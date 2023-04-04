@@ -2,20 +2,48 @@ import {createWebHistory, createRouter} from "vue-router";
 
 
 import Mainapp from '../components/mainapp.vue';
-import Sample from '../components/sample.vue';
-import PageNotFound from '../components/pageNotFound.vue';
+import Hook from '../components/basic/hooks.vue';
+import Method from '../components/basic/methods.vue';
+
+// Project
+import Home from '../components/pages/homePage/home.vue';
+import Map from '../components/pages/mapPage/map.vue';
+import Waterlevel from '../components/pages/mapPage/waterLevel.vue';
 
 
 export const routes = [
     {
+        name: 'hook',
+        path: '/hook',
+        component: Hook
+    },
+    {
         name: 'mainapp',
-        path: '/',
+        path: '/mainapp',
         component: Mainapp
     },
     {
-        name: 'sample',
-        path: '/sample',
-        component: Sample
+        name: 'method',
+        path: '/method',
+        component: Method
+    },
+
+    // Project
+
+    {
+        name: 'home',
+        path: '/',
+        component: Home
+    },
+    {
+        name: 'map',
+        path: '/map',
+        component: Map  
+    },
+    {
+        name: 'waterLevel',
+        path: '/waterLevel',
+        component: Waterlevel  
     },
 ];
 

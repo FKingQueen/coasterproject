@@ -1,16 +1,6 @@
-
 <template>
-      <div>
-        <h1>Sample</h1>
+    <div>
+        <h1>Main App</h1>
+        <router-view ></router-view>
     </div>
 </template>
-
-<script>
-    export default {
-
-    }
-</script>
-
-<style>
-
-</style>
