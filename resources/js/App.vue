@@ -1,85 +1,98 @@
+<style>
+  .sidebar:hover {
+      width: 16rem;
+  }
+  @media only screen and (min-width: 768px) {
+      .header-right {
+          width: calc(100% - 16rem);
+      }        
+  }
+</style>
 <template>
-    <div>
-        <!-- Top View -->
-        <div id="topView" class="w-full hidden lg:block p-0">
-                <div class="flex justify-around">
-                    <div class="md:flex p-0">
-                        <img src="img/top.png" class="duration-200  cursor-pointer object-fill h-20" alt="#">
-                    </div>
-                <div class="text-sm grid grid-cols-1 gap-1 content-center ">
-                    <div class="text-right">
-                        <p class="">Contact Us</p>
-                        <p class="no-underline hover:underline hover:text-blue-600 cursor-pointer">+63912345678</p>
-                        <p class="no-underline hover:underline hover:text-blue-600 cursor-pointer">coaster@gmail.com</p>
-                    </div>
-
-                </div>
-            </div>
+<div>
+    <div class="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased " style="background-color: rgb(245 247 249);">
+      <!-- Header -->
+      <div class="fixed w-full flex items-center justify-between h-14 text z-10">
+        <div class="flex items-center justify-start md:justify-center pl-3 w-14 md:w-64 h-14 bg-gray-300 border-none">
+          <img class="w-7 h-7 md:w-10 md:h-10 mr-2 rounded-md overflow-hidden bg-gray-300" src="https://therminic2018.eu/wp-content/uploads/2018/07/dummy-avatar.jpg" />
+          <span class="hidden md:block ">ADMIN</span>
         </div>
-        <nav id="navbar" style="transition: 0.6s;" class="relative z-30 flex w-full bg-[#0d2247] lg:px-20 md:px-3 sm:px-1 border-y-4 border-cyan-900 ">
-            <div class="px-5 xl:px-12  flex w-full justify-evenly">
-                <!-- Nav Links -->
-                <div id="navButton" style="">
-                    <div class=" lg:flex text-white font-normal font-heading w-full ">
-                        <!-- About -->
-                            <router-link to="/" href="javascript:void(0)" class="py-4 px-4 flex text-white font-semibold hover:bg-sky-700 
-                                cursor-pointer transition-colors duration-300 ">
-                                HOME
-                            </router-link>
-                        <!-- /About -->
-                        <!-- Tidal & Wave -->
-                            <a href="/" class="py-4 px-4 flex text-white font-semibold hover:bg-sky-700 
-                            cursor-pointer transition-colors duration-300 ">
-                                TIDAL & WAVE
-                            </a>
-                        <!-- /Tidal & Wave -->
-                        <!-- Weather -->
-                            <router-link to="/waterLevel" class="py-4 px-4 flex text-white font-semibold hover:bg-sky-700 
-                            cursor-pointer transition-colors duration-300 ">
-                                WEATHER
-                            </router-link>
-                        <!-- /Weather -->
-                        <!-- Map -->
-                            <Dropdown>
-                                <a href="javascript:void(0)" class="py-4 px-4 flex text-white font-semibold hover:bg-sky-700 
-                                    cursor-pointer transition-colors duration-300 ">
-                                    MAP
-                                </a>
-                                <template #list>
-                                    <DropdownMenu >
-                                        <DropdownItem>
-                                            <router-link to="/waterLevel">Map</router-link>
-                                        </DropdownItem>
-                                        <DropdownItem>
-                                            <router-link to="/map">Map</router-link>
-                                        </DropdownItem>
-                                    </DropdownMenu>
-                                </template>
-                            </Dropdown>
-                        <!-- /Map -->
-
-                        <!-- Project -->
-                            <div class="dropdown z-40  px-4 flex text-white font-semibold hover:bg-sky-700 
-                                cursor-pointer transition-colors duration-300 " style="float:left;">
-                                <button class="dropdown py-4 ">PROJECT</button>
-                            </div>
-                        <!-- /Project -->
-                    </div>
-                </div>
-
-                <!-- Search Bar -->
-                    <button id="btnSearchrToggler" type="button" class=" text-2xl text-white hover:text-gray-200 lg:mr-0 mr-8">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 focus:outline outline-offset-2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-                        </svg>
-                    </button>
-                <!-- /Search Bar -->
-
-            </div>
-          </nav>
-        <router-view ></router-view>
-        
+        <div class="flex justify-between items-center h-14 bg-gray-300 header-right">
+          <ul class="justify-end flex w-full">
+            <li>
+              <a href="#" class="flex items-center mr-4 text-black hover:text-gray-400 hidden lg:block">
+                <span class="inline-flex mr-1 ">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                </span>
+                Logout
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- ./Header -->
+    
+      <!-- Sidebar -->
+      <div class="fixed flex flex-col top-14 left-0 w-14 hover:w-64 md:w-64 bg-gray-900 h-full text-white transition-all duration-300 border-none z-10 sidebar">
+        <div class="overflow-y-auto overflow-x-hidden flex flex-col justify-between flex-grow">
+          <ul class="flex flex-col py-4 space-y-1">
+            <li class="px-5 hidden md:block">
+              <div class="flex flex-row items-center h-8">
+                <div class="text-sm font-light tracking-wide text-gray-400 uppercase">Main</div>
+              </div>
+            </li>
+            <li>
+              <router-link to="/articlePlatform" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-800 text-white hover:text-slate-300 border-l-4 border-transparent hover:border-blue-500 pr-6">
+                <span class="inline-flex justify-center items-center ml-4">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                </span>
+                <span class="ml-2 text-sm tracking-wide truncate">Article Management</span>
+              </router-link>
+              <router-link to="/userPlatform" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-800 text-white hover:text-slate-300 border-l-4 border-transparent hover:border-blue-500 pr-6">
+                <span class="inline-flex justify-center items-center ml-4">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                </span>
+                <span class="ml-2 text-sm tracking-wide truncate">User Management</span>
+              </router-link>
+            </li>
+            <li class="px-5 hidden md:block">
+              <div class="flex flex-row items-center mt-5 h-8">
+                <div class="text-sm font-light tracking-wide text-gray-400 uppercase">Settings</div>
+              </div>
+            </li>
+            <li>
+                <router-link to="/setting" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-800 text-white hover:text-slate-300 border-l-4 border-transparent hover:border-blue-500 pr-6">
+                    <span class="inline-flex justify-center items-center ml-4">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                    </span>
+                    <span class="ml-2 text-sm tracking-wide truncate">Setting</span>
+                </router-link>
+            </li>
+            <li>
+              <a href="#" class="block lg:hidden relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-800 text-white   hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 pr-6">
+                <span class="inline-flex justify-center items-center ml-4">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                  </svg>
+                </span>
+                <span class="ml-2 text-sm tracking-wide truncate">Logout</span>
+              </a>
+            </li>
+          </ul>
+          <p class="mb-14 px-5 py-3 hidden md:block text-center text-xs">Copyright @2023</p>
+        </div>
+      </div>
+      <!-- ./Sidebar -->
+    
+      <div class="h-full ml-14 mt-14 mb-10 md:ml-64 bg" >
+            <router-view ></router-view>
+      </div>
     </div>
+  </div>   
+  
 </template>
 
+  <script>
 
+  </script>
