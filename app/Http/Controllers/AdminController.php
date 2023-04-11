@@ -29,26 +29,51 @@ class AdminController extends Controller
         return $request;
     }
 
+    // Article
+
+    public function getArticle()
+    {
+        return Article::orderBy('id', 'desc')->get();
+    }
+
     public function storeArticle(Request $request){
-        $request->validate([
-            'title'  => 'required',
-            'author'  => 'required',
-            'article'  => 'required',
-            'image'  => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]); 
-        $input  = $request->all();
-        $imageName  = NULL;
-        if($image = $request->file('file')) {
-            $destination = '.img/';
-            $imageName = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->image($destinationPath, $imageName);
-            $input['image'] = $imageName; 
-        };
-        return $input;
+        $validated = $request->validate([
+            'title' => 'required',
+            'article' => 'required',
+            'author' => 'required',
+            'image' => 'required',
+        ]);
+
+        Article::create([
+            'title' => $request->title,
+            'article' => $request->article,
+            'author' => $request->author,
+            'image' => $request->image,
+        ]);
+
+        return $status = 'true';
     }
 
     public function upload(Request $request){
+        $request->validate([
+            'file' => 'required'
+        ]); 
+        $picName = time().'.'.$request->file->extension();
+        $request->file->move(public_path('uploads'),$picName);
+        return $picName;
+    }
 
-        return $request;
+    public function deleteImage(Request $request){
+        $fileName = $request->imageName;
+        $this->deleteFileFromServe($fileName);
+        return 'done';
+    }
+
+    public function deleteFileFromServe($fileName){
+        $filePath = public_path().'/uploads/'.$fileName;
+        if(file_exists($filePath)){
+            @unlink($filePath);
+        }
+        return;
     }
 }

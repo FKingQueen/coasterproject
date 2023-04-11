@@ -476,6 +476,9 @@ video {
 .fixed {
   position: fixed;
 }
+.absolute {
+  position: absolute;
+}
 .relative {
   position: relative;
 }
@@ -521,6 +524,9 @@ video {
 .mt-5 {
   margin-top: 1.25rem;
 }
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
 .block {
   display: block;
 }
@@ -529,6 +535,9 @@ video {
 }
 .inline-flex {
   display: inline-flex;
+}
+.table {
+  display: table;
 }
 .hidden {
   display: none;
@@ -696,6 +705,9 @@ video {
 }
 .pr-6 {
   padding-right: 1.5rem;
+}
+.pb-2 {
+  padding-bottom: 0.5rem;
 }
 .text-left {
   text-align: left;

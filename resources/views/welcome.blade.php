@@ -6,6 +6,14 @@
 
         <title>Laravel</title>
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+        <script>
+            (function (){
+                window.Laravel = {
+                    csrfToken: '{{ csrf_token() }}'
+                }
+            })();
+        </script>
     </head>
     <body class="antialiased">
         <div id="app">
