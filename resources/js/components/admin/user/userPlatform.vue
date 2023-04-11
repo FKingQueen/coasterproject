@@ -2,7 +2,7 @@
   <div>
     <div class="px-10 py-5">
       <a-button type="primary" @click="showModalCreate">Open Modal of 1000px width</a-button>
-      <a-modal v-model:visible="visible" width="1000px" title="Basic Modal" @ok="handleOk">
+      <a-modal v-model:visible="visible" :maskClosable="false" width="1000px" title="Basic Modal" @ok="handleOk">
         <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="95">
           <FormItem label="Name" prop="name">
               <Input v-model="formValidate.name" placeholder="Enter your name"></Input>

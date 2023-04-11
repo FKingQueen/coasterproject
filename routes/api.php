@@ -18,6 +18,7 @@ use App\Http\Controllers\AdminController;
 
 Route::post('/storeUser', [AdminController::class, 'storeUser']);
 Route::post('/storeArticle', [AdminController::class, 'storeArticle']);
+Route::post('/upload', [AdminController::class, 'upload']);
 
 Route::any('{slug}', function(){
     return view('welcome');

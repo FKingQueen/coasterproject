@@ -30,11 +30,25 @@ class AdminController extends Controller
     }
 
     public function storeArticle(Request $request){
-        Article::create([
-            'title' => $request->title,
-            'author' => $request->author,
-            'article' => $request->article,
-        ]);
+        $request->validate([
+            'title'  => 'required',
+            'author'  => 'required',
+            'article'  => 'required',
+            'image'  => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]); 
+        $input  = $request->all();
+        $imageName  = NULL;
+        if($image = $request->file('file')) {
+            $destination = '.img/';
+            $imageName = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->image($destinationPath, $imageName);
+            $input['image'] = $imageName; 
+        };
+        return $input;
+    }
+
+    public function upload(Request $request){
+
         return $request;
     }
 }

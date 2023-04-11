@@ -1,12 +1,13 @@
 <template>
   <div class="m-5 bg-white shadow-inner shadow rounded p-10">
     <a-button type="primary" @click="showModalCreate">Open Modal of 1000px width</a-button>
-    <a-modal v-model:visible="visible" width="1000px" title="Basic Modal" @ok="handleOk">
+    <a-modal v-model:visible="visible" width="1000px" :maskClosable="false" title="Basic Modal" @ok="handleOk">
       <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="95">
         <FormItem label="Image" prop="image">
-          <Upload v-model="formValidate.image" action="//jsonplaceholder.typicode.com/posts/">
-              <Button icon="ios-cloud-upload-outline">Upload files</Button>
-          </Upload>
+          <input type="file" class="" v-on:change="onChange">
+          <div v-if="img">
+            <img v-bind:src="imgPreview" width="100" height="100">
+          </div>
         </FormItem>
         <FormItem label="Title" prop="title">
             <Input v-model="formValidate.title" placeholder="Enter Title"></Input>
@@ -35,20 +36,28 @@
 </template>
 
 <script>
+import { UploadOutlined } from '@ant-design/icons-vue';
 import { defineComponent, ref } from 'vue';
 
 export default defineComponent({
+  components: {
+    UploadOutlined,
+  },
   data() {
+    const fileList = ref([]);
     const visible = ref(false);
     const showModalCreate = () => {
       visible.value = true;
     };
     const handleOk = e => {
-      console.log(e);
+      // console.log(e);
       visible.value = false;
     };
     
     return {
+      img: '',
+      imgPreview: null,
+      fileList,
       visible,
       showModalCreate,
       handleOk,
@@ -115,6 +124,18 @@ export default defineComponent({
     }
   },
   methods: {
+    onChange(e) {
+      this.img = e.target.files[0];
+      let reader = new FileReader();
+      reader.addEventListener("load", function(){
+        this.imgPreview = reader.result
+      }.bind(this), false);
+      if(this.img){
+        if(/\.(jpe?g|png|gif)$/i.test( this.img.name )){
+          reader.readAsDataURL( this.img );
+        }
+      }
+    },
     show (index) {
       this.$Modal.info({
         title: 'User Info',
@@ -128,16 +149,30 @@ export default defineComponent({
       this.$refs[name].validate((valid) => {
         if (valid) {
             this.$Message.success('Success!');
-            axios.post(`/api/storeArticle`, this.formValidate)
-                .then(function (response) {
-                console.log(response);
-                this.$Message.success('Success!');
+            // Post
+              this.$axios.get('/sanctum/csrf-cookie').then(response => {
+                let existingObj = this;
+
+                const formData = new FormData();
+                formData.append('title',this.formValidate.title);
+                formData.append('author',this.formValidate.author);
+                formData.append('image',this.img);
+                formData.append('article',this.formValidate.article);
+                this.$axios.post(`/api/storeArticle`, formData, {
+                  headers: {
+                    "Content-Type": "multipart/form-data",
+                  }
                 })
-                .catch(function (error) {
-                console.log(error)
-            });
+                .then(response => {
+                  console.log(response);
+                })
+                .catch(function(error){
+
+                })
+              })
+
             if(res.status==200){
-            console.log(res);
+            // console.log(res);
             }
         } else {
             // this.$Message.error('Fail!');
@@ -145,7 +180,9 @@ export default defineComponent({
       })
     }
   }
+  
 })
+
 </script>
 
 <style scoped>
