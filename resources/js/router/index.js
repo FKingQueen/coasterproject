@@ -11,7 +11,11 @@ import Map from '../components/pages/mapPage/map.vue';
 import Waterlevel from '../components/pages/mapPage/waterLevel.vue';
 
 // Admin
+// Article
 import articlePlatform from '../components/admin/article/articlePlatform.vue';
+import addForm from '../components/admin/article/addForm.vue';
+import editForm from '../components/admin/article/editForm.vue';
+
 import userPlatform from '../components/admin/user/userPlatform.vue';
 import setting from '../components/admin/user/setting.vue';
 
@@ -57,6 +61,16 @@ export const routes = [
         name: 'articlePlatform',
         path: '/articlePlatform',
         component: articlePlatform  
+    },
+    {
+        name: 'addForm',
+        path: '/addForm',
+        component: addForm  
+    },
+    {
+        name: 'editForm',
+        path: '/editForm',
+        component: editForm  
     },
     {
         name: 'userPlatform',

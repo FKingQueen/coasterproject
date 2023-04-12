@@ -76,4 +76,15 @@ class AdminController extends Controller
         }
         return;
     }
+
+    public function deleteArticle($id){
+        $Article = Article::find($id);
+        $fileName = $Article->image;
+        $filePath = public_path().'/uploads/'.$fileName;
+        if(file_exists($filePath)){
+            @unlink($filePath);
+        }
+        $Article->delete();
+        return $fileName;
+    }
 }

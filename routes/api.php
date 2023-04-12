@@ -17,10 +17,17 @@ use App\Http\Controllers\AdminController;
 
 
 Route::post('/storeUser', [AdminController::class, 'storeUser']);
+
+
+
+// Article
+Route::get('/getArticle', [AdminController::class, 'getArticle']);
+
 Route::post('/storeArticle', [AdminController::class, 'storeArticle']);
+Route::post('/deleteArticle/{id}', [AdminController::class, 'deleteArticle']);
 Route::post('/upload', [AdminController::class, 'upload']);
 Route::post('/deleteImage', [AdminController::class, 'deleteImage']);
-Route::get('/getArticle', [AdminController::class, 'getArticle']);
+
 
 
 
