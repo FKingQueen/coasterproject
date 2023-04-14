@@ -13,12 +13,6 @@ use App\Http\Controllers\AdminController;
 |
 */
 
-Route::get('/', function () {
+Route::get('/{any}', function () {
     return view('welcome');
-});
-
-Route::any('{slug}', function(){
-    return view('welcome');
-});
-
-Route::post('/storeUser', [AdminController::class, 'storeUser']);
+})->where('any', '.*');

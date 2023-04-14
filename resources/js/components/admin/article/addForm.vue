@@ -1,11 +1,12 @@
 <template>
     <div class="p-2">
-        <Breadcrumb separator=">">
-            <BreadcrumbItem to="/articlePlatform">Article Management</BreadcrumbItem>
-            <BreadcrumbItem>New Article Form</BreadcrumbItem>
-        </Breadcrumb>
+
         <div class="m-5 bg-white shadow-inner shadow-lg rounded px-20 py-5">
-            <a-button @click="this.$router.push('/articlePlatform')" class="mb-3">Back</a-button>
+            <Breadcrumb separator=">">
+                <BreadcrumbItem to="/articlePlatform">Article Management</BreadcrumbItem>
+                <BreadcrumbItem>New Article Form</BreadcrumbItem>
+            </Breadcrumb>
+            <a-button @click="this.$router.push('/articlePlatform')" class="my-3">Back</a-button>
             <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="95" class="px-10" >
                 <FormItem label="Image" prop="image">
                 <Upload
@@ -54,8 +55,8 @@
   import { defineComponent, ref } from 'vue';
   import { notification } from 'ant-design-vue';
   import { useRoute, useRouter} from 'vue-router';
-  
   export default defineComponent({
+
     data(){
         return{
             formValidate: {
@@ -90,7 +91,6 @@
                     // Post
                     axios.post(`/api/storeArticle`, this.formValidate)
                     .then(function (response) {
-                        console.log(response);
                         notification.success({
                             message: 'Notification',
                             description: 'New Article is Successfully Created',

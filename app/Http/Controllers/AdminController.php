@@ -87,4 +87,10 @@ class AdminController extends Controller
         $Article->delete();
         return $fileName;
     }
+
+    public function getArticleEdit($id)
+    {
+        $post = Article::find($id);
+        return response()->json($post);
+    }
 }

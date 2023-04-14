@@ -57,6 +57,7 @@ export const routes = [
 
     // Admin
 
+    // Article
     {
         name: 'articlePlatform',
         path: '/articlePlatform',
@@ -64,14 +65,17 @@ export const routes = [
     },
     {
         name: 'addForm',
-        path: '/addForm',
+        path: '/articlePlatform/addForm',
         component: addForm  
     },
     {
         name: 'editForm',
-        path: '/editForm',
-        component: editForm  
+        path: '/articlePlatform/editForm/:id',
+        component: editForm ,
+        props:true
     },
+
+
     {
         name: 'userPlatform',
         path: '/userPlatform',

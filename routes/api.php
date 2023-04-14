@@ -28,6 +28,8 @@ Route::post('/deleteArticle/{id}', [AdminController::class, 'deleteArticle']);
 Route::post('/upload', [AdminController::class, 'upload']);
 Route::post('/deleteImage', [AdminController::class, 'deleteImage']);
 
+Route::get('/getArticleEdit/{id}', [AdminController::class, 'getArticleEdit']);
+
 
 
 

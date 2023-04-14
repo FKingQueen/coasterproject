@@ -59,6 +59,7 @@
     data(){
         return{
             formValidate: {
+                id: '',
                 image: '',
                 token: '',
                 title: '',
@@ -142,6 +143,21 @@
     },
     async created(){
         this.token = window.Laravel.csrfToken;
+        // console.log(this.$route.params.id);
+        let id = this.$route.params.id
+        let existingObj = this;
+        await axios.get(`/api/getArticleEdit/${id}`)
+        .then(function (response) {
+            existingObj.formValidate.id = response.data.id
+            existingObj.formValidate.title = response.data.title
+            existingObj.formValidate.image = response.data.image
+            existingObj.formValidate.author = response.data.author
+            existingObj.formValidate.article = response.data.article
+            console.log(existingObj.formValidate.image);
+        })
+        .catch(function (error) {
+            console.log(error)
+        });
     }
   })
   </script>
