@@ -60,11 +60,11 @@
           </span>
           <template v-else-if="column.key === 'action'">
             <span>
-              <a @click="">View</a>
+              <a @click="editForm(record.id)">Edit</a>
             
               <a-divider type="vertical" />
               <a-popconfirm
-                v-if="articles.length"
+                v-if="users.length"
                 title="Sure to delete?"
                 @confirm="remove(index)"
               >
@@ -124,6 +124,10 @@ export default defineComponent({
             }, 100);
           }
         },
+    }, {
+      title: 'Action',
+      key: 'action',
+      width: 200,
     }];
 
     const handleSearch = (selectedKeys, confirm, dataIndex) => {
@@ -148,19 +152,38 @@ export default defineComponent({
     }
   },
   methods: {
-  },
+    remove(key){
+      let id = this.users[key].id;
+      this.users.splice(key, 1);
 
+      axios.post(`/api/deleteUser/${id}`)
+      .then(function (response) {
+        notification.success({
+            message: 'Notification',
+            description: 'The User is Successfully Deleted',
+        });
+      })
+      .catch(function (error) {
+        
+        console.log(error);
+      });
+    },
+    editForm(id){
+      console.log(id);
+      this.$router.push({path: '/userPlatform/editForm/' + id})
+    },
+  },
   data(){
     return{
-      user: []
+      users: []
     }
   },
   async created(){
     let existingObj = this;
     this.token = window.Laravel.csrfToken;
-    await axios.get('/api/getArticle')
+    await axios.get('/api/getUser')
     .then(function (response) {
-      existingObj.articles = response.data
+      existingObj.users = response.data
     })
     .catch(function (error) {
         if(error){

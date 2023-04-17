@@ -94,9 +94,10 @@ export const routes = [
     },
     {
         name: 'editUserForm',
-        path: '/userPlatform/addForm',
+        path: '/userPlatform/editForm',
         component: editUserForm  
     },
+    // Settings
     {
         name: 'setting',
         path: '/setting',

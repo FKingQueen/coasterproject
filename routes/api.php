@@ -16,8 +16,12 @@ use App\Http\Controllers\Admin\ArticleController;
 |
 */
 
+// User
 
+Route::get('/getUser', [UserController::class, 'getUser']);
 Route::post('/storeUser', [UserController::class, 'storeUser']);
+Route::post('/deleteUser/{id}', [UserController::class, 'deleteUser']);
+Route::get('/getUserEdit/{id}', [UserController::class, 'getUserEdit']);
 
 
 

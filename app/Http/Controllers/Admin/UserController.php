@@ -9,6 +9,10 @@ use App\Models\User;
 class UserController extends Controller
 {
     // User 
+    public function getUser()
+    {
+        return User::orderBy('id', 'desc')->get();
+    }
 
     public function storeUser(Request $request){
         $validated = $request->validate([
@@ -29,4 +33,17 @@ class UserController extends Controller
 
         return $request;
     }
+
+    public function deleteUser($id){
+        $User = User::find($id);
+        $User->delete();
+        return;
+    }
+
+    public function getUserEdit($id)
+    {
+        User::find($id);
+        return;
+    }
+    
 }
