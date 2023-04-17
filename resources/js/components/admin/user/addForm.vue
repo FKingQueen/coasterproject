@@ -21,10 +21,10 @@
                     </Select>
                 </FormItem>
                 <FormItem label="Password" prop="passwd">
-                    <Input type="password" v-model="formValidate.passwd"></Input>
+                    <Input type="password" placeholder="Password" v-model="formValidate.passwd"></Input>
                 </FormItem>
                 <FormItem label="Confirm" prop="passwdCheck">
-                    <Input type="password" v-model="formValidate.passwdCheck"></Input>
+                    <Input type="password" placeholder="Confirm-Password" v-model="formValidate.passwdCheck"></Input>
                 </FormItem>
                 <div class="flex justify-end">
                     <a-button key="submit" type="primary" @click="handleSubmit('formValidate')">Submit</a-button>
@@ -113,21 +113,6 @@
                 }
             })
             
-        },
-        async deleteImage(){
-            let image = this.formValidate.image
-            this.formValidate.image = ''
-            this.$refs.uploads.clearFiles()
-            await axios.post(`/api/deleteImage`, {imageName: image})
-                .then(function (response) {
-                
-
-                })
-                .catch(function (error) {
-                if(error){
-                    this.formValidate.image = image
-                }
-            });       
         }
     }
   })

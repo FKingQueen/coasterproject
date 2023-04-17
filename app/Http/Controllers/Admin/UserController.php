@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use DB;
 
 class UserController extends Controller
 {
@@ -42,8 +43,29 @@ class UserController extends Controller
 
     public function getUserEdit($id)
     {
-        User::find($id);
-        return;
+        return User::find($id);
+    }
+
+    public function updateUser(Request $request)
+    {
+        DB::table('users')
+        ->where('id', $request->id)
+        ->update([
+        'name' => $request->name,
+        'userType' => $request->userType,
+        'email' => $request->email
+        ]);
+        return $request->all();
     }
     
+    public function updatePassword(Request $request)
+    {
+        $password = bcrypt($request->passwd);
+        DB::table('users')
+        ->where('id', $request->id)
+        ->update([
+        'password' => $password
+        ]);
+        return;
+    }
 }

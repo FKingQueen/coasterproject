@@ -72,6 +72,14 @@
               </a-popconfirm>
             </span>
           </template>
+          <template v-else-if="column.key === 'userType'">
+            <span v-if="this.users[index].userType == 1">
+              Admin
+            </span>
+            <span v-else>
+              Editor
+            </span>
+          </template>
         </template>
 
       </a-table>

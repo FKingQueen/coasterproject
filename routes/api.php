@@ -22,19 +22,21 @@ Route::get('/getUser', [UserController::class, 'getUser']);
 Route::post('/storeUser', [UserController::class, 'storeUser']);
 Route::post('/deleteUser/{id}', [UserController::class, 'deleteUser']);
 Route::get('/getUserEdit/{id}', [UserController::class, 'getUserEdit']);
-
+Route::post('/updateUser', [UserController::class, 'updateUser']);
+Route::post('/updatePassword', [UserController::class, 'updatePassword']);
 
 
 // Article
 Route::get('/getArticle', [ArticleController::class, 'getArticle']);
 
 Route::post('/storeArticle', [ArticleController::class, 'storeArticle']);
-Route::post('/deleteArticle/{id}', [ArticleController::class, 'deleteArticle']);
 Route::post('/upload', [ArticleController::class, 'upload']);
 Route::post('/deleteImage', [ArticleController::class, 'deleteImage']);
 
+Route::post('/deleteArticle/{id}', [ArticleController::class, 'deleteArticle']);
+
 Route::get('/getArticleEdit/{id}', [ArticleController::class, 'getArticleEdit']);
-Route::post('/editArticle', [ArticleController::class, 'editArticle']);
+Route::post('/updateArticle', [ArticleController::class, 'updateArticle']);
 
 
 

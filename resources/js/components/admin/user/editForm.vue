@@ -20,12 +20,26 @@
                         <Option value="2">Editor</Option>
                     </Select>
                 </FormItem>
-                <FormItem label="Password" prop="passwd">
+                <!-- <FormItem label="Password" prop="passwd">
                     <Input type="password" v-model="formValidate.passwd"></Input>
                 </FormItem>
                 <FormItem label="Confirm" prop="passwdCheck">
                     <Input type="password" v-model="formValidate.passwdCheck"></Input>
+                </FormItem> -->
+                <FormItem >
+                    <a-button type="primary" @click="showModal">Change Password</a-button>
+                    <a-modal v-model:visible="visible" title="Updating Password" @ok="changePassword('formValidate')">
+                        <div class="ivu-form ivu-form-label-right">
+                            <FormItem label="Password" prop="passwd">
+                                <Input type="password" v-model="formValidate.passwd"></Input>
+                            </FormItem>
+                            <FormItem label="Confirm" prop="passwdCheck">
+                                <Input type="password" v-model="formValidate.passwdCheck"></Input>
+                            </FormItem>
+                        </div>
+                </a-modal>
                 </FormItem>
+
                 <div class="flex justify-end">
                     <a-button key="submit" type="primary" @click="handleSubmit('formValidate')">Submit</a-button>
                 </div>
@@ -41,7 +55,11 @@
   import { useRoute, useRouter} from 'vue-router';
   export default defineComponent({
     data(){
+        const visible = ref(false);
 
+        const showModal = () => {
+        visible.value = true;
+        };
         const validatePass = (rule, value, callback) => {
           if (value === '') {
               callback(new Error('Please enter your password'));
@@ -64,7 +82,10 @@
         };
 
         return{
+            visible,
+            showModal,
             formValidate: {
+                id: '',
                 name: '',
                 email: '',
                 userType: '',
@@ -97,11 +118,11 @@
             this.$refs[name].validate((valid) => {
                 if (valid) {
                     // Post
-                    axios.post(`/api/storeUser`, this.formValidate)
+                    axios.post(`/api/updateUser`, this.formValidate)
                     .then(function (response) {
                         notification.success({
                             message: 'Notification',
-                            description: 'New User is Successfully Created',
+                            description: 'Users Info is Successfully Updated',
                         });
                         existingObj.$router.push('/userPlatform');
                     })
@@ -112,21 +133,49 @@
                 } else {
                 }
             })
-            
         },
-        async deleteImage(){
-            let image = this.formValidate.image
-            this.formValidate.image = ''
-            this.$refs.uploads.clearFiles()
-            await axios.post(`/api/deleteImage`, {imageName: image})
-                .then(function (response) {
-                })
-                .catch(function (error) {
-                if(error){
-                    this.formValidate.image = image
+        changePassword(name)
+        {
+            let existingObj = this;
+            this.$refs[name].validate((valid) => {
+                if (valid) {
+                    // Post
+                    axios.post(`/api/updatePassword`, this.formValidate)
+                    .then(function (response) {
+                        notification.success({
+                            message: 'Notification',
+                            description: 'Users Password is Successfully Updated',
+                        });
+                        existingObj.visible = false;
+                        existingObj.formValidate.passwd = '';
+                        existingObj.formValidate.passwdCheck = '';
+
+                    })
+                    .catch(function (error) {
+
+                    });
+                } else {
                 }
-            });       
+            })
+            
+
         }
+    },
+    async created(){
+        this.token = window.Laravel.csrfToken;
+        // console.log(this.$route.params.id);
+        let id = this.$route.params.id
+        let existingObj = this;
+        await axios.get(`/api/getUserEdit/${id}`)
+        .then(function (response) {
+            existingObj.formValidate.id = response.data.id
+            existingObj.formValidate.name = response.data.name
+            existingObj.formValidate.userType = response.data.userType
+            existingObj.formValidate.email = response.data.email
+        })
+        .catch(function (error) {
+            console.log(error)
+        });
     }
   })
   </script>

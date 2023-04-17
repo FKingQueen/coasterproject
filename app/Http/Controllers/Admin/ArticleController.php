@@ -71,11 +71,10 @@ class ArticleController extends Controller
 
     public function getArticleEdit($id)
     {
-        Article::find($id);
-        return;
+        return Article::find($id);
     }
 
-    public function editArticle(Request $request){
+    public function updateArticle(Request $request){
         DB::table('articles')
             ->where('id', $request->id)
             ->update([

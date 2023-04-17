@@ -89,11 +89,11 @@
             this.$refs[name].validate((valid) => {
                 if (valid) {
                     // Post
-                    axios.post(`/api/editArticle`, this.formValidate)
+                    axios.post(`/api/updateArticle`, this.formValidate)
                     .then(function (response) {
                         notification.success({
                             message: 'Notification',
-                            description: 'New Article is Successfully Updated',
+                            description: 'The Article is Successfully Updated',
                         });
                         existingObj.$router.push('/articlePlatform');
                     })
@@ -152,7 +152,6 @@
             existingObj.formValidate.image = response.data.image
             existingObj.formValidate.author = response.data.author
             existingObj.formValidate.article = response.data.article
-            console.log(existingObj.formValidate.article);
         })
         .catch(function (error) {
             console.log(error)
