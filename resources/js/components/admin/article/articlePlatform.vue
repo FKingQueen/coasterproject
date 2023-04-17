@@ -5,16 +5,6 @@
         Article Management
       </div>
       <a-button  type="primary" @click="this.$router.push('/articlePlatform/addForm')" class="mb-2">New Article</a-button>
-      <!-- <Table border :columns="columns" :data="articles" ref="table" v-if="articles.length">
-          <template #title="{ row }">
-              <strong>{{ row.title }}</strong>
-          </template>
-
-          <template #action="{ row, index }">
-              <Button type="primary" size="small" style="margin-right: 5px" @click="this.$router.push('/editForm')">Edit</Button>
-              <Button type="error" size="small" @click="remove(index)">Delete</Button>
-          </template>
-      </Table> -->
       <a-table :data-source="articles" :columns="columns" size="small">
         <template #headerCell="{ column }">
           <template v-if="column.key === 'title'">
@@ -73,17 +63,29 @@
               <a @click="openModal(index)">View</a>
               <Modal
                 v-model="modal"
+                :closable="false"
+                :mask-closable="false"
+                :footer-hide="true"
                 title="Article"
-                width="1000"
-                cancel-text="Edit"
-                ok-text="Done"
-                @on-cancel="editForm(this.modalData.id)">
-                <div class="flex justify-center border">
-                  <Image :src="`/uploads/${this.modalData.image}`" class="object-cover w-full h-[20rem] border" />
+                width="1000">
+                <template #header>
+                  <div class="text-center">
+                    <h2>Article Details</h2>
+                  </div>
+                </template>
+                <div class="flex justify-center h-[20rem] shadow">
+                  <Image :src="`/uploads/${this.modalData.image}`" class="object-cover  border" />
                 </div>
-                <p class="text-xl font-semibold">{{this.modalData.title}}</p>
-                  <p>By <span class="italic">{{this.modalData.author}}</span></p>
-                <p class="indent-8">{{this.modalData.article}}</p>
+                <div>          
+                  <p class="text-xl mt-4 font-semibold">{{this.modalData.title}}</p>
+                    <p>By <span class="italic">{{this.modalData.author}}</span></p>
+                  <p class="indent-8">{{this.modalData.article}}</p>
+                </div>
+                <div class="space-x-2 text-right">
+                  <a @click="editForm(this.modalData.id)">Edit</a>
+                  <a-divider type="vertical" />
+                  <a @click="removeModal()">Done</a>
+                </div>
             </Modal>  
               <a-divider type="vertical" />
               <a-popconfirm
@@ -91,7 +93,7 @@
                 title="Sure to delete?"
                 @confirm="remove(index)"
               >
-                <a>delete</a>
+                <a class="hover:text-red-500">Delete</a>
               </a-popconfirm>
             </span>
           </template>
@@ -110,7 +112,7 @@
     </div>
   </div>
 </template>
-
+modal
 <script>
 import { notification } from 'ant-design-vue';
 import { SearchOutlined } from '@ant-design/icons-vue';
@@ -211,6 +213,9 @@ export default defineComponent({
     editForm(id){
       console.log(id);
       this.$router.push({path: '/articlePlatform/editForm/' + id})
+    },
+    removeModal(){
+      this.modal = false;
     }
   },
 

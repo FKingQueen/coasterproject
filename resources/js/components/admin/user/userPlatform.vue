@@ -1,121 +1,214 @@
 <template>
-  <div>
-    <div class="px-10 py-5">
-      <a-button type="primary" @click="showModalCreate">Open Modal of 1000px width</a-button>
-      <a-modal v-model:visible="visible" :maskClosable="false" width="1000px" title="Basic Modal" @ok="handleOk">
-        <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="95">
-          <FormItem label="Name" prop="name">
-              <Input v-model="formValidate.name" placeholder="Enter your name"></Input>
-          </FormItem>
-          <FormItem label="E-mail" prop="email">
-              <Input v-model="formValidate.email" placeholder="Enter your e-mail"></Input>
-          </FormItem>
-          <FormItem label="User Type" prop="userType">
-              <Select v-model="formValidate.userType" placeholder="Select your User Type">
-                  <Option value="1">Admin</Option>
-                  <Option value="2">Editor</Option>
-              </Select>
-          </FormItem>
-          <FormItem label="Password" prop="passwd">
-            <Input type="password" v-model="formValidate.passwd"></Input>
-          </FormItem>
-          <FormItem label="Confirm" prop="passwdCheck">
-            <Input type="password" v-model="formValidate.passwdCheck"></Input>
-          </FormItem>
-          <FormItem>
-              <Button type="primary" @click="handleSubmit('formValidate')">Submit</Button>
-          </FormItem>
-        </Form>
-      </a-modal>
+  <div class="p-2">
+    <div class="m-5 bg-white shadow-inner shadow-lg rounded px-10 py-5">
+      <div class="flex justify-center text-2xl">
+        User Management
+      </div>
+      <a-button  type="primary" @click="this.$router.push('/userPlatform/addForm')" class="mb-2">New User</a-button>
+
+      <a-table :data-source="users" :columns="columns" size="small">
+        <template #headerCell="{ column }">
+          <template v-if="column.key === 'name'">
+            <span style="color: #1890ff">Title</span>
+          </template>
+        </template>
+        <template
+          #customFilterDropdown="{ setSelectedKeys, selectedKeys, confirm, clearFilters, column }"
+        >
+          <div style="padding: 8px">
+            <a-input
+              ref="searchInput"
+              :placeholder="`Search ${column.dataIndex}`"
+              :value="selectedKeys[0]"
+              style="width: 188px; margin-bottom: 8px; display: block"
+              @change="e => setSelectedKeys(e.target.value ? [e.target.value] : [])"
+              @pressEnter="handleSearch(selectedKeys, confirm, column.dataIndex)"
+            />
+            <a-button
+              type="primary"
+              size="small"
+              style="width: 90px; margin-right: 8px"
+              @click="handleSearch(selectedKeys, confirm, column.dataIndex)"
+            >
+              <template #icon><SearchOutlined /></template>
+              Search
+            </a-button>
+            <a-button size="small" style="width: 90px" @click="handleReset(clearFilters)">
+              Reset
+            </a-button>
+          </div>
+        </template>
+        <template #customFilterIcon="{ filtered }">
+          <search-outlined :style="{ color: filtered ? '#108ee9' : undefined }" />
+        </template>
+        <template #bodyCell="{ text, column, record, index}">
+          <span v-if="searchText && searchedColumn === column.dataIndex">
+            <template
+              v-for="(fragment, i) in text
+                .toString()
+                .split(new RegExp(`(?<=${searchText})|(?=${searchText})`, 'i'))"
+            >
+              <mark
+                v-if="fragment.toLowerCase() === searchText.toLowerCase()"
+                :key="i"
+                class="highlight"
+              >
+                {{ fragment }}
+              </mark>
+              <template v-else>{{ fragment }}</template>
+            </template>
+          </span>
+          <template v-else-if="column.key === 'action'">
+            <span>
+              <a @click="">View</a>
+            
+              <a-divider type="vertical" />
+              <a-popconfirm
+                v-if="articles.length"
+                title="Sure to delete?"
+                @confirm="remove(index)"
+              >
+                <a class="hover:text-red-500">Delete</a>
+              </a-popconfirm>
+            </span>
+          </template>
+        </template>
+
+      </a-table>
+
     </div>
   </div>
 </template>
 <script>
-import { defineComponent, ref } from 'vue';
-  export default {
-      data () {
-        const visible = ref(false);
-        const showModalCreate = () => {
-          visible.value = true;
-        };
-        const handleOk = e => {
-          console.log(e);
-          visible.value = false;
-        };
-        
-        const validatePass = (rule, value, callback) => {
-          if (value === '') {
-              callback(new Error('Please enter your password'));
-          } else {
-              if (this.formValidate.passwdCheck !== '') {
-                  // 对第二个密码框单独验证
-                  this.$refs.formValidate.validateField('passwdCheck');
-              }
-              callback();
+import { notification } from 'ant-design-vue';
+import { SearchOutlined } from '@ant-design/icons-vue';
+import { defineComponent, reactive, ref, toRefs } from 'vue';
+export default defineComponent({
+  components: {
+    SearchOutlined,
+  },
+  setup() {
+    const state = reactive({
+      searchText: '',
+      searchedColumn: '',
+    });
+    const searchInput = ref();
+
+    const columns = [{
+        title: 'Name',
+        dataIndex: 'name',
+        key: 'name',
+        customFilterDropdown: true,
+        onFilter: (value, record) => record.name.toString().toLowerCase().includes(value.toLowerCase()),
+        onFilterDropdownVisibleChange: visible => {
+          if (visible) {
+            setTimeout(() => {
+              searchInput.value.focus();
+            }, 100);
           }
-        };
-        const validatePassCheck = (rule, value, callback) => {
-          if (value === '') {
-              callback(new Error('Please enter your password again'));
-          } else if (value !== this.formValidate.passwd) {
-              callback(new Error('The two input passwords do not match!'));
-          } else {
-              callback();
-          }
-        };
-        return {
-          formValidate: {
-              name: '',
-              email: '',
-              userType: '',
-              passwd: '',
-              passwdCheck: ''
-          },
-          ruleValidate: {
-              name: [
-                  { required: true, message: 'The name cannot be empty', trigger: 'blur' }
-              ],
-              email: [
-                  { required: true, message: 'Mailbox cannot be empty', trigger: 'blur' },
-                  { type: 'email', message: 'Incorrect email format', trigger: 'blur' }
-              ],
-              userType: [
-                  { required: true, message: 'Please select the userType', trigger: 'change' }
-              ],
-              passwd: [
-                { validator: validatePass, trigger: 'blur' }
-              ],
-              passwdCheck: [
-                  { validator: validatePassCheck, trigger: 'blur' }
-              ]
-          },
-          visible,
-          showModalCreate,
-          handleOk,
-        }
-      },
-      methods: {
-        handleSubmit (name) {
-          this.$refs[name].validate((valid) => {
-            if (valid) {
-                this.$Message.success('Success!');
-                axios.post(`/api/storeUser`, this.formValidate)
-                    .then(function (response) {
-                    console.log(response);
-                    this.$Message.success('Success!');
-                    })
-                    .catch(function (error) {
-                    console.log(error)
-                });
-            } else {
-                this.$Message.error('Fail!');
-            }
-          })
         },
-        handleReset (name) {
-            this.$refs[name].resetFields();
+      }, {
+        title: 'User Type',
+        dataIndex: 'userType',
+        key: 'userType',
+      }, {
+        title: 'Email',
+        dataIndex: 'email',
+        key: 'email',
+        customFilterDropdown: true,
+        onFilter: (value, record) => record.email.toString().toLowerCase().includes(value.toLowerCase()),
+        onFilterDropdownVisibleChange: visible => {
+          if (visible) {
+            setTimeout(() => {
+              searchInput.value.focus();
+            }, 100);
+          }
+        },
+    }];
+
+    const handleSearch = (selectedKeys, confirm, dataIndex) => {
+      confirm();
+      state.searchText = selectedKeys[0];
+      state.searchedColumn = dataIndex;
+    };
+
+    const handleReset = clearFilters => {
+      clearFilters({
+        confirm: true,
+      });
+      state.searchText = '';
+    };
+
+    return {
+      columns,
+      handleSearch,
+      handleReset,
+      searchInput,
+      ...toRefs(state),
+    }
+  },
+  methods: {
+  },
+
+  data(){
+    return{
+      user: []
+    }
+  },
+  async created(){
+    let existingObj = this;
+    this.token = window.Laravel.csrfToken;
+    await axios.get('/api/getArticle')
+    .then(function (response) {
+      existingObj.articles = response.data
+    })
+    .catch(function (error) {
+        if(error){
+          this.formValidate.image = image
         }
-          
-      }
+    });
   }
+  
+})
+
 </script>
+
+<style>
+    .demo-upload-list{
+        display: inline-block;
+        width: 60px;
+        height: 60px;
+        text-align: center;
+        line-height: 60px;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        overflow: hidden;
+        background: #fff;
+        position: relative;
+        box-shadow: 0 1px 1px rgba(0,0,0,.2);
+        margin-right: 4px;
+    }
+    .demo-upload-list img{
+        width: 100%;
+        height: 100%;
+    }
+    .demo-upload-list-cover{
+        display: none;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0,0,0,.6);
+    }
+    .demo-upload-list:hover .demo-upload-list-cover{
+        display: block;
+    }
+    .demo-upload-list-cover i{
+        color: #fff;
+        font-size: 20px;
+        cursor: pointer;
+        margin: 0 2px;
+    }
+    img.ant-image-preview-img { display: inline-block; } 
+</style>

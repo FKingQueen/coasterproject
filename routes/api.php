@@ -2,7 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\ArticleController;  
 
 /*
 |--------------------------------------------------------------------------
@@ -16,19 +17,20 @@ use App\Http\Controllers\AdminController;
 */
 
 
-Route::post('/storeUser', [AdminController::class, 'storeUser']);
+Route::post('/storeUser', [UserController::class, 'storeUser']);
 
 
 
 // Article
-Route::get('/getArticle', [AdminController::class, 'getArticle']);
+Route::get('/getArticle', [ArticleController::class, 'getArticle']);
 
-Route::post('/storeArticle', [AdminController::class, 'storeArticle']);
-Route::post('/deleteArticle/{id}', [AdminController::class, 'deleteArticle']);
-Route::post('/upload', [AdminController::class, 'upload']);
-Route::post('/deleteImage', [AdminController::class, 'deleteImage']);
+Route::post('/storeArticle', [ArticleController::class, 'storeArticle']);
+Route::post('/deleteArticle/{id}', [ArticleController::class, 'deleteArticle']);
+Route::post('/upload', [ArticleController::class, 'upload']);
+Route::post('/deleteImage', [ArticleController::class, 'deleteImage']);
 
-Route::get('/getArticleEdit/{id}', [AdminController::class, 'getArticleEdit']);
+Route::get('/getArticleEdit/{id}', [ArticleController::class, 'getArticleEdit']);
+Route::post('/editArticle', [ArticleController::class, 'editArticle']);
 
 
 

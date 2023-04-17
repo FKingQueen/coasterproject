@@ -11,13 +11,19 @@ import Map from '../components/pages/mapPage/map.vue';
 import Waterlevel from '../components/pages/mapPage/waterLevel.vue';
 
 // Admin
+
 // Article
 import articlePlatform from '../components/admin/article/articlePlatform.vue';
-import addForm from '../components/admin/article/addForm.vue';
-import editForm from '../components/admin/article/editForm.vue';
+import addArticleForm from '../components/admin/article/addForm.vue';
+import editArticleForm from '../components/admin/article/editForm.vue';
 
+// User
 import userPlatform from '../components/admin/user/userPlatform.vue';
-import setting from '../components/admin/user/setting.vue';
+import addUserForm from '../components/admin/user/addForm.vue';
+import editUserForm from '../components/admin/user/editForm.vue';
+
+// Settings
+import setting from '../components/admin/settings/setting.vue';
 
 
 export const routes = [
@@ -64,22 +70,32 @@ export const routes = [
         component: articlePlatform  
     },
     {
-        name: 'addForm',
+        name: 'addArticleForm',
         path: '/articlePlatform/addForm',
-        component: addForm  
+        component: addArticleForm  
     },
     {
-        name: 'editForm',
+        name: 'editArticleForm',
         path: '/articlePlatform/editForm/:id',
-        component: editForm ,
+        component: editArticleForm ,
         props:true
     },
 
-
+    //User 
     {
         name: 'userPlatform',
         path: '/userPlatform',
         component: userPlatform  
+    },
+    {
+        name: 'addUserForm',
+        path: '/userPlatform/addForm',
+        component: addUserForm  
+    },
+    {
+        name: 'editUserForm',
+        path: '/userPlatform/addForm',
+        component: editUserForm  
     },
     {
         name: 'setting',
