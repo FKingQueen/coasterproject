@@ -18,9 +18,9 @@ class UserController extends Controller
     public function storeUser(Request $request){
         $validated = $request->validate([
             'name' => 'required',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users',
             'userType' => 'required',
-            'passwd' => 'required',
+            'passwd' => 'required|min:8',
         ]);
 
         $password = bcrypt($request->passwd);
@@ -32,7 +32,7 @@ class UserController extends Controller
             'password' => $password,
         ]);
 
-        return $request;
+        return $validated;
     }
 
     public function deleteUser($id){

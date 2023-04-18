@@ -94,23 +94,35 @@
     methods: {
         async handleSubmit (name) {
             let existingObj = this;
-            this.$refs[name].validate((valid) => {
+            await this.$refs[name].validate((valid) => {
                 if (valid) {
                     // Post
-                    axios.post(`/api/storeUser`, this.formValidate)
-                    .then(function (response) {
-                        notification.success({
-                            message: 'Notification',
-                            description: 'New User is Successfully Created',
-                        });
-                        existingObj.$router.push('/userPlatform');
-                    })
-                    .catch(function (error) {
-
-                    });
-
+                    const res = axios.post(`/api/storeUser`, this.formValidate)
+                                .then(function (response) {
+                                    notification.success({
+                                        message: 'Notification',
+                                        description: 'New User is Successfully Created',
+                                    });
+                                    existingObj.$router.push('/userPlatform');
+                                })
+                                .catch(function (error) {
+                                    if (error.response) {
+                                        console.log(error.response.data.errors);
+                                        notification.error({
+                                            message: 'Notification',
+                                            description: error.response,
+                                        });
+                                    }
+                                    if (error.response) {
+                                        console.log(error.response.data);
+                                        console.log(error.response.status);
+                                        console.log(error.response.headers);
+                                    }
+                                });
+                          
                 } else {
                 }
+                
             })
             
         }
