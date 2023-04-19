@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\User;
 use DB;
@@ -12,6 +14,8 @@ class UserController extends Controller
     // User 
     public function getUser()
     {
+        
+        return Auth::check();
         return User::orderBy('id', 'desc')->get();
     }
 
@@ -23,7 +27,7 @@ class UserController extends Controller
             'passwd' => 'required|min:8',
         ]);
 
-        $password = bcrypt($request->passwd);
+        $password = Hash::make($request->passwd);
         // return $request;
         User::create([
             'name' => $request->name,
@@ -48,6 +52,12 @@ class UserController extends Controller
 
     public function updateUser(Request $request)
     {
+        $validated = $request->validate([
+            'name' => 'required',
+            'email' => "required|email|unique:users,email,$request->id",
+            'userType' => 'required',
+        ]);
+
         DB::table('users')
         ->where('id', $request->id)
         ->update([
@@ -60,6 +70,9 @@ class UserController extends Controller
     
     public function updatePassword(Request $request)
     {
+        $validated = $request->validate([
+            'passwd' => 'required|min:8',
+        ]);
         $password = bcrypt($request->passwd);
         DB::table('users')
         ->where('id', $request->id)

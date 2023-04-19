@@ -3,10 +3,9 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
+        <meta name="csrf-token" content="{{ csrf_token() }}"/>
         <title>Laravel</title>
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
         <script>
             (function (){
                 window.Laravel = {
@@ -16,8 +15,21 @@
         </script>
     </head>
     <body class="antialiased">
+
         <div id="app">
-            
+            @if (!Auth::check())
+            <script>
+                window.Laravel = {!!json_encode([
+                    'isLoggedin' => false,
+                ])!!}
+            </script>
+            @elseif(Auth::check())
+                <script>
+                    window.Laravel = {!!json_encode([
+                        'isLoggedin' => true
+                    ])!!}
+                </script>
+            @endif
         </div>
         <script src="{{mix('/js/app.js')}}"></script>
     </body>

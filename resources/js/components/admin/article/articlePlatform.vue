@@ -239,6 +239,7 @@ export default defineComponent({
     await axios.get('/api/getArticle')
     .then(function (response) {
       existingObj.articles = response.data
+      
     })
     .catch(function (error) {
         if(error){

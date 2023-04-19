@@ -106,17 +106,19 @@
                                     existingObj.$router.push('/userPlatform');
                                 })
                                 .catch(function (error) {
-                                    if (error.response) {
+                                    if (error.response.data.errors.email) {
                                         console.log(error.response.data.errors);
                                         notification.error({
                                             message: 'Notification',
-                                            description: error.response,
+                                            description: error.response.data.errors.email,
                                         });
                                     }
-                                    if (error.response) {
-                                        console.log(error.response.data);
-                                        console.log(error.response.status);
-                                        console.log(error.response.headers);
+                                    if (error.response.data.errors.passwd) {
+                                        console.log(error.response.data.errors);
+                                        notification.error({
+                                            message: 'Notification',
+                                            description: error.response.data.errors.passwd,
+                                        });
                                     }
                                 });
                           

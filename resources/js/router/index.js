@@ -1,10 +1,6 @@
 import {createWebHistory, createRouter} from "vue-router";
 
 
-import Mainapp from '../components/mainapp.vue';
-import Hook from '../components/basic/hooks.vue';
-import Method from '../components/basic/methods.vue';
-
 // Project
 import Home from '../components/pages/homePage/home.vue';
 import Map from '../components/pages/mapPage/map.vue';
@@ -25,26 +21,21 @@ import editUserForm from '../components/admin/user/editForm.vue';
 // Settings
 import setting from '../components/admin/settings/setting.vue';
 
+// Login
+import login from '../components/login.vue';
+
+// Dashboard
+import dashboard from '../components/dashboard.vue';
 
 export const routes = [
+    // Login
     {
-        name: 'hook',
-        path: '/hook',
-        component: Hook
-    },
-    {
-        name: 'mainapp',
-        path: '/mainapp',
-        component: Mainapp
-    },
-    {
-        name: 'method',
-        path: '/method',
-        component: Method
+        name: 'login',
+        path: '/login',
+        component: login
     },
 
     // Project
-
     {
         name: 'home',
         path: '/',
@@ -60,50 +51,57 @@ export const routes = [
         path: '/waterLevel',
         component: Waterlevel  
     },
+    {
+        path: '/admin',
+        component: dashboard,
+        children:[
+            // Admin
 
-    // Admin
+            // Article
+            {
+                name: 'articlePlatform',
+                path: '/admin/articlePlatform',
+                component: articlePlatform  
+            },
+            {
+                name: 'addArticleForm',
+                path: '/admin/articlePlatform/addForm',
+                component: addArticleForm  
+            },
+            {
+                name: 'editArticleForm',
+                path: '/admin/articlePlatform/editForm/:id',
+                component: editArticleForm ,
+                props:true
+            },
 
-    // Article
-    {
-        name: 'articlePlatform',
-        path: '/articlePlatform',
-        component: articlePlatform  
-    },
-    {
-        name: 'addArticleForm',
-        path: '/articlePlatform/addForm',
-        component: addArticleForm  
-    },
-    {
-        name: 'editArticleForm',
-        path: '/articlePlatform/editForm/:id',
-        component: editArticleForm ,
-        props:true
+            //User 
+            {
+                name: 'userPlatform',
+                path: '/admin/userPlatform',
+                component: userPlatform  
+            },
+            {
+                name: 'addUserForm',
+                path: '/admin/userPlatform/addForm',
+                component: addUserForm  
+            },
+            {
+                name: 'editUserForm',
+                path: '/admin/userPlatform/editForm/:id',
+                component: editUserForm,  
+                props:true
+            },
+            // Settings
+            {
+                name: 'setting',
+                path: '/admin/setting',
+                component: setting  
+            },
+        ]
     },
 
-    //User 
-    {
-        name: 'userPlatform',
-        path: '/userPlatform',
-        component: userPlatform  
-    },
-    {
-        name: 'addUserForm',
-        path: '/userPlatform/addForm',
-        component: addUserForm  
-    },
-    {
-        name: 'editUserForm',
-        path: '/userPlatform/editForm/:id',
-        component: editUserForm,  
-        props:true
-    },
-    // Settings
-    {
-        name: 'setting',
-        path: '/setting',
-        component: setting  
-    },
+    
 ];
 
 const router = createRouter({

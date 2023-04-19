@@ -4,7 +4,7 @@
       <div class="flex justify-center text-2xl">
         User Management
       </div>
-      <a-button  type="primary" @click="this.$router.push('/userPlatform/addForm')" class="mb-2">New User</a-button>
+      <a-button  type="primary" @click="this.$router.push('/admin/userPlatform/addForm')" class="mb-2">New User</a-button>
 
       <a-table :data-source="users" :columns="columns" size="small">
         <template #headerCell="{ column }">
@@ -178,7 +178,7 @@ export default defineComponent({
     },
     editForm(id){
       console.log(id);
-      this.$router.push({path: '/userPlatform/editForm/' + id})
+      this.$router.push({path: '/admin/userPlatform/editForm/' + id})
     },
   },
   data(){
@@ -192,6 +192,7 @@ export default defineComponent({
     await axios.get('/api/getUser')
     .then(function (response) {
       existingObj.users = response.data
+      console.log(response);
     })
     .catch(function (error) {
         if(error){

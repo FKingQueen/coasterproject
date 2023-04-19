@@ -127,7 +127,13 @@
                         existingObj.$router.push('/userPlatform');
                     })
                     .catch(function (error) {
-
+                        if (error.response.data.errors.email) {
+                            console.log(error.response.data.errors);
+                            notification.error({
+                                message: 'Notification',
+                                description: error.response.data.errors.email,
+                            });
+                        }
                     });
 
                 } else {
@@ -152,7 +158,13 @@
 
                     })
                     .catch(function (error) {
-
+                        if (error.response.data.errors.passwd) {
+                            console.log(error.response.data.errors);
+                            notification.error({
+                                message: 'Notification',
+                                description: error.response.data.errors.passwd,
+                            });
+                        }
                     });
                 } else {
                 }
