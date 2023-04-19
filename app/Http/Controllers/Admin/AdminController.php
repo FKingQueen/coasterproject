@@ -31,7 +31,9 @@ class AdminController extends Controller
         ];
 
         if(Auth::attempt($credentials)){
-            return Auth::user();
+            return response()->json([
+                'auth'  =>  'success'
+            ]);
             
         }else{
             return response()->json([
@@ -44,6 +46,6 @@ class AdminController extends Controller
     
     public function logout()
     {
-        Auth::logout();
+        auth()->guard('web')->logout();
     }
 }

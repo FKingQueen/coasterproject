@@ -3,10 +3,10 @@
 
         <div class="m-5 bg-white shadow-inner shadow-lg rounded px-20 py-5">
             <Breadcrumb separator=">">
-                <BreadcrumbItem to="/articlePlatform">Article Management</BreadcrumbItem>
+                <BreadcrumbItem to="/admin/articlePlatform">Article Management</BreadcrumbItem>
                 <BreadcrumbItem>New Article Form</BreadcrumbItem>
             </Breadcrumb>
-            <a-button @click="this.$router.push('/articlePlatform')" class="my-3">Back</a-button>
+            <a-button @click="this.$router.push('/admin/articlePlatform')" class="my-3">Back</a-button>
             <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="95" class="px-10" >
                 <FormItem label="Image" prop="image">
                 <Upload
@@ -19,7 +19,7 @@
                     :max-size="2048"
                     :on-format-error="handleFormatError"
                     :on-exceeded-size="handleMaxSize"
-                    action="/api/upload">
+                    action="/api/admin/upload">
                     <div style="padding: 20px 0">
                         <Icon type="ios-cloud-upload" size="52" style="color: #3399ff"></Icon>
                         <p>Click or drag files here to upload</p>
@@ -88,18 +88,19 @@
             let existingObj = this;
             this.$refs[name].validate((valid) => {
                 if (valid) {
-                    // Post
-                    axios.post(`/api/storeArticle`, this.formValidate)
-                    .then(function (response) {
-                        notification.success({
-                            message: 'Notification',
-                            description: 'New Article is Successfully Created',
-                        });
-                        existingObj.$router.push('/articlePlatform');
-                    })
-                    .catch(function (error) {
+                    axios.get('/sanctum/csrf-cookie').then(response => {
+                        axios.post(`/api/admin/storeArticle`, this.formValidate)
+                        .then(function (response) {
+                            notification.success({
+                                message: 'Notification',
+                                description: 'New Article is Successfully Created',
+                            });
+                            existingObj.$router.push('/admin/articlePlatform');
+                        })
+                        .catch(function (error) {
 
-                    });
+                        });
+                    })
 
                 } else {
                 }
@@ -110,16 +111,18 @@
             let image = this.formValidate.image
             this.formValidate.image = ''
             this.$refs.uploads.clearFiles()
-            await axios.post(`/api/deleteImage`, {imageName: image})
-                .then(function (response) {
-                
+            await axios.get('/sanctum/csrf-cookie').then(response => {
+                axios.post(`/api/admin/deleteImage`, {imageName: image})
+                    .then(function (response) {
+                    
 
-                })
-                .catch(function (error) {
-                if(error){
-                    this.formValidate.image = image
-                }
-            });       
+                    })
+                    .catch(function (error) {
+                    if(error){
+                        this.formValidate.image = image
+                    }
+                });    
+            })   
         },
         handleSuccess (res, file) {
             this.formValidate.image = res

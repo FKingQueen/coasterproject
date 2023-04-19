@@ -19,9 +19,9 @@ use App\Http\Controllers\Admin\ArticleController;
 
 // Login
 Route::post('/login', [AdminController::class, 'login']);
-Route::post('/logout', [AdminController::class, 'logout']);
+Route::post('/logout', [AdminController::class, 'logout'])->middleware('auth:sanctum');
 
-// Route::group(['prefix' => 'Admin'], function() {
+Route::group(['prefix' => 'admin','middleware' => 'auth:sanctum'], function() {
     // User
     Route::get('/getUser', [UserController::class, 'getUser']);
     Route::post('/storeUser', [UserController::class, 'storeUser']);
@@ -44,5 +44,5 @@ Route::post('/logout', [AdminController::class, 'logout']);
     Route::post('/updateArticle', [ArticleController::class, 'updateArticle']);
 
     Route::get('/getsomething', [AdminController::class, 'getsomething']);
-// });
+});
 

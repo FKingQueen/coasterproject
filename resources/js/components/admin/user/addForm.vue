@@ -3,10 +3,10 @@
 
         <div class="m-5 bg-white shadow-inner shadow-lg rounded px-20 py-5">
             <Breadcrumb separator=">">
-                <BreadcrumbItem to="/userPlatform">User Management</BreadcrumbItem>
+                <BreadcrumbItem to="/admin/userPlatform">User Management</BreadcrumbItem>
                 <BreadcrumbItem>New User Form</BreadcrumbItem>
             </Breadcrumb>
-            <a-button @click="this.$router.push('/userPlatform')" class="my-3">Back</a-button>
+            <a-button @click="this.$router.push('/admin/userPlatform')" class="my-3">Back</a-button>
             <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="95" class="px-10" >
                 <FormItem label="Name" prop="name">
                     <Input v-model="formValidate.name" placeholder="Enter your name"></Input>
@@ -97,30 +97,32 @@
             await this.$refs[name].validate((valid) => {
                 if (valid) {
                     // Post
-                    const res = axios.post(`/api/storeUser`, this.formValidate)
-                                .then(function (response) {
-                                    notification.success({
-                                        message: 'Notification',
-                                        description: 'New User is Successfully Created',
-                                    });
-                                    existingObj.$router.push('/userPlatform');
-                                })
-                                .catch(function (error) {
-                                    if (error.response.data.errors.email) {
-                                        console.log(error.response.data.errors);
-                                        notification.error({
-                                            message: 'Notification',
-                                            description: error.response.data.errors.email,
-                                        });
-                                    }
-                                    if (error.response.data.errors.passwd) {
-                                        console.log(error.response.data.errors);
-                                        notification.error({
-                                            message: 'Notification',
-                                            description: error.response.data.errors.passwd,
-                                        });
-                                    }
+                    axios.get('/sanctum/csrf-cookie').then(response => {
+                        const res = axios.post(`/api/admin/storeUser`, this.formValidate)
+                        .then(function (response) {
+                            notification.success({
+                                message: 'Notification',
+                                description: 'New User is Successfully Created',
+                            });
+                            existingObj.$router.push('/admin/userPlatform');
+                        })
+                        .catch(function (error) {
+                            if (error.response.data.errors.email) {
+                                console.log(error.response.data.errors);
+                                notification.error({
+                                    message: 'Notification',
+                                    description: error.response.data.errors.email,
                                 });
+                            }
+                            if (error.response.data.errors.passwd) {
+                                console.log(error.response.data.errors);
+                                notification.error({
+                                    message: 'Notification',
+                                    description: error.response.data.errors.passwd,
+                                });
+                            }
+                        });
+                    })
                           
                 } else {
                 }

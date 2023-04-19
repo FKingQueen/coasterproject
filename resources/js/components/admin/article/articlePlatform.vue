@@ -4,7 +4,7 @@
       <div class="flex justify-center text-2xl">
         Article Management
       </div>
-      <a-button  type="primary" @click="this.$router.push('/articlePlatform/addForm')" class="mb-2">New Article</a-button>
+      <a-button  type="primary" @click="this.$router.push('/admin/articlePlatform/addForm')" class="mb-2">New Article</a-button>
       <a-table :data-source="articles" :columns="columns" size="small">
         <template #headerCell="{ column }">
           <template v-if="column.key === 'title'">
@@ -190,7 +190,7 @@ export default defineComponent({
       this.articles.splice(key, 1);
       // let id = this.articles[key]
 
-      axios.post(`/api/deleteArticle/${id}`)
+      axios.post(`/api/admin/deleteArticle/${id}`)
       .then(function (response) {
         notification.success({
             message: 'Notification',
@@ -212,7 +212,7 @@ export default defineComponent({
     },
     editForm(id){
       console.log(id);
-      this.$router.push({path: '/articlePlatform/editForm/' + id})
+      this.$router.push({path: '/admin/articlePlatform/editForm/' + id})
     },
     removeModal(){
       this.modal = false;
@@ -236,7 +236,7 @@ export default defineComponent({
   async created(){
     let existingObj = this;
     this.token = window.Laravel.csrfToken;
-    await axios.get('/api/getArticle')
+    await axios.get('/api/admin/getArticle')
     .then(function (response) {
       existingObj.articles = response.data
       

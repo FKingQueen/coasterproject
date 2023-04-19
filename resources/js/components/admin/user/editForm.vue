@@ -3,10 +3,10 @@
 
         <div class="m-5 bg-white shadow-inner shadow-lg rounded px-20 py-5">
             <Breadcrumb separator=">">
-                <BreadcrumbItem to="/userPlatform">User Management</BreadcrumbItem>
-                <BreadcrumbItem>New User Form</BreadcrumbItem>
+                <BreadcrumbItem to="/admin/userPlatform">User Management</BreadcrumbItem>
+                <BreadcrumbItem>Edit User Form</BreadcrumbItem>
             </Breadcrumb>
-            <a-button @click="this.$router.push('/userPlatform')" class="my-3">Back</a-button>
+            <a-button @click="this.$router.push('/admin/userPlatform')" class="my-3">Back</a-button>
             <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="95" class="px-10" >
                 <FormItem label="Name" prop="name">
                     <Input v-model="formValidate.name" placeholder="Enter your name"></Input>
@@ -174,15 +174,15 @@
         }
     },
     async created(){
-        this.token = window.Laravel.csrfToken;
-        // console.log(this.$route.params.id);
         let id = this.$route.params.id
+        console.log(id);
         let existingObj = this;
-        await axios.get(`/api/getUserEdit/${id}`)
+        await axios.get(`/api/admin/getUserEdit/${id}`)
         .then(function (response) {
-            existingObj.formValidate.id = response.data.id
-            existingObj.formValidate.name = response.data.name
+            console.log(response.data);
             existingObj.formValidate.userType = response.data.userType
+            existingObj.formValidate.id = response.data.id
+            existingObj.formValidate.name = response.data.name  
             existingObj.formValidate.email = response.data.email
         })
         .catch(function (error) {

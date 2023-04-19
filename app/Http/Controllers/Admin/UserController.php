@@ -14,8 +14,6 @@ class UserController extends Controller
     // User 
     public function getUser()
     {
-        
-        return Auth::check();
         return User::orderBy('id', 'desc')->get();
     }
 

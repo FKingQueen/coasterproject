@@ -90,7 +90,7 @@
 <script>
 import { notification } from 'ant-design-vue';
 import { SearchOutlined } from '@ant-design/icons-vue';
-import { defineComponent, reactive, ref, toRefs } from 'vue';
+import { defineComponent, reactive, onMounted, ref, toRefs } from 'vue';
 export default defineComponent({
   components: {
     SearchOutlined,
@@ -177,7 +177,7 @@ export default defineComponent({
       });
     },
     editForm(id){
-      console.log(id);
+      // console.log(id);
       this.$router.push({path: '/admin/userPlatform/editForm/' + id})
     },
   },
@@ -189,10 +189,9 @@ export default defineComponent({
   async created(){
     let existingObj = this;
     this.token = window.Laravel.csrfToken;
-    await axios.get('/api/getUser')
+    await axios.get('/api/admin/getUser')
     .then(function (response) {
       existingObj.users = response.data
-      console.log(response);
     })
     .catch(function (error) {
         if(error){

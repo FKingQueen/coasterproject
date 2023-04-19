@@ -93,34 +93,31 @@ export default defineComponent({
   methods : {
     async login(){
         let existingObj = this;
-        axios.post('api/login', this.formState)
-        .then(response => {
-            if(response.data.auth == "success"){
-            notification.success({
-                message: 'Notification',
-                description: 'You are Logged In',
-            });
-            } else if(response.data.auth == "failed") {
-                notification.error({
+        axios.get('/sanctum/csrf-cookie').then(response => {
+            axios.post('api/login', this.formState)
+            .then(response => {
+                if(response.data.auth == "success"){
+                notification.success({
                     message: 'Notification',
-                    description: 'Incorrect Login Details',
+                    description: 'You are Logged In',
                 });
-            }
-            console.log(response);
+                } else if(response.data.auth == "failed") {
+                    notification.error({
+                        message: 'Notification',
+                        description: 'Incorrect Login Details',
+                    });
+                }
+                console.log(response);
+                this.$router.push({path: '/admin/userPlatform'})
+            })
+            .catch(function (error) {
+                console.error(error);
+            });   
         })
-        .catch(function (error) {
-            console.error(error);
-        });   
     }
   },
   async created(){
-    await axios.get('api/getsomething')
-        .then(response => { 
-            console.log(response);
-        })
-        .catch(function (error) {
-            console.error(error);
-        });   
+    console.log(window.window);
   }
 });
 </script>
