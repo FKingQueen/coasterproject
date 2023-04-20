@@ -11,7 +11,7 @@
 <template>
   <div >
     <div class="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased " style="background-color: rgb(245 247 249);">
-      <div v-if="isLoggedIn"> 
+      <div> 
         <!-- Header -->
         <div class="fixed w-full flex items-center justify-between h-14 text z-10">
           <div class="flex items-center justify-start md:justify-center pl-3 w-14 md:w-64 h-14 bg-gray-300 border-none">
@@ -86,10 +86,7 @@
         </div>
         <!-- ./Sidebar -->
       </div>
-      <div v-if="isLoggedIn" class="h-full ml-14 mt-14 mb-10 md:ml-64 bg" >
-        <router-view ></router-view>
-      </div>
-      <div v-else>
+      <div class="h-full ml-14 mt-14 mb-10 md:ml-64 bg" >
         <router-view ></router-view>
       </div>
     </div>
@@ -101,7 +98,6 @@
 export default {
   data(){
     return{
-      isLoggedIn : true,
     }
   },
   methods: {
@@ -109,14 +105,32 @@ export default {
       axios.get('/sanctum/csrf-cookie').then(response => {
         axios.post('/api/logout')
         .then(response => {
-                console.log(response);
+                window.Laravel.isLoggedin = false
                 this.$router.push({path: '/login'})
         })
         .catch(function (error) {
             console.error(error);
         });
-    }) 
+      }) 
+      this.$router.push({path: '/login'})
     }
+  },
+  async created(){
+    console.log(window.Laravel)
+    console.log(window)
   }
 }
 </script>
+
+<style scoped>
+.router-link-exact-active{
+    background-color: rgb(31 41 55);
+    border-left: 4px solid rgb(59 130 246);
+    color: rgb(203 213 225);
+}
+.router-link-active{
+    background-color: rgb(31 41 55);
+    border-left: 4px solid rgb(59 130 246);
+    color: rgb(203 213 225);
+}
+</style>

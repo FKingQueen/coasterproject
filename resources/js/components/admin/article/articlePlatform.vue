@@ -74,7 +74,7 @@
                   </div>
                 </template>
                 <div class="flex justify-center h-[20rem] shadow">
-                  <Image :src="`/uploads/${this.modalData.image}`" class="object-cover  border" />
+                  <Image :src="`/uploads/${modalData.image}`" class="object-cover  border" />
                 </div>
                 <div>          
                   <p class="text-xl mt-4 font-semibold">{{this.modalData.title}}</p>
@@ -202,7 +202,7 @@ export default defineComponent({
         console.log(error);
       });
     },
-    openModal(index){
+    async openModal(index){
       this.modalData.id = this.articles[index].id;
       this.modalData.title = this.articles[index].title;
       this.modalData.author = this.articles[index].author;

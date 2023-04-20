@@ -15,7 +15,10 @@ class AdminController extends Controller
 {
     public function getsomething(){
         
-        return Auth::user();
+        if(Auth::check()){
+            return redirect('admin/userPlatform');
+        }
+        return;
     }
     public function login(Request $request)
     {

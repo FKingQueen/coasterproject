@@ -13,7 +13,6 @@ import 'ant-design-vue/dist/antd.css';
 import 'view-ui-plus/dist/styles/viewuiplus.css';
 
 
-
 const app = createApp(App);
 app.config.globalProperties.$axios = axios;
 app.use(ViewUIPlus);

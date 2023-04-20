@@ -56,6 +56,7 @@
 import { defineComponent, reactive, computed } from 'vue';
 import { UserOutlined, LockOutlined } from '@ant-design/icons-vue';
 import { notification } from 'ant-design-vue';
+import { nextTick } from 'process';
 export default defineComponent({
   components: {
     UserOutlined,
@@ -88,12 +89,13 @@ export default defineComponent({
         validateMessages,
         layout,
         disabled,
+        prevRoute: null
     }
   },
   methods : {
     async login(){
         let existingObj = this;
-        axios.get('/sanctum/csrf-cookie').then(response => {
+        await axios.get('/sanctum/csrf-cookie').then(response => {
             axios.post('api/login', this.formState)
             .then(response => {
                 if(response.data.auth == "success"){
@@ -107,7 +109,8 @@ export default defineComponent({
                         description: 'Incorrect Login Details',
                     });
                 }
-                console.log(response);
+                window.Laravel.isLoggedin = true
+                
                 this.$router.push({path: '/admin/userPlatform'})
             })
             .catch(function (error) {
@@ -117,7 +120,8 @@ export default defineComponent({
     }
   },
   async created(){
-    console.log(window.window);
+    console.log(window.Laravel);
+    console.log(window)
   }
 });
 </script>

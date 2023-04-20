@@ -2,14 +2,5 @@
 @tailwind components;
 @tailwind utilities;
 
-.router-link-exact-active{
-    background-color: rgb(31 41 55);
-    border-left: 4px solid rgb(59 130 246);
-    color: rgb(203 213 225);
-}
-.router-link-active{
-    background-color: rgb(31 41 55);
-    border-left: 4px solid rgb(59 130 246);
-    color: rgb(203 213 225);
-}
+
 

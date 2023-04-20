@@ -35,7 +35,7 @@
         <div class="flex justify-center">
             <div class="w-3/4">
                 <a-card>
-                    <a-card-grid style="width: 33.3%; text-align: center"> 
+                    <a-card-grid style="width: 33.3%;  text-align: center"> 
                         <div>
                             <img src="img/field2.jpg" alt="" class="object-none w-full h-[12rem]">
                         </div>

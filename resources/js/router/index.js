@@ -1,7 +1,7 @@
 import {createWebHistory, createRouter} from "vue-router";
 
-
 // Project
+import homePage from '../components/home.vue';
 import Home from '../components/pages/homePage/home.vue';
 import Map from '../components/pages/mapPage/map.vue';
 import Waterlevel from '../components/pages/mapPage/waterLevel.vue';
@@ -32,28 +32,35 @@ export const routes = [
     {
         name: 'login',
         path: '/login',
-        component: login
+        component: login,
     },
 
     // Project
     {
-        name: 'home',
         path: '/',
-        component: Home
-    },
-    {
-        name: 'map',
-        path: '/map',
-        component: Map  
-    },
-    {
-        name: 'waterLevel',
-        path: '/waterLevel',
-        component: Waterlevel  
+        component: homePage,
+        children:[
+            {
+                name: 'home',
+                path: '/',
+                component: Home  
+            },
+            {
+                name: 'map',
+                path: '/map',
+                component: Map  
+            },
+            {
+                name: 'waterLevel',
+                path: '/waterLevel',
+                component: Waterlevel  
+            },
+            ]
     },
     {
         path: '/admin',
         component: dashboard,
+        meta : {requiresAuth: true},
         children:[
             // Admin
 
@@ -108,5 +115,21 @@ const router = createRouter({
     history: createWebHistory(),
     routes: routes,
 });
+
+router.beforeEach((to, from, next) => {
+    if(to.matched.some(record => record.meta.requiresAuth)){
+        if(!window.Laravel.isLoggedin){
+            next({
+                name: "login"
+            })
+        }
+         else {
+            next();
+        }
+    } else {
+        next();
+    }
+});
+
 
 export default router;
