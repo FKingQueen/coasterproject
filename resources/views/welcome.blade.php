@@ -6,13 +6,20 @@
         <!-- <meta name="csrf-token" content="{{ csrf_token() }}"/> -->
         <title>Laravel</title>
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
+        <script>
+            (function () {
+                window.Laravel = {
+                    csrfToken: '{{ csrf_token() }}'
+                };
+            })();
+        </script>
     </head>
     <body class="antialiased">
         @if (!Auth::check())
             <script>
                 window.Laravel = {!!json_encode([
                     'isLoggedin' => false,
+                    'csrfToken' => csrf_token() ,
                 ])!!}
             </script>
         @elseif(Auth::check())
@@ -20,6 +27,7 @@
                 window.Laravel = {!!json_encode([
                     'isLoggedin' => true,
                     'user' => Auth::user()->name,
+                    'csrfToken' =>  csrf_token() ,
                 ])!!}
             </script>
         @endif

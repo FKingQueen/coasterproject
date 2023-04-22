@@ -1,11 +1,11 @@
 <template>
     <div class="p-2">
         <Breadcrumb separator=">">
-            <BreadcrumbItem to="/articlePlatform">Article Management</BreadcrumbItem>
+            <BreadcrumbItem to="/admin/articlePlatform">Article Management</BreadcrumbItem>
             <BreadcrumbItem>Edit Article Form</BreadcrumbItem>
         </Breadcrumb>
         <div class="m-5 bg-white shadow-inner shadow-lg rounded px-20 py-5">
-            <a-button @click="this.$router.push('/articlePlatform')" class="mb-3">Back</a-button>
+            <a-button @click="this.$router.push('/admin/articlePlatform')" class="mb-3">Back</a-button>
             <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="95" class="px-10" >
                 <FormItem label="Image" prop="image">
                 <Upload
@@ -18,7 +18,7 @@
                     :max-size="2048"
                     :on-format-error="handleFormatError"
                     :on-exceeded-size="handleMaxSize"
-                    action="/api/upload">
+                    action="/api/admin/upload">
                     <div style="padding: 20px 0">
                         <Icon type="ios-cloud-upload" size="52" style="color: #3399ff"></Icon>
                         <p>Click or drag files here to upload</p>
@@ -89,13 +89,13 @@
             this.$refs[name].validate((valid) => {
                 if (valid) {
                     // Post
-                    axios.post(`/api/updateArticle`, this.formValidate)
+                    axios.post(`/api/admin/updateArticle`, this.formValidate)
                     .then(function (response) {
                         notification.success({
                             message: 'Notification',
                             description: 'The Article is Successfully Updated',
                         });
-                        existingObj.$router.push('/articlePlatform');
+                        existingObj.$router.push('/admin/articlePlatform');
                     })
                     .catch(function (error) {
 
@@ -110,7 +110,7 @@
             let image = this.formValidate.image
             this.formValidate.image = ''
             this.$refs.uploads.clearFiles()
-            await axios.post(`/api/deleteImage`, {imageName: image})
+            await axios.post(`/api/admin/deleteImage`, {imageName: image})
                 .then(function (response) {
                 
 
@@ -145,7 +145,7 @@
         // console.log(this.$route.params.id);
         let id = this.$route.params.id
         let existingObj = this;
-        await axios.get(`/api/getArticleEdit/${id}`)
+        await axios.get(`/api/admin/getArticleEdit/${id}`)
         .then(function (response) {
             existingObj.formValidate.id = response.data.id
             existingObj.formValidate.title = response.data.title

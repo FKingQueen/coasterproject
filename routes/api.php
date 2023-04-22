@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ArticleController;  
+use App\Http\Controllers\Home\HarticleController;  
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +25,7 @@ Route::get('/getsomething', [AdminController::class, 'getsomething']);
 Route::post('/logout', [AdminController::class, 'logout'])->middleware('auth:sanctum');
 
 Route::group(['prefix' => 'admin','middleware' => 'auth:sanctum'], function() {
-    // User
+    // Admin User
     Route::get('/getUser', [UserController::class, 'getUser']);
     Route::post('/storeUser', [UserController::class, 'storeUser']);
     Route::post('/deleteUser/{id}', [UserController::class, 'deleteUser']);
@@ -33,7 +34,7 @@ Route::group(['prefix' => 'admin','middleware' => 'auth:sanctum'], function() {
     Route::post('/updatePassword', [UserController::class, 'updatePassword']);
 
 
-    // Article
+    // Admin Article
     Route::get('/getArticle', [ArticleController::class, 'getArticle']);
 
     Route::post('/storeArticle', [ArticleController::class, 'storeArticle']);
@@ -44,7 +45,8 @@ Route::group(['prefix' => 'admin','middleware' => 'auth:sanctum'], function() {
 
     Route::get('/getArticleEdit/{id}', [ArticleController::class, 'getArticleEdit']);
     Route::post('/updateArticle', [ArticleController::class, 'updateArticle']);
-
-    
 });
+
+Route::get('/getArticles', [HarticleController::class, 'getArticles']);
+
 

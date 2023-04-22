@@ -112,6 +112,7 @@
             this.formValidate.image = ''
             this.$refs.uploads.clearFiles()
             await axios.get('/sanctum/csrf-cookie').then(response => {
+                response
                 axios.post(`/api/admin/deleteImage`, {imageName: image})
                     .then(function (response) {
                     
