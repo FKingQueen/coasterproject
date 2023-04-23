@@ -33,8 +33,8 @@
                 </a-divider>
             </div>
         </div>
-        <div class="w-full flex justify-center">
-            <div class="w-3/4">
+        <div class="w-full flex justify-center bg-gray-100 p-10">
+            <div class="w-3/4 drop-shadow-md">
                 <swiper
                 ref="{swiperRef}"
                 :slidesPerView="3"
@@ -50,45 +50,102 @@
                     <swiper-slide v-for='(article, index) in articles' :key='article.id' >
                         <article class="h-96">
                             <div class="article-wrapper">
-                            <figure>
-                                <img :src="`/uploads/${article.image}`" alt="" />
-                                <!-- <Image :src="`/uploads/${article.image}`" class="object-cover  border" /> -->
-                            </figure>
-                            <div class="article-body px-3 pt-2">
-                                <div>
-                                    <a-tag color="red">Project #</a-tag>
-                                    <a-tag color="green">Project #</a-tag>
-                                    <a-tag color="cyan">Project #</a-tag>
-                                    <a-tag color="blue">Project #</a-tag>
-                                </div> 
-                                <div class="flex justify-between">
-                                    <h2>{{ article.title.substring(0,15) }}</h2>
+                                <figure>
+                                    <img :src="`/uploads/${article.image}`" alt="" />
+                                    <!-- <Image :src="`/uploads/${article.image}`" class="object-cover  border" /> -->
+                                </figure>
+                                <div class="article-body px-3 pt-2">
+                                    <div>
+                                        <a-tag color="red">Project #</a-tag>
+                                        <a-tag color="green">Project #</a-tag>
+                                        <a-tag color="cyan">Project #</a-tag>
+                                        <a-tag color="blue">Project #</a-tag>
+                                    </div> 
+                                    <div class="flex justify-between">
+                                        <h2>{{ article.title.substring(0,15) }}</h2>
+                                        <p>
+                                            Date: 
+                                        </p>
+                                    </div>
                                     <p>
-                                        Date: 
+                                        By: {{ article.author }}
                                     </p>
+                                    <p class="indent-8 text-justify">
+                                        {{ article.article.substring(0,120)+"..." }}
+                                    </p>
+                                    <a href="#" class="read-more">
+                                    Read more
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                    </svg>
+                                    </a>
                                 </div>
-                                <p>
-                                    By: {{ article.author }}
-                                </p>
-                                <p class="indent-8 text-justify">
-                                    {{ article.article.substring(0,120)+"..." }}
-                                </p>
-                                <a href="#" class="read-more">
-                                Read more
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                </svg>
-                                </a>
-                            </div>
                             </div>
                         </article>
+                    </swiper-slide>
+                    <swiper-slide >
+                        <article class="h-96">
+                            <div class="grid grid-cols-2 gap-4 place-content-center h-48 p-10">
+                                <div>01</div>
+                                <div>02</div>
+                                <div>03</div>
+                                <div>04</div>
+                            </div>
+                        </article>
+
                     </swiper-slide>
                 </swiper>
             </div>
         </div>
-        <div class="h-96">
-            
+        
+        <div class=" flex justify-center">
+            <div class="w-3/4">
+                <a-divider  style="border-color: #728596">
+                    <h1 class="text-sky-600">
+                        PROJECT OBJECTIVES
+                    </h1>
+                </a-divider>
+            </div>
         </div>
+        
+        <section class="body-font text-gray-600">
+            <div class="container mx-auto px-5">
+                <div class="-m-4 flex flex-wrap">
+                    <div class="w-full p-4 md:w-1/2 lg:w-1/4">
+                    <a href="{{ route('project1')}}" class="relative block overflow-hidden rounded flex justify-center py-5">
+                        <img alt="ecommerce" class="block h-full w-80 shadow-lg object-cover object-center cursor-pointer transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-105 duration-300" src="img/P1.png" />
+                    </a>
+                    <div class="mt-4 flex justify-center">
+                        <h3 class="title-font mb-1 text-xs tracking-widest text-gray-500">PROJECT 1</h3>
+                    </div>
+                    </div>
+                    <div class="w-full p-4 md:w-1/2 lg:w-1/4">
+                    <a href="{{ route('project2')}}" class="relative block overflow-hidden rounded flex justify-center py-5">
+                        <img alt="ecommerce" class="block h-full w-80 shadow-lg object-cover object-center cursor-pointer transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-105 duration-300" src="img/P2.png" />
+                    </a>
+                    <div class="mt-4 flex justify-center">
+                        <h3 class="title-font mb-1 text-xs tracking-widest text-gray-500">PROJECT 2</h3>
+                    </div>
+                    </div>
+                    <div class="w-full p-4 md:w-1/2 lg:w-1/4">
+                    <a href="{{ route('project3')}}" class="relative block overflow-hidden rounded flex justify-center py-5">
+                        <img alt="ecommerce" class="block h-full w-80 shadow-lg object-cover object-center cursor-pointer transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-105 duration-300" src="img/P3.png" />
+                    </a>
+                    <div class="mt-4 flex justify-center">
+                        <h3 class="title-font mb-1 text-xs tracking-widest text-gray-500">PROJECT 3</h3>
+                    </div>
+                    </div>
+                    <div class="w-full p-4 md:w-1/2 lg:w-1/4">
+                    <a href="{{ route('project4')}}" class="relative block overflow-hidden rounded flex justify-center py-5">
+                        <img alt="ecommerce" class="block h-full w-80 shadow-lg object-cover object-center cursor-pointer transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-105 duration-300" src="img/P4.png" />
+                    </a>
+                    <div class="mt-4 flex justify-center">
+                        <h3 class="title-font mb-1 text-xs tracking-widest text-gray-500">PROJECT 4</h3>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
   </template>
   <script>
