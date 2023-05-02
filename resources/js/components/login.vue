@@ -120,8 +120,9 @@ export default defineComponent({
     }
   },
   async created(){
-    console.log(window.Laravel);
-    console.log(window)
+    if(window.Laravel.isLoggedin){
+      this.$router.go(-1)
+    }
   }
 });
 </script>
