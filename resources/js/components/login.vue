@@ -108,6 +108,7 @@ export default defineComponent({
                         message: 'Notification',
                         description: 'Incorrect Login Details',
                     });
+                    return;
                 }
                 window.Laravel.isLoggedin = true
                 
