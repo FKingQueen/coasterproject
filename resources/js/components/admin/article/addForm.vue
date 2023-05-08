@@ -33,6 +33,36 @@
                     </div>
                 </div>
                 </FormItem>
+                <FormItem label="Project" prop="projectValue">
+                    <a-select
+                        v-model:value="formValidate.projectValue"
+                        mode="multiple"
+                        style="width: 100%"
+                        placeholder="Select Project"
+                        :options="projectOptions"
+                        >
+                        <template #option="{ value: val, label, icon }">
+                            <span role="img" :aria-label="val">{{ icon }}</span>
+                            &nbsp;&nbsp;{{ label }}
+                        </template>
+                        <template #tagRender="{ value: val, label, closable, onClose, option }">
+                            <a-tag :closable="closable" style="margin-right: 3px" @close="onClose">
+                            {{ label }}&nbsp;&nbsp;
+                            <span role="img" :aria-label="val">{{ option.icon }}</span>
+                            </a-tag>
+                        </template>
+                    </a-select>
+                </FormItem>
+                <FormItem label="Article Type" prop="typeValue">
+                    <a-select
+                        v-model:value="formValidate.typeValue"
+                        show-search
+                        placeholder="Select Article Type"
+                        style="width: 100%"
+                        :options="typeOptions"
+                        :filter-option="filterOption"
+                    ></a-select>
+                </FormItem>
                 <FormItem label="Title" prop="title">
                     <Input v-model="formValidate.title" placeholder="Enter Title"></Input>
                 </FormItem>
@@ -52,15 +82,56 @@
   
   <script>
   import { UploadOutlined } from '@ant-design/icons-vue';
-  import { defineComponent, ref } from 'vue';
+  import { defineComponent, ref, watch } from 'vue';
   import { notification } from 'ant-design-vue';
   import { useRoute, useRouter} from 'vue-router';
   export default defineComponent({
+    setup() {
+        const projectOptions = ref([{
+        value: '1',
+        label: 'Project 1',
+        }, {
+        value: '2',
+        label: 'Project 2',
+        }, {
+        value: '3',
+        label: 'Project 3',
+        }, {
+        value: '4',
+        label: 'Project 4',
+        }]);
+        // watch(projectValue, val => {
+        // console.log(`selected:`, val);
+        // });
+
+        const typeOptions = ref([{
+        value: '1',
+        label: 'Event',
+        }, {
+        value: '2',
+        label: 'Announcement',
+        }, {
+        value: '3',
+        label: 'News',
+        }]);
+
+        const filterOption = (input, option) => {
+        return option.value.toLowerCase().indexOf(input.toLowerCase()) >= 0;
+        };
+
+        return {
+            projectOptions,
+            filterOption,
+            typeOptions,
+        };
+    },
 
     data(){
         return{
             formValidate: {
                 image: '',
+                projectValue: [],
+                typeValue: [],
                 token: '',
                 title: '',
                 author: '',
@@ -69,6 +140,12 @@
             ruleValidate: {
                 image: [
                     { required: true, message: 'The image cannot be empty', trigger: 'blur' }
+                ],
+                projectValue: [
+                    { required: true, message: 'The project cannot be empty', trigger: 'blur' }
+                ],
+                typeValue: [
+                    { required: true, message: 'The type cannot be empty', trigger: 'blur' }
                 ],
                 title: [
                     { required: true, message: 'The author cannot be empty', trigger: 'blur' }
@@ -86,21 +163,24 @@
     methods: {
         async handleSubmit (name) {
             let existingObj = this;
+            // console.log(name);
+            console.log(this.formValidate);
             this.$refs[name].validate((valid) => {
                 if (valid) {
-                    axios.get('/sanctum/csrf-cookie').then(response => {
-                        axios.post(`/api/admin/storeArticle`, this.formValidate)
-                        .then(function (response) {
-                            notification.success({
-                                message: 'Notification',
-                                description: 'New Article is Successfully Created',
-                            });
-                            existingObj.$router.push('/admin/articlePlatform');
-                        })
-                        .catch(function (error) {
+                    console.log(this.formValidate);
+                    // axios.get('/sanctum/csrf-cookie').then(response => {
+                    //     axios.post(`/api/admin/storeArticle`, this.formValidate)
+                    //     .then(function (response) {
+                    //         notification.success({
+                    //             message: 'Notification',
+                    //             description: 'New Article is Successfully Created',
+                    //         });
+                    //         existingObj.$router.push('/admin/articlePlatform');
+                    //     })
+                    //     .catch(function (error) {
 
-                        });
-                    })
+                    //     });
+                    // })
 
                 } else {
                 }

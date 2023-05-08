@@ -133,4 +133,6 @@ export default {
     border-left: 4px solid rgb(59 130 246);
     color: rgb(203 213 225);
 }
+
+
 </style>

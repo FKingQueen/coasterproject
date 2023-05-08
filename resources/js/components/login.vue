@@ -112,7 +112,7 @@ export default defineComponent({
                 }
                 window.Laravel.isLoggedin = true
                 
-                this.$router.push({path: '/admin/userPlatform'})
+                this.$router.push({path: '/admin/articlePlatform'})
             })
             .catch(function (error) {
                 console.error(error);

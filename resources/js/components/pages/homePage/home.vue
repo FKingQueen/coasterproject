@@ -33,12 +33,25 @@
                 </a-divider>
             </div>
         </div>
-        <div class="w-full flex justify-center bg-gray-100 p-10">
-            <div class="w-3/4 drop-shadow-md">
+        <div class="w-full flex justify-center bg-gray-100 lg:px-10 px-3 py-5">
+            <div class="w-full lg:w-3/4 drop-shadow-md">
                 <swiper
                 ref="{swiperRef}"
-                :slidesPerView="3"
-                :spaceBetween="30"
+
+                :breakpoints="{
+                '640': {
+                    slidesPerView: 1,
+                    spaceBetween: 0,
+                },
+                '768': {
+                    slidesPerView: 4,
+                    spaceBetween: 40,
+                },
+                '1024': {
+                    slidesPerView: 3,
+                    spaceBetween: 30,
+                },
+                }"
                 :pagination="{
                     type: 'fraction',
                 }"
@@ -61,17 +74,12 @@
                                         <a-tag color="cyan">Project #</a-tag>
                                         <a-tag color="blue">Project #</a-tag>
                                     </div> 
-                                    <div class="flex justify-between">
-                                        <h2>{{ article.title.substring(0,15) }}</h2>
-                                        <p>
-                                            Date: 
-                                        </p>
-                                    </div>
-                                    <p>
-                                        By: {{ article.author }}
+                                    <h1 class="text-base">{{ article.title.substring(0,15) }}</h1>
+                                    <p class="text-xs">
+                                        {{ article.date }}
                                     </p>
-                                    <p class="indent-8 text-justify">
-                                        {{ article.article.substring(0,120)+"..." }}
+                                    <p class="text-justify text-sm">
+                                        By: {{ article.author }}, {{ article.article.substring(0,160)+"..." }}
                                     </p>
                                     <a href="#" class="read-more">
                                     Read more
@@ -83,28 +91,17 @@
                             </div>
                         </article>
                     </swiper-slide>
-                    <swiper-slide >
-                        <article class="h-96">
-                            <div class="grid grid-cols-2 gap-4 place-content-center h-48 p-10">
-                                <div>01</div>
-                                <div>02</div>
-                                <div>03</div>
-                                <div>04</div>
-                            </div>
-                        </article>
-
-                    </swiper-slide>
                 </swiper>
+                <div class="w-full">
+                    <router-link to="/waterLevel" type="button"  class="lg:mb-0 font-bold text-center text-zinc-500 w-full py-2.5 font-medium text-xs uppercase ">View More</router-link>
+                </div>
             </div>
         </div>
-        
-        <div class=" flex justify-center">
-            <div class="w-3/4">
-                <a-divider  style="border-color: #728596">
-                    <h1 class="text-sky-600">
-                        PROJECT OBJECTIVES
-                    </h1>
-                </a-divider>
+        <!-- Project -->
+        <div class="grid gap-2 place-content-center mt-10">
+            <div class="text-center">
+            <h1 class="font-medium leading-tight text-3xl text-sky-600">PROJECT OBJECTIVES</h1>
+            <hr class="">
             </div>
         </div>
         
@@ -146,6 +143,67 @@
                 </div>
             </div>
         </section>
+        <!-- /Project -->
+        <!-- About Us -->
+        <div >
+            <div class="grid gap-2 place-content-center mt-10">
+                <div class="text-center">
+                <h1 class="font-medium leading-tight text-3xl text-sky-600">ABOUT US</h1>
+                <hr class="">
+                </div>
+            </div>
+            <div class="flex justify-center w-full  mt-5">
+                <div>
+                    <div class="xl:w-[90rem] lg:w-[50rem] w-full text-justify indent-8 p-3">
+                        The Coastal Engineering Research Center or CoastER Center is the country’s first coastal engineering and management research and development center and 
+                        the hub of innovations for coastal resiliency. This facility will spur the development of innovations that address coastal erosion, development construction 
+                        materials for coastal protection, policies, and guidelines intended to protect resources from coastal flooding and improve the lives of people in coastal 
+                        communities. It will also bolster the capability of Filipino engineers towards coastal engineering leading to the development of a master’s degree for coastal 
+                        engineering.
+                    </div>
+                    <hr class="my-6 border-sky-300" />
+                    <div class="xl:w-[90rem] lg:w-[50rem] w-full text-justify indent-8 p-3">
+                        The COASTER aims to spearhead the development of technologies and innovation to mitigate and manage coastal disasters and risks. The overall goal of the 
+                        center is to take the lead in coastal science and engineering studies to better undertand the magniture of certain process and hazards and their impacts
+                        on the maritime environment including tidal deltas and low-lying lands.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /About Us -->
+        <!-- Coop Agencies -->
+        <div class="grid gap-2 place-content-center mb-5">
+            <div class="grid gap-2 place-content-center lg:mt-10 mt-2">
+                <div class="text-center">
+                <h1 class="font-medium leading-tight text-3xl text-sky-600">COOP AGENCIES</h1>
+                <hr class="">
+                </div>
+            </div>
+            <div class="flex justify-center gap gap-4 px-10">
+                <div class="shrink-0">
+                    <a href="https://www.dost.gov.ph/"><img src="img/logo/DOST.png" class="object-fill lg:w-[4vw] lg:h-[4vw] w-[11vw] h-[11vw]" alt="#"></a>
+                </div>
+                <div class="shrink-0">
+                    <a href="https://www.dost.gov.ph/"><img src="img/logo/MMSU.png" class="object-fill lg:w-[4vw] lg:h-[4vw] w-[11vw] h-[11vw]" alt="#"></a>
+                </div>
+                <div class="shrink-0">
+                    <a href="https://www.mmsu.edu.ph/"><img src="img/logo/KYOTO.png" class="object-fill lg:w-[4vw] lg:h-[4vw] w-[11vw] h-[11vw]" alt="#"></a>
+                </div>
+                <div class="shrink-0">
+                    <a href="https://www.mmsu.edu.ph/"><img src="img/logo/DILIMAN.png" class="object-fill lg:w-[4vw] lg:h-[4vw] w-[11vw] h-[11vw]" alt="#"></a>
+                </div>
+                <div class="shrink-0">
+                    <a href="https://www.mmsu.edu.ph/"><img src="img/logo/DMMMSU.png" class="object-fill lg:w-[4vw] lg:h-[4vw] w-[11vw] h-[11vw]" alt="#"></a>
+                </div>
+                <div class="shrink-0">
+                    <a href="https://www.mmsu.edu.ph/"><img src="img/logo/CIVIL.png" class="object-fill lg:w-[4vw] lg:h-[4vw] w-[11vw] h-[11vw]" alt="#"></a>
+                </div>
+                <div class="shrink-0">
+                    <a href="https://www.mmsu.edu.ph/"><img src="img/logo/DPWH.png" class="object-fill lg:w-[4vw] lg:h-[4vw] w-[11vw] h-[11vw]" alt="#"></a>
+                </div>
+            </div>
+        </div>
+        <!-- /Coop Agencies -->
     </div>
   </template>
   <script>

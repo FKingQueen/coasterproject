@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Article;
 use DB;
@@ -27,6 +28,7 @@ class ArticleController extends Controller
 
         Article::create([
             'title' => $request->title,
+            'userId' => Auth::user()->id,
             'article' => $request->article,
             'author' => $request->author,
             'image' => $request->image,
