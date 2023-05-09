@@ -26,6 +26,7 @@ Route::post('/logout', [AdminController::class, 'logout'])->middleware('auth:san
 
 Route::group(['prefix' => 'admin','middleware' => 'auth:sanctum'], function() {
     // Admin User
+    Route::get('/getRole', [UserController::class, 'getRole']);
     Route::get('/getUser', [UserController::class, 'getUser']);
     Route::post('/storeUser', [UserController::class, 'storeUser']);
     Route::post('/deleteUser/{id}', [UserController::class, 'deleteUser']);

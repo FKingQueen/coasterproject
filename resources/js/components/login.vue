@@ -58,6 +58,13 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons-vue';
 import { notification } from 'ant-design-vue';
 import { nextTick } from 'process';
 export default defineComponent({
+  computed: {
+    user: {
+      get(){
+        return this.$store.state.currentUser.user;
+      }
+    }
+  },
   components: {
     UserOutlined,
     LockOutlined,

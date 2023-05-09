@@ -28,7 +28,8 @@
                     'isLoggedin' => true,
                     'user' => Auth::user()->name,
                     'csrfToken' =>  csrf_token() ,
-                ])!!}
+                ])!!};
+
             </script>
         @endif
         <div id="app">

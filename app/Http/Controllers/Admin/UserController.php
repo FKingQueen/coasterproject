@@ -12,6 +12,10 @@ use DB;
 class UserController extends Controller
 {
     // User 
+    public function getRole()
+    {
+        return Auth::user();
+    }
     public function getUser()
     {
         return User::orderBy('id', 'desc')->get();
