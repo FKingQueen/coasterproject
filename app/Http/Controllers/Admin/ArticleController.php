@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Article;
+use App\Models\Project;
+use App\Models\Type;
 use DB;
 
 class ArticleController extends Controller
@@ -15,26 +17,61 @@ class ArticleController extends Controller
 
     public function getArticle()
     {
-        return Article::orderBy('id', 'desc')->get();
+        return Article::orderBy('id', 'desc')->with('projects')->with('type')->get();
     }
 
     public function storeArticle(Request $request){
         $validated = $request->validate([
             'title' => 'required',
-            'article' => 'required',
+            'article' => 'required',    
+            'projectValue' => 'required',    
+            'typeValue' => 'required',       
             'author' => 'required',
             'image' => 'required',
         ]);
 
-        Article::create([
-            'title' => $request->title,
-            'userId' => Auth::user()->id,
-            'article' => $request->article,
-            'author' => $request->author,
-            'image' => $request->image,
-        ]);
 
-        return $status = 'true';
+        $newArticle = new Article;
+        $newArticle->user_id = Auth::id();
+        $newArticle->type_id = $request->typeValue;
+        $newArticle->title = $request->title;
+        $newArticle->author = $request->author;
+        $newArticle->image = $request->image;
+        $newArticle->article = $request->article;
+        $newArticle->save();
+
+        $projects = $request->projectValue;
+
+        foreach($projects as $key => $project){
+            if($project == '1'){
+                Project::create([
+                    'article_id' =>  $newArticle->id,
+                    'user_id' => Auth::user()->id,
+                    'projectType_id' => $project,
+                ]);
+            } else if ($project == '2') {
+                Project::create([
+                    'article_id' =>  $newArticle->id,
+                    'user_id' => Auth::user()->id,
+                    'projectType_id' => $project,
+                ]);
+            } else if ($project == '3') {
+                Project::create([
+                    'article_id' =>  $newArticle->id,
+                    'user_id' => Auth::user()->id,
+                    'projectType_id' => $project,
+                ]);
+            } else if ($project == '4') {
+                Project::create([
+                    'article_id' =>  $newArticle->id,
+                    'user_id' => Auth::user()->id,
+                    'projectType_id' => $project,
+                ]);
+            }
+            
+        }
+        
+        return;
     }
 
     public function upload(Request $request){
@@ -73,18 +110,64 @@ class ArticleController extends Controller
 
     public function getArticleEdit($id)
     {
-        return Article::find($id);
+        // return Article::find($id)->with('projects')->with('type')->get();
+        return Article::where('id', $id)->with('projects')->with('type')->get();
     }
 
     public function updateArticle(Request $request){
+        Project::where('article_id', $request->id)->delete();
+
+        $projects = $request->projectValue;
+
+        $validated = $request->validate([
+            'title' => 'required',
+            'article' => 'required',    
+            'projectValue' => 'required',    
+            'typeValue' => 'required',       
+            'author' => 'required',
+            'image' => 'required',
+        ]);
+
         DB::table('articles')
-            ->where('id', $request->id)
-            ->update([
-            'title' => $request->title,
-            'author' => $request->author,
-            'image' => $request->image,
-            'article' => $request->article,
-            ]);
+        ->where('id', $request->id)
+        ->update([
+        'user_id' => Auth::id(),
+        'title' => $request->title,
+        'type_id' => $request->typeValue[0],
+        'author' => $request->author,
+        'image' => $request->image,
+        'article' => $request->article,
+        ]);
+
+        foreach($projects as $key => $project){
+            if($project == '1'){
+                Project::create([
+                    'article_id' =>  $request->id,
+                    'user_id' => Auth::user()->id,
+                    'projectType_id' => $project,
+                ]);
+            } else if ($project == '2') {
+                Project::create([
+                    'article_id' =>  $request->id,
+                    'user_id' => Auth::user()->id,
+                    'projectType_id' => $project,
+                ]);
+            } else if ($project == '3') {
+                Project::create([
+                    'article_id' =>  $request->id,
+                    'user_id' => Auth::user()->id,
+                    'projectType_id' => $project,
+                ]);
+            } else if ($project == '4') {
+                Project::create([
+                    'article_id' =>  $request->id,
+                    'user_id' => Auth::user()->id,
+                    'projectType_id' => $project,
+                ]);
+            }
+            
+        }
+
         return ;
     }
 }

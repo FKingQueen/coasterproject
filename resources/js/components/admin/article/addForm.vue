@@ -33,35 +33,15 @@
                     </div>
                 </div>
                 </FormItem>
-                <FormItem label="Project" prop="projectValue">
-                    <a-select
-                        v-model:value="formValidate.projectValue"
-                        mode="multiple"
-                        style="width: 100%"
-                        placeholder="Select Project"
-                        :options="projectOptions"
-                        >
-                        <template #option="{ value: val, label, icon }">
-                            <span role="img" :aria-label="val">{{ icon }}</span>
-                            &nbsp;&nbsp;{{ label }}
-                        </template>
-                        <template #tagRender="{ value: val, label, closable, onClose, option }">
-                            <a-tag :closable="closable" style="margin-right: 3px" @close="onClose">
-                            {{ label }}&nbsp;&nbsp;
-                            <span role="img" :aria-label="val">{{ option.icon }}</span>
-                            </a-tag>
-                        </template>
-                    </a-select>
+                <FormItem label="Project" >
+                    <Select v-model="formValidate.projectValue" multiple style="width:100%" placeholder="Select Project" >
+                        <Option v-for="item in projectOptions" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                    </Select>
                 </FormItem>
                 <FormItem label="Article Type" prop="typeValue">
-                    <a-select
-                        v-model:value="formValidate.typeValue"
-                        show-search
-                        placeholder="Select Article Type"
-                        style="width: 100%"
-                        :options="typeOptions"
-                        :filter-option="filterOption"
-                    ></a-select>
+                    <Select v-model="formValidate.typeValue" style="width:100%" placeholder="Select Article Type" >
+                        <Option v-for="item in typeOptions" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                    </Select>
                 </FormItem>
                 <FormItem label="Title" prop="title">
                     <Input v-model="formValidate.title" placeholder="Enter Title"></Input>
@@ -89,16 +69,16 @@
     setup() {
         const projectOptions = ref([{
         value: '1',
-        label: 'Project 1',
+        label: 'Project 1 : Coastal Erosion Trends and Management Strategies for Region 1',
         }, {
         value: '2',
-        label: 'Project 2',
+        label: 'Project 2 : Assesment Monitoring, and Prediction of Coastal Flooding of Selected Municipalities in Region 1',
         }, {
         value: '3',
-        label: 'Project 3',
+        label: 'Project 3 : Development of Science-based Engineering Approach to Coastal Prediction in Region 1',
         }, {
         value: '4',
-        label: 'Project 4',
+        label: 'Project 4 : Enhancing Coastal Design and Infrastructure Intervention through the Establishment of Wave Testing Facility',
         }]);
         // watch(projectValue, val => {
         // console.log(`selected:`, val);
@@ -106,13 +86,13 @@
 
         const typeOptions = ref([{
         value: '1',
-        label: 'Event',
+        label: 'News',
         }, {
         value: '2',
         label: 'Announcement',
         }, {
         value: '3',
-        label: 'News',
+        label: 'Event',
         }]);
 
         const filterOption = (input, option) => {
@@ -130,8 +110,8 @@
         return{
             formValidate: {
                 image: '',
-                projectValue: [],
-                typeValue: [],
+                projectValue: '',
+                typeValue: '',
                 token: '',
                 title: '',
                 author: '',
@@ -167,20 +147,20 @@
             console.log(this.formValidate);
             this.$refs[name].validate((valid) => {
                 if (valid) {
-                    console.log(this.formValidate);
-                    // axios.get('/sanctum/csrf-cookie').then(response => {
-                    //     axios.post(`/api/admin/storeArticle`, this.formValidate)
-                    //     .then(function (response) {
-                    //         notification.success({
-                    //             message: 'Notification',
-                    //             description: 'New Article is Successfully Created',
-                    //         });
-                    //         existingObj.$router.push('/admin/articlePlatform');
-                    //     })
-                    //     .catch(function (error) {
+                    axios.get('/sanctum/csrf-cookie').then(response => {
+                        axios.post(`/api/admin/storeArticle`, this.formValidate)
+                        .then(function (response) {
+                            console.log(response.data);
+                            notification.success({
+                                message: 'Notification',
+                                description: 'New Article is Successfully Created',
+                            });
+                            existingObj.$router.push('/admin/articlePlatform');
+                        })
+                        .catch(function (error) {
 
-                    //     });
-                    // })
+                        });
+                    })
 
                 } else {
                 }

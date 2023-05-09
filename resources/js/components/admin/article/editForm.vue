@@ -32,6 +32,31 @@
                     </div>
                 </div>
                 </FormItem>
+                <FormItem label="Project" >
+                    <!-- <Select v-model="formValidate.projectValue" multiple style="width:100%" placeholder="Select Project" >
+                        <Option v-for="item in projectOptions" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                    </Select> -->
+                    <a-select
+                        v-model:value="formValidate.projectValue"
+                        mode="multiple"
+                        style="width: 100%"
+                        placeholder="Please select"
+                        :options="projectOptions"
+                        @change="handleChange"
+                    ></a-select>
+                </FormItem>
+                <FormItem label="Article Type" prop="typeValue">
+                    <!-- <Select v-model="formValidate.typeValue" style="width:100%" placeholder="Select Article Type" >
+                        <Option v-for="item in typeOptions" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                    </Select> -->
+                    <a-select
+                        v-model:value="formValidate.typeValue"
+                        style="width: 100%"
+                        placeholder="Please select"
+                        :options="typeOptions"
+                        @change="handleChange"
+                    ></a-select>
+                </FormItem>
                 <FormItem label="Title" prop="title">
                     <Input v-model="formValidate.title" placeholder="Enter Title"></Input>
                 </FormItem>
@@ -56,11 +81,51 @@
   import { useRoute, useRouter} from 'vue-router';
   
   export default defineComponent({
+    setup() {
+        const projectOptions = ref([{
+        value: '1',
+        label: 'Project 1 : Coastal Erosion Trends and Management Strategies for Region 1',
+        }, {
+        value: '2',
+        label: 'Project 2 : Assesment Monitoring, and Prediction of Coastal Flooding of Selected Municipalities in Region 1',
+        }, {
+        value: '3',
+        label: 'Project 3 : Development of Science-based Engineering Approach to Coastal Prediction in Region 1',
+        }, {
+        value: '4',
+        label: 'Project 4 : Enhancing Coastal Design and Infrastructure Intervention through the Establishment of Wave Testing Facility',
+        }]);
+        // watch(projectValue, val => {
+        // console.log(`selected:`, val);
+        // });
+
+        const typeOptions = ref([{
+        value: '1',
+        label: 'News',
+        }, {
+        value: '2',
+        label: 'Announcement',
+        }, {
+        value: '3',
+        label: 'Event',
+        }]);
+
+        const filterOption = (input, option) => {
+        return option.value.toLowerCase().indexOf(input.toLowerCase()) >= 0;
+        };
+
+        return {
+            projectOptions,
+            filterOption,
+            typeOptions,
+        };
+    },
     data(){
         return{
             formValidate: {
-                id: '',
                 image: '',
+                projectValue: ref([]),
+                typeValue: ref([]),
                 token: '',
                 title: '',
                 author: '',
@@ -89,6 +154,9 @@
             this.$refs[name].validate((valid) => {
                 if (valid) {
                     // Post
+                    // console.log(existingObj.formValidate);
+
+                    // return;
                     axios.post(`/api/admin/updateArticle`, this.formValidate)
                     .then(function (response) {
                         notification.success({
@@ -147,11 +215,19 @@
         let existingObj = this;
         await axios.get(`/api/admin/getArticleEdit/${id}`)
         .then(function (response) {
-            existingObj.formValidate.id = response.data.id
-            existingObj.formValidate.title = response.data.title
-            existingObj.formValidate.image = response.data.image
-            existingObj.formValidate.author = response.data.author
-            existingObj.formValidate.article = response.data.article
+            // console.log(response.data[0].type);
+            existingObj.formValidate.id = response.data[0].id
+            existingObj.formValidate.title = response.data[0].title
+            existingObj.formValidate.image = response.data[0].image
+            existingObj.formValidate.author = response.data[0].author
+            existingObj.formValidate.article = response.data[0].article
+
+            for(let i = 0; i < response.data[0].projects.length; i++ ){
+                existingObj.formValidate.projectValue.push(response.data[0].projects[i].projectType_id.toString());
+            }
+            existingObj.formValidate.typeValue.push(response.data[0].type_id.toString());
+            // console.log(existingObj.formValidate.projectValue);
+            
         })
         .catch(function (error) {
             console.log(error)

@@ -97,6 +97,12 @@
               </a-popconfirm>
             </span>
           </template>
+          <template v-else-if="column.key === 'project'">
+            <a-tag v-for="project in articles[index].projects" color="blue" >Project {{project.projectType_id}}</a-tag>
+          </template>
+          <template v-else-if="column.key === 'typ'">
+            <a-tag  color="green">{{articles[index].type.name}}</a-tag>
+          </template>
           <template v-else-if="column.key === 'image'">
             <a-image
               style="height: 35px"
@@ -155,10 +161,20 @@ export default defineComponent({
         }
       },
     }, {
+      title: 'Project',
+      dataIndex: 'project',
+      key: 'project',
+      width: 350,
+    }, {
+      title: 'Article Type',
+      dataIndex: 'typ',
+      key: 'typ',
+      width: 100  ,
+    }, {
       title: 'Image',
       dataIndex: 'image',
       key: 'image',
-      width: 300,
+      width: 200,
     }, {
       title: 'Action',
       key: 'action',
@@ -238,6 +254,7 @@ export default defineComponent({
     this.token = window.Laravel.csrfToken;
     await axios.get('/api/admin/getArticle')
     .then(function (response) {
+      // console.log(response.data);
       existingObj.articles = response.data
       
     })
