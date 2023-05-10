@@ -12,8 +12,6 @@ use DB;
 
 class ArticleController extends Controller
 {
-    
-    // Article
 
     public function getArticle()
     {
@@ -29,7 +27,6 @@ class ArticleController extends Controller
             'author' => 'required',
             'image' => 'required',
         ]);
-
 
         $newArticle = new Article;
         $newArticle->user_id = Auth::id();

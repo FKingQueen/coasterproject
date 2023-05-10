@@ -6,11 +6,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Models\Article;
+use App\Models\Project;
+use App\Models\Type;
 
 class HarticleController extends Controller
 {
     public function getArticles() {
-        $article = Article::all()->reverse();
+        $article =  Article::with('projects')->with('type')->get();
         
         foreach($article as $key => $arti)
         {

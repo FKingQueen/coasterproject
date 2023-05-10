@@ -1,99 +1,82 @@
 <template>
     <div>
-        <div>
+        <div class="w-full">
             <Carousel autoplay v-model="value" :autoplay-speed="3000" :arrow="hover" loop>
                 <CarouselItem  class="">
-                    <div class="demo-carousel flex justify-center ">
-                            <img src="img/field1.jpg" class="duration-200 object-contain object-none w-full h-[35rem]" alt="#">       
+                    <div class="demo-carousel flex justify-center w-full ">
+                            <img src="img/field1.jpg" class="duration-200 object-cover object-none w-full h-[35rem]" alt="#">       
                     </div>
                 </CarouselItem>
                 <CarouselItem >
                     <div class="demo-carousel flex justify-center " >
-                        <img src="img/field2.jpg" class="duration-200  cursor-pointer object-none w-full h-[35rem]" alt="#">
+                        <img src="img/field2.jpg" class="duration-200  cursor-pointer object-cover object-none w-full h-[35rem]" alt="#">
                     </div>
                 </CarouselItem>
                 <CarouselItem >
                     <div class="demo-carousel flex justify-center " >
-                        <img src="img/field3.jpg" class="duration-200  cursor-pointer object-none w-full h-[35rem]" alt="#">
+                        <img src="img/field3.jpg" class="duration-200  cursor-pointer object-cover object-none w-full h-[35rem]" alt="#">
                     </div>
                 </CarouselItem>
                 <CarouselItem >
                     <div class="demo-carousel flex justify-center " >
-                        <img src="img/field2.jpg" class="duration-200  cursor-pointer object-none w-full h-[35rem]" alt="#">
+                        <img src="img/field2.jpg" class="duration-200  cursor-pointer object-cover object-none w-full h-[35rem]" alt="#">
                     </div>
                 </CarouselItem>
             </Carousel>
         </div>
-        <div class=" flex justify-center">
-            <div class="w-3/4">
-                <a-divider  style="border-color: #728596">
-                    <h1 class="text-sky-600">
-                        Latest Update
-                    </h1>
-                </a-divider>
+        <div class="w-full lg:flex lg:justify-center lg:space-x-20 lg:pt-10 p-5">
+            <div class=" lg:w-3/12 w-full  bg-white shadow-xl border lg:mt-0">
+                <h1 class="text-sky-600 text-2xl text-center">News</h1>
+                <div class="max-h-full border-t-2 border-sky-800 p-2">
+                    <div v-for="(news, key, index) in this.news"  class="flex border-b  pb-1">
+                        <div class="flex-none min-w-fit h-20">
+                            <img  class="bg-sky-500 object-cover object-center blur-none w-20 h-20 " :src="`/uploads/${news.image}`">
+                        </div>
+                        <div class="px-1 flex-initial w-5/6">
+                            <p class="text-sm blur-none font-semibold text-sky-900  truncate">{{ news.title }}</p>
+                            <h1 class="text-xs blur-none">News | {{ news.date }}</h1>
+                            <h1 class="text-xs blur-none text-justify">By {{ news.author }}, {{ news.article.substring(0,160)+"..." }}</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="border-t">
+                    View More
+                </div>
             </div>
-        </div>
-        <div class="w-full flex justify-center bg-gray-100 lg:px-10 px-3 py-5">
-            <div class="w-full lg:w-3/4 drop-shadow-md">
-                <swiper
-                ref="{swiperRef}"
-
-                :breakpoints="{
-                '640': {
-                    slidesPerView: 1,
-                    spaceBetween: 0,
-                },
-                '768': {
-                    slidesPerView: 4,
-                    spaceBetween: 40,
-                },
-                '1024': {
-                    slidesPerView: 3,
-                    spaceBetween: 30,
-                },
-                }"
-                :pagination="{
-                    type: 'fraction',
-                }"
-                :navigation="true"
-                :modules="modules"
-                class="mySwiper"
-                
-                >
-                    <swiper-slide v-for='(article, index) in articles' :key='article.id' >
-                        <article class="h-96">
-                            <div class="article-wrapper">
-                                <figure>
-                                    <img :src="`/uploads/${article.image}`" alt="" />
-                                    <!-- <Image :src="`/uploads/${article.image}`" class="object-cover  border" /> -->
-                                </figure>
-                                <div class="article-body px-3 pt-2">
-                                    <div>
-                                        <a-tag color="red">Project #</a-tag>
-                                        <a-tag color="green">Project #</a-tag>
-                                        <a-tag color="cyan">Project #</a-tag>
-                                        <a-tag color="blue">Project #</a-tag>
-                                    </div> 
-                                    <h1 class="text-base">{{ article.title.substring(0,15) }}</h1>
-                                    <p class="text-xs">
-                                        {{ article.date }}
-                                    </p>
-                                    <p class="text-justify text-sm">
-                                        By: {{ article.author }}, {{ article.article.substring(0,160)+"..." }}
-                                    </p>
-                                    <a href="#" class="read-more">
-                                    Read more
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                    </svg>
-                                    </a>
-                                </div>
-                            </div>
-                        </article>
-                    </swiper-slide>
-                </swiper>
-                <div class="w-full">
-                    <router-link to="/waterLevel" type="button"  class="lg:mb-0 font-bold text-center text-zinc-500 w-full py-2.5 font-medium text-xs uppercase ">View More</router-link>
+            <div class=" lg:w-3/12 w-full  bg-white shadow-xl border lg:mt-0">
+                <h1 class="text-sky-600 text-2xl text-center">Events</h1>
+                <div class="max-h-full border-t-2 border-sky-800 p-2">
+                    <div v-for="(event, key, index) in this.events"  class="flex border-b">
+                        <div class="flex-none w-20 h-20">
+                            <img  class="bg-sky-500 object-cover object-center blur-none w-20 h-20 " :src="`/uploads/${event.image}`">
+                        </div>
+                        <div class="px-1 flex-initial w-[20rem]">
+                            <p class="text-sm blur-none font-semibold text-sky-900  truncate">{{ event.title }}</p>
+                            <h1 class="text-xs blur-none">Events | {{ event.date }}</h1>
+                            <h1 class="text-xs blur-none text-justify">By {{ event.author }}, {{ event.article.substring(0,160)+"..." }}</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="border-t">
+                    View More
+                </div>
+            </div>
+            <div class=" lg:w-3/12 w-full  bg-white shadow-xl border lg:mt-0">
+                <h1 class="text-sky-600 text-2xl text-center">Events</h1>
+                <div class="max-h-full border-t-2 border-sky-800 p-2">
+                    <div v-for="(announcement, key, index) in this.announcements"  class="flex border-b">
+                        <div class="flex-none w-20 h-20">
+                            <img  class="bg-sky-500 object-cover object-center blur-none w-20 h-20 " :src="`/uploads/${announcement.image}`">
+                        </div>
+                        <div class="px-1 flex-initial w-5/6">
+                            <p class="text-sm blur-none font-semibold text-sky-900  truncate">{{ announcement.title }}</p>
+                            <h1 class="text-xs blur-none">Announcements | {{ announcement.date }}</h1>
+                            <h1 class="text-xs blur-none text-justify">By {{ announcement.author }}, {{ announcement.article.substring(0,160)+"..." }}</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="border-t">
+                    View More
                 </div>
             </div>
         </div>
@@ -232,7 +215,10 @@
     },
     data() {
         return {
-            articles: [],
+            articles: '',
+            events: [],
+            news: [],
+            announcements: [],
         }
     },
     async created() {
@@ -241,7 +227,22 @@
         await axios.get('/api/getArticles')
         .then(function (response) {
         existingObj.articles = response.data
-        console.log(existingObj.articles);
+        for(let i = 0; i < existingObj.articles.length; i++){
+            if(existingObj.articles[i].type_id == 1){
+                existingObj.news.push(existingObj.articles[i]);
+            }
+            if(existingObj.articles[i].type_id == 2){
+                existingObj.announcements.push(existingObj.articles[i]);
+            }
+            if(existingObj.articles[i].type_id == 3){
+                existingObj.events.push(existingObj.articles[i]);
+            }
+
+        }
+        // existingObj.events = response.data
+        console.log(existingObj.news);
+        console.log(existingObj.announcements);
+        console.log(existingObj.events);
         })
         .catch(function (error) {
         });
