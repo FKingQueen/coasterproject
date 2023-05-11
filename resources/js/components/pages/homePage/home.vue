@@ -131,7 +131,7 @@
             </div>
             <div class="flex justify-center w-full  mt-5">
                 <div>
-                    <div class="xl:w-[90rem] lg:w-[50rem] w-full text-justify indent-8 p-3">
+                    <div class="w-full text-justify indent-8 lg:px-40 px-5 block">
                         The Coastal Engineering Research Center or CoastER Center is the country’s first coastal engineering and management research and development center and 
                         the hub of innovations for coastal resiliency. This facility will spur the development of innovations that address coastal erosion, development construction 
                         materials for coastal protection, policies, and guidelines intended to protect resources from coastal flooding and improve the lives of people in coastal 
@@ -139,7 +139,7 @@
                         engineering.
                     </div>
                     <hr class="my-6 border-sky-300" />
-                    <div class="xl:w-[90rem] lg:w-[50rem] w-full text-justify indent-8 p-3">
+                    <div class="w-full text-justify indent-8 lg:px-40 px-5 block">
                         The COASTER aims to spearhead the development of technologies and innovation to mitigate and manage coastal disasters and risks. The overall goal of the 
                         center is to take the lead in coastal science and engineering studies to better undertand the magniture of certain process and hazards and their impacts
                         on the maritime environment including tidal deltas and low-lying lands.
