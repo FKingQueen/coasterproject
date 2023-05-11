@@ -35,7 +35,8 @@ class AdminController extends Controller
 
         if(Auth::attempt($credentials)){
             return response()->json([
-                'auth'  =>  'success'
+                'auth'  =>  'success',
+                'role_id'  =>  Auth::user()->role_id,
             ]);
             
         }else{

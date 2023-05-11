@@ -125,33 +125,18 @@ export default {
       this.$router.push({path: '/login'})
     }
   },
+  
   async created(){
-    // console.log(window.Laravel)
-    // console.log(window)
+    let existingObj = this;
     axios.get('/sanctum/csrf-cookie').then(response => {
         axios.get('/api/admin/getRole')
         .then(response => {
-          // console.log(response.data)
-          localStorage.setItem(
-              "role_id",
-              response.data.role_id,
-          )
+          existingObj.role = response.data.role_id
         })
         .catch(function (error) {
             console.error(error);
         });
     }) 
-    this.role = localStorage.getItem("role_id")
-    console.log(this.role);
-
-
-  },
-  beforeRouteUpdate (to, from) {
-    let existingObj = this;
-    console.log(to.path);
-    if(to.path == '/admin/userPlatform' ){
-      existingObj.$router.push({path: from.path})
-    }
   }
 }
 </script>

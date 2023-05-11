@@ -12,7 +12,6 @@
                     v-bind="layout"
                     class="login-form"
                     @finish="login"
-                    @finishFailed="onFinishFailed"
                     :validate-messages="validateMessages"
                 >
                     <a-form-item
@@ -118,6 +117,7 @@ export default defineComponent({
                     return;
                 }
                 window.Laravel.isLoggedin = true
+                window.Laravel.role_id = response.data.role_id
                 
                 this.$router.push({path: '/admin/articlePlatform'})
             })
@@ -126,11 +126,15 @@ export default defineComponent({
             });   
         })
     }
-  },
-  async created(){
+  }, 
+  beforeRouteEnter(to, from, next){
+    let existingObj = this;
     if(window.Laravel.isLoggedin){
-      this.$router.go(-1)
+        next({ path: '/admin/articlePlatform' })
+    } else{
+      next();
     }
   }
+
 });
 </script>

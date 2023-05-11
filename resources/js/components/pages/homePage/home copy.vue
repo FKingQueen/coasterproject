@@ -23,6 +23,7 @@
                     </div>
                 </CarouselItem>
             </Carousel>
+
         </div>
         <div class=" flex justify-center">
             <div class="w-3/4">
@@ -212,7 +213,6 @@
   
   // Import Swiper styles
   import "swiper/css";
-  
   import "swiper/css/pagination";
   import "swiper/css/navigation";
   

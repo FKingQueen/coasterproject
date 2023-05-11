@@ -198,6 +198,14 @@ export default defineComponent({
           this.formValidate.image = image
         }
     });
+  },
+  beforeRouteEnter(to, from, next){
+    let existingObj = this;
+    if(window.Laravel.role_id == "2"){
+      return;
+    } else{
+      next();
+    }
   }
   
 })

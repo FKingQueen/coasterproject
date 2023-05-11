@@ -1,81 +1,75 @@
 <template>
     <div>
         <div class="w-full">
-            <Carousel autoplay v-model="value" :autoplay-speed="3000" :arrow="hover" loop>
-                <CarouselItem  class="">
-                    <div class="demo-carousel flex justify-center w-full ">
-                            <img src="img/field1.jpg" class="duration-200 object-cover object-none w-full h-[35rem]" alt="#">       
-                    </div>
-                </CarouselItem>
-                <CarouselItem >
-                    <div class="demo-carousel flex justify-center " >
-                        <img src="img/field2.jpg" class="duration-200  cursor-pointer object-cover object-none w-full h-[35rem]" alt="#">
-                    </div>
-                </CarouselItem>
-                <CarouselItem >
-                    <div class="demo-carousel flex justify-center " >
-                        <img src="img/field3.jpg" class="duration-200  cursor-pointer object-cover object-none w-full h-[35rem]" alt="#">
-                    </div>
-                </CarouselItem>
-                <CarouselItem >
-                    <div class="demo-carousel flex justify-center " >
-                        <img src="img/field2.jpg" class="duration-200  cursor-pointer object-cover object-none w-full h-[35rem]" alt="#">
-                    </div>
-                </CarouselItem>
-            </Carousel>
+            <swiper 
+                :pagination="true"     
+                :autoplay="{
+                    delay: 3500,
+                    disableOnInteraction: false,
+                }" 
+                :mousewheel="true"
+                :modules="modules" class="mySwiper"
+            >
+                <swiper-slide>
+                    <img src="img/field1.jpg" class="object-cover w-full lg:h-[35rem]" alt="#">       
+                </swiper-slide>
+                <swiper-slide>
+                    <img src="img/field1.jpg" class="object-cover w-full lg:h-[35rem]" alt="#">       
+                </swiper-slide>
+                <swiper-slide>
+                    <img src="img/field1.jpg" class="object-cover w-full lg:h-[35rem]" alt="#">       
+                </swiper-slide>
+                <swiper-slide>
+                    <img src="img/field1.jpg" class="object-cover w-full lg:h-[35rem]" alt="#">       
+                </swiper-slide>
+            </swiper>
         </div>
-        <div class="w-full lg:flex lg:justify-center lg:space-x-20 lg:pt-10 p-5">
-            <div class=" lg:w-3/12 w-full  bg-white shadow-xl border lg:mt-0">
-                <h1 class="text-sky-600 text-2xl text-center">News</h1>
-                <div class="max-h-full border-t-2 border-sky-800 p-2">
-                    <div v-for="(news, key, index) in this.news"  class="flex border-b  pb-1">
-                        <div class="flex-none min-w-fit h-20">
-                            <img  class="bg-sky-500 object-cover object-center blur-none w-20 h-20 " :src="`/uploads/${news.image}`">
-                        </div>
-                        <div class="px-1 flex-initial w-5/6">
-                            <p class="text-sm blur-none font-semibold text-sky-900  truncate">{{ news.title }}</p>
+        <div class="w-full lg:flex lg:justify-center lg:space-x-20 lg:pt-10 lg:px-0 px-5">
+            <div class=" lg:w-3/12 w-full  bg-white shadow-xl border-t lg:mt-0 mt-10 ">
+                <h1 class="text-sky-800 text-2xl text-center">News</h1>
+                <div class="h-4/5 border-t-2 border-sky-800 p-2">
+                    <div v-for="(news, key, index) in this.news.slice(0,3)" class="flex block border-b pb-1 mb-3">
+                        <img  class="bg-sky-900 object-cover object-center blur-none w-20 h-20 " :src="`/uploads/${news.image}`">
+                        <div class="block w-fit px-1 overflow-hidden">
+                            <p class="text-sm blur-none font-semibold text-sky-600  truncate">{{ news.title }}</p>
                             <h1 class="text-xs blur-none">News | {{ news.date }}</h1>
-                            <h1 class="text-xs blur-none text-justify">By {{ news.author }}, {{ news.article.substring(0,160)+"..." }}</h1>
+                            <h1 class="text-xs blur-none text-justify ">By {{ news.author }}, {{ news.article.substring(0,90)+"..." }}</h1>
                         </div>
                     </div>
                 </div>
-                <div class="border-t">
+                <div class="border-t grid h-12 text-center place-content-center text-lg blur-none ">
                     View More
                 </div>
             </div>
-            <div class=" lg:w-3/12 w-full  bg-white shadow-xl border lg:mt-0">
-                <h1 class="text-sky-600 text-2xl text-center">Events</h1>
-                <div class="max-h-full border-t-2 border-sky-800 p-2">
-                    <div v-for="(event, key, index) in this.events"  class="flex border-b">
-                        <div class="flex-none w-20 h-20">
-                            <img  class="bg-sky-500 object-cover object-center blur-none w-20 h-20 " :src="`/uploads/${event.image}`">
+            <div class=" lg:w-3/12 w-full  bg-white shadow-xl border-t lg:mt-0 mt-10">
+                <h1 class="text-sky-800 text-2xl text-center">Announcements</h1>
+                <div class="h-4/5 border-t-2 border-sky-800 p-2">
+                    <div v-for="(announcement, key, index) in this.announcements.slice(0,3)" class="flex block border-b pb-1 mb-3">
+                        <img  class="bg-sky-500 object-cover object-center blur-none w-20 h-20 " :src="`/uploads/${announcement.image}`">
+                        <div class="block w-fit px-1 overflow-hidden">
+                            <p class="text-sm blur-none font-semibold text-sky-600  truncate">{{ announcement.title }}</p>
+                            <h1 class="text-xs blur-none">Announcements | {{ announcement.date }}</h1>
+                            <h1 class="text-xs blur-none text-justify ">By {{ announcement.author }}, {{ announcement.article.substring(0,90)+"..." }}</h1>
                         </div>
-                        <div class="px-1 flex-initial w-[20rem]">
-                            <p class="text-sm blur-none font-semibold text-sky-900  truncate">{{ event.title }}</p>
+                    </div>
+                </div>
+                <div class="border-t grid h-12 text-center place-content-center text-lg blur-none ">
+                    View More
+                </div>
+            </div>
+            <div class=" lg:w-3/12 w-full  bg-white shadow-xl border-t lg:mt-0 mt-10">
+                <h1 class="text-sky-800 text-2xl text-center">Events</h1>
+                <div class="h-4/5 border-t-2 border-sky-800 p-2">
+                    <div v-for="(event, key, index) in this.events.slice(0,3)" class="flex block border-b pb-1 mb-3">
+                        <img  class="bg-sky-500 object-cover object-center blur-none w-20 h-20 " :src="`/uploads/${event.image}`">
+                        <div class="block w-fit px-1 overflow-hidden">
+                            <p class="text-sm blur-none font-semibold text-sky-600  truncate">{{ event.title }}</p>
                             <h1 class="text-xs blur-none">Events | {{ event.date }}</h1>
                             <h1 class="text-xs blur-none text-justify">By {{ event.author }}, {{ event.article.substring(0,160)+"..." }}</h1>
                         </div>
                     </div>
                 </div>
-                <div class="border-t">
-                    View More
-                </div>
-            </div>
-            <div class=" lg:w-3/12 w-full  bg-white shadow-xl border lg:mt-0">
-                <h1 class="text-sky-600 text-2xl text-center">Events</h1>
-                <div class="max-h-full border-t-2 border-sky-800 p-2">
-                    <div v-for="(announcement, key, index) in this.announcements"  class="flex border-b">
-                        <div class="flex-none w-20 h-20">
-                            <img  class="bg-sky-500 object-cover object-center blur-none w-20 h-20 " :src="`/uploads/${announcement.image}`">
-                        </div>
-                        <div class="px-1 flex-initial w-5/6">
-                            <p class="text-sm blur-none font-semibold text-sky-900  truncate">{{ announcement.title }}</p>
-                            <h1 class="text-xs blur-none">Announcements | {{ announcement.date }}</h1>
-                            <h1 class="text-xs blur-none text-justify">By {{ announcement.author }}, {{ announcement.article.substring(0,160)+"..." }}</h1>
-                        </div>
-                    </div>
-                </div>
-                <div class="border-t">
+                <div class="border-t grid h-12 text-center place-content-center text-lg blur-none ">
                     View More
                 </div>
             </div>
@@ -93,7 +87,7 @@
                 <div class="-m-4 flex flex-wrap">
                     <div class="w-full p-4 md:w-1/2 lg:w-1/4">
                     <a href="{{ route('project1')}}" class="relative block overflow-hidden rounded flex justify-center py-5">
-                        <img alt="ecommerce" class="block h-full w-80 shadow-lg object-cover object-center cursor-pointer transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-105 duration-300" src="img/P1.png" />
+                        <img alt="ecommerce" class="block h-full w-80 shadow-lg object-cover object-center cursor-pointer transition ease-in-out delay-75  hover:-translate-y-1 hover:scale-105 duration-300" src="img/P1.png" />
                     </a>
                     <div class="mt-4 flex justify-center">
                         <h3 class="title-font mb-1 text-xs tracking-widest text-gray-500">PROJECT 1</h3>
@@ -101,7 +95,7 @@
                     </div>
                     <div class="w-full p-4 md:w-1/2 lg:w-1/4">
                     <a href="{{ route('project2')}}" class="relative block overflow-hidden rounded flex justify-center py-5">
-                        <img alt="ecommerce" class="block h-full w-80 shadow-lg object-cover object-center cursor-pointer transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-105 duration-300" src="img/P2.png" />
+                        <img alt="ecommerce" class="block h-full w-80 shadow-lg object-cover object-center cursor-pointer transition ease-in-out delay-75  hover:-translate-y-1 hover:scale-105 duration-300" src="img/P2.png" />
                     </a>
                     <div class="mt-4 flex justify-center">
                         <h3 class="title-font mb-1 text-xs tracking-widest text-gray-500">PROJECT 2</h3>
@@ -109,7 +103,7 @@
                     </div>
                     <div class="w-full p-4 md:w-1/2 lg:w-1/4">
                     <a href="{{ route('project3')}}" class="relative block overflow-hidden rounded flex justify-center py-5">
-                        <img alt="ecommerce" class="block h-full w-80 shadow-lg object-cover object-center cursor-pointer transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-105 duration-300" src="img/P3.png" />
+                        <img alt="ecommerce" class="block h-full w-80 shadow-lg object-cover object-center cursor-pointer transition ease-in-out delay-75  hover:-translate-y-1 hover:scale-105 duration-300" src="img/P3.png" />
                     </a>
                     <div class="mt-4 flex justify-center">
                         <h3 class="title-font mb-1 text-xs tracking-widest text-gray-500">PROJECT 3</h3>
@@ -117,7 +111,7 @@
                     </div>
                     <div class="w-full p-4 md:w-1/2 lg:w-1/4">
                     <a href="{{ route('project4')}}" class="relative block overflow-hidden rounded flex justify-center py-5">
-                        <img alt="ecommerce" class="block h-full w-80 shadow-lg object-cover object-center cursor-pointer transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-105 duration-300" src="img/P4.png" />
+                        <img alt="ecommerce" class="block h-full w-80 shadow-lg object-cover object-center cursor-pointer transition ease-in-out delay-75  hover:-translate-y-1 hover:scale-105 duration-300" src="img/P4.png" />
                     </a>
                     <div class="mt-4 flex justify-center">
                         <h3 class="title-font mb-1 text-xs tracking-widest text-gray-500">PROJECT 4</h3>
@@ -195,13 +189,12 @@
   
   // Import Swiper styles
   import "swiper/css";
-  
   import "swiper/css/pagination";
   import "swiper/css/navigation";
   
   
   // import required modules
-  import { Pagination, Navigation } from "swiper";
+  import { Mousewheel, Autoplay, Pagination, Navigation } from "swiper";
   
   export default {
     components: {
@@ -210,7 +203,7 @@
     },
     setup() {
       return {
-        modules: [Pagination, Navigation],
+        modules: [Mousewheel, Autoplay, Pagination, Navigation],
       };
     },
     data() {

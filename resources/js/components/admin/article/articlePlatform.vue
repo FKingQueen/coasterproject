@@ -227,14 +227,13 @@ export default defineComponent({
       this.modal = true;
     },
     editForm(id){
-      console.log(id);
       this.$router.push({path: '/admin/articlePlatform/editForm/' + id})
     },
     removeModal(){
       this.modal = false;
     }
   },
-
+  
   data(){
     return{
       modalData: {
@@ -254,7 +253,6 @@ export default defineComponent({
     this.token = window.Laravel.csrfToken;
     await axios.get('/api/admin/getArticle')
     .then(function (response) {
-      // console.log(response.data);
       existingObj.articles = response.data
       
     })
@@ -268,7 +266,6 @@ export default defineComponent({
 })
 
 </script>
-
 <style>
     .demo-upload-list{
         display: inline-block;

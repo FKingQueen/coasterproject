@@ -20,16 +20,17 @@
                 window.Laravel = {!!json_encode([
                     'isLoggedin' => false,
                     'csrfToken' => csrf_token() ,
+                    'role_id' => false,
                 ])!!}
             </script>
         @elseif(Auth::check())
             <script>
                 window.Laravel = {!!json_encode([
                     'isLoggedin' => true,
-                    'user' => Auth::user()->name,
+                    'user' => Auth::user(),
+                    'role_id' => Auth::user()->id,
                     'csrfToken' =>  csrf_token() ,
                 ])!!};
-
             </script>
         @endif
         <div id="app">
