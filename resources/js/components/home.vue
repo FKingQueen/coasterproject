@@ -5,7 +5,7 @@
             <div id="topView" class="w-full hidden lg:block p-0">
                     <div class="flex justify-around">
                         <div class="md:flex p-0">
-                            <img src="img/top.png" class="duration-200  cursor-pointer object-fill h-20" alt="#">
+                            <img src="img/top.png" class="duration-200 blur-none cursor-pointer object-fill h-20" alt="#">
                         </div>
                     <div class="text-sm grid grid-cols-1 gap-1 content-center ">
                         <div class="text-right">
@@ -17,10 +17,10 @@
                     </div>
                 </div>
             </div>
-            <nav id="navbar" style="transition: 0.6s;" class="relative z-30 flex w-full bg-[#0d2247] lg:px-20 md:px-3 sm:px-1 border-y-4 border-cyan-900 ">
+            <nav style="transition: 0.6s;" class=" relative z-30 flex w-full bg-[#0d2247] lg:px-20 md:px-3 sm:px-1 border-y-4 border-cyan-900 ">
                 <div class="px-5 xl:px-12  flex w-full justify-evenly">
                     <!-- Nav Links -->
-                    <div id="navButton" style="">
+                    <div class="lg:block hidden">
                         <div class=" lg:flex text-white font-normal font-heading w-full ">
                             <!-- About -->
                                 <router-link to="/" class="py-4 px-4 flex text-white font-semibold hover:bg-sky-700 
@@ -67,14 +67,86 @@
                         </div>
                     </div>
 
+                    <div class="flex justify-between w-full lg:hidden block">
+                        <!-- Search Bar -->
+                            <button @click="value1 = true" type="button" class="text-2xl text-white hover:text-gray-200 ">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                                </svg>
+                            </button>
+                        <!-- /Search Bar -->
+                        <Drawer placement="left" :closable="false" v-model="value1" >
+                            <div class="w-full border-b-4">
+                                <img src="img/top.png" class="duration-200 blur-none cursor-pointer object-fill mb-2 " alt="#">
+                            </div>
+                            <div class="">
+                                <a-menu
+                                    v-model:openKeys="openKeys"
+                                    v-model:selectedKeys="selectedKeys"
+                                    style="width: 224px"
+                                    mode="inline"
+                                    @click="handleClick"
+                                >
+                                    <a-menu-item key="1">
+                                        <template #icon>
+                                            <Icon type="ios-home" />    
+                                        </template>
+                                            HOME
+                                    </a-menu-item>
+                                    <a-menu-item key="2">
+                                        <template #icon>
+                                            <Icon type="ios-water" />    
+                                        </template>
+                                        TIDAL & WAVE
+                                    </a-menu-item>
+                                    <a-menu-item key="3">
+                                        <template #icon>
+                                            <Icon type="ios-cloud" />    
+                                        </template>
+                                        WEATHER
+                                    </a-menu-item>
+
+                                    <a-sub-menu key="sub1">
+                                        <template #icon>
+                                            <Icon type="ios-map" />    
+                                        </template>
+                                        <template #title>MAP</template>
+                                        <a-menu-item key="4">WATER LEVEL</a-menu-item>
+                                        <a-menu-item key="5">MAP</a-menu-item>
+                                    </a-sub-menu>
+
+                                    <a-sub-menu key="sub2">
+                                        <template #icon>
+                                            <Icon type="ios-document" />    
+                                        </template>
+                                        <template #title>PROJECT</template>
+                                        <a-menu-item key="6">PROJECT 1</a-menu-item>
+                                        <a-menu-item key="7">PROJECT 2</a-menu-item>
+                                        <a-menu-item key="8">PROJECT 3</a-menu-item>
+                                        <a-menu-item key="9">PROJECT 4</a-menu-item>
+                                    </a-sub-menu>
+
+                                </a-menu>
+                            </div>
+                        </Drawer>
+                        <!-- /Search Bar -->
+                        <img src="img/logo/COASTER.png" class="duration-200 blur-none cursor-pointer object-fill h-14 py-1" alt="#">
+                        <!-- Search Bar -->
+                            <button type="button" class="text-2xl text-white hover:text-gray-200 ">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 focus:outline outline-offset-2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                                </svg>
+                            </button>
+                        <!-- /Search Bar -->
+                    </div>
+
                     <!-- Search Bar -->
-                        <button id="btnSearchrToggler" type="button" class=" text-2xl text-white hover:text-gray-200 lg:mr-0 mr-8">
+                        <button type="button" class="lg:block hidden text-2xl text-white hover:text-gray-200 ">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 focus:outline outline-offset-2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
                             </svg>
                         </button>
                     <!-- /Search Bar -->
-
                 </div>
             </nav>
 
@@ -139,8 +211,9 @@
 </template>
 
 <script>
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref, reactive, toRefs, watch } from 'vue';
 import { MailOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons-vue';
+
 export default defineComponent({
     components: {
         MailOutlined,
@@ -151,8 +224,18 @@ export default defineComponent({
         const activeItem1 = ref(false);
         const activeItem2 = ref(false);
         return {
+            value1: false,
             activeItem1,
             activeItem2,
+        };
+    },
+    setup() {
+        const selectedKeys = ref(['1']);
+        const openKeys = ref([]);
+        
+        return {
+        selectedKeys,
+        openKeys
         };
     },
     watch:{
@@ -170,6 +253,40 @@ export default defineComponent({
             }
         }
     },
+    methods: {
+        handleClick(event){
+            let existingObj = this;
+            if(event.key == 1){
+                this.$router.push({path: '/'})
+            } 
+            else if (event.key == 2){
+                console.log(event.key);
+            }
+            else if (event.key == 3){
+                console.log(event.key);
+            }
+            else if (event.key == 4){
+                console.log(event.key);
+                this.$router.push({path: '/waterLevel'})
+            }
+            else if (event.key == 5){
+                console.log(event.key);
+                this.$router.push({path: '/Map'})
+            }
+            else if (event.key == 6){
+                console.log(event.key);
+            }
+            else if (event.key == 7){
+                console.log(event.key);
+            }
+            else if (event.key == 8){
+                console.log(event.key);
+            }
+            else if (event.key == 9){
+                console.log(event.key);
+            }
+        }
+    }
 });
 </script>
 

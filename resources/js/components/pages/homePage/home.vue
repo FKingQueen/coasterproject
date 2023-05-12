@@ -7,7 +7,7 @@
                     delay: 3500,
                     disableOnInteraction: false,
                 }" 
-                :mousewheel="true"
+                :mousewheel="false"
                 :modules="modules" class="mySwiper"
             >
                 <swiper-slide>
@@ -25,13 +25,13 @@
             </swiper>
         </div>
         <div class="w-full lg:flex lg:justify-center lg:space-x-20 lg:pt-10 lg:px-0 px-5">
-            <div class=" lg:w-3/12 w-full  bg-white shadow-xl border-t lg:mt-0 mt-10 ">
+            <div class=" lg:w-3/12 w-full  bg-white drop-shadow-md border-t lg:mt-0 mt-10 ">
                 <h1 class="text-sky-800 text-2xl text-center">News</h1>
                 <div class="h-4/5 border-t-2 border-sky-800 p-2">
                     <div v-for="(news, key, index) in this.news.slice(0,3)" class="flex block border-b pb-1 mb-3">
-                        <img  class="bg-sky-900 object-cover object-center blur-none w-20 h-20 " :src="`/uploads/${news.image}`">
+                        <img @click="gotoArticle(news)" class="cursor-pointer bg-sky-200 object-cover object-center blur-none w-20 h-20 " :src="`/uploads/${news.image}`">
                         <div class="block w-fit px-1 overflow-hidden">
-                            <p class="text-sm blur-none font-semibold text-sky-600  truncate">{{ news.title }}</p>
+                            <p @click="gotoArticle(news)" class="cursor-pointer text-sm blur-none font-semibold text-sky-600  truncate">{{ news.title }}</p>
                             <h1 class="text-xs blur-none">News | {{ news.date }}</h1>
                             <h1 class="text-xs blur-none text-justify ">By {{ news.author }}, {{ news.article.substring(0,90)+"..." }}</h1>
                         </div>
@@ -41,13 +41,13 @@
                     View More
                 </div>
             </div>
-            <div class=" lg:w-3/12 w-full  bg-white shadow-xl border-t lg:mt-0 mt-10">
+            <div class=" lg:w-3/12 w-full  bg-white drop-shadow-md border-t lg:mt-0 mt-10">
                 <h1 class="text-sky-800 text-2xl text-center">Announcements</h1>
                 <div class="h-4/5 border-t-2 border-sky-800 p-2">
                     <div v-for="(announcement, key, index) in this.announcements.slice(0,3)" class="flex block border-b pb-1 mb-3">
-                        <img  class="bg-sky-500 object-cover object-center blur-none w-20 h-20 " :src="`/uploads/${announcement.image}`">
+                        <img @click="gotoArticle(announcement)" class="cursor-pointer bg-sky-200 object-cover object-center blur-none w-20 h-20 " :src="`/uploads/${announcement.image}`">
                         <div class="block w-fit px-1 overflow-hidden">
-                            <p class="text-sm blur-none font-semibold text-sky-600  truncate">{{ announcement.title }}</p>
+                            <p @click="gotoArticle(announcement)" class="cursor-pointer text-sm blur-none font-semibold text-sky-600  truncate">{{ announcement.title }}</p>
                             <h1 class="text-xs blur-none">Announcements | {{ announcement.date }}</h1>
                             <h1 class="text-xs blur-none text-justify ">By {{ announcement.author }}, {{ announcement.article.substring(0,90)+"..." }}</h1>
                         </div>
@@ -57,15 +57,15 @@
                     View More
                 </div>
             </div>
-            <div class=" lg:w-3/12 w-full  bg-white shadow-xl border-t lg:mt-0 mt-10">
+            <div class=" lg:w-3/12 w-full  bg-white drop-shadow-md border-t lg:mt-0 mt-10">
                 <h1 class="text-sky-800 text-2xl text-center">Events</h1>
                 <div class="h-4/5 border-t-2 border-sky-800 p-2">
                     <div v-for="(event, key, index) in this.events.slice(0,3)" class="flex block border-b pb-1 mb-3">
-                        <img  class="bg-sky-500 object-cover object-center blur-none w-20 h-20 " :src="`/uploads/${event.image}`">
-                        <div class="block w-fit px-1 overflow-hidden">
-                            <p class="text-sm blur-none font-semibold text-sky-600  truncate">{{ event.title }}</p>
+                        <img @click="gotoArticle(event)" class="cursor-pointer bg-sky-200 object-cover object-center blur-none w-20 h-20 " :src="`/uploads/${event.image}`">
+                        <div class="block w-fit px-1 overflow-hidden" >
+                            <p  @click="gotoArticle(event)" class="cursor-pointer text-sm blur-none font-semibold text-sky-600  truncate">{{ event.title }}</p>
                             <h1 class="text-xs blur-none">Events | {{ event.date }}</h1>
-                            <h1 class="text-xs blur-none text-justify">By {{ event.author }}, {{ event.article.substring(0,160)+"..." }}</h1>
+                            <h1 class="text-xs blur-none text-justify">By {{ event.author }}, {{ event.article.substring(0,90)+"..." }}</h1>
                         </div>
                     </div>
                 </div>
@@ -156,7 +156,7 @@
                 <hr class="">
                 </div>
             </div>
-            <div class="flex justify-center gap gap-4 px-10">
+            <div class="flex justify-center gap lg:gap-4 gap-2 px-10">
                 <div class="shrink-0">
                     <a href="https://www.dost.gov.ph/"><img src="img/logo/DOST.png" class="object-fill lg:w-[4vw] lg:h-[4vw] w-[11vw] h-[11vw]" alt="#"></a>
                 </div>
@@ -232,14 +232,16 @@
             }
 
         }
-        // existingObj.events = response.data
-        console.log(existingObj.news);
-        console.log(existingObj.announcements);
-        console.log(existingObj.events);
         })
         .catch(function (error) {
         });
+    },     
+    methods: {
+        gotoArticle(article){
+        console.log(article);
     }
+    }   
+
   };
   </script>
 

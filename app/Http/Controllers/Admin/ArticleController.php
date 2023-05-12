@@ -9,6 +9,7 @@ use App\Models\Article;
 use App\Models\Project;
 use App\Models\Type;
 use DB;
+use File;
 
 class ArticleController extends Controller
 {
@@ -75,10 +76,22 @@ class ArticleController extends Controller
         $request->validate([
             'file' => 'required'
         ]); 
+        $x = 100;
         $picName = time().'.'.$request->file->extension();
-        $request->file->move(public_path('uploads'),$picName);
+        $file = $request->file;
+        $img = \Image::make($file)->resize(250, 125);
+        $img->save(public_path('uploads/'.$picName),$x);
+        // File::move(public_path($picName), public_path('uploads/'.$picName));
         return $picName;
     }
+    // public function upload(Request $request){
+    //     $request->validate([
+    //         'file' => 'required'
+    //     ]); 
+    //     $picName = time().'.'.$request->file->extension();
+    //     $request->file->move(public_path('uploads'),$picName);
+    //     return $picName;
+    // }
 
     public function deleteImage(Request $request){
         $fileName = $request->imageName;
