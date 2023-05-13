@@ -5,7 +5,7 @@
             <div id="topView" class="w-full hidden lg:block p-0">
                     <div class="flex justify-around">
                         <div class="md:flex p-0">
-                            <img src="img/top.png" class="duration-200 blur-none cursor-pointer object-fill h-20" alt="#">
+                            <img src="/img/top.png" class="duration-200 blur-none cursor-pointer object-fill h-20" alt="#">
                         </div>
                     <div class="text-sm grid grid-cols-1 gap-1 content-center ">
                         <div class="text-right">
@@ -157,7 +157,7 @@
                 <div id="contact" class="max-w-screen-xl mx-auto lg:py-5 md:p-8 lg:p-10">
                 <div class="grid grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-2">
                     <div class="place-content-center grid ">
-                        <img class="w-40 h-40 sm:w-36 sm:h-36 " src="img/logo/coaster.png" alt="" >
+                        <img class="w-40 h-40 sm:w-36 sm:h-36 " src="/img/logo/coaster.png" alt="" >
                     </div>
                     <div class="">
                         <h3 class="mb-4 text-base text-gray-900 dark:text-white block">Coaster Contact Information</h3>

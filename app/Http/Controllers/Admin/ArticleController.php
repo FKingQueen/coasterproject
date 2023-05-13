@@ -84,14 +84,6 @@ class ArticleController extends Controller
         // File::move(public_path($picName), public_path('uploads/'.$picName));
         return $picName;
     }
-    // public function upload(Request $request){
-    //     $request->validate([
-    //         'file' => 'required'
-    //     ]); 
-    //     $picName = time().'.'.$request->file->extension();
-    //     $request->file->move(public_path('uploads'),$picName);
-    //     return $picName;
-    // }
 
     public function deleteImage(Request $request){
         $fileName = $request->imageName;

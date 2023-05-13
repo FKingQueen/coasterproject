@@ -180,8 +180,6 @@
             this.$refs.uploads.clearFiles()
             await axios.post(`/api/admin/deleteImage`, {imageName: image})
                 .then(function (response) {
-                
-
                 })
                 .catch(function (error) {
                 if(error){

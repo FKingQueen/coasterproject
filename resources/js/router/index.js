@@ -2,7 +2,14 @@ import {createWebHistory, createRouter} from "vue-router";
 
 // Project
 import homePage from '../components/home.vue';
+
+// Home
 import Home from '../components/pages/homePage/home.vue';
+
+// Article
+import Article  from '../components/pages/homePage/articlePage/article.vue';
+
+// Map
 import Map from '../components/pages/mapPage/map.vue';
 import Waterlevel from '../components/pages/mapPage/waterLevel.vue';
 
@@ -43,7 +50,12 @@ export const routes = [
             {
                 name: 'home',
                 path: '/',
-                component: Home  
+                component: Home ,
+            },
+            {
+                name: 'article',
+                path: '/article/:id',
+                component: Article  
             },
             {
                 name: 'map',
@@ -55,7 +67,7 @@ export const routes = [
                 path: '/waterLevel',
                 component: Waterlevel  
             },
-            ]
+        ]
     },
     {
         path: '/admin',

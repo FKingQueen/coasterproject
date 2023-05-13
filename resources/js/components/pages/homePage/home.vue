@@ -11,16 +11,16 @@
                 :modules="modules" class="mySwiper"
             >
                 <swiper-slide>
-                    <img src="img/field1.jpg" class="object-cover w-full lg:h-[35rem]" alt="#">       
+                    <img src="/img/field1.jpg" class="object-cover w-full lg:h-[35rem]" alt="#">       
                 </swiper-slide>
                 <swiper-slide>
-                    <img src="img/field1.jpg" class="object-cover w-full lg:h-[35rem]" alt="#">       
+                    <img src="/img/field1.jpg" class="object-cover w-full lg:h-[35rem]" alt="#">       
                 </swiper-slide>
                 <swiper-slide>
-                    <img src="img/field1.jpg" class="object-cover w-full lg:h-[35rem]" alt="#">       
+                    <img src="/img/field1.jpg" class="object-cover w-full lg:h-[35rem]" alt="#">       
                 </swiper-slide>
                 <swiper-slide>
-                    <img src="img/field1.jpg" class="object-cover w-full lg:h-[35rem]" alt="#">       
+                    <img src="/img/field1.jpg" class="object-cover w-full lg:h-[35rem]" alt="#">       
                 </swiper-slide>
             </swiper>
         </div>
@@ -230,7 +230,6 @@
             if(existingObj.articles[i].type_id == 3){
                 existingObj.events.push(existingObj.articles[i]);
             }
-
         }
         })
         .catch(function (error) {
@@ -238,8 +237,8 @@
     },     
     methods: {
         gotoArticle(article){
-        console.log(article);
-    }
+            this.$router.push({path: 'article/' + article.id})
+        }
     }   
 
   };
