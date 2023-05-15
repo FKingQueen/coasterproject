@@ -24,29 +24,29 @@
                         <div class=" lg:flex text-white font-normal font-heading w-full ">
                             <!-- About -->
                                 <router-link to="/" class="py-4 px-4 flex text-white font-semibold hover:bg-sky-700 
-                                    cursor-pointer transition-colors duration-300 ">
+                                    cursor-pointer transition-colors duration-300 antialiased">
                                     HOME
                                 </router-link>
                             <!-- /About -->
                             <!-- Tidal & Wave -->
                                 <a to="/" class="py-4 px-4 flex text-white font-semibold hover:bg-sky-700 
-                                cursor-pointer transition-colors duration-300 ">
+                                cursor-pointer transition-colors duration-300 antialiased">
                                     TIDAL & WAVE
                                 </a>
                             <!-- /Tidal & Wave -->
                             <!-- Weather -->
                                 <a to="/" class="py-4 px-4 flex text-white font-semibold hover:bg-sky-700 
-                                cursor-pointer transition-colors duration-300 ">
+                                cursor-pointer transition-colors duration-300 antialiased">
                                     WEATHER
                                 </a>
                             <!-- /Weather -->
                             <!-- Map -->
                             <div :class="{ active: activeItem1}" class="dropdown z-40  px-4 flex text-white font-semibold hover:bg-sky-700 
-                            cursor-pointer transition-colors duration-300 " style="float:left;">
+                            cursor-pointer transition-colors duration-300 antialiased" style="float:left;">
                             <button class="dropdown py-4" >MAP</button>
                                 <div class="dropdown-content p-1 w-[10rem] font-normal " style="left:0;">
-                                    <router-link to="/waterLevel"  class="w-full text-white hover:shadow-[inset_10rem_0_0_0] hover:shadow-cyan-700 duration-[400ms,700ms] transition-[color,box-shadow]">WATER LEVEL</router-link>
-                                    <router-link to="/Map"  class="w-full text-white hover:shadow-[inset_10rem_0_0_0] hover:shadow-cyan-700 duration-[400ms,700ms] transition-[color,box-shadow]">MAP</router-link>
+                                    <router-link to="/waterLevel"  class="antialiased w-full text-white hover:shadow-[inset_10rem_0_0_0] hover:shadow-cyan-700 duration-[400ms,700ms] transition-[color,box-shadow]">WATER LEVEL</router-link>
+                                    <router-link to="/Map"  class="antialiased w-full text-white hover:shadow-[inset_10rem_0_0_0] hover:shadow-cyan-700 duration-[400ms,700ms] transition-[color,box-shadow]">MAP</router-link>
                                     
                                 </div>
                             </div>
@@ -55,12 +55,12 @@
                             <!-- Project -->
                             <div :class="{ active: activeItem2}" class="dropdown z-40  px-4 flex text-white font-semibold hover:bg-sky-700 
                                 cursor-pointer transition-colors duration-300 " style="float:left;">
-                                <button class="dropdown py-4 ">PROJECT</button>
+                                <button class="dropdown py-4 antialiased">PROJECT</button>
                                 <div class="dropdown-content p-1 w-[23rem] font-normal " style="left:0;">
-                                    <router-link to="/Map" class="text-white text-justify  hover:shadow-[inset_23rem_0_0_0] hover:shadow-cyan-700 duration-[400ms,700ms] transition-[color,box-shadow]">Coastal Erosion Trends and Management Strategies for Region 1</router-link>
-                                    <router-link to="/Map" class="text-white text-justify  hover:shadow-[inset_23rem_0_0_0] hover:shadow-cyan-700 duration-[400ms,700ms] transition-[color,box-shadow]">Assesment Monitoring, and Prediction of Coastal Flooding of Selected Municipalities in Region 1</router-link>
-                                    <router-link to="/Map" class="text-white text-justify  hover:shadow-[inset_23rem_0_0_0] hover:shadow-cyan-700 duration-[400ms,700ms] transition-[color,box-shadow]">Development of Science-based Engineering Approach to Coastal Prediction in Region 1</router-link>
-                                    <router-link to="/Map" class="text-white text-justify  hover:shadow-[inset_23rem_0_0_0] hover:shadow-cyan-700 duration-[400ms,700ms] transition-[color,box-shadow]">Enhancing Coastal Design and Infrastructure Intervention through the Establishment of Wave Testing Facility</router-link>
+                                    <router-link to="/Map" class="antialiased text-white text-justify  hover:shadow-[inset_23rem_0_0_0] hover:shadow-cyan-700 duration-[400ms,700ms] transition-[color,box-shadow]">Coastal Erosion Trends and Management Strategies for Region 1</router-link>
+                                    <router-link to="/Map" class="antialiased text-white text-justify  hover:shadow-[inset_23rem_0_0_0] hover:shadow-cyan-700 duration-[400ms,700ms] transition-[color,box-shadow]">Assesment Monitoring, and Prediction of Coastal Flooding of Selected Municipalities in Region 1</router-link>
+                                    <router-link to="/Map" class="antialiased text-white text-justify  hover:shadow-[inset_23rem_0_0_0] hover:shadow-cyan-700 duration-[400ms,700ms] transition-[color,box-shadow]">Development of Science-based Engineering Approach to Coastal Prediction in Region 1</router-link>
+                                    <router-link to="/Map" class="antialiased text-white text-justify  hover:shadow-[inset_23rem_0_0_0] hover:shadow-cyan-700 duration-[400ms,700ms] transition-[color,box-shadow]">Enhancing Coastal Design and Infrastructure Intervention through the Establishment of Wave Testing Facility</router-link>
                                 </div>
                             </div>
                             <!-- /Project -->

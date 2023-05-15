@@ -74,7 +74,7 @@
                   </div>
                 </template>
                 <div class="flex justify-center h-[20rem] shadow">
-                  <Image :src="`/uploads/${modalData.image}`" class="object-cover  border" />
+                  <Image :src="`/uploads/high/${modalData.image}`" class="object-cover  border" />
                 </div>
                 <div>          
                   <p class="text-xl mt-4 font-semibold">{{this.modalData.title}}</p>
@@ -106,9 +106,9 @@
           <template v-else-if="column.key === 'image'">
             <a-image
               style="height: 35px"
-              :src="`/uploads/${record.image}`"
+              :src="`/uploads/low/${record.image}`"
               :preview="{
-                src: `/uploads/${record.image}`,
+                src: `/uploads/high/${record.image}`,
               }"
             />
           </template>

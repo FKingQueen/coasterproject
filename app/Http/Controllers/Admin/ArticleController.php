@@ -77,11 +77,17 @@ class ArticleController extends Controller
             'file' => 'required'
         ]); 
         $x = 100;
+        $y = 60;
         $picName = time().'.'.$request->file->extension();
+
         $file = $request->file;
         $img = \Image::make($file)->resize(250, 125);
-        $img->save(public_path('uploads/'.$picName),$x);
-        // File::move(public_path($picName), public_path('uploads/'.$picName));
+        $img->save(public_path('/uploads'.'/low/'.$picName),$x);
+
+        $img2 = \Image::make($file);
+        $img2->save(public_path('/uploads'.'/high/'.$picName),$y);
+
+        // $request->file->move(public_path('uploads/high'),$picName);
         return $picName;
     }
 

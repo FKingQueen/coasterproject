@@ -26,7 +26,7 @@
                     </div>
                 </Upload>
                 <div v-if="formValidate.image" class="demo-upload-list">
-                    <Image :src="`/uploads/${formValidate.image}`" fit="cover" width="100%" height="100%" />
+                    <Image :src="`/uploads/low/${formValidate.image}`" fit="cover" width="100%" height="100%" />
                     <div class="demo-upload-list-cover">
                         <Icon type="ios-eye-outline" @click="handleView(item.name)"></Icon>
                         <Icon type="ios-trash-outline" @click="deleteImage"></Icon>
