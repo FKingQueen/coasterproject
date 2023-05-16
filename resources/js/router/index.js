@@ -55,7 +55,8 @@ export const routes = [
             {
                 name: 'article',
                 path: '/article/:id',
-                component: Article  
+                component: Article ,
+                props:true 
             },
             {
                 name: 'map',

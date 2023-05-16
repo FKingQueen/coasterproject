@@ -77,7 +77,7 @@
                         <!-- /Search Bar -->
                         <Drawer placement="left" :closable="false" v-model="value1" >
                             <div class="w-full border-b-4">
-                                <img src="img/top.png" class="duration-200 blur-none cursor-pointer object-fill mb-2 " alt="#">
+                                <img src="/img/top.png" @click="this.$router.push('/')" class="duration-200 blur-none cursor-pointer object-fill mb-2 " alt="#">
                             </div>
                             <div class="">
                                 <a-menu
@@ -130,7 +130,7 @@
                             </div>
                         </Drawer>
                         <!-- /Search Bar -->
-                        <img src="img/logo/COASTER.png" class="duration-200 blur-none cursor-pointer object-fill h-14 py-1" alt="#">
+                        <img src="/img/logo/coaster.png" @click="this.$router.push('/')" class="duration-200 blur-none cursor-pointer object-fill h-14 py-1" alt="#">
                         <!-- Search Bar -->
                             <button type="button" class="text-2xl text-white hover:text-gray-200 ">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 focus:outline outline-offset-2">
@@ -150,7 +150,7 @@
                 </div>
             </nav>
 
-            <router-view ></router-view>
+            <router-view :key="$route.fullPath"></router-view>
 
             <!-- Footer -->
             <footer id="footer" style="" class="bg-white dark:bg-gray-800">

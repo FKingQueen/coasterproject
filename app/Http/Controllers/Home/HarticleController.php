@@ -23,6 +23,7 @@ class HarticleController extends Controller
     }   
 
     public function getArticle($id){
+        // return $id;
         $article = Article::where('id', $id)->with('projects')->with('type')->get();
 
         $article[0]->date = Carbon::createFromFormat('Y-m-d H:i:s', $article[0]->created_at)->format('F d, Y');
