@@ -8,6 +8,7 @@ import Home from '../components/pages/homePage/home.vue';
 
 // Article
 import Article  from '../components/pages/homePage/articlePage/article.vue';
+import moreArticle  from '../components/pages/homePage/articlePage/moreArticle.vue';
 
 // Map
 import Map from '../components/pages/mapPage/map.vue';
@@ -54,8 +55,14 @@ export const routes = [
             },
             {
                 name: 'article',
-                path: '/article/:id',
+                path: '/:article/:title/:id',
                 component: Article ,
+                props:true 
+            },
+            {
+                name: 'moreArticle',
+                path: '/:article',
+                component: moreArticle ,
                 props:true 
             },
             {

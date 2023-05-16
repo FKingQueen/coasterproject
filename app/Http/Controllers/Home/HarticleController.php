@@ -40,4 +40,26 @@ class HarticleController extends Controller
             'articles'  =>  $articles,
         ]);
     }
+
+    public function getmoreArticle($id){
+        $moreArticle =  Article::where('type_id', $id)->with('projects')->with('type')->get();
+        
+        foreach($moreArticle as $key => $arti)
+        {
+            $moreArticle[$key]->date = Carbon::createFromFormat('Y-m-d H:i:s', $arti->created_at)->format('F d, Y');
+        }
+
+        $articles =  Article::where('type_id', $id)->with('projects')->with('type')->get();
+        
+        foreach($articles as $key => $arti)
+        {
+            $articles[$key]->date = Carbon::createFromFormat('Y-m-d H:i:s', $arti->created_at)->format('F d, Y');
+        }
+
+        return response()->json([
+            'moreArticle'  =>  $moreArticle,
+            'articles'  =>  $articles,
+        ]);
+
+    }
 }

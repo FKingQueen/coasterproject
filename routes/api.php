@@ -38,6 +38,7 @@ Route::group(['prefix' => 'admin','middleware' => 'auth:sanctum'], function() {
     // Admin Article
     Route::get('/getArticle', [ArticleController::class, 'getArticle']);
 
+
     Route::post('/storeArticle', [ArticleController::class, 'storeArticle']);
     Route::post('/upload', [ArticleController::class, 'upload']);
     Route::post('/deleteImage', [ArticleController::class, 'deleteImage']);
@@ -48,7 +49,9 @@ Route::group(['prefix' => 'admin','middleware' => 'auth:sanctum'], function() {
     Route::post('/updateArticle', [ArticleController::class, 'updateArticle']);
 });
 
+// Home Article
 Route::get('/getArticles', [HarticleController::class, 'getArticles']);
 Route::get('/getArticle/{id}', [HarticleController::class, 'getArticle']);
+Route::get('/getmoreArticle/{id}', [HarticleController::class, 'getmoreArticle']);
 
 

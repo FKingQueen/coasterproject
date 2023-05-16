@@ -37,7 +37,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="border-t grid h-12 text-center place-content-center text-lg blur-none ">
+                <div @click="moreArticle('news')" class="border-t grid h-12 text-center place-content-center text-lg blur-none ">
                     View More
                 </div>
             </div>
@@ -53,7 +53,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="border-t grid h-12 text-center place-content-center text-lg blur-none ">
+                <div @click="moreArticle('announcements')" class="border-t grid h-12 text-center place-content-center text-lg blur-none ">
                     View More
                 </div>
             </div>
@@ -69,7 +69,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="border-t grid h-12 text-center place-content-center text-lg blur-none ">
+                <div @click="moreArticle('events')" class="border-t grid h-12 text-center place-content-center text-lg blur-none ">
                     View More
                 </div>
             </div>
@@ -238,8 +238,19 @@
     methods: {
         gotoArticle(article){
             const id = article.id
-            this.$router.push({path: '/article/' + id})
-            // this.$router.push({path: 'article/' + article.id})
+            const title = article.title
+            if(article.type_id == 1){
+                article = 'news'
+            } else if(article.type_id == 2){
+                article = 'announcements'
+            } else if(article.type_id == 3){
+                article = 'events'
+            }
+            // this.$router.push({path: article + '/' + title + '/' +id})
+            this.$router.push({ name: 'article', params: { article, title, id } })
+        },
+        moreArticle(article){
+            this.$router.push({ name: 'moreArticle', params: { article } })
         }
     }   
 

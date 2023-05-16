@@ -38,7 +38,7 @@
                 </h1>
                 <div v-for="(other, key) in this.others.slice(0,5)" class="py-2 drop-shadow-2xl">
                     <div class="h-32 shadow-lg" :style="{backgroundImage:`url(/uploads/low/${other.image})`}" style="background-repeat: no-repeat; background-size: cover; ">  
-                        <div @click="gotoArticle(other.id)" class="cursor-pointer flex items-end w-full h-full bg-[#0d2247]/60">
+                        <div @click="gotoArticle(other)" class="cursor-pointer flex items-end w-full h-full bg-[#0d2247]/60">
                             <div class="px-2 w-full">
                                 <h1 class="text-white/80 text-sm p-0 font-thin blur-none antialiased  ">
                                     {{ other.date }}
@@ -50,7 +50,6 @@
                         </div> 
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -80,14 +79,21 @@ export default defineComponent({
         }
     },
     methods: {
-        gotoArticle(id){
-            // this.$router.push({path: '/article/', params: {sid}});
-            this.$router.push({ name: 'article', params: {id} }) // -> /user/eduardo
+        gotoArticle(article){
+            const id = article.id
+            const title = article.title
+            if(article.type_id == 1){
+                article = 'news'
+            } else if(article.type_id == 2){
+                article = 'announcements'
+            } else if(article.type_id == 3){
+                article = 'events'
+            }
+            this.$router.push({ name: 'article', params: { article, title, id } })
         }
     },
     async created(){
         let id = this.$route.params.id
-        console.log(id);
         let existingObj = this;
         await axios.get(`/api/getArticle/${id}`)
         .then(function (response) {
@@ -118,7 +124,6 @@ export default defineComponent({
                 existingObj.otherCurrent = 'Events'
             }
             existingObj.isLoaded = true;
-            console.log(existingObj.others);
         })
         .catch(function (error) {
             console.log(error)

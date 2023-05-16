@@ -19,10 +19,10 @@ class TypeSeeder extends Seeder
             'name' => 'News'
         ]);
         DB::table('types')->insert([
-            'name' => 'Announcement'
+            'name' => 'Announcements'
         ]);
         DB::table('types')->insert([
-            'name' => 'Event'
+            'name' => 'Events'
         ]);
     }
 }
