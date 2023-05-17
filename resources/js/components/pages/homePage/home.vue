@@ -37,7 +37,7 @@
                         </div>
                     </div>
                 </div>
-                <div @click="moreArticle('news')" class="border-t grid h-12 text-center place-content-center text-lg blur-none ">
+                <div @click="moreArticle('news')" class="cursor-pointer border-t grid h-12 text-center place-content-center text-lg blur-none ">
                     View More
                 </div>
             </div>
@@ -53,7 +53,7 @@
                         </div>
                     </div>
                 </div>
-                <div @click="moreArticle('announcements')" class="border-t grid h-12 text-center place-content-center text-lg blur-none ">
+                <div @click="moreArticle('announcements')" class="cursor-pointer border-t grid h-12 text-center place-content-center text-lg blur-none ">
                     View More
                 </div>
             </div>
@@ -69,7 +69,7 @@
                         </div>
                     </div>
                 </div>
-                <div @click="moreArticle('events')" class="border-t grid h-12 text-center place-content-center text-lg blur-none ">
+                <div @click="moreArticle('events')" class="cursor-pointer border-t grid h-12 text-center place-content-center text-lg blur-none ">
                     View More
                 </div>
             </div>

@@ -36,6 +36,9 @@
         <div id="app">
 
         </div>
+        <script src="https://unpkg.com/vue-observe-visibility/dist/vue-observe-visibility.min.js"></script> 
         <script src="{{mix('/js/app.js')}}"></script>
+        <!-- <script src="vue.js"></script> -->
+
     </body>
 </html>
