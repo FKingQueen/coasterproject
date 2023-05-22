@@ -161,7 +161,7 @@ export default defineComponent({
         }
       },
     }, {
-      title: 'Project',
+      title: 'Project Type',
       dataIndex: 'project',
       key: 'project',
       width: 350,

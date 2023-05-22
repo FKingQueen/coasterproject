@@ -16,7 +16,12 @@ class ArticleController extends Controller
 
     public function getArticle()
     {
-        return Article::orderBy('id', 'desc')->with('projects')->with('type')->get();
+        if(Auth::user()->id == 1){
+            return Article::orderBy('id', 'desc')->with('projects')->with('type')->get();
+        } else if(Auth::user()->id == 2){
+            return Article::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->with('projects')->with('type')->get();
+        }
+        
     }
 
     public function storeArticle(Request $request){

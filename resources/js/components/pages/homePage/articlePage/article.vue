@@ -5,12 +5,12 @@
                 <img class="object-cover w-full" :src="`/uploads/high/${this.article.image}`">
                 <div class="p-10 grid grid-cols-1 divide-y divide-sky-400">
                     <div >
-                        <h1 class="text-left blur-none decoration-sky-500/10 antialiased block">
+                        <p class="text-left text-4xl blur-none text-black/80 antialiased block">
                             {{ this.article.title }}
-                        </h1>
-                        <h1 class="text-left blur-none text-xl font-thin text-black/70 antialiased">
+                        </p>
+                        <p class="text-left blur-none text-xl font-thin text-black/70 antialiased">
                             {{ this.article.date }}
-                        </h1>
+                        </p>
                         <p class="text-justify blur-none font-medium mt-10 mb-5 tracking-wide antialiased">
                             By {{ this.article.author }}
                         </p>
@@ -19,9 +19,9 @@
                         </p>
                     </div>
                     <div class="mt-5">
-                        <h1 class="text-xl mt-3 blur-none text-black/80 antialiased">
+                        <p class="text-xl mt-3 blur-none text-black/80 antialiased">
                             Gallery
-                        </h1>
+                        </p>
                         <a-image
                             style="height: 70px"
                             :src="`/uploads/low/${this.article.image}`"
@@ -32,26 +32,27 @@
                     </div>
                 </div>
             </div>
-            <div class="lg:w-2/12 h-full lg=mt-0 mt-14">
-                <h1 class="text-center text-2xl border-b-2 border-sky-800/40 blur-none antialiased text-sky-800/90">
-                    Other {{ otherCurrent }}
-                </h1>
+            <div class="lg:w-2/12 h-full lg=mt-0 mt-5">
+                <p class="text-center text-2xl border-b-2 blur-none antialiased">
+                    Other  <span class="text-sky-800 ">{{ otherCurrent }}</span>
+                </p>
                 <div v-for="(other, key) in this.others.slice(0,5)" class="py-2 drop-shadow-2xl">
-                    <div class="h-32 shadow-lg" :style="{backgroundImage:`url(/uploads/low/${other.image})`}" style="background-repeat: no-repeat; background-size: cover; ">  
+                    <div class="h-36 shadow-lg" :style="{backgroundImage:`url(/uploads/low/${other.image})`}" style="background-repeat: no-repeat; background-size: cover; ">  
                         <div @click="gotoArticle(other)" class="cursor-pointer flex items-end w-full h-full bg-[#0d2247]/60">
                             <div class="px-2 w-full">
-                                <h1 class="text-white/80 text-sm p-0 font-thin blur-none antialiased  ">
+                                <p class="text-white text-sm p-0 font-thin blur-none antialiased  ">
                                     {{ other.date }}
-                                </h1>
-                                <h1 class="text-white/80 p-0 text-base font-thin blur-none antialiased ">
+                                </p>
+                                <p class="text-white p-0 font-thin blur-none antialiased ">
                                     {{ other.title }}
-                                </h1>
+                                </p>
                             </div>
                         </div> 
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 </template>
 <script>

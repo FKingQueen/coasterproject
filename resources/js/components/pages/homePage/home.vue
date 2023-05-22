@@ -2,7 +2,8 @@
     <div>
         <div class="w-full">
             <swiper 
-                :pagination="true"     
+                :pagination="true" 
+                :loop="true"    
                 :autoplay="{
                     delay: 3500,
                     disableOnInteraction: false,
@@ -11,65 +12,65 @@
                 :modules="modules" class="mySwiper"
             >
                 <swiper-slide>
-                    <img src="/img/field1.jpg" class="object-cover w-full lg:h-[35rem]" alt="#">       
+                    <img src="/img/field1.jpg" class="object-cover w-full lg:h-[30rem]" alt="#">       
                 </swiper-slide>
                 <swiper-slide>
-                    <img src="/img/field1.jpg" class="object-cover w-full lg:h-[35rem]" alt="#">       
+                    <img src="/img/field1.jpg" class="object-cover w-full lg:h-[30rem]" alt="#">       
                 </swiper-slide>
                 <swiper-slide>
-                    <img src="/img/field1.jpg" class="object-cover w-full lg:h-[35rem]" alt="#">       
+                    <img src="/img/field1.jpg" class="object-cover w-full lg:h-[30rem]" alt="#">       
                 </swiper-slide>
                 <swiper-slide>
-                    <img src="/img/field1.jpg" class="object-cover w-full lg:h-[35rem]" alt="#">       
+                    <img src="/img/field1.jpg" class="object-cover w-full lg:h-[30rem]" alt="#">       
                 </swiper-slide>
             </swiper>
         </div>
         <div class="w-full lg:flex lg:justify-center lg:space-x-20 lg:pt-10 lg:px-0 px-5">
             <div class=" lg:w-3/12 w-full  bg-white drop-shadow-md border-t lg:mt-0 mt-10 ">
-                <h1 class="text-sky-800 text-2xl text-center">News</h1>
+                <p class="text-sky-800 text-2xl text-center blur-none ">News</p>
                 <div class="h-4/5 border-t-2 border-sky-800 p-2">
                     <div v-for="(news, key, index) in this.news.slice(0,3)" class="flex block border-b pb-1 mb-3">
                         <img @click="gotoArticle(news)" class="cursor-pointer bg-sky-200 object-cover object-center blur-none w-20 h-20 " :src="`/uploads/low/${news.image}`">
                         <div class="block w-fit px-1 overflow-hidden">
                             <p @click="gotoArticle(news)" class="cursor-pointer text-sm blur-none font-semibold text-sky-600  truncate">{{ news.title }}</p>
-                            <h1 class="text-xs blur-none">News | {{ news.date }}</h1>
-                            <h1 class="text-xs blur-none text-justify line-clamp-3">By {{ news.author }}, {{ news.article }}</h1>
+                            <p class="text-xs blur-none">News | {{ news.date }}</p>
+                            <p class="text-xs blur-none text-justify line-clamp-3">By {{ news.author }}, {{ news.article }}</p>
                         </div>
                     </div>
                 </div>
-                <div @click="moreArticle('news')" class="cursor-pointer border-t grid h-12 text-center place-content-center text-lg blur-none ">
+                <div @click="moreArticle('News')" class="cursor-pointer border-t grid h-12 text-center place-content-center text-lg blur-none ">
                     View More
                 </div>
             </div>
             <div class=" lg:w-3/12 w-full  bg-white drop-shadow-md border-t lg:mt-0 mt-10">
-                <h1 class="text-sky-800 text-2xl text-center">Announcements</h1>
+                <p class="text-sky-800 text-2xl text-center blur-none">Announcements</p>
                 <div class="h-4/5 border-t-2 border-sky-800 p-2">
                     <div v-for="(announcement, key, index) in this.announcements.slice(0,3)" class="flex block border-b pb-1 mb-3">
                         <img @click="gotoArticle(announcement)" class="cursor-pointer bg-sky-200 object-cover object-center blur-none w-20 h-20 " :src="`/uploads/low/${announcement.image}`">
                         <div class="block w-fit px-1 overflow-hidden">
                             <p @click="gotoArticle(announcement)" class="cursor-pointer text-sm blur-none font-semibold text-sky-600  truncate">{{ announcement.title }}</p>
-                            <h1 class="text-xs blur-none">Announcements | {{ announcement.date }}</h1>
-                            <h1 class="text-xs blur-none text-justify line-clamp-3">By {{ announcement.author }}, {{ announcement.article }}</h1>
+                            <p class="text-xs blur-none">Announcements | {{ announcement.date }}</p>
+                            <p class="text-xs blur-none text-justify line-clamp-3">By {{ announcement.author }}, {{ announcement.article }}</p>
                         </div>
                     </div>
                 </div>
-                <div @click="moreArticle('announcements')" class="cursor-pointer border-t grid h-12 text-center place-content-center text-lg blur-none ">
+                <div @click="moreArticle('Announcements')" class="cursor-pointer border-t grid h-12 text-center place-content-center text-lg blur-none ">
                     View More
                 </div>
             </div>
             <div class=" lg:w-3/12 w-full  bg-white drop-shadow-md border-t lg:mt-0 mt-10">
-                <h1 class="text-sky-800 text-2xl text-center">Events</h1>
+                <p class="text-sky-800 text-2xl text-center blur-none">Events</p>
                 <div class="h-4/5 border-t-2 border-sky-800 p-2">
                     <div v-for="(event, key, index) in this.events.slice(0,3)" class="flex block border-b pb-1 mb-3">
                         <img @click="gotoArticle(event)" class="cursor-pointer bg-sky-200 object-cover object-center blur-none w-20 h-20 " :src="`/uploads/low/${event.image}`">
                         <div class="block w-fit px-1 overflow-hidden" >
                             <p  @click="gotoArticle(event)" class="cursor-pointer text-sm blur-none font-semibold text-sky-600  truncate">{{ event.title }}</p>
-                            <h1 class="text-xs blur-none">Events | {{ event.date }}</h1>
-                            <h1 class="text-xs blur-none text-justify line-clamp-3">By {{ event.author }}, {{ event.article }}</h1>
+                            <p class="text-xs blur-none">Events | {{ event.date }}</p>
+                            <p class="text-xs blur-none text-justify line-clamp-3">By {{ event.author }}, {{ event.article }}</p>
                         </div>
                     </div>
                 </div>
-                <div @click="moreArticle('events')" class="cursor-pointer border-t grid h-12 text-center place-content-center text-lg blur-none ">
+                <div @click="moreArticle('Events')" class="cursor-pointer border-t grid h-12 text-center place-content-center text-lg blur-none ">
                     View More
                 </div>
             </div>

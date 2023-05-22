@@ -56,8 +56,45 @@ class HarticleController extends Controller
             $articles[$key]->date = Carbon::createFromFormat('Y-m-d H:i:s', $arti->created_at)->format('F d, Y');
         }
 
+        if($id == 1){
+            $moreArticle1 =  Article::where('type_id', 2)->with('projects')->with('type')->get();
+            $moreArticle2 =  Article::where('type_id', 3)->with('projects')->with('type')->get();
+            foreach($moreArticle1 as $key => $arti)
+            {
+                $moreArticle1[$key]->date = Carbon::createFromFormat('Y-m-d H:i:s', $arti->created_at)->format('F d, Y');
+            }
+            foreach($moreArticle2 as $key => $arti)
+            {
+                $moreArticle2[$key]->date = Carbon::createFromFormat('Y-m-d H:i:s', $arti->created_at)->format('F d, Y');
+            }
+        } else if($id == 2){
+            $moreArticle1 =  Article::where('type_id', 1)->with('projects')->with('type')->get();
+            $moreArticle2 =  Article::where('type_id', 3)->with('projects')->with('type')->get();
+            foreach($moreArticle1 as $key => $arti)
+            {
+                $moreArticle1[$key]->date = Carbon::createFromFormat('Y-m-d H:i:s', $arti->created_at)->format('F d, Y');
+            }
+            foreach($moreArticle2 as $key => $arti)
+            {
+                $moreArticle2[$key]->date = Carbon::createFromFormat('Y-m-d H:i:s', $arti->created_at)->format('F d, Y');
+            }
+        } else if($id == 3){
+            $moreArticle1 =  Article::where('type_id', 1)->with('projects')->with('type')->get();
+            $moreArticle2 =  Article::where('type_id', 2)->with('projects')->with('type')->get();
+            foreach($moreArticle1 as $key => $arti)
+            {
+                $moreArticle1[$key]->date = Carbon::createFromFormat('Y-m-d H:i:s', $arti->created_at)->format('F d, Y');
+            }
+            foreach($moreArticle2 as $key => $arti)
+            {
+                $moreArticle2[$key]->date = Carbon::createFromFormat('Y-m-d H:i:s', $arti->created_at)->format('F d, Y');
+            }
+        }
+
         return response()->json([
             'moreArticle'  =>  $moreArticle,
+            'moreArticle1'  =>  $moreArticle1,
+            'moreArticle2'  =>  $moreArticle2,
             'articles'  =>  $articles,
         ]);
 
