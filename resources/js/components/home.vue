@@ -23,7 +23,7 @@
                             </div>
                         </div>
                     <div class="text-sm grid grid-cols-1 gap-1 content-center ">
-                        <div class="text-right">
+                        <div class="text-right leading-loose">
                             <p class="">Contact Us</p>
                             <p class="no-underline hover:underline hover:text-blue-600 cursor-pointer">+63912345678</p>
                             <p class="no-underline hover:underline hover:text-blue-600 cursor-pointer">coaster@gmail.com</p>
@@ -32,7 +32,7 @@
                     </div>
                 </div>
             </div>
-            <nav ref="navElement" style="transition: 0.6s;" class=" relative z-30 flex w-full bg-[#0d2247] lg:px-20 md:px-3 sm:px-1 border-y-4 border-cyan-900 ">
+            <nav  ref="navElement" style="transition: 0.6s;" class=" relative z-30 flex w-full bg-[#0d2247] lg:px-20 md:px-3 sm:px-1 border-y-4 border-cyan-900 ">
                 <div class="px-5 xl:px-12  flex w-full justify-evenly">
                     <!-- Nav Links -->
                     <div class="lg:block hidden">
@@ -170,8 +170,8 @@
                         <!-- /Search Bar -->
                     </div>
 
-                    <!-- Search Bar -->
-                        <button type="button" class="lg:block hidden text-2xl text-white hover:text-gray-200 ">
+                    <!-- Search Bar --> 
+                        <button type="button" @click="Search()" class="lg:block hidden text-2xl text-white hover:text-gray-200 ">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 focus:outline outline-offset-2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
                             </svg>
@@ -180,12 +180,32 @@
                 </div>
             </nav>
 
+            <div v-if="isSearch" class="w-full flex justify-center absolute z-30 ">
+                <div class="bg-gray-200 w-3/4 h-14 flex items-center justify-center border-x-2 border-b-2">
+                    <div class="w-3/4 flex justify-center">
+                        <img src="/img/top.png" class="blur-none antialiased duration-200 blur-none cursor-pointer object-fill h-10 mr-5" alt="#">
+                        <input @keyup.enter="this.handleSubmitSearch($event.target.value)" required class="bg-transparent w-full leading-tight focus:outline-none border-b-2 border-sky-800" type="text" placeholder="Search News, Announcement, Events">
+                        <button type="submit" >
+                            <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve" width="512px" height="512px">
+                                <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
             <Transition>
                 <nav v-if="isShowNav" style="" class=" fixed z-30 top-0 flex w-full bg-[#0d2247] lg:px-20 md:px-3 sm:px-1 border-y-4 border-cyan-900 ">
-                    <div class="px-5 xl:px-12  flex w-full justify-evenly">
+                    <div class="px-5 xl:px-12  flex w-full justify-between">
                         <!-- Nav Links -->
                         <div class="lg:block hidden">
+                            
                             <div class=" lg:flex text-white font-normal font-heading w-full ">
+                                    <div class="text-center flex items-center pr-10">
+                                        <p class="cursor-pointer text-5xl font-serif font-semibold text-sky-700 tracking-wide blur-none antialiased">
+                                            COASTER
+                                        </p>
+                                    </div>
                                 <!-- About -->
                                     <router-link to="/" class="py-4 px-4 flex text-white font-semibold hover:bg-sky-700 
                                         cursor-pointer transition-colors duration-300 antialiased">
@@ -320,7 +340,7 @@
                         </div>
 
                         <!-- Search Bar -->
-                            <button type="button" class="lg:block hidden text-2xl text-white hover:text-gray-200 ">
+                            <button  @click="gotoTop()" type="button" class="lg:block hidden mr-60 text-2xl text-white hover:text-gray-200 ">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 focus:outline outline-offset-2">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
                                 </svg>
@@ -328,7 +348,10 @@
                         <!-- /Search Bar -->
                     </div>
                 </nav>
+
             </Transition>
+
+
 
             
 
@@ -410,15 +433,15 @@ export default defineComponent({
             activeItem1,
             activeItem2,
             isShowNav:  ref(false),
+            isSearch: ref(false)
         };
     },
     setup() {
         const selectedKeys = ref(['1']);
         const openKeys = ref([]);
-        
         return {
         selectedKeys,
-        openKeys
+        openKeys,
         };
     },
     watch:{
@@ -472,13 +495,36 @@ export default defineComponent({
         handleScroll() {
             const top = this.$refs.topElement
             const nav = this.$refs.navElement
-            console.log(window.scrollY >= top.offsetHeight + nav.offsetHeight);
             if(window.scrollY >= top.offsetHeight + nav.offsetHeight - 50){
                 this.isShowNav = true;
             }else {
                 this.isShowNav = false;
             }
+
+            
+            if(this.isSearch == true ){
+                if(window.scrollY){
+                    // this.isSearch = false;
+                }
+            }
         },
+        Search(){
+            if(this.isSearch == false){
+                this.isSearch = true;
+            } else {
+                this.isSearch = false;
+            }           
+        },
+        gotoTop(){
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+            this.isSearch = true;
+        },
+        async handleSubmitSearch(search){
+            this.$router.push({path: '/search/' + search})
+        }
     },
     mounted(){
         window.addEventListener('scroll', this.handleScroll);

@@ -53,5 +53,6 @@ Route::group(['prefix' => 'admin','middleware' => 'auth:sanctum'], function() {
 Route::get('/getArticles', [HarticleController::class, 'getArticles']);
 Route::get('/getArticle/{id}', [HarticleController::class, 'getArticle']);
 Route::get('/getmoreArticle/{id}', [HarticleController::class, 'getmoreArticle']);
+Route::get('/searchArticle', [HarticleController::class, 'searchArticle']);
 
 

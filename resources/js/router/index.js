@@ -10,6 +10,9 @@ import Home from '../components/pages/homePage/home.vue';
 import Article  from '../components/pages/homePage/articlePage/article.vue';
 import moreArticle  from '../components/pages/homePage/articlePage/moreArticle.vue';
 
+// Search
+import Search  from '../components/pages/homePage/articlePage/search.vue';
+
 // Map
 import Map from '../components/pages/mapPage/map.vue';
 import Waterlevel from '../components/pages/mapPage/waterLevel.vue';
@@ -74,6 +77,11 @@ export const routes = [
                 name: 'waterLevel',
                 path: '/waterLevel',
                 component: Waterlevel  
+            },
+            {
+                name: 'search',
+                path: '/search/:search',
+                component: Search  
             },
         ]
     },

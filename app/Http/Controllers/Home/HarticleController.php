@@ -99,4 +99,8 @@ class HarticleController extends Controller
         ]);
 
     }
+
+    public function searchArticle(Request $request){
+        return $request->all();
+    }
 }

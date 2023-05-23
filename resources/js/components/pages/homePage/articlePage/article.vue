@@ -5,7 +5,7 @@
                 <img class="object-cover w-full" :src="`/uploads/high/${this.article.image}`">
                 <div class="p-10 grid grid-cols-1 divide-y divide-sky-400">
                     <div >
-                        <p class="text-left text-4xl blur-none text-black/80 antialiased block">
+                        <p class="text-left lg:text-4xl text-3xl blur-none text-black/80 antialiased block">
                             {{ this.article.title }}
                         </p>
                         <p class="text-left blur-none text-xl font-thin text-black/70 antialiased">
