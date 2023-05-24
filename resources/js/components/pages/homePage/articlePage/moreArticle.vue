@@ -42,8 +42,8 @@
                         </p>
                         <div v-for="(more, key) in this.moreArticle_list" class="flex block border-b-2 border-sky-900/60 pb-3 mb-5">
                             <img @click="gotoArticle(more)"  class="cursor-pointer bg-sky-200 object-cover object-center blur-none w-24 h-24 " :src="`/uploads/low/${more.image}`">
-                            <div @click="gotoArticle(more)" class="block w-fit px-1 overflow-hidden">
-                                <p class="cursor-pointer text-sm blur-none antialiased font-semibold text-sky-600  truncate">{{ more.title }}</p>
+                            <div class="block w-fit px-1 overflow-hidden">
+                                <p @click="gotoArticle(more)" class="cursor-pointer text-sm blur-none antialiased font-semibold text-sky-600  truncate">{{ more.title }}</p>
                                 <p class="text-xs blur-none">{{ moreCurrent }} | {{ more.date }}</p>
                                 <p class="blur-none antialiased text-xs text-justify line-clamp-3 leading-relaxed">By {{ more.author }}, {{ more.article }}</p>
                             </div>
