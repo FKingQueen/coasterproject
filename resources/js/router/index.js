@@ -17,6 +17,9 @@ import Search  from '../components/pages/homePage/articlePage/search.vue';
 import Map from '../components/pages/mapPage/map.vue';
 import Waterlevel from '../components/pages/mapPage/waterLevel.vue';
 
+// Projects
+import Projects from '../components/pages/homePage/projectsPage/project.vue';
+
 // Admin
 
 // Article
@@ -66,6 +69,12 @@ export const routes = [
                 name: 'moreArticle',
                 path: '/:article',
                 component: moreArticle ,
+                props:true 
+            },
+            {
+                name: 'projects',
+                path: '/projects/:project/:id',
+                component: Projects ,
                 props:true 
             },
             {

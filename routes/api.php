@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ArticleController;  
 use App\Http\Controllers\Home\HarticleController;  
+use App\Http\Controllers\Home\ProjectController;  
 
 /*
 |--------------------------------------------------------------------------
@@ -54,5 +55,7 @@ Route::get('/getArticles', [HarticleController::class, 'getArticles']);
 Route::get('/getArticle/{id}', [HarticleController::class, 'getArticle']);
 Route::get('/getmoreArticle/{id}', [HarticleController::class, 'getmoreArticle']);
 Route::post('/searchArticle', [HarticleController::class, 'searchArticle']);
+// Home Projects
+Route::get('/getProject/{id}', [ProjectController::class, 'getProject']);
 
 

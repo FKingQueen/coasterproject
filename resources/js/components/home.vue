@@ -522,6 +522,7 @@ export default defineComponent({
                 top: 0,
                 behavior: "smooth"
             });
+            this.$nextTick(() => this.$refs.searchFocus.focus())
             this.isSearch = true;
         },
         async handleSubmitSearch(search){

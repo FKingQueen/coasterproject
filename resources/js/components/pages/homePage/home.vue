@@ -87,32 +87,32 @@
             <div class="container mx-auto px-5">
                 <div class="-m-4 flex flex-wrap">
                     <div class="w-full p-4 md:w-1/2 lg:w-1/4">
-                    <a href="{{ route('project1')}}" class="relative block overflow-hidden rounded flex justify-center py-5">
-                        <img alt="ecommerce" class="block h-full w-80 shadow-lg object-cover object-center cursor-pointer transition ease-in-out delay-75  hover:-translate-y-1 hover:scale-105 duration-300" src="img/P1.png" />
+                    <a class="relative block overflow-hidden rounded flex justify-center py-5">
+                        <img @click="gotoProject(1)" alt="ecommerce" class="block h-full w-80 shadow-lg object-cover object-center cursor-pointer transition ease-in-out delay-75  hover:-translate-y-1 hover:scale-105 duration-300" src="img/P1.png" />
                     </a>
                     <div class="mt-4 flex justify-center">
                         <h3 class="title-font mb-1 text-xs tracking-widest text-gray-500">PROJECT 1</h3>
                     </div>
                     </div>
                     <div class="w-full p-4 md:w-1/2 lg:w-1/4">
-                    <a href="{{ route('project2')}}" class="relative block overflow-hidden rounded flex justify-center py-5">
-                        <img alt="ecommerce" class="block h-full w-80 shadow-lg object-cover object-center cursor-pointer transition ease-in-out delay-75  hover:-translate-y-1 hover:scale-105 duration-300" src="img/P2.png" />
+                    <a class="relative block overflow-hidden rounded flex justify-center py-5">
+                        <img @click="gotoProject(2)" alt="ecommerce" class="block h-full w-80 shadow-lg object-cover object-center cursor-pointer transition ease-in-out delay-75  hover:-translate-y-1 hover:scale-105 duration-300" src="img/P2.png" />
                     </a>
                     <div class="mt-4 flex justify-center">
                         <h3 class="title-font mb-1 text-xs tracking-widest text-gray-500">PROJECT 2</h3>
                     </div>
                     </div>
                     <div class="w-full p-4 md:w-1/2 lg:w-1/4">
-                    <a href="{{ route('project3')}}" class="relative block overflow-hidden rounded flex justify-center py-5">
-                        <img alt="ecommerce" class="block h-full w-80 shadow-lg object-cover object-center cursor-pointer transition ease-in-out delay-75  hover:-translate-y-1 hover:scale-105 duration-300" src="img/P3.png" />
+                    <a class="relative block overflow-hidden rounded flex justify-center py-5">
+                        <img @click="gotoProject(3)" alt="ecommerce" class="block h-full w-80 shadow-lg object-cover object-center cursor-pointer transition ease-in-out delay-75  hover:-translate-y-1 hover:scale-105 duration-300" src="img/P3.png" />
                     </a>
                     <div class="mt-4 flex justify-center">
                         <h3 class="title-font mb-1 text-xs tracking-widest text-gray-500">PROJECT 3</h3>
                     </div>
                     </div>
                     <div class="w-full p-4 md:w-1/2 lg:w-1/4">
-                    <a href="{{ route('project4')}}" class="relative block overflow-hidden rounded flex justify-center py-5">
-                        <img alt="ecommerce" class="block h-full w-80 shadow-lg object-cover object-center cursor-pointer transition ease-in-out delay-75  hover:-translate-y-1 hover:scale-105 duration-300" src="img/P4.png" />
+                    <a class="relative block overflow-hidden rounded flex justify-center py-5">
+                        <img @click="gotoProject(4)" alt="ecommerce" class="block h-full w-80 shadow-lg object-cover object-center cursor-pointer transition ease-in-out delay-75  hover:-translate-y-1 hover:scale-105 duration-300" src="img/P4.png" />
                     </a>
                     <div class="mt-4 flex justify-center">
                         <h3 class="title-font mb-1 text-xs tracking-widest text-gray-500">PROJECT 4</h3>
@@ -213,6 +213,7 @@
             events: [],
             news: [],
             announcements: [],
+            selectedProject: '',
         }
     },
     async created() {
@@ -252,6 +253,20 @@
         },
         moreArticle(article){
             this.$router.push({ name: 'moreArticle', params: { article } })
+        },
+        gotoProject(id){
+            let existingObj = this;
+            if(id == 1){
+                existingObj.selectedProject = 'Coastal Erosion Trends and Management Strategies for Region 1'
+            }else if(id == 2){
+                existingObj.selectedProject = 'Assesment Monitoring, and Prediction of Coastal Flooding of Selected Municipalities in Region 1'
+            }else if(id == 3){
+                existingObj.selectedProject = 'Development of Science-based Engineering Approach to Coastal Prediction in Region 1'
+            }else if(id == 4){
+                existingObj.selectedProject = 'Enhancing Coastal Design and Infrastructure Intervention through the Establishment of Wave Testing Facility'
+            }
+            const project = existingObj.selectedProject
+            this.$router.push({ name: 'projects', params: { project, id } })
         }
     }   
 
