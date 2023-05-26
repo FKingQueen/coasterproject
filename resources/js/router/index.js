@@ -22,6 +22,11 @@ import Projects from '../components/pages/homePage/projectsPage/project.vue';
 
 // Admin
 
+// Slide Show
+// import articlePlatform from '../components/admin/article/articlePlatform.vue';
+// import addArticleForm from '../components/admin/article/addForm.vue';
+// import editArticleForm from '../components/admin/article/editForm.vue';
+
 // Article
 import articlePlatform from '../components/admin/article/articlePlatform.vue';
 import addArticleForm from '../components/admin/article/addForm.vue';
@@ -39,7 +44,7 @@ import setting from '../components/admin/settings/setting.vue';
 import login from '../components/login.vue';
 
 // Dashboard
-import dashboard from '../components/dashboard.vue';
+import dashboard from '../components/admin/dashboard.vue';
 
 export const routes = [
     // Login

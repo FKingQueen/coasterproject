@@ -17,7 +17,7 @@ class CreateProjectsTable extends Migration
             $table->id();
             $table->integer("article_id")->nullable();
             $table->integer("user_id")->nullable();
-            $table->integer("projectType_id")->nullable();
+            $table->integer("project_type_id")->nullable();
             $table->timestamps();
         });
     }

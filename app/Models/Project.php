@@ -11,7 +11,7 @@ class Project extends Model
     protected $fillable = [
         'user_id',
         'article_id',
-        'projectType_id',
+        'project_type_id',
     ];
 
 

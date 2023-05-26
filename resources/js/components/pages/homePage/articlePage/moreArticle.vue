@@ -1,6 +1,6 @@
 <template>
     <div :class="{ 'h-screen': !isLoaded }" class="">
-        <div v-if="isLoaded" class="w-full flex justify-center space-x-7">
+        <div v-if="isLoaded" class="w-full flex justify-center lg:space-x-6 space-x-0 py-10">
             <div class="lg:w-5/12 md:w-10/12 w-full lg:px-0 px-2">
                 <div v-if="isLoaded" class="flex justify-center">
                     <div class="w-full">

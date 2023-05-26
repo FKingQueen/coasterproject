@@ -10,5 +10,15 @@ class ProjectType extends Model
     use HasFactory;
     protected $fillable = [
         'name',
+        'about',
     ];
+
+    public function projectObjective()
+    {
+        return $this->hasMany('App\Models\ProjectObjective');
+    }
+    public function projectImage()
+    {
+        return $this->hasMany('App\Models\Image');
+    }
 }

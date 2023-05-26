@@ -88,7 +88,7 @@
                 <div class="-m-4 flex flex-wrap">
                     <div class="w-full p-4 md:w-1/2 lg:w-1/4">
                     <a class="relative block overflow-hidden rounded flex justify-center py-5">
-                        <img @click="gotoProject(1)" alt="ecommerce" class="block h-full w-80 shadow-lg object-cover object-center cursor-pointer transition ease-in-out delay-75  hover:-translate-y-1 hover:scale-105 duration-300" src="img/P1.png" />
+                        <img @click="gotoProject(1)" alt="ecommerce" class="block h-full w-80 shadow-lg object-cover object-center cursor-pointer transition ease-in-out delay-75  hover:-translate-y-1 hover:scale-105 duration-300" src="/img/Project1/P1.png" />
                     </a>
                     <div class="mt-4 flex justify-center">
                         <h3 class="title-font mb-1 text-xs tracking-widest text-gray-500">PROJECT 1</h3>
@@ -96,7 +96,7 @@
                     </div>
                     <div class="w-full p-4 md:w-1/2 lg:w-1/4">
                     <a class="relative block overflow-hidden rounded flex justify-center py-5">
-                        <img @click="gotoProject(2)" alt="ecommerce" class="block h-full w-80 shadow-lg object-cover object-center cursor-pointer transition ease-in-out delay-75  hover:-translate-y-1 hover:scale-105 duration-300" src="img/P2.png" />
+                        <img @click="gotoProject(2)" alt="ecommerce" class="block h-full w-80 shadow-lg object-cover object-center cursor-pointer transition ease-in-out delay-75  hover:-translate-y-1 hover:scale-105 duration-300" src="/img/Project2/P2.png" />
                     </a>
                     <div class="mt-4 flex justify-center">
                         <h3 class="title-font mb-1 text-xs tracking-widest text-gray-500">PROJECT 2</h3>
@@ -104,7 +104,7 @@
                     </div>
                     <div class="w-full p-4 md:w-1/2 lg:w-1/4">
                     <a class="relative block overflow-hidden rounded flex justify-center py-5">
-                        <img @click="gotoProject(3)" alt="ecommerce" class="block h-full w-80 shadow-lg object-cover object-center cursor-pointer transition ease-in-out delay-75  hover:-translate-y-1 hover:scale-105 duration-300" src="img/P3.png" />
+                        <img @click="gotoProject(3)" alt="ecommerce" class="block h-full w-80 shadow-lg object-cover object-center cursor-pointer transition ease-in-out delay-75  hover:-translate-y-1 hover:scale-105 duration-300" src="/img/Project3/P3.png" />
                     </a>
                     <div class="mt-4 flex justify-center">
                         <h3 class="title-font mb-1 text-xs tracking-widest text-gray-500">PROJECT 3</h3>
@@ -112,7 +112,7 @@
                     </div>
                     <div class="w-full p-4 md:w-1/2 lg:w-1/4">
                     <a class="relative block overflow-hidden rounded flex justify-center py-5">
-                        <img @click="gotoProject(4)" alt="ecommerce" class="block h-full w-80 shadow-lg object-cover object-center cursor-pointer transition ease-in-out delay-75  hover:-translate-y-1 hover:scale-105 duration-300" src="img/P4.png" />
+                        <img @click="gotoProject(4)" alt="ecommerce" class="block h-full w-80 shadow-lg object-cover object-center cursor-pointer transition ease-in-out delay-75  hover:-translate-y-1 hover:scale-105 duration-300" src="/img/Project4/P4.png" />
                     </a>
                     <div class="mt-4 flex justify-center">
                         <h3 class="title-font mb-1 text-xs tracking-widest text-gray-500">PROJECT 4</h3>
