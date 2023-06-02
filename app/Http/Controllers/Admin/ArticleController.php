@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Article;
 use App\Models\Project;
 use App\Models\Type;
+use Carbon\Carbon;
 use DB;
 use File;
 
@@ -16,10 +17,21 @@ class ArticleController extends Controller
 
     public function getArticle()
     {
+        
         if(Auth::user()->id == 1){
-            return Article::orderBy('id', 'desc')->with('projects')->with('type')->get();
+            $article = Article::orderBy('id', 'desc')->with('projects')->with('type')->get();
+            foreach($article as $key => $arti)
+            {
+                $article[$key]->date = Carbon::createFromFormat('Y-m-d H:i:s', $arti->created_at)->format('F d, Y');
+            }
+            return $article;
         } else if(Auth::user()->id == 2){
-            return Article::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->with('projects')->with('type')->get();
+            $article = Article::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->with('projects')->with('type')->get();
+            foreach($article as $key => $arti)
+            {
+                $article[$key]->date = Carbon::createFromFormat('Y-m-d H:i:s', $arti->created_at)->format('F d, Y');
+            }
+            return $article;
         }
         
     }
@@ -29,8 +41,7 @@ class ArticleController extends Controller
             'title' => 'required',
             'article' => 'required',    
             'projectValue' => 'required',    
-            'typeValue' => 'required',       
-            'author' => 'required',
+            'typeValue' => 'required',          
             'image' => 'required',
         ]);
 
@@ -45,30 +56,37 @@ class ArticleController extends Controller
 
         $projects = $request->projectValue;
 
+        DB::table('articles')
+        ->where('id', $newArticle->id)
+        ->update([
+        'created_at' => Carbon::parse($request->date),
+        ]);
+
+
         foreach($projects as $key => $project){
             if($project == '1'){
                 Project::create([
                     'article_id' =>  $newArticle->id,
                     'user_id' => Auth::user()->id,
-                    'projectType_id' => $project,
+                    'project_type_id' => $project,
                 ]);
             } else if ($project == '2') {
                 Project::create([
                     'article_id' =>  $newArticle->id,
                     'user_id' => Auth::user()->id,
-                    'projectType_id' => $project,
+                    'project_type_id' => $project,
                 ]);
             } else if ($project == '3') {
                 Project::create([
                     'article_id' =>  $newArticle->id,
                     'user_id' => Auth::user()->id,
-                    'projectType_id' => $project,
+                    'project_type_id' => $project,
                 ]);
             } else if ($project == '4') {
                 Project::create([
                     'article_id' =>  $newArticle->id,
                     'user_id' => Auth::user()->id,
-                    'projectType_id' => $project,
+                    'project_type_id' => $project,
                 ]);
             }
             
@@ -128,6 +146,7 @@ class ArticleController extends Controller
     }
 
     public function updateArticle(Request $request){
+        return $request->all();
         Project::where('article_id', $request->id)->delete();
 
         $projects = $request->projectValue;
@@ -137,7 +156,7 @@ class ArticleController extends Controller
             'article' => 'required',    
             'projectValue' => 'required',    
             'typeValue' => 'required',       
-            'author' => 'required',
+            'date' => 'required',       
             'image' => 'required',
         ]);
 
@@ -149,6 +168,7 @@ class ArticleController extends Controller
         'type_id' => $request->typeValue[0],
         'author' => $request->author,
         'image' => $request->image,
+        'created_at' => Carbon::parse($request->date),
         'article' => $request->article,
         ]);
 
@@ -157,25 +177,25 @@ class ArticleController extends Controller
                 Project::create([
                     'article_id' =>  $request->id,
                     'user_id' => Auth::user()->id,
-                    'projectType_id' => $project,
+                    'project_type_id' => $project,
                 ]);
             } else if ($project == '2') {
                 Project::create([
                     'article_id' =>  $request->id,
                     'user_id' => Auth::user()->id,
-                    'projectType_id' => $project,
+                    'project_type_id' => $project,
                 ]);
             } else if ($project == '3') {
                 Project::create([
                     'article_id' =>  $request->id,
                     'user_id' => Auth::user()->id,
-                    'projectType_id' => $project,
+                    'project_type_id' => $project,
                 ]);
             } else if ($project == '4') {
                 Project::create([
                     'article_id' =>  $request->id,
                     'user_id' => Auth::user()->id,
-                    'projectType_id' => $project,
+                    'project_type_id' => $project,
                 ]);
             }
             

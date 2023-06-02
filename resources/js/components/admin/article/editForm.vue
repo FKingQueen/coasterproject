@@ -7,64 +7,66 @@
         <div class="m-5 bg-white shadow-inner shadow-lg rounded px-20 py-5">
             <a-button @click="this.$router.push('/admin/articlePlatform')" class="mb-3">Back</a-button>
             <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="95" class="px-10" >
-                <FormItem label="Image" prop="image">
-                <Upload
-                    type="drag"
-                    ref="uploads"
-                    :headers="{'x-csrf-token' : token, 'X-Requested-With' : 'XMLHttpRequest'}"
-                    :on-success="handleSuccess"
-                    :on-error="handleError"
-                    :format="['jpg','jpeg','png']"
-                    :max-size="2048"
-                    :on-format-error="handleFormatError"
-                    :on-exceeded-size="handleMaxSize"
-                    action="/api/admin/upload">
-                    <div style="padding: 20px 0">
-                        <Icon type="ios-cloud-upload" size="52" style="color: #3399ff"></Icon>
-                        <p>Click or drag files here to upload</p>
-                    </div>
-                </Upload>
-                <div v-if="formValidate.image" class="demo-upload-list">
-                    <Image :src="`/uploads/low/${formValidate.image}`" fit="cover" width="100%" height="100%" />
-                    <div class="demo-upload-list-cover">
-                        <Icon type="ios-eye-outline" @click="handleView(item.name)"></Icon>
-                        <Icon type="ios-trash-outline" @click="deleteImage"></Icon>
-                    </div>
-                </div>
+                <FormItem label="Title" prop="title">
+                    <Input v-model="formValidate.title" placeholder="Enter Title"></Input>
                 </FormItem>
                 <FormItem label="Project" >
-                    <!-- <Select v-model="formValidate.projectValue" multiple style="width:100%" placeholder="Select Project" >
-                        <Option v-for="item in projectOptions" :value="item.value" :key="item.value">{{ item.label }}</Option>
-                    </Select> -->
                     <a-select
                         v-model:value="formValidate.projectValue"
                         mode="multiple"
                         style="width: 100%"
                         placeholder="Please select"
                         :options="projectOptions"
-                        @change="handleChange"
                     ></a-select>
                 </FormItem>
                 <FormItem label="Article Type" prop="typeValue">
-                    <!-- <Select v-model="formValidate.typeValue" style="width:100%" placeholder="Select Article Type" >
-                        <Option v-for="item in typeOptions" :value="item.value" :key="item.value">{{ item.label }}</Option>
-                    </Select> -->
                     <a-select
+                        :change="onChangeArticleType()"
                         v-model:value="formValidate.typeValue"
                         style="width: 100%"
                         placeholder="Please select"
                         :options="typeOptions"
-                        @change="handleChange"
                     ></a-select>
                 </FormItem>
-                <FormItem label="Title" prop="title">
-                    <Input v-model="formValidate.title" placeholder="Enter Title"></Input>
+                <FormItem label="Change Date">
+                    <Switch v-model="checked" />
                 </FormItem>
-                <FormItem label="Author" prop="author">
+                <FormItem v-if="checked == true" label="Date"  prop="date" class="w-full ">
+                    <Input type="date" v-model="formValidate.date" class="w-full rounded"></Input>
+                </FormItem>
+                <FormItem label="Image" prop="image">
+                    <Upload
+                        type="drag"
+                        ref="uploads"
+                        :headers="{'x-csrf-token' : token, 'X-Requested-With' : 'XMLHttpRequest'}"
+                        :on-success="handleSuccess"
+                        :on-error="handleError"
+                        :format="['jpg','jpeg','png']"
+                        :max-size="2048"
+                        :on-format-error="handleFormatError"
+                        :on-exceeded-size="handleMaxSize"
+                        action="/api/admin/upload">
+                        <div style="padding: 20px 0">
+                            <Icon type="ios-cloud-upload" size="52" style="color: #3399ff"></Icon>
+                            <p>Click or drag files here to upload</p>
+                        </div>
+                    </Upload>
+                    <div v-if="formValidate.image" class="demo-upload-list">
+                        <Image :src="`/uploads/low/${formValidate.image}`" fit="cover" width="100%" height="100%" />
+                        <div class="demo-upload-list-cover">
+                            <Icon type="ios-eye-outline" @click="handleView(item.name)"></Icon>
+                            <Icon type="ios-trash-outline" @click="deleteImage"></Icon>
+                        </div>
+                    </div>
+                </FormItem>
+
+
+                <FormItem v-if="isShowAuthor" label="Author" prop="author">
                     <Input v-model="formValidate.author" placeholder="Enter Author"></Input>
                 </FormItem>
+
                 <FormItem label="Article" prop="article">
-                    <Input v-model="formValidate.article" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="Write Article"></Input>
+                    <ckeditor :editor="editor" v-model="formValidate.article" :config="editorConfig" placeholder="Write Article"></ckeditor>
                 </FormItem>
                 <div class="flex justify-end">
                     <a-button key="submit" type="primary" @click="handleSubmit('formValidate')">Submit</a-button>
@@ -76,6 +78,7 @@
   
   <script>
   import { UploadOutlined } from '@ant-design/icons-vue';
+  import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
   import { defineComponent, ref } from 'vue';
   import { notification } from 'ant-design-vue';
   import { useRoute, useRouter} from 'vue-router';
@@ -95,9 +98,6 @@
         value: '4',
         label: 'Project 4 : Enhancing Coastal Design and Infrastructure Intervention through the Establishment of Wave Testing Facility',
         }]);
-        // watch(projectValue, val => {
-        // console.log(`selected:`, val);
-        // });
 
         const typeOptions = ref([{
         value: '1',
@@ -118,6 +118,9 @@
             projectOptions,
             filterOption,
             typeOptions,
+            isShowAuthor: ref(false),
+            checked: ref(false),
+            
         };
     },
     data(){
@@ -129,7 +132,8 @@
                 token: '',
                 title: '',
                 author: '',
-                article: ''
+                article: '',
+                date: '',
             },
             ruleValidate: {
                 image: [
@@ -144,19 +148,35 @@
                 article: [
                     { required: true, message: 'The article section cannot be empty', trigger: 'blur' },
                     // { type: 'string', min: 20, message: 'Introduce no less than 20 words', trigger: 'blur' }
-                ]
+                ],
+                date: [
+                    { required: true, message: 'The Date section cannot be empty', trigger: 'blur' }
+                ],
             },
+            editor: ClassicEditor,
+            editorConfig: {
+                toolbar: {
+                    items: [
+                    'undo', 'redo',
+                    '|', 'heading',
+                    '|', 'fontfamily', 'fontsize', 'fontColor', 'fontBackgroundColor',
+                    '|', 'bold', 'italic', 'strikethrough', 'subscript', 'superscript', 'code',
+                    '|', 'link', 'blockQuote', 'codeBlock',
+                    '|', 'bulletedList', 'numberedList', 'todoList', 'outdent', 'indent'
+                    ]
+                }
+            }
         }
     },
     methods: {
         async handleSubmit (name) {
             let existingObj = this;
+            // let dateFormat1 = moment(existingObj.formValidate.date).format();
+            // console.log(dateFormat1);
+            console.log(existingObj.formValidate);
+            return;
             this.$refs[name].validate((valid) => {
                 if (valid) {
-                    // Post
-                    // console.log(existingObj.formValidate);
-
-                    // return;
                     axios.post(`/api/admin/updateArticle`, this.formValidate)
                     .then(function (response) {
                         notification.success({
@@ -205,6 +225,14 @@
                 description: 'File  ' + file.name + ' is too large, no more than 2M.'
             });
         },
+        onChangeArticleType(){
+            let existingObj = this;
+            if(existingObj.formValidate.typeValue == 1){
+                existingObj.isShowAuthor = true;
+            } else {
+                existingObj.isShowAuthor = false;
+            }
+        }
     },
     async created(){
         this.token = window.Laravel.csrfToken;
@@ -214,22 +242,31 @@
         await axios.get(`/api/admin/getArticleEdit/${id}`)
         .then(function (response) {
             // console.log(response.data[0].type);
+            console.log(response.data[0]);
             existingObj.formValidate.id = response.data[0].id
             existingObj.formValidate.title = response.data[0].title
             existingObj.formValidate.image = response.data[0].image
             existingObj.formValidate.author = response.data[0].author
             existingObj.formValidate.article = response.data[0].article
+            existingObj.formValidate.date = response.data[0].created_at
+            // existingObj.formValidate.typeValue = response.data[0].type.name
+             existingObj.formValidate.typeValue.push(response.data[0].type_id.toString());
+            // existingObj.formValidate.projectValue = response.data[0].type.name
 
             for(let i = 0; i < response.data[0].projects.length; i++ ){
-                existingObj.formValidate.projectValue.push(response.data[0].projects[i].projectType_id.toString());
+                existingObj.formValidate.projectValue.push(response.data[0].projects[i].project_type_id.toString());
             }
-            existingObj.formValidate.typeValue.push(response.data[0].type_id.toString());
+           
             // console.log(existingObj.formValidate.projectValue);
             
         })
         .catch(function (error) {
             console.log(error)
         });
+
+        if(existingObj.formValidate.author != null){
+            existingObj.isShowAuthor = true
+        }
     }
   })
   </script>

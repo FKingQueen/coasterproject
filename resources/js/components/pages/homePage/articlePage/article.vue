@@ -4,18 +4,24 @@
             <div class="lg:w-5/12 w-full h-full lg:shadow-2xl shadow-lg border">
                 <img class="object-cover w-full" :src="`/uploads/high/${this.article.image}`">
                 <div class="p-10 grid grid-cols-1 divide-y divide-sky-400">
-                    <div >
+                    <div>
+                        <div class="flex justify-end pb-3">
+                            <div v-for="(items, key) in this.projects">
+                                <a-tag @click="gotoProject(items.project_type_id)" class="cursor-pointer" color="blue">Project {{ items.project_type_id }}</a-tag>
+                            </div>
+                            
+                        </div>
                         <p class="text-left lg:text-4xl text-3xl blur-none text-black/80 antialiased block">
                             {{ this.article.title }}
                         </p>
-                        <p class="text-left blur-none text-xl font-thin text-black/70 antialiased">
+                        <p class="text-left blur-none text-xl mb-5 font-thin text-black/70 antialiased">
                             {{ this.article.date }}
                         </p>
-                        <p class="text-justify blur-none font-medium mt-10 mb-5 tracking-wide antialiased">
+                        <p v-if="this.article.author != null" class="text-justify blur-none mb-5 font-medium tracking-wide antialiased">
                             By {{ this.article.author }}
                         </p>
-                        <p class="text-justify blur-none font-medium indent-8 leading-loose tracking-wide antialiased">
-                            {{ this.article.article }}
+                        <p v-html="this.article.article" class="text-justify blur-none font-medium indent-8 leading-loose tracking-wide antialiased">
+
                         </p>
                     </div>
                     <div class="mt-5">
@@ -71,6 +77,7 @@ export default defineComponent({
                 type: ''
             },
             articles: '',
+            projects: [],
             events: [],
             news: [],
             announcements: [],
@@ -91,6 +98,20 @@ export default defineComponent({
                 article = 'events'
             }
             this.$router.push({ name: 'article', params: { article, title, id } })
+        },
+        gotoProject(id){
+            let existingObj = this;
+            if(id == 1){
+                existingObj.selectedProject = 'Coastal Erosion Trends and Management Strategies for Region 1'
+            }else if(id == 2){
+                existingObj.selectedProject = 'Assesment Monitoring, and Prediction of Coastal Flooding of Selected Municipalities in Region 1'
+            }else if(id == 3){
+                existingObj.selectedProject = 'Development of Science-based Engineering Approach to Coastal Prediction in Region 1'
+            }else if(id == 4){
+                existingObj.selectedProject = 'Enhancing Coastal Design and Infrastructure Intervention through the Establishment of Wave Testing Facility'
+            }
+            const project = existingObj.selectedProject
+            this.$router.push({ name: 'projects', params: { project, id } })
         }
     },
     async created(){
@@ -98,6 +119,8 @@ export default defineComponent({
         let existingObj = this;
         await axios.get(`/api/getArticle/${id}`)
         .then(function (response) {
+            existingObj.projects = response.data.article[0].projects;
+            console.log(existingObj.projects);
             existingObj.articles = response.data.articles
             existingObj.article.id = response.data.article[0].id
             existingObj.article.title = response.data.article[0].title

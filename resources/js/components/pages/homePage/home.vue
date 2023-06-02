@@ -34,7 +34,7 @@
                         <div class="block w-fit px-1 overflow-hidden">
                             <p @click="gotoArticle(news)" class="cursor-pointer text-sm blur-none font-semibold text-sky-600  truncate">{{ news.title }}</p>
                             <p class="text-xs blur-none">News | {{ news.date }}</p>
-                            <p class="text-xs blur-none text-justify line-clamp-3">By {{ news.author }}, {{ news.article }}</p>
+                            <p class="text-xs blur-none text-justify line-clamp-3" v-html="news.article"> </p>
                         </div>
                     </div>
                 </div>
@@ -50,7 +50,7 @@
                         <div class="block w-fit px-1 overflow-hidden">
                             <p @click="gotoArticle(announcement)" class="cursor-pointer text-sm blur-none font-semibold text-sky-600  truncate">{{ announcement.title }}</p>
                             <p class="text-xs blur-none">Announcements | {{ announcement.date }}</p>
-                            <p class="text-xs blur-none text-justify line-clamp-3">By {{ announcement.author }}, {{ announcement.article }}</p>
+                            <p class="text-xs blur-none text-justify line-clamp-3" v-html="announcement.article"></p>
                         </div>
                     </div>
                 </div>
@@ -66,7 +66,7 @@
                         <div class="block w-fit px-1 overflow-hidden" >
                             <p  @click="gotoArticle(event)" class="cursor-pointer text-sm blur-none font-semibold text-sky-600  truncate">{{ event.title }}</p>
                             <p class="text-xs blur-none">Events | {{ event.date }}</p>
-                            <p class="text-xs blur-none text-justify line-clamp-3">By {{ event.author }}, {{ event.article }}</p>
+                            <p class="text-xs blur-none text-justify line-clamp-3" v-html="event.article"></p>
                         </div>
                     </div>
                 </div>
@@ -132,7 +132,7 @@
             </div>
             <div class="flex justify-center w-full  mt-5">
                 <div>
-                    <div class="w-full text-justify indent-8 lg:px-40 px-5 block">
+                    <div class="w-full text-justify indent-8 lg:px-40 px-5 block leading-loose tracking-wide antialiased">
                         The Coastal Engineering Research Center or CoastER Center is the country’s first coastal engineering and management research and development center and 
                         the hub of innovations for coastal resiliency. This facility will spur the development of innovations that address coastal erosion, development construction 
                         materials for coastal protection, policies, and guidelines intended to protect resources from coastal flooding and improve the lives of people in coastal 
@@ -140,7 +140,7 @@
                         engineering.
                     </div>
                     <hr class="my-6 border-sky-300" />
-                    <div class="w-full text-justify indent-8 lg:px-40 px-5 block">
+                    <div class="w-full text-justify indent-8 lg:px-40 px-5 block leading-loose tracking-wide antialiased">
                         The COASTER aims to spearhead the development of technologies and innovation to mitigate and manage coastal disasters and risks. The overall goal of the 
                         center is to take the lead in coastal science and engineering studies to better undertand the magniture of certain process and hazards and their impacts
                         on the maritime environment including tidal deltas and low-lying lands.

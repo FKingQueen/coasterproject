@@ -64,7 +64,7 @@ class UserController extends Controller
         ->where('id', $request->id)
         ->update([
         'name' => $request->name,
-        'userType' => $request->userType,
+        'role_id' => $request->userType,
         'email' => $request->email
         ]);
         return $request->all();

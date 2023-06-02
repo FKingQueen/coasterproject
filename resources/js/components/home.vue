@@ -5,12 +5,19 @@
             <div ref="topElement" id="topView" class="w-full hidden lg:block p-0">
                     <div class="flex justify-around">
                         <div class="md:flex py-1 ">
-                            <img src="/img/top.png" class="blur-none antialiased duration-200 blur-none cursor-pointer object-fill h-20" alt="#">
-                            <div class="p-0 leading-normal">
-                                <div class="text-center">
-                                    <p class="text-5xl font-serif font-semibold text-sky-900 blur-none antialiased">
-                                        COASTER
-                                    </p>
+                            <div class="flex items-center space-x-2 w-full">
+                                <img src="/img/logo/PCIEERD.png" class="blur-none antialiased cursor-pointer object-fill h-16" alt="#">
+                                <img src="/img/logo/MMSU.png" class="blur-none antialiased cursor-pointer object-fill h-16" alt="#">
+                                <img src="/img/top.png" class="blur-none antialiased cursor-pointer object-fill h-16" alt="#">
+                            </div>
+
+                            <div class="p-0 leading-normal pl-1">
+                                <div class="text-center grid divide-y-2 w-full">
+                                    <div>
+                                        <p class="text-5xl font-serif font-semibold text-sky-900 blur-none antialiased">
+                                            COASTER
+                                        </p>
+                                    </div>
                                     <div class="text-center text-xs blur-none antialiased">
                                         <p>
                                             Coastal Engineering, Management Research
@@ -28,7 +35,6 @@
                             <p class="no-underline hover:underline hover:text-blue-600 cursor-pointer">+63912345678</p>
                             <p class="no-underline hover:underline hover:text-blue-600 cursor-pointer">coaster@gmail.com</p>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -43,39 +49,33 @@
                                     HOME
                                 </router-link>
                             <!-- /About -->
-                            <!-- Tidal & Wave -->
-                                <a to="/" class="py-4 px-4 flex text-white font-semibold hover:bg-sky-700 
-                                cursor-pointer transition-colors duration-300 antialiased">
-                                    TIDAL & WAVE
-                                </a>
-                            <!-- /Tidal & Wave -->
                             <!-- Weather -->
                                 <a to="/" class="py-4 px-4 flex text-white font-semibold hover:bg-sky-700 
                                 cursor-pointer transition-colors duration-300 antialiased">
                                     WEATHER
                                 </a>
                             <!-- /Weather -->
-                            <!-- Map -->
-                            <div :class="{ active: activeItem1}" class="dropdown z-40  px-4 flex text-white font-semibold hover:bg-sky-700 
-                            cursor-pointer transition-colors duration-300 antialiased" style="float:left;">
-                            <button class="dropdown py-4" >MAP</button>
-                                <div class="dropdown-content p-1 w-[10rem] font-normal " style="left:0;">
-                                    <router-link to="/waterLevel"  class="antialiased w-full text-white hover:shadow-[inset_10rem_0_0_0] hover:shadow-cyan-700 duration-[400ms,700ms] transition-[color,box-shadow]">WATER LEVEL</router-link>
-                                    <router-link to="/Map"  class="antialiased w-full text-white hover:shadow-[inset_10rem_0_0_0] hover:shadow-cyan-700 duration-[400ms,700ms] transition-[color,box-shadow]">MAP</router-link>
-                                    
-                                </div>
-                            </div>
-                            <!-- /Map -->
-
+                            <!-- Weather -->
+                                <router-link to="/waterLevel" class="py-4 px-4 flex text-white font-semibold hover:bg-sky-700 
+                                    cursor-pointer transition-colors duration-300 antialiased">
+                                    WATER LEVEL
+                                </router-link>
+                            <!-- /Weather -->
+                            <!-- Weather -->
+                                <router-link to="/map" class="py-4 px-4 flex text-white font-semibold hover:bg-sky-700 
+                                    cursor-pointer transition-colors duration-300 antialiased">
+                                    MAP
+                                </router-link>
+                            <!-- /Weather -->
                             <!-- Project -->
-                            <div :class="{ active: activeItem2}" class="dropdown z-40  px-4 flex text-white font-semibold hover:bg-sky-700 
+                            <div  class="dropdown z-40  px-4 flex text-white font-semibold hover:bg-sky-700 
                                 cursor-pointer transition-colors duration-300 " style="float:left;">
                                 <button class="dropdown py-4 antialiased">PROJECT</button>
                                 <div class="dropdown-content p-1 w-[23rem] font-normal " style="left:0;">
-                                    <router-link to="/Map" class="antialiased text-white text-justify  hover:shadow-[inset_23rem_0_0_0] hover:shadow-cyan-700 duration-[400ms,700ms] transition-[color,box-shadow]">Coastal Erosion Trends and Management Strategies for Region 1</router-link>
-                                    <router-link to="/Map" class="antialiased text-white text-justify  hover:shadow-[inset_23rem_0_0_0] hover:shadow-cyan-700 duration-[400ms,700ms] transition-[color,box-shadow]">Assesment Monitoring, and Prediction of Coastal Flooding of Selected Municipalities in Region 1</router-link>
-                                    <router-link to="/Map" class="antialiased text-white text-justify  hover:shadow-[inset_23rem_0_0_0] hover:shadow-cyan-700 duration-[400ms,700ms] transition-[color,box-shadow]">Development of Science-based Engineering Approach to Coastal Prediction in Region 1</router-link>
-                                    <router-link to="/Map" class="antialiased text-white text-justify  hover:shadow-[inset_23rem_0_0_0] hover:shadow-cyan-700 duration-[400ms,700ms] transition-[color,box-shadow]">Enhancing Coastal Design and Infrastructure Intervention through the Establishment of Wave Testing Facility</router-link>
+                                    <a @click="gotoProject(1)" class="antialiased text-white text-justify  hover:shadow-[inset_23rem_0_0_0] hover:shadow-cyan-700 duration-[400ms,700ms] transition-[color,box-shadow]">Coastal Erosion Trends and Management Strategies for Region 1</a>
+                                    <a @click="gotoProject(2)" class="antialiased text-white text-justify  hover:shadow-[inset_23rem_0_0_0] hover:shadow-cyan-700 duration-[400ms,700ms] transition-[color,box-shadow]">Assesment Monitoring, and Prediction of Coastal Flooding of Selected Municipalities in Region 1</a>
+                                    <a @click="gotoProject(3)" class="antialiased text-white text-justify  hover:shadow-[inset_23rem_0_0_0] hover:shadow-cyan-700 duration-[400ms,700ms] transition-[color,box-shadow]">Development of Science-based Engineering Approach to Coastal Prediction in Region 1</a>
+                                    <a @click="gotoProject(4)" class="antialiased text-white text-justify  hover:shadow-[inset_23rem_0_0_0] hover:shadow-cyan-700 duration-[400ms,700ms] transition-[color,box-shadow]">Enhancing Coastal Design and Infrastructure Intervention through the Establishment of Wave Testing Facility</a>
                                 </div>
                             </div>
                             <!-- /Project -->
@@ -202,6 +202,7 @@
                             
                             <div class=" lg:flex text-white font-normal font-heading w-full ">
                                     <div class="text-center flex items-center pr-10">
+                                        <!-- <img src="/img/top.png" class="blur-none antialiased duration-200 blur-none cursor-pointer object-fill h-12 mr-2" alt="#"> -->
                                         <p class="cursor-pointer text-5xl font-serif font-semibold text-sky-700 tracking-wide blur-none antialiased">
                                             COASTER
                                         </p>
@@ -241,10 +242,10 @@
                                     cursor-pointer transition-colors duration-300 " style="float:left;">
                                     <button class="dropdown py-4 antialiased">PROJECT</button>
                                     <div class="dropdown-content p-1 w-[23rem] font-normal " style="left:0;">
-                                        <router-link to="/Map" class="antialiased text-white text-justify  hover:shadow-[inset_23rem_0_0_0] hover:shadow-cyan-700 duration-[400ms,700ms] transition-[color,box-shadow]">Coastal Erosion Trends and Management Strategies for Region 1</router-link>
-                                        <router-link to="/Map" class="antialiased text-white text-justify  hover:shadow-[inset_23rem_0_0_0] hover:shadow-cyan-700 duration-[400ms,700ms] transition-[color,box-shadow]">Assesment Monitoring, and Prediction of Coastal Flooding of Selected Municipalities in Region 1</router-link>
-                                        <router-link to="/Map" class="antialiased text-white text-justify  hover:shadow-[inset_23rem_0_0_0] hover:shadow-cyan-700 duration-[400ms,700ms] transition-[color,box-shadow]">Development of Science-based Engineering Approach to Coastal Prediction in Region 1</router-link>
-                                        <router-link to="/Map" class="antialiased text-white text-justify  hover:shadow-[inset_23rem_0_0_0] hover:shadow-cyan-700 duration-[400ms,700ms] transition-[color,box-shadow]">Enhancing Coastal Design and Infrastructure Intervention through the Establishment of Wave Testing Facility</router-link>
+                                        <a @click="gotoProject(1)" class="antialiased text-white text-justify  hover:shadow-[inset_23rem_0_0_0] hover:shadow-cyan-700 duration-[400ms,700ms] transition-[color,box-shadow]">Coastal Erosion Trends and Management Strategies for Region 1</a>
+                                        <a @click="gotoProject(2)" class="antialiased text-white text-justify  hover:shadow-[inset_23rem_0_0_0] hover:shadow-cyan-700 duration-[400ms,700ms] transition-[color,box-shadow]">Assesment Monitoring, and Prediction of Coastal Flooding of Selected Municipalities in Region 1</a>
+                                        <a @click="gotoProject(3)" class="antialiased text-white text-justify  hover:shadow-[inset_23rem_0_0_0] hover:shadow-cyan-700 duration-[400ms,700ms] transition-[color,box-shadow]">Development of Science-based Engineering Approach to Coastal Prediction in Region 1</a>
+                                        <a @click="gotoProject(4)" class="antialiased text-white text-justify  hover:shadow-[inset_23rem_0_0_0] hover:shadow-cyan-700 duration-[400ms,700ms] transition-[color,box-shadow]">Enhancing Coastal Design and Infrastructure Intervention through the Establishment of Wave Testing Facility</a>
                                     </div>
                                 </div>
                                 <!-- /Project -->
@@ -480,16 +481,27 @@ export default defineComponent({
                 this.$router.push({path: '/Map'})
             }
             else if (event.key == 6){
-                console.log(event.key);
+                let id = 1
+                const project = existingObj.selectedProject
+                this.$router.push({ name: 'projects', params: { project, id } })
             }
             else if (event.key == 7){
-                console.log(event.key);
+                let id = 2
+                existingObj.selectedProject = 'Assesment Monitoring, and Prediction of Coastal Flooding of Selected Municipalities in Region 1'
+                const project = existingObj.selectedProject
+                this.$router.push({ name: 'projects', params: { project, id } })
             }
             else if (event.key == 8){
-                console.log(event.key);
+                let id = 3
+                existingObj.selectedProject = 'Development of Science-based Engineering Approach to Coastal Prediction in Region 1'
+                const project = existingObj.selectedProject
+                this.$router.push({ name: 'projects', params: { project, id } })
             }
             else if (event.key == 9){
-                console.log(event.key);
+                let id = 4
+                existingObj.selectedProject = 'Enhancing Coastal Design and Infrastructure Intervention through the Establishment of Wave Testing Facility'
+                const project = existingObj.selectedProject
+                this.$router.push({ name: 'projects', params: { project, id } })
             }
         },
         handleScroll() {
@@ -528,6 +540,20 @@ export default defineComponent({
         async handleSubmitSearch(search){
             this.$router.push({path: '/search/' + search})
             this.isSearch = false;
+        },
+        gotoProject(id){
+            let existingObj = this;
+            if(id == 1){
+                existingObj.selectedProject = 'Coastal Erosion Trends and Management Strategies for Region 1'
+            }else if(id == 2){
+                existingObj.selectedProject = 'Assesment Monitoring, and Prediction of Coastal Flooding of Selected Municipalities in Region 1'
+            }else if(id == 3){
+                existingObj.selectedProject = 'Development of Science-based Engineering Approach to Coastal Prediction in Region 1'
+            }else if(id == 4){
+                existingObj.selectedProject = 'Enhancing Coastal Design and Infrastructure Intervention through the Establishment of Wave Testing Facility'
+            }
+            const project = existingObj.selectedProject
+            this.$router.push({ name: 'projects', params: { project, id } })
         }
     },
     mounted(){

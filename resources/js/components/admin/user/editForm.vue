@@ -15,17 +15,13 @@
                     <Input v-model="formValidate.email" placeholder="Enter your e-mail"></Input>
                 </FormItem>
                 <FormItem label="User Type" prop="userType">
-                    <Select v-model="formValidate.userType" placeholder="Select your User Type">
-                        <Option value="1">Admin</Option>
-                        <Option value="2">Editor</Option>
-                    </Select>
+                    <a-select
+                        v-model:value="formValidate.userType"
+                        style="width: 100%"
+                        placeholder="Select your User Type"
+                        :options="userTypeOptions"
+                    ></a-select>
                 </FormItem>
-                <!-- <FormItem label="Password" prop="passwd">
-                    <Input type="password" v-model="formValidate.passwd"></Input>
-                </FormItem>
-                <FormItem label="Confirm" prop="passwdCheck">
-                    <Input type="password" v-model="formValidate.passwdCheck"></Input>
-                </FormItem> -->
                 <FormItem >
                     <a-button type="primary" @click="showModal">Change Password</a-button>
                     <a-modal v-model:visible="visible" title="Updating Password" @ok="changePassword('formValidate')">
@@ -37,7 +33,7 @@
                                 <Input type="password" v-model="formValidate.passwdCheck"></Input>
                             </FormItem>
                         </div>
-                </a-modal>
+                    </a-modal>
                 </FormItem>
 
                 <div class="flex justify-end">
@@ -81,9 +77,19 @@
           }
         };
 
+        const userTypeOptions = ref([{
+            value: '1',
+            label: 'Admin',
+            }, {
+            value: '2',
+            label: 'Editor',
+            }
+        ]);
+
         return{
             visible,
             showModal,
+            userTypeOptions,
             formValidate: {
                 id: '',
                 name: '',
@@ -118,13 +124,13 @@
             this.$refs[name].validate((valid) => {
                 if (valid) {
                     // Post
-                    axios.post(`/api/updateUser`, this.formValidate)
+                    axios.post(`/api/admin/updateUser`, this.formValidate)
                     .then(function (response) {
                         notification.success({
                             message: 'Notification',
-                            description: 'Users Info is Successfully Updated',
+                            description: 'User Info is Successfully Updated',
                         });
-                        existingObj.$router.push('/userPlatform');
+                        existingObj.$router.push('/admin/userPlatform');
                     })
                     .catch(function (error) {
                         if (error.response.data.errors.email) {
@@ -140,14 +146,15 @@
                 }
             })
         },
-        changePassword(name)
-        {
+        changePassword(name){
             let existingObj = this;
             this.$refs[name].validate((valid) => {
                 if (valid) {
                     // Post
-                    axios.post(`/api/updatePassword`, this.formValidate)
+                    console.log("failed");
+                    axios.post(`/api/admin/updatePassword`, this.formValidate)
                     .then(function (response) {
+                        console.log(response);
                         notification.success({
                             message: 'Notification',
                             description: 'Users Password is Successfully Updated',
@@ -169,18 +176,15 @@
                 } else {
                 }
             })
-            
-
         }
     },
-    async created(){
+    async mounted(){
         let id = this.$route.params.id
         console.log(id);
         let existingObj = this;
         await axios.get(`/api/admin/getUserEdit/${id}`)
         .then(function (response) {
-            console.log(response.data);
-            existingObj.formValidate.userType = response.data.userType
+            existingObj.formValidate.userType = String(response.data.role_id)
             existingObj.formValidate.id = response.data.id
             existingObj.formValidate.name = response.data.name  
             existingObj.formValidate.email = response.data.email
@@ -188,6 +192,7 @@
         .catch(function (error) {
             console.log(error)
         });
+        console.log(existingObj.formValidate.userType);
     }
   })
   </script>

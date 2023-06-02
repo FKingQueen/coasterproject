@@ -23,7 +23,7 @@ import Projects from '../components/pages/homePage/projectsPage/project.vue';
 // Admin
 
 // Slide Show
-// import articlePlatform from '../components/admin/article/articlePlatform.vue';
+import slideShowPlatform from '../components/admin/slideshow/slideShowPlatform.vue';
 // import addArticleForm from '../components/admin/article/addForm.vue';
 // import editArticleForm from '../components/admin/article/editForm.vue';
 
@@ -39,6 +39,9 @@ import editUserForm from '../components/admin/user/editForm.vue';
 
 // Settings
 import setting from '../components/admin/settings/setting.vue';
+
+// User Account
+import userAccount from '../components/admin/userAccount/userAccount.vue';
 
 // Login
 import login from '../components/login.vue';
@@ -99,13 +102,18 @@ export const routes = [
             },
         ]
     },
+    // Admin
     {
         path: '/admin',
         component: dashboard,
         meta : {requiresAuth: true},
         children:[
-            // Admin
-
+            // SlideShow
+            {
+                name: 'slideShowPlatform',
+                path: '/admin/slideShowPlatform',
+                component: slideShowPlatform
+            },
             // Article
             {
                 name: 'articlePlatform',
@@ -146,6 +154,11 @@ export const routes = [
                 name: 'setting',
                 path: '/admin/setting',
                 component: setting  
+            },
+            {
+                name: 'userAccount',
+                path: '/admin/userAccount',
+                component: userAccount
             },
         ]
     },

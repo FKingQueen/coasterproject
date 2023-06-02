@@ -13,9 +13,14 @@
                         <swiper
                             :spaceBetween="30"
                             :loop="true"
+                            :autoplay="{
+                            delay: 2500,
+                            disableOnInteraction: false,
+                            }"
                             :pagination="{
                             clickable: true,
                             }"
+                            :modules="modules"
                             class="mySwiper h-80 mt-2"
                         >
                             <swiper-slide v-slot="{ isActive }" v-for="(project, key) in this.projectImages" >
@@ -129,14 +134,14 @@ import { defineComponent, ref} from 'vue';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css';
 import 'swiper/css/pagination';   
-import { Pagination } from 'swiper';
+import 'swiper/css/navigation';
+import { Autoplay, Pagination, Navigation } from 'swiper';
 export default defineComponent({
     components: {
         Swiper,
         SwiperSlide,
-        Pagination
     },
-    data(){
+    data() {
         return{
             projectImages: [],
             projectObjectives: [],
@@ -145,6 +150,11 @@ export default defineComponent({
             announcementsArticles: [],
             eventsArticles: [],
             isLoaded: ref(false)
+        }
+    },
+    setup() {
+        return{
+            modules: [Autoplay, Pagination, Navigation],
         }
     },
     methods: {
@@ -168,7 +178,7 @@ export default defineComponent({
         let existingObj = this; 
         let projectjId = this.$route.params.id
         // let projectjName = this.$route.params.project
-        
+        console.log();
         await axios.get(`/api/getProject/${projectjId}`)
         .then(function (response) {
             existingObj.projectImages = response.data.project[0].project_image;
@@ -180,12 +190,12 @@ export default defineComponent({
                 }
             }
             for(let i = 0; i < response.data.announcementsArticles.length; i++ ){
-                if(response.data.newsArticles[i].type.id == 2){
+                if(response.data.announcementsArticles[i].type.id == 2){
                     existingObj.announcementsArticles.push(response.data.announcementsArticles[i]);
                 }
             }
             for(let i = 0; i < response.data.eventsArticles.length; i++ ){
-                if(response.data.newsArticles[i].type.id == 3){
+                if(response.data.eventsArticles[i].type.id == 3){
                     existingObj.eventsArticles.push(response.data.eventsArticles[i]);
                 }
             }

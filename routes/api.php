@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ArticleController;  
+use App\Http\Controllers\Admin\UserAccountController;  
 use App\Http\Controllers\Home\HarticleController;  
 use App\Http\Controllers\Home\ProjectController;  
 
@@ -48,6 +49,11 @@ Route::group(['prefix' => 'admin','middleware' => 'auth:sanctum'], function() {
 
     Route::get('/getArticleEdit/{id}', [ArticleController::class, 'getArticleEdit']);
     Route::post('/updateArticle', [ArticleController::class, 'updateArticle']);
+
+    // User Account
+    Route::get('/getUserAccount', [UserAccountController::class, 'getUserAccount']);
+    Route::post('/updateUserAccount', [UserAccountController::class, 'updateUserAccount']);
+    Route::post('/updateUserAccountPassword', [UserAccountController::class, 'updateUserAccountPassword']);
 });
 
 // Home Article

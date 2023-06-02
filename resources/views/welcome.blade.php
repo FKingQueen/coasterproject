@@ -36,7 +36,7 @@
         <div id="app">
 
         </div>
-        <script src="https://unpkg.com/vue-observe-visibility/dist/vue-observe-visibility.min.js"></script> 
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqrwTHtdIIy2XFwP3GkVGaMqtEfjjwJuY&v=beta&callback=initMap" type="text/javascript"></script>
         <script src="{{mix('/js/app.js')}}"></script>
         <!-- <script src="vue.js"></script> -->
 

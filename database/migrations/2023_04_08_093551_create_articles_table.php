@@ -18,9 +18,10 @@ class CreateArticlesTable extends Migration
             $table->integer('user_id')->nullable();
             $table->integer('type_id')->nullable();
             $table->string('title');
-            $table->string('author');
+            $table->string('author')->nullable();
             $table->string('image')->nullable();
             $table->text('article');
+            $table->date('date');
             $table->timestamps();
         });
     }

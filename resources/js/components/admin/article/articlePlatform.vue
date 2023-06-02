@@ -77,9 +77,13 @@
                   <Image :src="`/uploads/high/${modalData.image}`" class="object-cover  border" />
                 </div>
                 <div>          
-                  <p class="text-xl mt-4 font-semibold">{{this.modalData.title}}</p>
-                    <p>By <span class="italic">{{this.modalData.author}}</span></p>
-                  <p class="indent-8">{{this.modalData.article}}</p>
+                  <div class="w-full text-right mt-4">
+                    <a-tag v-for="project in articles[index].projects" color="blue" >Project {{project.project_type_id}}</a-tag>
+                  </div>
+                  <p class="text-xl mt-2 font-semibold">{{this.modalData.title}}</p>
+                  <p class="text-sm">{{this.modalData.date}}</p>
+                  <p class=" mt-2" v-if="this.modalData.author != null">By <span class="italic">{{this.modalData.author}}</span></p>
+                  <p class="indent-8 mt-4"  v-html="this.modalData.article"></p>
                 </div>
                 <div class="space-x-2 text-right">
                   <a @click="editForm(this.modalData.id)">Edit</a>
@@ -98,10 +102,14 @@
             </span>
           </template>
           <template v-else-if="column.key === 'project'">
-            <a-tag v-for="project in articles[index].projects" color="blue" >Project {{project.projectType_id}}</a-tag>
+            <a-tag v-for="project in articles[index].projects" color="blue" >Project {{project.project_type_id}}</a-tag>
           </template>
           <template v-else-if="column.key === 'typ'">
             <a-tag  color="green">{{articles[index].type.name}}</a-tag>
+          </template>
+          <template v-else-if="column.key === 'author'">
+            <a-tag v-if="this.articles[index].author == null" color="red">Unavailable</a-tag>
+            <p v-else>{{articles[index].author}}</p>
           </template>
           <template v-else-if="column.key === 'image'">
             <a-image
@@ -224,6 +232,7 @@ export default defineComponent({
       this.modalData.author = this.articles[index].author;
       this.modalData.image = this.articles[index].image;
       this.modalData.article = this.articles[index].article;
+      this.modalData.date = this.articles[index].date;
       this.modal = true;
     },
     editForm(id){
