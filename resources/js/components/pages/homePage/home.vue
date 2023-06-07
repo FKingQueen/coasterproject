@@ -26,7 +26,7 @@
             </swiper>
         </div>
         <div class="w-full lg:flex lg:justify-center lg:space-x-20 lg:pt-10 lg:px-0 px-5">
-            <div class=" lg:w-3/12 w-full  bg-white drop-shadow-md border-t lg:mt-0 mt-10 ">
+            <div v-if="this.news.length != 0" class=" lg:w-3/12 w-full  bg-white drop-shadow-md border-t lg:mt-0 mt-10 ">
                 <p class="text-sky-800 text-2xl text-center blur-none ">News</p>
                 <div class="h-4/5 border-t-2 border-sky-800 p-2">
                     <div v-for="(news, key, index) in this.news.slice(0,3)" class="flex block border-b pb-1 mb-3">
@@ -42,7 +42,7 @@
                     View More
                 </div>
             </div>
-            <div class=" lg:w-3/12 w-full  bg-white drop-shadow-md border-t lg:mt-0 mt-10">
+            <div v-if="this.announcements.length != 0" class=" lg:w-3/12 w-full  bg-white drop-shadow-md border-t lg:mt-0 mt-10">
                 <p class="text-sky-800 text-2xl text-center blur-none">Announcements</p>
                 <div class="h-4/5 border-t-2 border-sky-800 p-2">
                     <div v-for="(announcement, key, index) in this.announcements.slice(0,3)" class="flex block border-b pb-1 mb-3">
@@ -58,7 +58,7 @@
                     View More
                 </div>
             </div>
-            <div class=" lg:w-3/12 w-full  bg-white drop-shadow-md border-t lg:mt-0 mt-10">
+            <div v-if="this.events.length != 0" class=" lg:w-3/12 w-full  bg-white drop-shadow-md border-t lg:mt-0 mt-10">
                 <p class="text-sky-800 text-2xl text-center blur-none">Events</p>
                 <div class="h-4/5 border-t-2 border-sky-800 p-2">
                     <div v-for="(event, key, index) in this.events.slice(0,3)" class="flex block border-b pb-1 mb-3">

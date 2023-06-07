@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\Admin\UserAccountController;  
 use App\Http\Controllers\Home\HarticleController;  
 use App\Http\Controllers\Home\ProjectController;  
+use App\Http\Controllers\Home\TyphoonController;  
 
 /*
 |--------------------------------------------------------------------------
@@ -63,5 +64,7 @@ Route::get('/getmoreArticle/{id}', [HarticleController::class, 'getmoreArticle']
 Route::post('/searchArticle', [HarticleController::class, 'searchArticle']);
 // Home Projects
 Route::get('/getProject/{id}', [ProjectController::class, 'getProject']);
+// Water Level
+Route::get('/getTyphoon/{id}', [TyphoonController::class, 'getTyphoon']);
 
 

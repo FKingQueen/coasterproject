@@ -24,8 +24,7 @@
                                                     <p class="font-sans text-lg font-medium tracking-wide antialiased blur-none text-white">
                                                         {{ more.title }}
                                                     </p>
-                                                    <p class="indent-5 font-light text-white font-sans line-clamp-2 blur-none antialiased leading-relaxed">
-                                                        By {{ more.author }}, {{ more.article }}
+                                                    <p v-html="more.article" class="indent-5 font-light text-white font-sans line-clamp-2 blur-none antialiased leading-relaxed">
                                                     </p>
                                                 </div>
                                             </div>
@@ -45,14 +44,14 @@
                             <div class="block w-fit px-1 overflow-hidden">
                                 <p @click="gotoArticle(more)" class="cursor-pointer text-sm blur-none antialiased font-semibold text-sky-600  truncate">{{ more.title }}</p>
                                 <p class="text-xs blur-none">{{ moreCurrent }} | {{ more.date }}</p>
-                                <p class="blur-none antialiased text-xs text-justify line-clamp-3 leading-relaxed">By {{ more.author }}, {{ more.article }}</p>
+                                <p v-html="more.article" class="blur-none antialiased text-xs text-justify line-clamp-3 leading-relaxed"></p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="w-2/12 pt-10 hidden lg:block">
-                <div>
+                <div v-if="this.moreArticle1.length != 0">
                     <div class="bg-sky-600/60 border-b-2 border-sky-900 py-2">
                         <p class="text-xl text-center">
                             Latest <span class="text-sky-900">{{ this.moreCurrent1 }}</span>
@@ -67,7 +66,7 @@
                     </p>
                 </div>
 
-                <div>
+                <div v-if="this.moreArticle2.length != 0">
                     <div class="bg-sky-600/60 border-b-2 border-sky-900 py-2">
                         <p class="text-xl text-center">
                             Latest <span class="text-sky-900">{{ this.moreCurrent2 }}</span>
