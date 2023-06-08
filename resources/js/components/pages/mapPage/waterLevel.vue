@@ -4,33 +4,36 @@
           :center="this.center"
           :zoom="zoom"
           ref="gmap"
-          map-type-id="terrain"
+          :options="options"
           style="width: 100vw; height: 100%"
           @zoom_changed="zoomChanged"
       >
-      <GMapPolygon @click="handleSelect(1)" :options="ilocosNorteOptions"
-          :paths="ilocosNortePath" 
-      />
-      <GMapPolygon @click="handleSelect(2)" :options="ilocosSurOptions"
-          :paths="ilocosSurPath" 
-      />
-      <GMapPolygon @click="handleSelect(3)" :options="laUnionOptions"
-          :paths="laUnionPath" 
-      />
-      <GMapPolygon @click="handleSelect(4)" :options="pangasinanOptions"
-          :paths="Pangasinan"
-      />
-
-      <GMapMarker
-        :key="index"
-        v-for="(m, index) in markers"
-        :position="m.position"
-        @click="openInfoWindow(marker.id)"
-        :clickable="true"
-        :visible="false"
-      />
+        <GMapPolygon @click="handleSelect(1)" :options="ilocosNorteOptions"
+            :paths="ilocosNortePath" 
+        />
+        <GMapPolygon @click="handleSelect(2)" :options="ilocosSurOptions"
+            :paths="ilocosSurPath" 
+        />
+        <GMapPolygon @click="handleSelect(3)" :options="laUnionOptions"
+            :paths="laUnionPath" 
+        />
+        <GMapPolygon @click="handleSelect(4)" :options="pangasinanOptions"
+            :paths="Pangasinan"
+        />
+        <GMapMarker
+          :key="index"
+          v-for="(m, index) in markers"
+          :position="m.position"
+          @click="openInfoWindow(marker.id)"
+          :clickable="true"
+          :visible="false"
+        />
       </GMapMap>
-
+      <div style="height: 100%;" ref="card" >
+        <div >
+          Hello
+        </div>
+      </div>
     </div>
 </template>
 
@@ -40,6 +43,89 @@ export default defineComponent({
   name: 'App',
   data() {
     return {
+      options: {
+        styles: [
+          { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
+          { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
+          { elementType: "labels.text.fill", stylers: [{ color: "#746855" }] },
+          {
+            featureType: "administrative.locality",
+            elementType: "labels.text.fill",
+            stylers: [{ color: "#d59563" }],
+          },
+          {
+            featureType: "poi",
+            elementType: "labels.text.fill",
+            stylers: [{ color: "#d59563" }],
+          },
+          {
+            featureType: "poi.park",
+            elementType: "geometry",
+            stylers: [{ color: "#263c3f" }],
+          },
+          {
+            featureType: "poi.park",
+            elementType: "labels.text.fill",
+            stylers: [{ color: "#6b9a76" }],
+          },
+          {
+            featureType: "road",
+            elementType: "geometry",
+            stylers: [{ color: "#38414e" }],
+          },
+          {
+            featureType: "road",
+            elementType: "geometry.stroke",
+            stylers: [{ color: "#212a37" }],
+          },
+          {
+            featureType: "road",
+            elementType: "labels.text.fill",
+            stylers: [{ color: "#9ca5b3" }],
+          },
+          {
+            featureType: "road.highway",
+            elementType: "geometry",
+            stylers: [{ color: "#746855" }],
+          },
+          {
+            featureType: "road.highway",
+            elementType: "geometry.stroke",
+            stylers: [{ color: "#1f2835" }],
+          },
+          {
+            featureType: "road.highway",
+            elementType: "labels.text.fill",
+            stylers: [{ color: "#f3d19c" }],
+          },
+          {
+            featureType: "transit",
+            elementType: "geometry",
+            stylers: [{ color: "#2f3948" }],
+          },
+          {
+            featureType: "transit.station",
+            elementType: "labels.text.fill",
+            stylers: [{ color: "#d59563" }],
+          },
+          {
+            featureType: "water",
+            elementType: "geometry",
+            stylers: [{ color: "#17263c" }],
+          },
+          {
+            featureType: "water",
+            elementType: "labels.text.fill",
+            stylers: [{ color: "#515c6d" }],
+          },
+          {
+            featureType: "water",
+            elementType: "labels.text.stroke",
+            stylers: [{ color: "#17263c" }],
+          }
+        ]
+      },
+      isActive: ref(false),
       isVisible: ref(false),
       center: '',
       zoom: '',
@@ -1508,6 +1594,9 @@ export default defineComponent({
     }
   },
   methods: {
+    clicks(){
+      this.width = 80;
+    },
     handleSelect(selected) {
       if(selected == 1){
         this.$refs.gmap.$mapPromise.then((map) => {
@@ -1552,6 +1641,25 @@ export default defineComponent({
   async mounted() {
     this.zoom = 8
     this.center = {lat: 17.156009, lng: 121.247046}
+    this.$refs.gmap.$mapPromise.then((map) => {
+      const card = this.$refs.card
+      map.controls[google.maps.ControlPosition.RIGHT_CENTER].push(this.$refs.card);
+    })
   }
 });
 </script>
+
+<style>
+.pac-card {
+  background-color: #fff;
+  border: 0;
+  border-radius: 2px;
+  box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.3);
+  margin: 10px;
+  padding: 0 0.5em;
+  font: 400 18px Roboto, Arial, sans-serif;
+  overflow: hidden;
+  font-family: Roboto;
+  padding: 0;
+}
+</style>
