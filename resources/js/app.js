@@ -28,7 +28,6 @@ app.use(CKEditor);
 app.use(VueGoogleMaps, {
     load: {
         key: 'AIzaSyBqrwTHtdIIy2XFwP3GkVGaMqtEfjjwJuY',
-        // language: 'de',
     },
 });
 app.mount('#app');

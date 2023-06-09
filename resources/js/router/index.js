@@ -22,6 +22,10 @@ import Projects from '../components/pages/homePage/projectsPage/project.vue';
 
 // Admin
 
+// Inventory
+import inventoryPlatform from '../components/admin/inventory/inventory.vue';
+import addInventoryForm from '../components/admin/inventory/addForm.vue';
+
 // Slide Show
 import slideShowPlatform from '../components/admin/slideshow/slideShowPlatform.vue';
 // import addArticleForm from '../components/admin/article/addForm.vue';
@@ -93,7 +97,7 @@ export const routes = [
             {
                 name: 'waterLevel',
                 path: '/waterLevel',
-                component: Waterlevel  
+                component: Waterlevel,
             },
             {
                 name: 'search',
@@ -108,6 +112,17 @@ export const routes = [
         component: dashboard,
         meta : {requiresAuth: true},
         children:[
+            // Inventory
+            {
+                name: 'inventoryPlatform',
+                path: '/admin/inventoryPlatform',
+                component: inventoryPlatform
+            },
+            {
+                name: 'addInventoryForm',
+                path: '/admin/inventoryPlatform/addForm',
+                component: addInventoryForm
+            },
             // SlideShow
             {
                 name: 'slideShowPlatform',

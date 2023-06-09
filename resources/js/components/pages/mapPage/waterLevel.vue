@@ -23,26 +23,60 @@
         <GMapMarker
           :key="index"
           v-for="(m, index) in markers"
-          :position="m.position"
-          @click="openInfoWindow(marker.id)"
+          :position="{lat: m.latitude, lng: m.longitude }"
           :clickable="true"
-          :visible="false"
         />
       </GMapMap>
-      <div style="height: 100%;" ref="card" >
-        <div >
-          Hello
-        </div>
+
+      <div ref="card">
+        <transition>
+          <div v-if="this.isVisible"  class="pac-card lg:w-[100vh] w-[52vh] mt-8" id="pac-card" style="overflow-x: hidden; overflow-y: auto;">
+              <div>
+                  <div id="title" class="text-center">Ilocos Norte</div>
+                  <div class="flex justify-center">
+                    <a-menu v-model:selectedKeys="current" mode="horizontal">
+                      <a-menu-item key="description">
+                        Description
+                      </a-menu-item>
+                      <a-menu-item key="delft3d">
+                        Delft3D
+                      </a-menu-item>
+                    </a-menu>
+                  </div>
+                  <div class="border w-full h-[52vh]">
+                    <Description v-if="this.current == 'description'" :id="this.id"/>
+                    <Delft3D v-if="this.current == 'delft3d'" :id="this.id"/>
+                  </div>
+                  <div class="w-full p-1 flex justify-end">
+                    <a-button type="text" @click="back()">Return</a-button>
+                  </div>
+              </div>
+          </div>
+        </transition>
       </div>
+      
     </div>
 </template>
 
 <script>
 import { defineComponent, ref } from 'vue';
+import Description from './waterLevel/description.vue'
+import Delft3D from './waterLevel/delft3d.vue'
 export default defineComponent({
   name: 'App',
+  components: {
+    Description,
+    Delft3D
+  },
+  setup() {
+    const current = ref(['description']);
+    return {
+      current,
+    };
+  },
   data() {
     return {
+      id: '',
       options: {
         styles: [
           { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
@@ -129,30 +163,12 @@ export default defineComponent({
       isVisible: ref(false),
       center: '',
       zoom: '',
-      markers: [
+      markers: '',
+      pusher: [
         {
-          id: 1,
           position: {
-            lat: 18.171899, lng: 121.138134
-          },
-        },
-        {
-          id: 2,
-          position: {
-            lat: 17.245368, lng: 121.029509
-          },
-        },
-        {
-          id: 3,
-          position: {
-            lat: 16.499366, lng: 120.756722
-          },
-        },
-        {
-          id: 4,
-          position: {
-            lat: 16.010742, lng: 120.945431
-          },
+            lat: '', lng: ''
+          }
         }
       ],
       ilocosNortePath: 
@@ -1594,38 +1610,41 @@ export default defineComponent({
     }
   },
   methods: {
-    clicks(){
-      this.width = 80;
-    },
     handleSelect(selected) {
+      let existingObj = this;
       if(selected == 1){
         this.$refs.gmap.$mapPromise.then((map) => {
-          map.setZoom(10)
-          map.panTo({lat: 18.171899, lng: 121.138134})
+          map.setZoom(11)
+          map.panTo({lat: 18.1647, lng: 120.7116})
         })
+        this.id = 1;
       }
       if(selected == 2){
         this.$refs.gmap.$mapPromise.then((map) => {
-          map.setZoom(10)
-          map.panTo({lat: 17.245368, lng: 121.029509})
+          map.setZoom(11)
+          map.panTo({lat: 17.227866, lng: 120.573958})
         })
+        this.id = 2;
       }
       if(selected == 3){
         this.$refs.gmap.$mapPromise.then((map) => {
-          map.setZoom(10)
-          map.panTo({lat: 16.499366, lng: 120.756722})
+          map.setZoom(11)
+          map.panTo({lat: 16.6159, lng:  120.4099})
         })
+        this.id = 3;
       }
       if(selected == 4){
         this.$refs.gmap.$mapPromise.then((map) => {
-          map.setZoom(10)
-          map.panTo({lat: 16.010742, lng: 120.945431})
+          map.setZoom(11)
+          map.panTo({lat: 15.9900, lng: 120.3163})
         })
+        this.id = 4;
       }
+
+      this.isVisible = true
 
       axios.get(`api/getTyphoon/${selected}`)
         .then(function (response) {
-            console.log(response.data);
         })
         .catch(function (error) {
             console.log(error)
@@ -1635,31 +1654,104 @@ export default defineComponent({
       console.log($event);
     },
     zoomChanged(){
-      console.log(this.$refs.gmap.$mapObject.getZoom())
+      if(this.$refs.gmap.$mapObject.getZoom() != 11){
+        this.isVisible = false
+      }
+      this.current = ref(['description']);
+      // console.log(this.$refs.gmap.$mapObject.getZoom())
+      // console.log('Visible', this.isVisible);
+    },
+    back(){
+      this.$refs.gmap.$mapPromise.then((map) => {
+          map.setZoom(this.zoom)
+          map.panTo(this.center)
+        })
+      this.current = ref(['description']);
     }
   },
   async mounted() {
+    let existingObj = this;
     this.zoom = 8
     this.center = {lat: 17.156009, lng: 121.247046}
     this.$refs.gmap.$mapPromise.then((map) => {
       const card = this.$refs.card
-      map.controls[google.maps.ControlPosition.RIGHT_CENTER].push(this.$refs.card);
+      map.controls[google.maps.ControlPosition.TOP_CENTER].push(this.$refs.card);
     })
+    
+    await axios.get('/api/getInventory')
+    .then(response => {
+              existingObj.markers = response.data 
+    })
+    .catch(function (error) {
+        console.error(error);
+    });
+    console.log(this.markers);
   }
 });
 </script>
 
-<style>
-.pac-card {
-  background-color: #fff;
-  border: 0;
-  border-radius: 2px;
-  box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.3);
-  margin: 10px;
-  padding: 0 0.5em;
-  font: 400 18px Roboto, Arial, sans-serif;
-  overflow: hidden;
-  font-family: Roboto;
-  padding: 0;
+<style scoped>
+  .pac-card {
+    background-color: #fff;
+    border: 0;
+    border-radius: 2px;
+    box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.3);
+    padding: 0 0.5em;
+    font: 400 18px Roboto, Arial, sans-serif;
+    overflow: hidden;
+    font-family: Roboto;
+    padding: 0;
+  }
+
+  #pac-container {
+    padding-bottom: 12px;
+    margin-right: 12px;
+  }
+
+  .pac-controls {
+    display: inline-block;
+    padding: 5px 11px;
+  }
+
+  .pac-controls label {
+    font-family: Roboto;
+    font-size: 13px;
+    font-weight: 300;
+  }
+
+  #pac-input {
+    background-color: #fff;
+    font-family: Roboto;
+    font-size: 15px;
+    font-weight: 300;
+    margin-left: 12px;
+    padding: 0 11px 0 13px;
+    text-overflow: ellipsis;
+    width: 400px;
+  }
+
+  #pac-input:focus {
+    border-color: #4d90fe;
+  }
+
+  #title {
+    color: #fff;
+    background-color: #4d90fe;
+    font-size: 25px;
+    font-weight: 500;
+    padding: 6px 12px;
+  }
+</style>
+
+
+<style scoped>
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }
 </style>

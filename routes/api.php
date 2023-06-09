@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ArticleController;  
+use App\Http\Controllers\Admin\InventoryController;  
 use App\Http\Controllers\Admin\UserAccountController;  
 use App\Http\Controllers\Home\HarticleController;  
 use App\Http\Controllers\Home\ProjectController;  
@@ -28,6 +29,9 @@ Route::get('/getsomething', [AdminController::class, 'getsomething']);
 Route::post('/logout', [AdminController::class, 'logout'])->middleware('auth:sanctum');
 
 Route::group(['prefix' => 'admin','middleware' => 'auth:sanctum'], function() {
+    // Admin Inventory
+    Route::post('/storeInventory', [InventoryController::class, 'storeInventory']);
+
     // Admin User
     Route::get('/getRole', [UserController::class, 'getRole']);
     Route::get('/getUser', [UserController::class, 'getUser']);
@@ -40,8 +44,6 @@ Route::group(['prefix' => 'admin','middleware' => 'auth:sanctum'], function() {
 
     // Admin Article
     Route::get('/getArticle', [ArticleController::class, 'getArticle']);
-
-
     Route::post('/storeArticle', [ArticleController::class, 'storeArticle']);
     Route::post('/upload', [ArticleController::class, 'upload']);
     Route::post('/deleteImage', [ArticleController::class, 'deleteImage']);
@@ -66,5 +68,7 @@ Route::post('/searchArticle', [HarticleController::class, 'searchArticle']);
 Route::get('/getProject/{id}', [ProjectController::class, 'getProject']);
 // Water Level
 Route::get('/getTyphoon/{id}', [TyphoonController::class, 'getTyphoon']);
+Route::get('/getInventory', [InventoryController::class, 'getInventory']);
+
 
 
