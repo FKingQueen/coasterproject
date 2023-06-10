@@ -8,7 +8,7 @@
 export default {
     props: ['id'],
     created(){
-        console.log(this.id)
+        // console.log(this.id)
     }
 }
 </script>

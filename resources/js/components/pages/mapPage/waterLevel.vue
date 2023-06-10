@@ -25,14 +25,15 @@
           v-for="(m, index) in markers"
           :position="{lat: m.latitude, lng: m.longitude }"
           :clickable="true"
+          @click="marker(m.id)"
         />
       </GMapMap>
 
-      <div ref="card">
+      <div ref="cardProvince">
         <transition>
-          <div v-if="this.isVisible"  class="pac-card lg:w-[100vh] w-[52vh] mt-8" id="pac-card" style="overflow-x: hidden; overflow-y: auto;">
+          <div v-if="this.isVisibleCardProvince"  class="pac-card lg:w-[100vh] w-[52vh] mt-8" id="pac-card" style="overflow-x: hidden; overflow-y: auto;">
               <div>
-                  <div id="title" class="text-center">Ilocos Norte</div>
+                  <div id="title" class="text-center bg-[#025cfa]">Ilocos Norte</div>
                   <div class="flex justify-center">
                     <a-menu v-model:selectedKeys="current" mode="horizontal">
                       <a-menu-item key="description">
@@ -48,7 +49,25 @@
                     <Delft3D v-if="this.current == 'delft3d'" :id="this.id"/>
                   </div>
                   <div class="w-full p-1 flex justify-end">
-                    <a-button type="text" @click="back()">Return</a-button>
+                    <a-button type="text" @click="close()">Return</a-button>
+                  </div>
+              </div>
+          </div>
+        </transition>
+      </div>
+
+      <div ref="cardMarker">
+        <transition>
+          <div v-if="this.isVisibleCardMarker"  class="pac-card lg:w-[100vh] w-[52vh] mt-8" id="pac-card" style="overflow-x: hidden; overflow-y: auto;">
+              <div>
+                  <div id="title" class="text-center bg-[#800000]">{{ dataMarker.province }}</div>
+                  <div class="border w-full h-[52vh]">
+                    <p class="w-full flex justify-center pt-2 text-sm">
+                      Location: {{ dataMarker.barangay }}, {{ dataMarker.municipality }}, {{ dataMarker.province }} 
+                    </p>
+                  </div>
+                  <div class="w-full p-1 flex justify-end">
+                    <a-button type="text" @click="close()">Return</a-button>
                   </div>
               </div>
           </div>
@@ -159,11 +178,12 @@ export default defineComponent({
           }
         ]
       },
-      isActive: ref(false),
-      isVisible: ref(false),
+      isVisibleCardProvince: ref(false),
+      isVisibleCardMarker: ref(false),
       center: '',
       zoom: '',
       markers: '',
+      dataMarker: '',
       pusher: [
         {
           position: {
@@ -1641,7 +1661,7 @@ export default defineComponent({
         this.id = 4;
       }
 
-      this.isVisible = true
+      this.isVisibleCardProvince = true
 
       axios.get(`api/getTyphoon/${selected}`)
         .then(function (response) {
@@ -1650,23 +1670,35 @@ export default defineComponent({
             console.log(error)
         });
     },
-    handleClickForDelete($event){
-      console.log($event);
-    },
     zoomChanged(){
       if(this.$refs.gmap.$mapObject.getZoom() != 11){
-        this.isVisible = false
+        this.isVisibleCardProvince = false
+        this.isVisibleCardMarker = false
       }
       this.current = ref(['description']);
       // console.log(this.$refs.gmap.$mapObject.getZoom())
-      // console.log('Visible', this.isVisible);
+      // console.log('Visible', this.isVisibleCardProvince);
     },
-    back(){
+    close(){
       this.$refs.gmap.$mapPromise.then((map) => {
           map.setZoom(this.zoom)
           map.panTo(this.center)
         })
       this.current = ref(['description']);
+    },
+    async marker(id){
+      let existingObj = this;
+      for(let i = 0; i < existingObj.markers.length; i++){
+        if(id == existingObj.markers[i].id){
+          existingObj.$refs.gmap.$mapPromise.then((map) => {
+            map.setZoom(11)
+            map.panTo({lat: existingObj.markers[i].latitude, lng: existingObj.markers[i].longitude})
+          })
+          existingObj.dataMarker = existingObj.markers[i]
+        }
+      }
+      console.log(existingObj.dataMarker.municipality);
+      existingObj.isVisibleCardMarker = true
     }
   },
   async mounted() {
@@ -1675,17 +1707,17 @@ export default defineComponent({
     this.center = {lat: 17.156009, lng: 121.247046}
     this.$refs.gmap.$mapPromise.then((map) => {
       const card = this.$refs.card
-      map.controls[google.maps.ControlPosition.TOP_CENTER].push(this.$refs.card);
+      map.controls[google.maps.ControlPosition.TOP_CENTER].push(this.$refs.cardProvince);
+      map.controls[google.maps.ControlPosition.TOP_CENTER].push(this.$refs.cardMarker);
     })
     
     await axios.get('/api/getInventory')
     .then(response => {
-              existingObj.markers = response.data 
+      existingObj.markers = response.data 
     })
     .catch(function (error) {
         console.error(error);
     });
-    console.log(this.markers);
   }
 });
 </script>
@@ -1736,7 +1768,7 @@ export default defineComponent({
 
   #title {
     color: #fff;
-    background-color: #4d90fe;
+    /* background-color: #4d90fe; */
     font-size: 25px;
     font-weight: 500;
     padding: 6px 12px;

@@ -7,8 +7,11 @@
             </Breadcrumb>
             <a-button @click="this.$router.push('/admin/articlePlatform')" class="my-3">Back</a-button>
             <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="100" class="px-10" >
-                <FormItem label="Province" prop="province">
-                    <Select v-model="formValidate.province" clearable placeholder="Select Municipality" >
+                <FormItem label="Province" prop="province" >
+                    <Select v-model="formValidate.province" filterable >
+                        <Option v-for="item in provinceList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                    </Select>
+                    <Select v-model="formValidate.province" filterable>
                         <Option v-for="item in provinceList" :value="item.value" :key="item.value">{{ item.label }}</Option>
                     </Select>
                 </FormItem>
