@@ -18,6 +18,7 @@ class CreateInventoriesTable extends Migration
             $table->string("province");
             $table->string("municipality");
             $table->string("barangay");
+            $table->string("coastalHazard");
             $table->string("shoreline");
             $table->string("morphology");
             $table->string("typeStructure");
@@ -29,8 +30,9 @@ class CreateInventoriesTable extends Migration
             $table->string("landwardsTypology");
             $table->string("shorelineTypology");
             $table->string("nearshoreTypology");
+            $table->string("armorUnits");
             $table->string('image')->nullable();
-            $table->string("content");
+            $table->string("description");
             $table->double('latitude', 15, 8);
             $table->double('longitude', 15, 8);
             $table->timestamps();

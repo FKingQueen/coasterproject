@@ -1,11 +1,11 @@
 <template>
     <div class="p-2">
-        <Breadcrumb separator=">">
-            <BreadcrumbItem to="/admin/articlePlatform">Article Management</BreadcrumbItem>
-            <BreadcrumbItem>Edit Article Form</BreadcrumbItem>
-        </Breadcrumb>
         <div class="m-5 bg-white shadow-inner shadow-lg rounded px-20 py-5">
-            <a-button @click="this.$router.push('/admin/articlePlatform')" class="mb-3">Back</a-button>
+            <Breadcrumb separator=">">
+                <BreadcrumbItem to="/admin/articlePlatform">Article Management</BreadcrumbItem>
+                <BreadcrumbItem>Edit Article Form</BreadcrumbItem>
+            </Breadcrumb>
+            <a-button @click="this.$router.push('/admin/articlePlatform')" class="my-3">Back</a-button>
             <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="95" class="px-10" >
                 <FormItem label="Title" prop="title">
                     <Input v-model="formValidate.title" placeholder="Enter Title"></Input>
@@ -159,10 +159,9 @@
                     items: [
                     'undo', 'redo',
                     '|', 'heading',
-                    '|', 'fontfamily', 'fontsize', 'fontColor', 'fontBackgroundColor',
-                    '|', 'bold', 'italic', 'strikethrough', 'subscript', 'superscript', 'code',
-                    '|', 'link', 'blockQuote', 'codeBlock',
-                    '|', 'bulletedList', 'numberedList', 'todoList', 'outdent', 'indent'
+                    '|', 'bold', 'italic',
+                    '|', 'link', 'blockQuote',
+                    '|', 'bulletedList', 'numberedList', 'outdent', 'indent'
                     ]
                 }
             }

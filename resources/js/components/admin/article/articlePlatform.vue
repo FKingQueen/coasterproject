@@ -60,7 +60,7 @@
           </span>
           <template v-else-if="column.key === 'action'">
             <span>
-              <a @click="openModal(index)">View</a>
+              <a @click="openModal(index)">Details</a>
               <Modal
                 v-model="modal"
                 :closable="false"
@@ -73,9 +73,7 @@
                     <h2>Article Details</h2>
                   </div>
                 </template>
-                <div class="flex justify-center h-[20rem] shadow">
-                  <Image :src="`/uploads/high/${modalData.image}`" class="object-cover  border" />
-                </div>
+                <Image :src="`/uploads/high/${modalData.image}`" class="object-cover  border" />
                 <div>          
                   <div class="w-full text-right mt-4">
                     <a-tag v-for="project in articles[index].projects" color="blue" >Project {{project.project_type_id}}</a-tag>
@@ -236,6 +234,7 @@ export default defineComponent({
       this.modal = true;
     },
     editForm(id){
+      this.modal = false;
       this.$router.push({path: '/admin/articlePlatform/editForm/' + id})
     },
     removeModal(){
@@ -257,7 +256,7 @@ export default defineComponent({
       token: '',
     }
   },
-  async created(){
+  async mounted(){
     let existingObj = this;
     this.token = window.Laravel.csrfToken;
     await axios.get('/api/admin/getArticle')

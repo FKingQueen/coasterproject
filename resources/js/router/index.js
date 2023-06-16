@@ -23,8 +23,9 @@ import Projects from '../components/pages/homePage/projectsPage/project.vue';
 // Admin
 
 // Inventory
-import inventoryPlatform from '../components/admin/inventory/inventory.vue';
+import inventoryPlatform from '../components/admin/inventory/inventoryPlatform.vue';
 import addInventoryForm from '../components/admin/inventory/addForm.vue';
+import editInventoryForm from '../components/admin/inventory/editForm.vue';
 
 // Slide Show
 import slideShowPlatform from '../components/admin/slideshow/slideShowPlatform.vue';
@@ -122,6 +123,12 @@ export const routes = [
                 name: 'addInventoryForm',
                 path: '/admin/inventoryPlatform/addForm',
                 component: addInventoryForm
+            },
+            {
+                name: 'editInventoryForm',
+                path: '/admin/inventoryPlatform/editForm/:id',
+                component: editInventoryForm ,
+                props:true
             },
             // SlideShow
             {

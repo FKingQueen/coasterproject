@@ -30,7 +30,13 @@ Route::post('/logout', [AdminController::class, 'logout'])->middleware('auth:san
 
 Route::group(['prefix' => 'admin','middleware' => 'auth:sanctum'], function() {
     // Admin Inventory
+    Route::get('/getInventory', [InventoryController::class, 'getInventory']);
     Route::post('/storeInventory', [InventoryController::class, 'storeInventory']);
+    Route::post('/uploadInventory', [InventoryController::class, 'uploadInventory']);
+    Route::post('/deleteImageInventory', [InventoryController::class, 'deleteImageInventory']);
+    Route::post('/deleteInventory/{id}', [InventoryController::class, 'deleteInventory']);
+    Route::get('/getInventoryEdit/{id}', [InventoryController::class, 'getInventoryEdit']);
+    Route::post('/updateInventory', [InventoryController::class, 'updateInventory']);
 
     // Admin User
     Route::get('/getRole', [UserController::class, 'getRole']);

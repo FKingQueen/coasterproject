@@ -45,7 +45,7 @@
                     </a-menu>
                   </div>
                   <div class="border w-full h-[52vh]">
-                    <Description v-if="this.current == 'description'" :id="this.id"/>
+                    <!-- <Description v-if="this.current == 'description'" :id="this.id"/> -->
                     <Delft3D v-if="this.current == 'delft3d'" :id="this.id"/>
                   </div>
                   <div class="w-full p-1 flex justify-end">
@@ -58,15 +58,40 @@
 
       <div ref="cardMarker">
         <transition>
-          <div v-if="this.isVisibleCardMarker"  class="pac-card lg:w-[100vh] w-[52vh] mt-8" id="pac-card" style="overflow-x: hidden; overflow-y: auto;">
-              <div>
+          <div v-if="this.isVisibleCardMarker"  class="pac-card lg:w-[85vh] w-[52vh] mt-8" id="pac-card" style="overflow-x: hidden; overflow-y: auto;">
+              <div class="">
                   <div id="title" class="text-center bg-[#800000]">{{ dataMarker.province }}</div>
-                  <div class="border w-full h-[52vh]">
-                    <p class="w-full flex justify-center pt-2 text-sm">
-                      Location: {{ dataMarker.barangay }}, {{ dataMarker.municipality }}, {{ dataMarker.province }} 
-                    </p>
+                  <div class="border w-full h-[52vh] block">
+                    <div class="h-full overflow-y-scroll">
+                      <p class="w-full flex justify-center py-4 text-sm">
+                        Location: {{ dataMarker.barangay }}, {{ dataMarker.municipality }}, {{ dataMarker.province }} 
+                      </p>
+                      <div class="w-full flex justify-center">
+                        <div class="w-10/12">
+                          <Image :src="`/inventory/high/${dataMarker.image}`" class="object-cover  border" />
+                        </div>
+                      </div>
+                      <div class="px-5 py-5">
+                        <p class="text-base mt-2"> <span class="font-bold">Coordinates:</span> Lat. {{ dataMarker.latitude }}, Lng {{ dataMarker.longitude }}</p>
+                        <p class="text-base mt-2"> <span class="font-bold">Shoreline use:</span> {{ dataMarker.shoreline }}</p>
+                        <p class="text-base mt-2"> <span class="font-bold">Morphology:</span> {{ dataMarker.morphology }}</p>
+                        <p class="text-base mt-2"> <span class="font-bold">Type of Coastal Structure:</span> {{ dataMarker.typeStructure }}</p>
+                        <p class="text-base mt-2"> <span class="font-bold">Structure Material:</span> {{ dataMarker.structureMaterial }}</p>
+                        <p class="text-base mt-2"> <span class="font-bold">Waves Acting on Structure:</span> {{ dataMarker.wavesStructure }}</p>
+                        <p class="text-base mt-2"> <span class="font-bold">Coastal Hazard:</span> {{ dataMarker.coastalHazard }}</p>
+                        <p class="text-base mt-2"> <span class="font-bold">Protection Toe:</span> {{ dataMarker.protectionToe }}</p>
+                        <p class="text-base mt-2"> <span class="font-bold">Height of Structure:</span> {{ dataMarker.heightStructure }}</p>
+                        <p class="text-base mt-2"> <span class="font-bold">Length of Structure:</span> {{ dataMarker.lengthStructure }}</p>
+                        <p class="text-base mt-2"> <span class="font-bold">Typology:</span></p>
+                        <p class="pl-5 mt-2"><span class="font-bold">Landwards:</span> {{ dataMarker.landwardsTypology }}</p>
+                        <p class="pl-5 mt-2"><span class="font-bold">Shoreline:</span> {{ dataMarker.shorelineTypology }}</p>
+                        <p class="pl-5 mt-2"><span class="font-bold">Nearshore:</span> {{ dataMarker.nearshoreTypology }}</p>
+                        <p class="text-base mt-2"> <span class="font-bold">Description:</span></p>
+                        <p class="text-base text-justify" v-html="dataMarker.description"></p>
+                      </div>
+                    </div>
                   </div>
-                  <div class="w-full p-1 flex justify-end">
+                  <div class="w-full p-1 flex justify-end block">
                     <a-button type="text" @click="close()">Return</a-button>
                   </div>
               </div>

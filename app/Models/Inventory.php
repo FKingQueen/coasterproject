@@ -13,6 +13,7 @@ class Inventory extends Model
         'province',
         'municipality',
         'barangay',
+        'coastalHazard',
         'shoreline',
         'morphology',
         'typeStructure',

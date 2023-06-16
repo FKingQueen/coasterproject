@@ -35,9 +35,7 @@
                         :on-success="handleSuccess"
                         :on-error="handleError"
                         :format="['jpg','jpeg','png']"
-                        :max-size="2048"
                         :on-format-error="handleFormatError"
-                        :on-exceeded-size="handleMaxSize"
                         action="/api/admin/upload">
                         <div style="padding: 20px 0">
                             <Icon type="ios-cloud-upload" size="52" style="color: #3399ff"></Icon>
@@ -158,10 +156,9 @@
                     items: [
                     'undo', 'redo',
                     '|', 'heading',
-                    '|', 'fontfamily', 'fontsize', 'fontColor', 'fontBackgroundColor',
-                    '|', 'bold', 'italic', 'strikethrough', 'subscript', 'superscript', 'code',
-                    '|', 'link', 'blockQuote', 'codeBlock',
-                    '|', 'bulletedList', 'numberedList', 'todoList', 'outdent', 'indent'
+                    '|', 'bold', 'italic',
+                    '|', 'link', 'blockQuote',
+                    '|', 'bulletedList', 'numberedList', 'outdent', 'indent'
                     ]
                 }
             }
@@ -196,15 +193,11 @@
         },
         async deleteImage(){
             let image = this.formValidate.image
-            console.log(this.$refs.articleType.values[0].value == 1)
             this.formValidate.image = ''
             this.$refs.uploads.clearFiles()
             await axios.get('/sanctum/csrf-cookie').then(response => {
-                response
                 axios.post(`/api/admin/deleteImage`, {imageName: image})
                     .then(function (response) {
-                    
-
                     })
                     .catch(function (error) {
                     if(error){
@@ -223,12 +216,6 @@
             notification.warning({
                 message: 'The file format is incorrect',
                 description: 'File format of ' + file.name + ' is incorrect, please select jpg or png.'
-            });
-        },
-        handleMaxSize (file) {
-            notification.warning({
-                message: 'Exceeding file size limit',
-                description: 'File  ' + file.name + ' is too large, no more than 2M.'
             });
         },
         onChangeArticleType(){

@@ -3,7 +3,7 @@
         <div>
             <!-- Top View -->
             <div ref="topElement" id="topView" class="w-full hidden lg:block p-0">
-                    <div class="flex justify-around">
+                    <div class="flex justify-around bg-[#DDE6ED]">
                         <div class="md:flex py-1 ">
                             <div class="flex items-center space-x-2 w-full">
                                 <img src="/img/logo/PCIEERD.png" class="blur-none antialiased cursor-pointer object-fill h-16" alt="#">
@@ -12,9 +12,9 @@
                             </div>
 
                             <div class="p-0 leading-normal pl-1">
-                                <div class="text-center grid divide-y-2 w-full">
+                                <div class="text-center grid divide-[#002B5B]/75 divide-y-2 w-full">
                                     <div>
-                                        <p class="text-5xl font-serif font-semibold text-sky-900 blur-none antialiased">
+                                        <p class="text-5xl font-serif font-semibold text-[#146C94] blur-none antialiased">
                                             COASTER
                                         </p>
                                     </div>
@@ -29,16 +29,22 @@
                                 </div>
                             </div>
                         </div>
-                    <div class="text-sm grid grid-cols-1 gap-1 content-center ">
-                        <div class="text-right leading-loose">
-                            <p class="">Contact Us</p>
-                            <p class="no-underline hover:underline hover:text-blue-600 cursor-pointer">+63912345678</p>
-                            <p class="no-underline hover:underline hover:text-blue-600 cursor-pointer">coaster@gmail.com</p>
+                    <div class="text-sm grid grid-cols-1 gap-1 content-center px-5 ">
+                        <div class="text-right leading-loose flex ">
+                            <div class="grid grid-cols-1 gap-1 content-center bg-[#F1F6F9] pl-1 py-1 rounded-l-lg">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" class="w-12 h-12">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <div class=" bg-[#F1F6F9] py-1 pr-2 rounded-r-lg">
+                                <p class="blur-none antialiased text-4xl font-bold  text-center">{{ this.digitalTime.hour }}:{{ this.digitalTime.min }}:{{ this.digitalTime.sec }}</p>
+                                <p class="blur-none antialiased text-sm font-bold text-center">{{ this.digitalTime.date }} : {{ this.digitalTime.day }} : {{ this.digitalTime.year }}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <nav  ref="navElement" style="transition: 0.6s;" class=" relative z-30 flex w-full bg-[#0d2247] lg:px-20 md:px-3 sm:px-1 border-y-4 border-cyan-900 ">
+            <nav  ref="navElement" style="transition: 0.6s;" class=" relative z-30 flex w-full bg-[#002B5B] lg:px-20 md:px-3 sm:px-1 border-y-4 border-cyan-900">
                 <div class="px-5 xl:px-12  flex w-full justify-evenly">
                     <!-- Nav Links -->
                     <div class="lg:block hidden">
@@ -203,7 +209,7 @@
                             <div class=" lg:flex text-white font-normal font-heading w-full ">
                                     <div class="text-center flex items-center pr-10">
                                         <!-- <img src="/img/top.png" class="blur-none antialiased duration-200 blur-none cursor-pointer object-fill h-12 mr-2" alt="#"> -->
-                                        <p class="cursor-pointer text-5xl font-serif font-semibold text-sky-700 tracking-wide blur-none antialiased">
+                                        <p class="cursor-pointer text-5xl font-serif font-semibold text-[#146C94] tracking-wide blur-none antialiased">
                                             COASTER
                                         </p>
                                     </div>
@@ -430,6 +436,17 @@ export default defineComponent({
         const activeItem1 = ref(false);
         const activeItem2 = ref(false);
         return {
+            digitalTime: {
+                week: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Satruday'],
+                month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                year: '',
+                currentMonth: '',
+                date: '',
+                day: '',
+                hour: '',
+                min: '',
+                sec: '',
+            },
             value1: false,
             activeItem1,
             activeItem2,
@@ -554,10 +571,31 @@ export default defineComponent({
             }
             const project = existingObj.selectedProject
             this.$router.push({ name: 'projects', params: { project, id } })
+        },
+        zeroPadding(num, digit){
+            var zero = '';
+            for(var i = 0; i < digit; i++) {
+                zero += '0';
+            }
+            return (zero + num).slice(-digit);
+        },
+        updateTime(){
+            var cd = new Date();
+            this.digitalTime.year = this.zeroPadding(cd.getYear(), 2); 
+            this.digitalTime.currentMonth = this.digitalTime.month[cd.getMonth()];
+            this.digitalTime.day = this.zeroPadding(cd.getDate(), 2);
+            this.digitalTime.date = this.digitalTime.week[cd.getDay()];
+            this.digitalTime.hour = this.zeroPadding(cd.getHours(), 2);
+            this.digitalTime.min = this.zeroPadding(cd.getMinutes(), 2);
+            this.digitalTime.sec = this.zeroPadding(cd.getSeconds(), 2);
         }
     },
     mounted(){
         window.addEventListener('scroll', this.handleScroll);
+        setInterval(() => {
+          return this.updateTime();
+        }, 1000);
+        this.updateTime()
     }
 });
 </script>

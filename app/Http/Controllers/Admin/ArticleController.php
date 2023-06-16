@@ -121,7 +121,11 @@ class ArticleController extends Controller
     }
 
     public function deleteFileFromServe($fileName){
-        $filePath = public_path().'/uploads/'.$fileName;
+        $filePath = public_path().'/uploads/'. '/low/'.$fileName;
+        if(file_exists($filePath)){
+            @unlink($filePath);
+        }
+        $filePath = public_path().'/uploads/'. '/high/'.$fileName;
         if(file_exists($filePath)){
             @unlink($filePath);
         }
