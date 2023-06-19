@@ -2,7 +2,7 @@
     <div :class="{ 'h-screen': !isLoaded }" class="">
         <div v-if="isLoaded" class="w-full flex justify-center lg:space-x-6 space-x-0 py-10">
             <div class="lg:w-5/12 md:w-10/12 w-full lg:px-0 px-2">
-                <div v-if="isLoaded" class="flex justify-center">
+                <div v-if="isLoaded" class="flex justify-center drop-shadow-md bg-white">
                     <div class="w-full">
                         <p class="text-left text-3xl tracking-wide antialiased border-b-2 border-black/20 mt-4 blur-none">
                             Most Recent <span class="text-sky-800 ">{{ moreCurrent }}</span>

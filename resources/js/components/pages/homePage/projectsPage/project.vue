@@ -2,14 +2,14 @@
 <div :class="{ 'h-screen': !isLoaded }">
     <div v-if="isLoaded" class="w-full flex justify-center lg:space-x-6 space-x-0 py-10">
         <div class="lg:w-5/12 md:w-10/12 w-full lg:px-0 px-2 ">
-            <div v-if="isLoaded" class="flex justify-center">
+            <div v-if="isLoaded" class="flex justify-center drop-shadow-md bg-white">
                 <div class="w-full">
                     <div class=" flex justify-center items-center">
                         <!-- <img src="/img/top.png" class="blur-none antialiased duration-200 blur-none cursor-pointer object-fill h-20" alt="#"> -->
                         <p class="text-center text-4xl tracking-wide antialiased border-b-2 border-sky-800/50 mt-4 blur-none text-sky-900">Project {{ this.project.id }}: {{ this.project.title }}</p>
                     </div>
-                    <div class=" pt-5">
-                        <p class="text-left text-2xl tracking-wide antialiased mt-4 blur-none text-sky-800/90">Highlights of the Activity</p>
+                    <div class="">
+                        <p class="px-3 text-left text-2xl tracking-wide antialiased mt-2 blur-none text-sky-800/90">Highlights of the Activity</p>
                         <swiper
                             :spaceBetween="30"
                             :loop="true"
@@ -39,47 +39,49 @@
                         </swiper>
 
                     </div>
-
-                    <div>
-                        <p class="text-left text-2xl tracking-wide antialiased mt-4 blur-none text-sky-800/90">Objective</p>
-                        <p v-for="(project, key) in this.projectObjectives" class="text-justify indent-8 text-sm tracking-wide antialiased mt-4 blur-none">
-                            {{ key+1 }}. {{ project.objective }}
-                        </p>
-                    </div>
-                    <div>
-                        <p class="text-left text-2xl tracking-wide antialiased mt-4 blur-none text-sky-800/90">About</p>
-                        <p class="text-justify indent-8 text-sm tracking-wide antialiased mt-4 blur-none leading-loose">
-                            {{ this.project.about }}
-                        </p>
-                    </div>
-                    <div class="grid grid-cols-1 divide-y-2 divide-sky-800/70 pt-5">
+                    <div class="px-3">
                         <div>
-
+                            <p class="text-left text-2xl tracking-wide antialiased mt-4 blur-none text-sky-800/90">Objective</p>
+                            <p v-for="(project, key) in this.projectObjectives" class="text-justify indent-8 text-sm tracking-wide antialiased mt-4 blur-none">
+                                {{ key+1 }}. {{ project.objective }}
+                            </p>
                         </div>
                         <div>
+                            <p class="text-left text-2xl tracking-wide antialiased mt-4 blur-none text-sky-800/90">About</p>
+                            <p class="text-justify indent-8 text-sm tracking-wide antialiased mt-4 blur-none leading-loose">
+                                {{ this.project.about }}
+                            </p>
+                        </div>
+                        <div class="grid grid-cols-1 divide-y-2 divide-sky-800/70 pt-5">
+                            <div>
 
+                            </div>
+                            <div>
+
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-left text-2xl tracking-wide antialiased mt-4 blur-none text-sky-800/90">Gallery</p>
+                            <div class="pt-5">
+                                <a-image-preview-group>
+                                    <a-image class="px-5" v-for="(project, key) in this.projectImages"
+                                    :width="100"
+                                        style="height: 70px"
+                                        :src="`/img/Project${project.project_type_id}/${project.name}`"
+                                        :preview="{
+                                            src: `/img/Project${project.project_type_id}/${project.name}`,
+                                        }"
+                                    />
+                                </a-image-preview-group>
+
+                            </div>
                         </div>
                     </div>
-                    <div>
-                        <p class="text-left text-2xl tracking-wide antialiased mt-4 blur-none text-sky-800/90">Gallery</p>
-                        <div class="pt-5">
-                            <a-image-preview-group>
-                                <a-image class="px-5" v-for="(project, key) in this.projectImages"
-                                :width="100"
-                                    style="height: 70px"
-                                    :src="`/img/Project${project.project_type_id}/${project.name}`"
-                                    :preview="{
-                                        src: `/img/Project${project.project_type_id}/${project.name}`,
-                                    }"
-                                />
-                            </a-image-preview-group>
 
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
-        <div class="w-2/12 pt-10 hidden lg:block">
+        <div class="w-2/12 pt-10 hidden lg:block ">
             <div>
                 <div class="bg-sky-600/60 border-b-2 border-sky-900 py-2">
                     <p class="text-xl text-center">

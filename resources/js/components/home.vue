@@ -6,9 +6,9 @@
                     <div class="flex justify-around bg-[#DDE6ED]">
                         <div class="md:flex py-1 ">
                             <div class="flex items-center space-x-2 w-full">
-                                <img src="/img/logo/PCIEERD.png" class="blur-none antialiased cursor-pointer object-fill h-16" alt="#">
+                                <img src="/img/logo/DOST.png" class="blur-none antialiased cursor-pointer object-fill h-16" alt="#">
                                 <img src="/img/logo/MMSU.png" class="blur-none antialiased cursor-pointer object-fill h-16" alt="#">
-                                <img src="/img/top.png" class="blur-none antialiased cursor-pointer object-fill h-16" alt="#">
+                                <img src="/img/logo/COASTER.png" class="blur-none antialiased cursor-pointer object-fill h-16" alt="#">
                             </div>
 
                             <div class="p-0 leading-normal pl-1">
@@ -30,13 +30,13 @@
                             </div>
                         </div>
                     <div class="text-sm grid grid-cols-1 gap-1 content-center px-5 ">
-                        <div class="text-right leading-loose flex ">
-                            <div class="grid grid-cols-1 gap-1 content-center bg-[#F1F6F9] pl-1 py-1 rounded-l-lg">
+                        <div class="text-right leading-loose flex drop-shadow-md">
+                            <div class="grid grid-cols-1 gap-1 content-center bg-[#F1F6F9] pl-1 py-1 ">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" class="w-12 h-12">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
                             </div>
-                            <div class=" bg-[#F1F6F9] py-1 pr-2 rounded-r-lg">
+                            <div class=" bg-[#F1F6F9] py-1 pr-2 ">
                                 <p class="blur-none antialiased text-4xl font-bold  text-center">{{ this.digitalTime.hour }}:{{ this.digitalTime.min }}:{{ this.digitalTime.sec }}</p>
                                 <p class="blur-none antialiased text-sm font-bold text-center">{{ this.digitalTime.date }} : {{ this.digitalTime.day }} : {{ this.digitalTime.year }}</p>
                             </div>
@@ -62,15 +62,15 @@
                                 </a>
                             <!-- /Weather -->
                             <!-- Weather -->
-                                <router-link to="/waterLevel" class="py-4 px-4 flex text-white font-semibold hover:bg-sky-700 
-                                    cursor-pointer transition-colors duration-300 antialiased">
-                                    WATER LEVEL
-                                </router-link>
-                            <!-- /Weather -->
-                            <!-- Weather -->
                                 <router-link to="/map" class="py-4 px-4 flex text-white font-semibold hover:bg-sky-700 
                                     cursor-pointer transition-colors duration-300 antialiased">
                                     MAP
+                                </router-link>
+                            <!-- /Weather -->
+                            <!-- Weather -->
+                                <router-link to="/gee" class="py-4 px-4 flex text-white font-semibold hover:bg-sky-700 
+                                    cursor-pointer transition-colors duration-300 antialiased">
+                                    GEE
                                 </router-link>
                             <!-- /Weather -->
                             <!-- Project -->

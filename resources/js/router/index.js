@@ -14,8 +14,8 @@ import moreArticle  from '../components/pages/homePage/articlePage/moreArticle.v
 import Search  from '../components/pages/homePage/articlePage/search.vue';
 
 // Map
+import Gee from '../components/pages/mapPage/gee.vue';
 import Map from '../components/pages/mapPage/map.vue';
-import Waterlevel from '../components/pages/mapPage/waterLevel.vue';
 
 // Projects
 import Projects from '../components/pages/homePage/projectsPage/project.vue';
@@ -91,14 +91,14 @@ export const routes = [
                 props:true 
             },
             {
-                name: 'map',
-                path: '/map',
-                component: Map  
+                name: 'gee',
+                path: '/gee',
+                component: Gee  
             },
             {
-                name: 'waterLevel',
-                path: '/waterLevel',
-                component: Waterlevel,
+                name: 'map',
+                path: '/map',
+                component: Map,
             },
             {
                 name: 'search',

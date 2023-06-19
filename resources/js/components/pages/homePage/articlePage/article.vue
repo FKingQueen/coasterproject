@@ -1,7 +1,7 @@
 <template>
     <div :class="{ 'h-screen': !isLoaded }">
         <div v-if="isLoaded" class="lg:flex lg:px-0 px-2 justify-center lg:space-x-6 space-x-0 py-10">
-            <div class="lg:w-5/12 w-full h-full lg:shadow-2xl shadow-lg border">
+            <div class="lg:w-5/12 w-full h-full drop-shadow-md bg-white">
                 <img class="object-cover w-full" :src="`/uploads/high/${this.article.image}`">
                 <div class="p-10 grid grid-cols-1 divide-y divide-sky-400">
                     <div>
