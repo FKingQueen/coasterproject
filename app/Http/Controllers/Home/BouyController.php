@@ -21,16 +21,16 @@ class BouyController extends Controller
             $data[$i][10] = explode(':',($data[$i][8][1])); 
         }
         for($i = 0; $i < count($sms)-1; $i++ ){
-            $newData[$i]['height'] = $data[$i][0];
-            $newData[$i]['temp'] = $data[$i][1];
-            $newData[$i]['humidity'] = $data[$i][3];
-            $newData[$i]['year'] = $data[$i][9][0];
-            $newData[$i]['month'] = $data[$i][9][1];
-            $newData[$i]['day'] = $data[$i][9][2];
+            $newData[$i]['height'] = (double)$data[$i][0];
+            $newData[$i]['temp'] = (double)$data[$i][1];
+            $newData[$i]['humidity'] = (double)$data[$i][3];
+            $newData[$i]['year'] = (int)$data[$i][9][0];
+            $newData[$i]['month'] = (int)$data[$i][9][1];
+            $newData[$i]['day'] = (int)$data[$i][9][2];
 
-            $newData[$i]['hour'] = $data[$i][10][0];
-            $newData[$i]['min'] = $data[$i][10][1];
-            $newData[$i]['sec'] = $data[$i][10][2];
+            $newData[$i]['hour'] = (int)$data[$i][10][0];
+            $newData[$i]['min'] = (double)($data[$i][10][1]/60);
+            $newData[$i]['sec'] = (int)$data[$i][10][0] + (double)($data[$i][10][1]/60);
         }
         // $data1[0] = $newData->whereYear('date', 2022);
         $new = collect($newData);

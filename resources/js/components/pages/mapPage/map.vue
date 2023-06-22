@@ -186,21 +186,8 @@ export default defineComponent({
         },
         series: [
           {
-            name: 'Height',
-            data: [
-              [1, 29.9],
-              [2, 71.5],
-              [5, 106.4],
-              [6, 129.2],
-              [7, 144.0],
-              [8, 176.0],
-              [9, 135.6],
-              [12, 48.5],
-              [13, 216.4],
-              [14, 194.1],
-              [15, 95.6],
-              [16, 54.4]
-            ],
+            name: 'Water Level',
+            data: [],
           }
         ],
         title: {
@@ -222,7 +209,7 @@ export default defineComponent({
               },
               // pointInterval: 3600000, // one hour
               // pointStart: Date.UTC(2022, 5, 13, 0, 0, 0)
-              pointStart: Date.UTC(2020, 0, 1),
+              pointStart: Date.UTC(2022, 6, 26),
               pointInterval: 36e5, // one hour
               relativeXValue: true
           },
@@ -1860,9 +1847,8 @@ export default defineComponent({
           const sampleData = []
           for(let i = 0; i < response.data.length; i++){
             existingObj.chartOptions.series[0].data[i] = []
-            
-            existingObj.chartOptions.series[0].data[i][0] = Number(response.data[i].hour) 
-            existingObj.chartOptions.series[0].data[i][1] = Number(response.data[i].height) 
+            existingObj.chartOptions.series[0].data[i][0] = response.data[i].sec
+            existingObj.chartOptions.series[0].data[i][1] = response.data[i].height
             // sampleData[i] = []
             // sampleData[i][0] = response.data[i].min
             // sampleData[i][1] = response.data[i].height
