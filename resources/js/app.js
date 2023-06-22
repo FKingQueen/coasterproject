@@ -14,6 +14,7 @@ import 'view-ui-plus/dist/styles/viewuiplus.css';
 import locale from 'view-ui-plus/dist/locale/en-US';
 import CKEditor from '@ckeditor/ckeditor5-vue';
 import VueGoogleMaps from '@fawmi/vue-google-maps'
+import HighchartsVue from "highcharts-vue";
 
 
 
@@ -25,6 +26,7 @@ app.use(store);
 app.use(router);
 app.use(Antd);
 app.use(CKEditor);
+app.use(HighchartsVue);
 app.use(VueGoogleMaps, {
     load: {
         key: 'AIzaSyBqrwTHtdIIy2XFwP3GkVGaMqtEfjjwJuY',

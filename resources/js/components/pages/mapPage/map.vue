@@ -46,7 +46,7 @@
         <transition>
           <div v-if="this.isVisibleCardProvince"  class="pac-card lg:w-[100vh] w-[52vh] mt-10" id="pac-card" style="overflow-x: hidden; overflow-y: auto;">
               <div>
-                  <div id="title" class="text-center bg-[#025cfa]">Ilocos Norte</div>
+                  <!-- <div id="title" class="text-center bg-[#025cfa]">Ilocos Norte</div> -->
                   <div class="flex justify-center">
                     <a-menu v-model:selectedKeys="current" mode="horizontal">
                       <a-menu-item key="delft3d">
@@ -70,7 +70,7 @@
         <transition>
           <div v-if="this.isVisibleCardMarker"  class="pac-card lg:w-[85vh] w-[52vh] mt-10" id="pac-card" style="overflow-x: hidden; overflow-y: auto;">
               <div class="">
-                  <div id="title" class="text-center bg-[#800000]">{{ dataMarker.province }}</div>
+                  <!-- <div id="title" class="text-center bg-[#800000]">{{ dataMarker.province }}</div> -->
                   <div class="border w-full h-[52vh] block">
                     <div class="h-full overflow-y-scroll">
 
@@ -118,12 +118,16 @@
         <transition>
           <div v-if="this.isVisibleCardBouy"  class="pac-card lg:w-[100vh] w-[52vh] mt-10" id="pac-card" style="overflow-x: hidden; overflow-y: auto;">
               <div>
-                  <div id="title" class="text-center bg-[#025cfa]">Ilocos Norte</div>
+                  <!-- <div id="title" class="text-center bg-[#025cfa]">Ilocos Norte</div> -->
                   <div class="flex justify-center">
-                    <p>BOUY</p>
+                    <a-menu v-model:selectedKeys="currentBouy" mode="horizontal">
+                      <a-menu-item key="bouy">
+                        BOUY
+                      </a-menu-item>
+                    </a-menu>
                   </div>
                   <div class="border w-full h-[52vh]">
-                    <p>BOUY</p>
+                    <highcharts v-if="this.isVisibleCardBouy" class="hc" :options="chartOptions" ref="chart"></highcharts>
                   </div>
                   <div class="w-full p-1 flex justify-end">
                     <a-button type="text" @click="close()">Return</a-button>
@@ -148,20 +152,14 @@ export default defineComponent({
   },
   setup() {
     const current = ref(['delft3d']);
+    const currentBouy = ref(['bouy']);
     return {
+      currentBouy,
       current,
     };
   },
   data() {
-    // const svgMarker = {
-    //   path: "M-1.547 12l6.563-6.609-1.406-1.406-5.156 5.203-2.063-2.109-1.406 1.406zM0 0q2.906 0 4.945 2.039t2.039 4.945q0 1.453-0.727 3.328t-1.758 3.516-2.039 3.070-1.711 2.273l-0.75 0.797q-0.281-0.328-0.75-0.867t-1.688-2.156-2.133-3.141-1.664-3.445-0.75-3.375q0-2.906 2.039-4.945t4.945-2.039z",
-    //   fillColor: "blue",
-    //   fillOpacity: 0.6,
-    //   strokeWeight: 0,
-    //   rotation: 0,
-    //   scale: 1.5,
-    //   anchor: new google.maps.Point(0, 20),
-    // };
+    
     var desMarker = {
         url: '/img/marker/gmapmarker1.png', // image is 512 x 512
         scaledSize : new google.maps.Size(18, 26)
@@ -171,6 +169,66 @@ export default defineComponent({
         scaledSize : new google.maps.Size(20, 22)
     };
     return {
+      date: new Date(),
+      chartOptions: {
+        chart: {
+          type: 'spline',
+          scrollablePlotArea: {
+              minWidth: 600,
+              scrollPositionX: 1
+          }
+        },
+        xAxis: {
+            type: 'datetime',
+            labels: {
+                overflow: 'justify'
+            }
+        },
+        series: [
+          {
+            name: 'Height',
+            data: [
+              [1, 29.9],
+              [2, 71.5],
+              [5, 106.4],
+              [6, 129.2],
+              [7, 144.0],
+              [8, 176.0],
+              [9, 135.6],
+              [12, 48.5],
+              [13, 216.4],
+              [14, 194.1],
+              [15, 95.6],
+              [16, 54.4]
+            ],
+          }
+        ],
+        title: {
+            text: 'Ilocos Norte'
+        },
+        subtitle: {
+            text: 'Water Level'
+        },
+        plotOptions: {
+          spline: {
+              lineWidth: 2,
+              states: {
+                  hover: {
+                      lineWidth: 3
+                  }
+              },
+              marker: {
+                  enabled: false
+              },
+              // pointInterval: 3600000, // one hour
+              // pointStart: Date.UTC(2022, 5, 13, 0, 0, 0)
+              pointStart: Date.UTC(2020, 0, 1),
+              pointInterval: 36e5, // one hour
+              relativeXValue: true
+          },
+          
+        },
+      },
       desMarker,
       bouyMarker,
       id: '',
@@ -1780,7 +1838,7 @@ export default defineComponent({
       console.log(existingObj.dataMarker.municipality);
       existingObj.isVisibleCardMarker = true
     },
-    bouy(id){
+    async bouy(id){
       let existingObj = this;
       if(id == 1){
         existingObj.$refs.gmap.$mapPromise.then((map) => {
@@ -1795,6 +1853,28 @@ export default defineComponent({
       }
       existingObj.isVisibleCardBouy = true
       console.log(id);
+
+      await axios.get('/api/getSms')
+        .then(response => {
+          console.log(response.data);
+          const sampleData = []
+          for(let i = 0; i < response.data.length; i++){
+            existingObj.chartOptions.series[0].data[i] = []
+            
+            existingObj.chartOptions.series[0].data[i][0] = Number(response.data[i].hour) 
+            existingObj.chartOptions.series[0].data[i][1] = Number(response.data[i].height) 
+            // sampleData[i] = []
+            // sampleData[i][0] = response.data[i].min
+            // sampleData[i][1] = response.data[i].height
+            // existingObj.chartOptions.series[0].data[i].push(response.data[i].min)
+            // existingObj.chartOptions.series[0].data[i].push(response.data[i].height)
+          }
+      })
+      
+      .catch(function (error) {
+        console.error(error);
+      });
+      console.log(existingObj.chartOptions.series[0]);
     }
   },
   async mounted() {
@@ -1815,6 +1895,17 @@ export default defineComponent({
     .catch(function (error) {
         console.error(error);
     });
+      
+    const d = new Date();
+    let year = d.getFullYear();
+    let month = d.getMonth();
+    let date = d.getDate();
+    
+
+    // this.chartOptions.plotOptions.spline.pointInterval = 3600000
+    // this.chartOptions.plotOptions.spline.pointStart =Date.UTC(2022, 5, 13)
+    console.log(this.chartOptions)
+
   }
 });
 </script>

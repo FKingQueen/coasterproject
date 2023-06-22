@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\UserAccountController;
 use App\Http\Controllers\Home\HarticleController;  
 use App\Http\Controllers\Home\ProjectController;  
 use App\Http\Controllers\Home\TyphoonController;  
+use App\Http\Controllers\Home\BouyController;  
 
 /*
 |--------------------------------------------------------------------------
@@ -75,6 +76,7 @@ Route::get('/getProject/{id}', [ProjectController::class, 'getProject']);
 // Water Level
 Route::get('/getTyphoon/{id}', [TyphoonController::class, 'getTyphoon']);
 Route::get('/getInventory', [InventoryController::class, 'getInventory']);
+Route::get('/getSms', [BouyController::class, 'getSms']);
 
 
 
