@@ -29,8 +29,8 @@ class BouyController extends Controller
             $newData[$i]['day'] = (int)$data[$i][9][2];
 
             $newData[$i]['hour'] = (int)$data[$i][10][0];
-            $newData[$i]['min'] = (double)($data[$i][10][1]/60);
-            $newData[$i]['sec'] = (int)$data[$i][10][0] + (double)($data[$i][10][1]/60);
+            $newData[$i]['min'] = (int)$data[$i][10][1];
+            $newData[$i]['sec'] = (int)$data[$i][10][2];
         }
         // $data1[0] = $newData->whereYear('date', 2022);
         $new = collect($newData);

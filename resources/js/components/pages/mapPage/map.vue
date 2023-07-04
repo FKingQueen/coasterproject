@@ -187,7 +187,12 @@ export default defineComponent({
         series: [
           {
             name: 'Water Level',
-            data: [],
+            data: [
+              // [Date.UTC(2022, 6, 26, 1, 10),1],
+              // [Date.UTC(2022, 6, 26, 1, 20),2],
+              // [Date.UTC(2022, 6, 26, 1, 30),2],
+              // [Date.UTC(2022, 6, 26, 1, 40),2],
+            ],
           }
         ],
         title: {
@@ -209,8 +214,8 @@ export default defineComponent({
               },
               // pointInterval: 3600000, // one hour
               // pointStart: Date.UTC(2022, 5, 13, 0, 0, 0)
-              pointStart: Date.UTC(2022, 6, 26),
-              pointInterval: 36e5, // one hour
+              // pointStart: Date.UTC(2022, 6, 26),
+              // pointInterval: 36e5, // one hour
               relativeXValue: true
           },
           
@@ -1844,16 +1849,11 @@ export default defineComponent({
       await axios.get('/api/getSms')
         .then(response => {
           console.log(response.data);
-          const sampleData = []
+
           for(let i = 0; i < response.data.length; i++){
             existingObj.chartOptions.series[0].data[i] = []
-            existingObj.chartOptions.series[0].data[i][0] = response.data[i].sec
+            existingObj.chartOptions.series[0].data[i][0] = Date.UTC(response.data[i].year, response.data[i].month, response.data[i].day, response.data[i].hour, response.data[i].min, response.data[i].sec)
             existingObj.chartOptions.series[0].data[i][1] = response.data[i].height
-            // sampleData[i] = []
-            // sampleData[i][0] = response.data[i].min
-            // sampleData[i][1] = response.data[i].height
-            // existingObj.chartOptions.series[0].data[i].push(response.data[i].min)
-            // existingObj.chartOptions.series[0].data[i].push(response.data[i].height)
           }
       })
       
