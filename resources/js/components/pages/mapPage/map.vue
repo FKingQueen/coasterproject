@@ -127,6 +127,14 @@
                     </a-menu>
                   </div>
                   <div class="border w-full h-[52vh]">
+                    <div :style="{ marginTop: '16px' }" class="text-center">
+                      <RadioGroup v-model="selectedBouy" size="small" type="button">
+                          <Radio label="Yearly"></Radio>
+                          <Radio label="Monthly"></Radio>
+                          <Radio label="Weekly"></Radio>
+                          <Radio label="Latest"></Radio>
+                      </RadioGroup>
+                    </div>
                     <highcharts v-if="this.isVisibleCardBouy" class="hc" :options="chartOptions" ref="chart"></highcharts>
                   </div>
                   <div class="w-full p-1 flex justify-end">
@@ -187,12 +195,7 @@ export default defineComponent({
         series: [
           {
             name: 'Water Level',
-            data: [
-              // [Date.UTC(2022, 6, 26, 1, 10),1],
-              // [Date.UTC(2022, 6, 26, 1, 20),2],
-              // [Date.UTC(2022, 6, 26, 1, 30),2],
-              // [Date.UTC(2022, 6, 26, 1, 40),2],
-            ],
+            data: [],
           }
         ],
         title: {
@@ -206,17 +209,9 @@ export default defineComponent({
               lineWidth: 2,
               states: {
                   hover: {
-                      lineWidth: 3
+                      lineWidth: 2
                   }
               },
-              marker: {
-                  enabled: false
-              },
-              // pointInterval: 3600000, // one hour
-              // pointStart: Date.UTC(2022, 5, 13, 0, 0, 0)
-              // pointStart: Date.UTC(2022, 6, 26),
-              // pointInterval: 36e5, // one hour
-              relativeXValue: true
           },
           
         },
@@ -1806,8 +1801,6 @@ export default defineComponent({
         this.isVisibleCardBouy = false
       }
       this.current = ref(['delft3d']);
-      // console.log(this.$refs.gmap.$mapObject.getZoom())
-      // console.log('Visible', this.isVisibleCardProvince);
     },
     close(){
       this.$refs.gmap.$mapPromise.then((map) => {
