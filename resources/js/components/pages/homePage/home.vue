@@ -5,20 +5,26 @@
                 :pagination="true" 
                 :loop="true"    
                 :autoplay="{
-                    delay: 3500,
+                    delay: 5000,
                     disableOnInteraction: false,
                 }" 
                 :mousewheel="false"
                 :modules="modules" class="mySwiper"
             >
                 <swiper-slide>
-                    <img src="/img/slides/banner1.jpg" class="object-cover w-full lg:h-[30rem]" alt="#">       
+                    <img src="/img/slides/slide1.JPG" class="object-cover w-full lg:h-[30rem]" alt="#">       
                 </swiper-slide>
                 <swiper-slide>
-                    <img src="/img/slides/coaster_banner.jpg" class="object-cover w-full lg:h-[30rem]" alt="#">       
+                    <img src="/img/slides/slide2.JPG" class="object-cover w-full lg:h-[30rem]" alt="#">       
                 </swiper-slide>
                 <swiper-slide>
-                    <img src="/img/field1.jpg" class="object-cover w-full lg:h-[30rem]" alt="#">       
+                    <img src="/img/slides/slide3.JPG" class="object-cover w-full lg:h-[30rem]" alt="#">       
+                </swiper-slide>
+                <swiper-slide>
+                    <img src="/img/slides/slide4.JPG" class="object-cover w-full lg:h-[30rem]" alt="#">       
+                </swiper-slide>
+                <swiper-slide>
+                    <img src="/img/slides/slide5.JPG" class="object-cover w-full lg:h-[30rem]" alt="#">       
                 </swiper-slide>
             </swiper>
         </div>
