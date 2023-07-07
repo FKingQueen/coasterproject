@@ -150,7 +150,7 @@ class ArticleController extends Controller
     }
 
     public function updateArticle(Request $request){
-        return $request->all();
+
         Project::where('article_id', $request->id)->delete();
 
         $projects = $request->projectValue;

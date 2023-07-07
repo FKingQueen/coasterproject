@@ -36,4 +36,14 @@ class ProjectController extends Controller
             'eventsArticles'  =>  $eventsArticles,
         ]);
     }
+
+    public function getRelatedArticle(){
+        $articles = Article::with('projects')->with('type')->get();
+        foreach($articles as $key => $arti)
+        {
+            $articles[$key]->date = Carbon::createFromFormat('Y-m-d H:i:s', $arti->created_at)->format('F d, Y');
+        }
+        return $articles;
+    }
+        
 }

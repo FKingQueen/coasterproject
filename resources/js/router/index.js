@@ -20,6 +20,9 @@ import Map from '../components/pages/mapPage/map.vue';
 // Projects
 import Projects from '../components/pages/homePage/projectsPage/project.vue';
 
+// About
+import About from '../components/pages/homePage/aboutPage/about.vue';
+
 // Admin
 
 // Inventory
@@ -99,6 +102,11 @@ export const routes = [
                 name: 'map',
                 path: '/map',
                 component: Map,
+            },
+            {
+                name: 'about',
+                path: '/about/:id',
+                component: About,
             },
             {
                 name: 'search',

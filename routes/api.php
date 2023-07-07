@@ -73,6 +73,7 @@ Route::get('/getmoreArticle/{id}', [HarticleController::class, 'getmoreArticle']
 Route::post('/searchArticle', [HarticleController::class, 'searchArticle']);
 // Home Projects
 Route::get('/getProject/{id}', [ProjectController::class, 'getProject']);
+Route::get('/getRelatedArticle', [ProjectController::class, 'getRelatedArticle']);
 // Water Level
 Route::get('/getTyphoon/{id}', [TyphoonController::class, 'getTyphoon']);
 Route::get('/getInventory', [InventoryController::class, 'getInventory']);

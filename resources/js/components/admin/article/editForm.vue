@@ -173,7 +173,6 @@
             // let dateFormat1 = moment(existingObj.formValidate.date).format();
             // console.log(dateFormat1);
             console.log(existingObj.formValidate);
-            return;
             this.$refs[name].validate((valid) => {
                 if (valid) {
                     axios.post(`/api/admin/updateArticle`, this.formValidate)
@@ -185,7 +184,7 @@
                         existingObj.$router.push('/admin/articlePlatform');
                     })
                     .catch(function (error) {
-
+                        console.log(error)
                     });
 
                 } else {

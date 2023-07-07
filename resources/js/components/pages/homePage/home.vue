@@ -12,13 +12,10 @@
                 :modules="modules" class="mySwiper"
             >
                 <swiper-slide>
-                    <img src="/img/field1.jpg" class="object-cover w-full lg:h-[30rem]" alt="#">       
+                    <img src="/img/slides/banner1.jpg" class="object-cover w-full lg:h-[30rem]" alt="#">       
                 </swiper-slide>
                 <swiper-slide>
-                    <img src="/img/field1.jpg" class="object-cover w-full lg:h-[30rem]" alt="#">       
-                </swiper-slide>
-                <swiper-slide>
-                    <img src="/img/field1.jpg" class="object-cover w-full lg:h-[30rem]" alt="#">       
+                    <img src="/img/slides/coaster_banner.jpg" class="object-cover w-full lg:h-[30rem]" alt="#">       
                 </swiper-slide>
                 <swiper-slide>
                     <img src="/img/field1.jpg" class="object-cover w-full lg:h-[30rem]" alt="#">       
@@ -162,16 +159,16 @@
                     <a href="https://www.dost.gov.ph/"><img src="img/logo/DOST.png" class="object-fill lg:w-[4vw] lg:h-[4vw] w-[11vw] h-[11vw]" alt="#"></a>
                 </div>
                 <div class="shrink-0">
-                    <a href="https://www.dost.gov.ph/"><img src="img/logo/MMSU.png" class="object-fill lg:w-[4vw] lg:h-[4vw] w-[11vw] h-[11vw]" alt="#"></a>
+                    <a href="https://www.mmsu.edu.ph/"><img src="img/logo/MMSU.png" class="object-fill lg:w-[4vw] lg:h-[4vw] w-[11vw] h-[11vw]" alt="#"></a>
                 </div>
                 <div class="shrink-0">
-                    <a href="https://www.mmsu.edu.ph/"><img src="img/logo/KYOTO.png" class="object-fill lg:w-[4vw] lg:h-[4vw] w-[11vw] h-[11vw]" alt="#"></a>
+                    <a href="https://www.kyoto-u.ac.jp/en"><img src="img/logo/KYOTO.png" class="object-fill lg:w-[4vw] lg:h-[4vw] w-[11vw] h-[11vw]" alt="#"></a>
                 </div>
                 <div class="shrink-0">
-                    <a href="https://www.mmsu.edu.ph/"><img src="img/logo/DILIMAN.png" class="object-fill lg:w-[4vw] lg:h-[4vw] w-[11vw] h-[11vw]" alt="#"></a>
+                    <a href="https://up.edu.ph/"><img src="img/logo/DILIMAN.png" class="object-fill lg:w-[4vw] lg:h-[4vw] w-[11vw] h-[11vw]" alt="#"></a>
                 </div>
                 <div class="shrink-0">
-                    <a href="https://www.mmsu.edu.ph/"><img src="img/logo/DMMMSU.png" class="object-fill lg:w-[4vw] lg:h-[4vw] w-[11vw] h-[11vw]" alt="#"></a>
+                    <a href="https://www.dmmmsu.edu.ph/"><img src="img/logo/DMMMSU.png" class="object-fill lg:w-[4vw] lg:h-[4vw] w-[11vw] h-[11vw]" alt="#"></a>
                 </div>
                 <div class="shrink-0">
                     <a href="https://www.mmsu.edu.ph/"><img src="img/logo/CIVIL.png" class="object-fill lg:w-[4vw] lg:h-[4vw] w-[11vw] h-[11vw]" alt="#"></a>

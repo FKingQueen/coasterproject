@@ -5,7 +5,6 @@
             <div v-if="isLoaded" class="flex justify-center drop-shadow-md bg-white">
                 <div class="w-full">
                     <div class=" flex justify-center items-center">
-                        <!-- <img src="/img/top.png" class="blur-none antialiased duration-200 blur-none cursor-pointer object-fill h-20" alt="#"> -->
                         <p class="text-center text-4xl tracking-wide antialiased border-b-2 border-sky-800/50 mt-4 blur-none text-sky-900">Project {{ this.project.id }}: {{ this.project.title }}</p>
                     </div>
                     <div class="">
@@ -82,49 +81,22 @@
             </div>
         </div>
         <div class="w-2/12 pt-10 hidden lg:block ">
-            <div>
-                <div class="bg-sky-600/60 border-b-2 border-sky-900 py-2">
-                    <p class="text-xl text-center">
-                        Related <span class="text-sky-900">News</span>
-                    </p>
+            <p class="text-center text-2xl border-b-2 blur-none antialiased">
+                Related  <span class="text-sky-800 ">Activities</span>
+            </p>
+            <div v-for="(relatedArticle, key) in this.relatedArticles.slice(0,5)" class="py-2 drop-shadow-2xl">
+                <div class="h-36 shadow-lg" :style="{backgroundImage:`url(/uploads/low/${relatedArticle.image})`}" style="background-repeat: no-repeat; background-size: cover; ">  
+                    <div @click="gotoArticle(relatedArticle)" class="cursor-pointer flex items-end w-full h-full bg-[#0d2247]/60">
+                        <div class="px-2 w-full">
+                            <p class="text-white text-sm p-0 font-thin blur-none antialiased  ">
+                                {{ relatedArticle.date }}
+                            </p>
+                            <p class="text-white p-0 font-thin blur-none antialiased ">
+                                {{ relatedArticle.title }}
+                            </p>
+                        </div>
+                    </div> 
                 </div>
-                <div class="border-b-2" v-for="(article, key) in this.newsArticles.slice(0,5)">
-                    <p @click="gotoArticle(article)" class="text-sm font-thin tracking-wide text-sky-700 cursor-pointer">{{ article.title }}</p>
-                    <p class="text-xs font-thin tracking-wide">News | {{ article.date }}</p>
-                </div>
-                <p @click="gotoMoreArticle('News')" class="text-center text-lg p-5 cursor-pointer">
-                    VIEW MORE
-                </p>
-            </div>
-
-            <div>
-                <div class="bg-sky-600/60 border-b-2 border-sky-900 py-2">
-                    <p class="text-xl text-center">
-                        Related <span class="text-sky-900">Announcements</span>
-                    </p>
-                </div>
-                <div class="border-b-2" v-for="(article, key) in this.announcementsArticles.slice(0,5)">
-                    <p @click="gotoArticle(article)" class="text-sm font-thin tracking-wide text-sky-700 cursor-pointer">{{ article.title }}</p>
-                    <p class="text-xs font-thin tracking-wide"> Announcements | {{ article.date }}</p>
-                </div>
-                <p @click="gotoMoreArticle('Announcements')" class="text-center text-lg p-5 cursor-pointer">
-                    VIEW MORE
-                </p>
-            </div>
-
-            <div>
-                <div class="bg-sky-600/60 border-b-2 border-sky-900 py-2">
-                    <p class="text-xl text-center">
-                        Related <span class="text-sky-900">Events</span>
-                    </p>
-                </div>
-                <div class="border-b-2" v-for="(article, key) in this.eventsArticles.slice(0,5)">
-                    <p @click="gotoArticle(article)" class="text-sm font-thin tracking-wide text-sky-700 cursor-pointer">{{ article.title }}</p>
-                    <p class="text-xs font-thin tracking-wide"> Events | {{ article.date }}</p>
-                </div>
-                <p @click="gotoMoreArticle('Events')" class="text-center text-lg p-5 cursor-pointer">
-                    VIEW MORE
-                </p>
             </div>
         </div>
     </div>
@@ -151,6 +123,7 @@ export default defineComponent({
             newsArticles: [],
             announcementsArticles: [],
             eventsArticles: [],
+            relatedArticles: [],
             isLoaded: ref(false)
         }
     },
@@ -178,10 +151,9 @@ export default defineComponent({
     },
     async mounted(){
         let existingObj = this; 
-        let projectjId = this.$route.params.id
+        let projectId = this.$route.params.id
         // let projectjName = this.$route.params.project
-        console.log();
-        await axios.get(`/api/getProject/${projectjId}`)
+        await axios.get(`/api/getProject/${projectId}`)
         .then(function (response) {
             existingObj.projectImages = response.data.project[0].project_image;
             existingObj.projectObjectives = response.data.project[0].project_objective;
@@ -206,8 +178,23 @@ export default defineComponent({
         .catch(function (error) {
             console.log(error)
         });
-        
-        
+
+        await axios.get(`/api/getRelatedArticle`)
+        .then(function (response) {
+            console.log(response.data);
+            for(let  i = 0; i < response.data.length; i++){
+                for(let k = 0; k < response.data[i].projects.length; k++){
+                    if(projectId == response.data[i].projects[k].project_type_id){
+                        existingObj.relatedArticles.push(response.data[i]);
+                        break;
+                    }
+                }
+            }
+        })
+        .catch(function (error) {
+            console.log(error)
+        });
+
     }
 })
 </script>
