@@ -390,8 +390,8 @@
             <!-- Footer -->
             <footer id="footer" style="" class="bg-white dark:bg-gray-800">
                 <div id="contact" class="max-w-screen-xl mx-auto lg:py-5 md:p-8 lg:p-10">
-                    <div class="flex justify-between">
-                        <div class="place-content-center grid ">
+                    <div class="flex justify-between items-center">
+                        <div class="mt-4 lg:mt-0 grid">
                             <img class="w-40 h-40 sm:w-36 sm:h-36 " src="/img/logo/coaster.png" alt="" >
                         </div>
                         <div class="">

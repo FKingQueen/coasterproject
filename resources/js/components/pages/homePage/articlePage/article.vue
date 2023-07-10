@@ -1,6 +1,6 @@
 <template>
     <div :class="{ 'h-screen': !isLoaded }">
-        <div v-if="isLoaded" class="lg:flex lg:px-0 px-2 justify-center lg:space-x-6 space-x-0 py-10">
+        <div v-if="isLoaded" class="lg:flex lg:px-0 px-2 justify-center lg:space-x-6 space-x-0 lg:py-10 py-3">
             <div class="lg:w-5/12 w-full h-full drop-shadow-md bg-white">
                 <img class="object-cover w-full" :src="`/uploads/high/${this.article.image}`">
                 <div class="p-10 grid grid-cols-1 divide-y divide-sky-400">
@@ -38,7 +38,7 @@
                     </div>
                 </div>
             </div>
-            <div class="lg:w-2/12 h-full lg=mt-0 mt-5">
+            <div class="lg:w-2/12 h-full lg:mt-0 mt-5">
                 <p class="text-center text-2xl border-b-2 blur-none antialiased">
                     Other  <span class="text-sky-800 ">{{ otherCurrent }}</span>
                 </p>

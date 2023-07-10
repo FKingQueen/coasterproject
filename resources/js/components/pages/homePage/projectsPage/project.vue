@@ -1,11 +1,11 @@
 <template>
 <div :class="{ 'h-screen': !isLoaded }">
-    <div v-if="isLoaded" class="w-full flex justify-center lg:space-x-6 space-x-0 py-10">
+    <div v-if="isLoaded" class="w-full lg:flex justify-center lg:space-x-6 space-x-0 lg:py-10 py-5">
         <div class="lg:w-5/12 md:w-10/12 w-full lg:px-0 px-2 ">
             <div v-if="isLoaded" class="flex justify-center drop-shadow-md bg-white">
                 <div class="w-full">
                     <div class=" flex justify-center items-center">
-                        <p class="text-center text-4xl tracking-wide antialiased border-b-2 border-sky-800/50 mt-4 blur-none text-sky-900">Project {{ this.project.id }}: {{ this.project.title }}</p>
+                        <p class="text-center text-4xl tracking-wide antialiased border-b lg:py-5 py-2 px-2 border-sky-800/50 blur-none text-sky-900">{{ this.project.title }}</p>
                     </div>
                     <div class="">
                         <p class="px-3 text-left text-2xl tracking-wide antialiased mt-2 blur-none text-sky-800/90">Highlights of the Activity</p>
@@ -51,7 +51,7 @@
                                 {{ this.project.about }}
                             </p>
                         </div>
-                        <div class="grid grid-cols-1 divide-y-2 divide-sky-800/70 pt-5">
+                        <div class="grid grid-cols-1 divide-y divide-sky-400 pt-10">
                             <div>
 
                             </div>
@@ -61,7 +61,7 @@
                         </div>
                         <div>
                             <p class="text-left text-2xl tracking-wide antialiased mt-4 blur-none text-sky-800/90">Gallery</p>
-                            <div class="pt-5">
+                            <div class="py-5">
                                 <a-image-preview-group>
                                     <a-image class="px-5" v-for="(project, key) in this.projectImages"
                                     :width="100"
@@ -80,7 +80,24 @@
                 </div>
             </div>
         </div>
-        <div class="w-2/12 pt-10 hidden lg:block ">
+        <div class="lg:w-2/12 w-full lg:pt-10 pt-5 px-2">
+            <p class="text-center text-2xl border-b-2 blur-none antialiased">
+                Other  <span class="text-sky-800 ">Projects</span>
+            </p>
+            <div class="py-2 drop-shadow-2xl grid gap-4">
+                <div  @click="gotoProject(1)" v-if="this.$route.params.id != 1" class="drop-shadow-md cursor-pointer flex items-end w-full h-full">
+                    <img src="/img/slides/slide2.JPG" class="object-cover w-full" alt="#">                          
+                </div>
+                <div  @click="gotoProject(2)" v-if="this.$route.params.id != 2" class="drop-shadow-md cursor-pointer flex items-end w-full h-full">
+                    <img src="/img/slides/slide3.JPG" class="object-cover w-full" alt="#">                          
+                </div>
+                <div  @click="gotoProject(3)" v-if="this.$route.params.id != 3" class="drop-shadow-md cursor-pointer flex items-end w-full h-full">
+                    <img src="/img/slides/slide4.JPG" class="object-cover w-full" alt="#">                          
+                </div>
+                <div  @click="gotoProject(4)" v-if="this.$route.params.id != 4" class="drop-shadow-md cursor-pointer flex items-end w-full h-full">
+                    <img src="/img/slides/slide5.JPG" class="object-cover w-full" alt="#">                          
+                </div>
+            </div>
             <p class="text-center text-2xl border-b-2 blur-none antialiased">
                 Related  <span class="text-sky-800 ">Activities</span>
             </p>
@@ -148,6 +165,20 @@ export default defineComponent({
         gotoMoreArticle(article){
             this.$router.push({ name: 'moreArticle', params: { article } })
         },
+        gotoProject(id){
+            let existingObj = this;
+            if(id == 1){
+                existingObj.selectedProject = 'Coastal Erosion Trends and Management Strategies for Region 1'
+            }else if(id == 2){
+                existingObj.selectedProject = 'Assesment Monitoring, and Prediction of Coastal Flooding of Selected Municipalities in Region 1'
+            }else if(id == 3){
+                existingObj.selectedProject = 'Development of Science-based Engineering Approach to Coastal Prediction in Region 1'
+            }else if(id == 4){
+                existingObj.selectedProject = 'Enhancing Coastal Design and Infrastructure Intervention through the Establishment of Wave Testing Facility'
+            }
+            const project = existingObj.selectedProject
+            this.$router.push({ name: 'projects', params: { project, id } })
+        }
     },
     async mounted(){
         let existingObj = this; 

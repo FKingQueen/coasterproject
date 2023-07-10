@@ -12,24 +12,24 @@
                 :modules="modules" class="mySwiper"
             >
                 <swiper-slide>
-                    <img src="/img/slides/slide1.JPG" class="object-cover w-full lg:h-[30rem]" alt="#">       
+                    <img src="/img/slides/slide1.JPG" class="object-cover w-full " alt="#">       
                 </swiper-slide>
                 <swiper-slide>
-                    <img src="/img/slides/slide2.JPG" class="object-cover w-full lg:h-[30rem]" alt="#">       
+                    <img src="/img/slides/slide2.JPG" class="object-cover w-full " alt="#">       
                 </swiper-slide>
                 <swiper-slide>
-                    <img src="/img/slides/slide3.JPG" class="object-cover w-full lg:h-[30rem]" alt="#">       
+                    <img src="/img/slides/slide3.JPG" class="object-cover w-full " alt="#">       
                 </swiper-slide>
                 <swiper-slide>
-                    <img src="/img/slides/slide4.JPG" class="object-cover w-full lg:h-[30rem]" alt="#">       
+                    <img src="/img/slides/slide4.JPG" class="object-cover w-full " alt="#">       
                 </swiper-slide>
                 <swiper-slide>
-                    <img src="/img/slides/slide5.JPG" class="object-cover w-full lg:h-[30rem]" alt="#">       
+                    <img src="/img/slides/slide5.JPG" class="object-cover w-full " alt="#">       
                 </swiper-slide>
             </swiper>
         </div>
-        <div class="w-full lg:flex lg:justify-center lg:space-x-20 lg:pt-10 lg:px-0 px-5">
-            <div v-if="this.news.length != 0" class=" lg:w-3/12 w-full  bg-white drop-shadow-md border-t lg:mt-0 mt-10 ">
+        <div class="w-full lg:flex lg:justify-center lg:space-x-20 lg:pt-14 lg:px-0 px-5 pb-14">
+            <div v-if="this.news.length != 0" class=" lg:w-3/12 w-full  bg-white drop-shadow-md border-t lg:mt-0 mt-3 ">
                 <p class="text-sky-800 text-2xl text-center blur-none ">News</p>
                 <div class="h-4/5 border-t-2 border-sky-800 p-2">
                     <div v-for="(news, key, index) in this.news.slice(0,3)" class="flex block border-b pb-1 mb-3">
@@ -41,7 +41,7 @@
                         </div>
                     </div>
                 </div>
-                <div @click="moreArticle('News')" class="cursor-pointer border-t grid h-12 text-center place-content-center text-lg blur-none ">
+                <div @click="moreArticle('News')" class="bg-white cursor-pointer border-t grid h-12 text-center place-content-center text-lg blur-none ">
                     View More
                 </div>
             </div>
@@ -57,7 +57,7 @@
                         </div>
                     </div>
                 </div>
-                <div @click="moreArticle('Announcements')" class="cursor-pointer border-t grid h-12 text-center place-content-center text-lg blur-none ">
+                <div @click="moreArticle('Announcements')" class="bg-white cursor-pointer border-t grid h-12 text-center place-content-center text-lg blur-none ">
                     View More
                 </div>
             </div>
@@ -73,13 +73,13 @@
                         </div>
                     </div>
                 </div>
-                <div @click="moreArticle('Events')" class="cursor-pointer border-t grid h-12 text-center place-content-center text-lg blur-none ">
+                <div @click="moreArticle('Events')" class="bg-white cursor-pointer border-t grid h-12 text-center place-content-center text-lg blur-none ">
                     View More
                 </div>
             </div>
         </div>
         <!-- Project -->
-        <div class="grid gap-2 place-content-center mt-10">
+        <div class="grid gap-2 place-content-center">
             <div class="text-center">
             <h1 class="font-medium leading-tight text-3xl text-sky-600">PROJECT OBJECTIVES</h1>
             <hr class="">
@@ -127,7 +127,7 @@
         <!-- /Project -->
         <!-- About Us -->
         <div >
-            <div class="grid gap-2 place-content-center mt-10">
+            <div class="grid gap-2 place-content-center pt-14">
                 <div class="text-center">
                 <h1 class="font-medium leading-tight text-3xl text-sky-600">ABOUT US</h1>
                 <hr class="">
@@ -154,13 +154,13 @@
         <!-- /About Us -->
         <!-- Coop Agencies -->
         <div class="grid gap-2 place-content-center mb-5">
-            <div class="grid gap-2 place-content-center lg:mt-10 mt-2">
+            <div class="grid gap-2 place-content-center lg:pt-14 mt-2">
                 <div class="text-center">
                 <h1 class="font-medium leading-tight text-3xl text-sky-600">COOP AGENCIES</h1>
                 <hr class="">
                 </div>
             </div>
-            <div class="flex justify-center gap lg:gap-4 gap-2 px-10">
+            <div class="flex justify-center  gap lg:gap-4 gap-2 px-10">
                 <div class="shrink-0">
                     <a href="https://www.dost.gov.ph/"><img src="img/logo/DOST.png" class="object-fill lg:w-[4vw] lg:h-[4vw] w-[11vw] h-[11vw]" alt="#"></a>
                 </div>
