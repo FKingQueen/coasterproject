@@ -20,10 +20,10 @@
                                     </div>
                                     <div class="text-center text-xs blur-none antialiased">
                                         <p>
-                                            Coastal Engineering, Management Research
+                                            Coastal Engineering and Management 
                                         </p>
                                         <p>
-                                            and Development Center
+                                            Research and Development Center
                                         </p>
                                     </div>
                                 </div>

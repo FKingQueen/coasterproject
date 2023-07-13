@@ -5,7 +5,22 @@
                 <div class="flex justify-center text-2xl">
                     Inventory
                 </div>
-                <a-button  type="primary" @click="this.$router.push('/admin/inventoryPlatform/addForm')" class="mb-2">New Inventory</a-button>
+                <div class="mb-2 flex justify-start gap-1">
+                  <a-button  type="primary" @click="this.$router.push('/admin/inventoryPlatform/addForm')" class="mb-2">New Inventory</a-button>
+
+                  <Upload 
+                    :headers="{'x-csrf-token' : token, 'X-Requested-With' : 'XMLHttpRequest'}"
+                    :on-success="handleSuccess"
+                    :on-error="handleError"
+                    :format="['csv','xlsx']"
+                    :multiple="false"
+                    :on-format-error="handleFormatError"
+                    action="/api/admin/importInventory"
+                  >
+                      <Button icon="ios-cloud-upload-outline">Import File</Button>
+                  </Upload>
+                </div>
+
 
                 <a-table :data-source="inventories" :columns="columns" size="small">
                     <template #headerCell="{ column }">
@@ -209,6 +224,7 @@ export default defineComponent({
   },
   data(){
     return{
+      token: '',
       modalData: '',
       modal: false,
       inventories: [],
@@ -217,10 +233,8 @@ export default defineComponent({
   },
   methods: {
     remove(key){
-      // this.articles.value = this.articles.value.filter(item => item.key !== key);
       let id = this.inventories[key].id
       this.inventories.splice(key, 1);
-      // let id = this.articles[key]
 
       axios.post(`/api/admin/deleteInventory/${id}`)
       .then(function (response) {
@@ -245,7 +259,19 @@ export default defineComponent({
     },
     removeModal(){
       this.modal = false;
-    }
+    },
+    handleSuccess (res, file) {
+        console.log(res);
+    },
+    handleError (res, file) {
+        console.log('res', res);
+    },
+    handleFormatError (file) {
+        notification.warning({
+            message: 'The file format is incorrect',
+            description: 'File format of ' + file.name + ' is incorrect, please select jpg or png.'
+        });
+    },
   },
   async created(){
     let existingObj = this;

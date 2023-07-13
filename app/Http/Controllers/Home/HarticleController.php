@@ -12,7 +12,7 @@ use App\Models\Type;
 class HarticleController extends Controller
 {
     public function getArticles() {
-        $article =  Article::with('projects')->with('type')->get();
+        $article =  Article::with('projects')->with('type')->orderBy('created_at','DESC')->get();
         
         foreach($article as $key => $arti)
         {
@@ -28,7 +28,7 @@ class HarticleController extends Controller
 
         $article[0]->date = Carbon::createFromFormat('Y-m-d H:i:s', $article[0]->created_at)->format('F d, Y');
 
-        $articles =  Article::with('projects')->with('type')->get();
+        $articles =  Article::with('projects')->with('type')->orderBy('created_at','DESC')->get();
         
         foreach($articles as $key => $arti)
         {
@@ -42,7 +42,7 @@ class HarticleController extends Controller
     }
 
     public function getmoreArticle($id){
-        $moreArticle =  Article::where('type_id', $id)->with('projects')->with('type')->get();
+        $moreArticle =  Article::where('type_id', $id)->with('projects')->with('type')->orderBy('created_at','DESC')->get();
         
         foreach($moreArticle as $key => $arti)
         {
@@ -57,8 +57,8 @@ class HarticleController extends Controller
         }
 
         if($id == 1){
-            $moreArticle1 =  Article::where('type_id', 2)->with('projects')->with('type')->get();
-            $moreArticle2 =  Article::where('type_id', 3)->with('projects')->with('type')->get();
+            $moreArticle1 =  Article::where('type_id', 2)->with('projects')->with('type')->orderBy('created_at','DESC')->get();;
+            $moreArticle2 =  Article::where('type_id', 3)->with('projects')->with('type')->orderBy('created_at','DESC')->get();;
             foreach($moreArticle1 as $key => $arti)
             {
                 $moreArticle1[$key]->date = Carbon::createFromFormat('Y-m-d H:i:s', $arti->created_at)->format('F d, Y');
@@ -68,8 +68,8 @@ class HarticleController extends Controller
                 $moreArticle2[$key]->date = Carbon::createFromFormat('Y-m-d H:i:s', $arti->created_at)->format('F d, Y');
             }
         } else if($id == 2){
-            $moreArticle1 =  Article::where('type_id', 1)->with('projects')->with('type')->get();
-            $moreArticle2 =  Article::where('type_id', 3)->with('projects')->with('type')->get();
+            $moreArticle1 =  Article::where('type_id', 1)->with('projects')->with('type')->orderBy('created_at','DESC')->get();;
+            $moreArticle2 =  Article::where('type_id', 3)->with('projects')->with('type')->orderBy('created_at','DESC')->get();;
             foreach($moreArticle1 as $key => $arti)
             {
                 $moreArticle1[$key]->date = Carbon::createFromFormat('Y-m-d H:i:s', $arti->created_at)->format('F d, Y');
@@ -79,8 +79,8 @@ class HarticleController extends Controller
                 $moreArticle2[$key]->date = Carbon::createFromFormat('Y-m-d H:i:s', $arti->created_at)->format('F d, Y');
             }
         } else if($id == 3){
-            $moreArticle1 =  Article::where('type_id', 1)->with('projects')->with('type')->get();
-            $moreArticle2 =  Article::where('type_id', 2)->with('projects')->with('type')->get();
+            $moreArticle1 =  Article::where('type_id', 1)->with('projects')->with('type')->orderBy('created_at','DESC')->get();;
+            $moreArticle2 =  Article::where('type_id', 2)->with('projects')->with('type')->orderBy('created_at','DESC')->get();;
             foreach($moreArticle1 as $key => $arti)
             {
                 $moreArticle1[$key]->date = Carbon::createFromFormat('Y-m-d H:i:s', $arti->created_at)->format('F d, Y');

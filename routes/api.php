@@ -38,6 +38,7 @@ Route::group(['prefix' => 'admin','middleware' => 'auth:sanctum'], function() {
     Route::post('/deleteInventory/{id}', [InventoryController::class, 'deleteInventory']);
     Route::get('/getInventoryEdit/{id}', [InventoryController::class, 'getInventoryEdit']);
     Route::post('/updateInventory', [InventoryController::class, 'updateInventory']);
+    Route::post('/importInventory', [InventoryController::class, 'importInventory']);
 
     // Admin User
     Route::get('/getRole', [UserController::class, 'getRole']);

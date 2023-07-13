@@ -218,4 +218,9 @@ class InventoryController extends Controller
         return;
     } 
 
+    public function importInventory(){
+
+        return true;
+    }
+
 }

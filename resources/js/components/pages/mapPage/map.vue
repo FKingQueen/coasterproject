@@ -127,14 +127,6 @@
                     </a-menu>
                   </div>
                   <div class="border w-full h-[52vh]">
-                    <div :style="{ marginTop: '16px' }" class="text-center">
-                      <RadioGroup v-model="selectedBouy" size="small" type="button">
-                          <Radio label="Yearly"></Radio>
-                          <Radio label="Monthly"></Radio>
-                          <Radio label="Weekly"></Radio>
-                          <Radio label="Latest"></Radio>
-                      </RadioGroup>
-                    </div>
                     <highcharts v-if="this.isVisibleCardBouy" class="hc" :options="chartOptions" ref="chart"></highcharts>
                   </div>
                   <div class="w-full p-1 flex justify-end">
@@ -213,7 +205,9 @@ export default defineComponent({
                   }
               },
           },
-          
+          series: {
+              pointStart: Date.UTC(2010, 0, 1),
+          }
         },
       },
       desMarker,
