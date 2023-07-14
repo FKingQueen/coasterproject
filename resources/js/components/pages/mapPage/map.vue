@@ -162,11 +162,11 @@ export default defineComponent({
     
     var desMarker = {
         url: '/img/marker/gmapmarker1.png', // image is 512 x 512
-        scaledSize : new google.maps.Size(18, 26)
+        scaledSize : new google.maps.Size(10, 10)
     };
     var bouyMarker = {
         url: '/img/marker/gmapmarker2.png', // image is 512 x 512
-        scaledSize : new google.maps.Size(20, 22)
+        scaledSize : new google.maps.Size(10, 10)
     };
     return {
       date: new Date(),

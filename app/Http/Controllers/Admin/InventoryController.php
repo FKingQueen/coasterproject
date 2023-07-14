@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Inventory;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\InventoryImport;
 use DB;
 
 class InventoryController extends Controller
@@ -218,9 +220,11 @@ class InventoryController extends Controller
         return;
     } 
 
-    public function importInventory(){
+    public function importInventory(Request $request){
 
-        return true;
+        $res = Excel::import(new InventoryImport, $request->file);
+        
+       return "sample";
     }
 
 }

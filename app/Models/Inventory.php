@@ -26,7 +26,7 @@ class Inventory extends Model
         'shorelineTypology',
         'nearshoreTypology',
         'image',
-        'content',
+        'description',
         'latitude',
         'longitude',
     ];

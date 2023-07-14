@@ -12,7 +12,7 @@
                     :headers="{'x-csrf-token' : token, 'X-Requested-With' : 'XMLHttpRequest'}"
                     :on-success="handleSuccess"
                     :on-error="handleError"
-                    :format="['csv','xlsx']"
+                    :format="['csv','xlsx', 'xls', 'jpg']"
                     :multiple="false"
                     :on-format-error="handleFormatError"
                     action="/api/admin/importInventory"
@@ -260,11 +260,26 @@ export default defineComponent({
     removeModal(){
       this.modal = false;
     },
-    handleSuccess (res, file) {
-        console.log(res);
+    async handleSuccess (res, file) {
+        let existingObj = this;
+        axios.get('/api/admin/getInventory')
+        .then(function (response) {
+          existingObj.inventories = response.data
+          notification.success({
+              message: 'Notification',
+              description: 'New Inventories are Successfully Imported',
+          });
+        })
+        .catch(function (error) {
+        });
+
+      
     },
     handleError (res, file) {
-        console.log('res', res);
+        notification.warning({
+            message: 'Notification',
+            description: 'Something is wrong, kindly validate the imported Excel file',
+        });
     },
     handleFormatError (file) {
         notification.warning({
@@ -281,9 +296,6 @@ export default defineComponent({
       existingObj.inventories = response.data
     })
     .catch(function (error) {
-        if(error){
-          this.formValidate.image = image
-        }
     });
   }
 })
