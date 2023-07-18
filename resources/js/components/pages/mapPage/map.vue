@@ -44,7 +44,7 @@
 
       <div ref="cardProvince">
         <transition>
-          <div v-if="this.isVisibleCardProvince"  class="pac-card lg:w-[100vh] w-[52vh] mt-10" id="pac-card" style="overflow-x: hidden; overflow-y: auto;">
+          <div v-if="this.isVisibleCardProvince"  class="pac-card lg:w-[100vh] w-[52vh] mt-20" id="pac-card" style="overflow-x: hidden; overflow-y: auto;">
               <div>
                   <!-- <div id="title" class="text-center bg-[#025cfa]">Ilocos Norte</div> -->
                   <div class="flex justify-center">
@@ -68,10 +68,10 @@
 
       <div ref="cardMarker">
         <transition>
-          <div v-if="this.isVisibleCardMarker"  class="pac-card lg:w-[85vh] w-[52vh] mt-10" id="pac-card" style="overflow-x: hidden; overflow-y: auto;">
+          <div v-if="this.isVisibleCardMarker"  class="pac-card lg:w-[100vh] w-[52vh] mt-20 ml-96 " id="pac-card" style="overflow-x: hidden; overflow-y: auto;">
               <div class="">
                   <!-- <div id="title" class="text-center bg-[#800000]">{{ dataMarker.province }}</div> -->
-                  <div class="border w-full h-[52vh] block">
+                  <div class="border w-full h-[56vh] block">
                     <div class="h-full overflow-y-scroll">
 
                       <div class="w-full flex justify-center">
@@ -116,7 +116,7 @@
 
       <div ref="cardBouy">
         <transition>
-          <div v-if="this.isVisibleCardBouy"  class="pac-card lg:w-[100vh] w-[52vh] mt-10" id="pac-card" style="overflow-x: hidden; overflow-y: auto;">
+          <div v-if="this.isVisibleCardBouy"  class="pac-card lg:w-[100vh] w-[52vh] mt-20 ml-96" id="pac-card" style="overflow-x: hidden; overflow-y: auto;">
               <div>
                   <!-- <div id="title" class="text-center bg-[#025cfa]">Ilocos Norte</div> -->
                   <div class="flex justify-center">
@@ -582,7 +582,7 @@ export default defineComponent({
       ilocosNorteOptions:{
         strokeColor: '#009dff',
         strokeOpacity: 0.3,
-        strokeWeight: 2,
+        strokeWeight: 1,
         fillColor: '#009dff',
         fillOpacity: 0.35
       },
@@ -1809,7 +1809,7 @@ export default defineComponent({
         if(id == existingObj.markers[i].id){
           existingObj.$refs.gmap.$mapPromise.then((map) => {
             map.setZoom(11)
-            map.panTo({lat: existingObj.markers[i].latitude, lng: existingObj.markers[i].longitude})
+            map.panTo({lat: existingObj.markers[i].latitude, lng: existingObj.markers[i].longitude + .3900})
           })
           existingObj.dataMarker = existingObj.markers[i]
         }
@@ -1822,12 +1822,12 @@ export default defineComponent({
       if(id == 1){
         existingObj.$refs.gmap.$mapPromise.then((map) => {
           map.setZoom(11)
-          map.panTo({lat: 18.200961, lng: 120.571584})
+          map.panTo({lat: 18.200961, lng: 120.571584 + .3900})
         })
       } else if(id == 2){
         existingObj.$refs.gmap.$mapPromise.then((map) => {
           map.setZoom(11)
-          map.panTo({lat: 17.557391, lng: 120.466835})
+          map.panTo({lat: 17.557391, lng: 120.466835 + .3900})
         })
       }
       existingObj.isVisibleCardBouy = true
@@ -1894,45 +1894,6 @@ export default defineComponent({
     overflow: hidden;
     font-family: Roboto;
     padding: 0;
-  }
-
-  #pac-container {
-    padding-bottom: 12px;
-    margin-right: 12px;
-  }
-
-  .pac-controls {
-    display: inline-block;
-    padding: 5px 11px;
-  }
-
-  .pac-controls label {
-    font-family: Roboto;
-    font-size: 13px;
-    font-weight: 300;
-  }
-
-  #pac-input {
-    background-color: #fff;
-    font-family: Roboto;
-    font-size: 15px;
-    font-weight: 300;
-    margin-left: 12px;
-    padding: 0 11px 0 13px;
-    text-overflow: ellipsis;
-    width: 400px;
-  }
-
-  #pac-input:focus {
-    border-color: #4d90fe;
-  }
-
-  #title {
-    color: #fff;
-    /* background-color: #4d90fe; */
-    font-size: 25px;
-    font-weight: 500;
-    padding: 6px 12px;
   }
 </style>
 

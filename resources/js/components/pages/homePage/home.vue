@@ -126,32 +126,60 @@
         </section>
         <!-- /Project -->
         <!-- About Us -->
-        <div >
-            <div class="grid gap-2 place-content-center pt-14">
-                <div class="text-center">
-                <h1 class="font-medium leading-tight text-3xl text-sky-600">ABOUT US</h1>
-                <hr class="">
-                </div>
-            </div>
+        <div class="pt-14">
             <div class="flex justify-center w-full  mt-5">
-                <div>
-                    <div class="w-full text-justify indent-8 lg:px-40 px-5 block leading-loose tracking-wide antialiased">
-                        The Coastal Engineering Research Center or CoastER Center is the country’s first coastal engineering and management research and development center and 
-                        the hub of innovations for coastal resiliency. This facility will spur the development of innovations that address coastal erosion, development construction 
-                        materials for coastal protection, policies, and guidelines intended to protect resources from coastal flooding and improve the lives of people in coastal 
-                        communities. It will also bolster the capability of Filipino engineers towards coastal engineering leading to the development of a master’s degree for coastal 
-                        engineering.
+                <div class="w-10/12 flex justify-center">
+                    <div class="items-center flex w-2/12 justify-center">
+                        <img class="w-3/4" src="/img/logo/coaster.png" alt="" >
                     </div>
-                    <hr class="my-6 border-sky-300" />
-                    <div class="w-full text-justify indent-8 lg:px-40 px-5 block leading-loose tracking-wide antialiased">
-                        The COASTER aims to spearhead the development of technologies and innovation to mitigate and manage coastal disasters and risks. The overall goal of the 
-                        center is to take the lead in coastal science and engineering studies to better undertand the magniture of certain process and hazards and their impacts
-                        on the maritime environment including tidal deltas and low-lying lands.
+                    <div class="w-3/4">
+                        <Collapse simple>
+                            <Panel name="1" class="text-2xl py-5 font-semibold text-sky-600 ">
+                                WHO WE ARE
+                                <template #content >
+                                    <p class="text-base text-justify indent-8 px-5 font-normal">
+                                        The Coastal Engineering Research Center or CoastER Center is the country’s first coastal engineering and management research and development center and 
+                                        the hub of innovations for coastal resiliency. This facility will spur the development of innovations that address coastal erosion, development construction 
+                                        materials for coastal protection, policies, and guidelines intended to protect resources from coastal flooding and improve the lives of people in coastal 
+                                        communities. It will also bolster the capability of Filipino engineers towards coastal engineering leading to the development of a master’s degree for coastal 
+                                        engineering.
+                                    </p>
+                                </template>
+                            </Panel>
+                            <Panel name="2" class="text-2xl py-5 font-semibold text-sky-600">
+                                WHAT WE DO
+                                <template #content >
+                                    <p class="text-base text-justify indent-8 px-5 font-normal">
+                                        The COASTER aims to spearhead the development of technologies and innovation to mitigate and manage coastal disasters and risks. The overall goal of the 
+                                        center is to take the lead in coastal science and engineering studies to better undertand the magniture of certain process and hazards and their impacts
+                                        on the maritime environment including tidal deltas and low-lying lands.
+                                    </p>
+                                    <div class="w-full flex justify-center space-x-4">
+                                        <iframe width="560" height="315" src="https://www.youtube.com/embed/C7ZEzkKpxZs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                                        <iframe width="560" height="315" src="https://www.youtube.com/embed/fre6VqZIYxk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                                    </div>
+                                </template>
+                            </Panel>
+                            <Panel name="3" class="text-2xl py-5 font-semibold text-sky-600">
+                                WHERE WE ARE
+                                <template #content>
+                                    <p  class="text-base text-justify indent-8 px-5 font-normal">
+                                        The Coastal Engineering Research Center or CoastER Center is located in #16 Quiling Sur, City of Batac 2906 Ilocos Norte, within the Mariano Marcos State University, in front of College of Engineering (COE)
+                                    </p>
+                                    <div class="w-full flex justify-center">
+                                        <div class="pt-5">
+                                            <img @click="this.isActiveLocation = true" class="h-full w-52 cursor-pointer transition ease-in-out delay-75  hover:-translate-y-1 hover:scale-105 duration-300" src="/img/location.png" />
+                                            <Location v-if="this.isActiveLocation == true" :isActiveLocation="this.isActiveLocation"/>
+                                            <p>{{this.isActiveLocation}}</p>
+                                        </div>
+                                    </div>
+                                </template>
+                            </Panel>
+                        </Collapse>
                     </div>
                 </div>
             </div>
         </div>
-        
         <!-- /About Us -->
         <!-- Coop Agencies -->
         <div class="grid gap-2 place-content-center mb-5">
@@ -200,14 +228,19 @@
   
   // import required modules
   import { Mousewheel, Autoplay, Pagination, Navigation } from "swiper";
+  import Location from './homeComponents/location.vue'
+
+  import { defineComponent, ref } from 'vue';
   
-  export default {
+  export default defineComponent({
     components: {
       Swiper,
       SwiperSlide,
+      Location,
     },
     setup() {
       return {
+        isActiveLocation: ref(false),
         modules: [Mousewheel, Autoplay, Pagination, Navigation],
       };
     },
@@ -273,8 +306,7 @@
             this.$router.push({ name: 'projects', params: { project, id } })
         }
     }   
-
-  };
+  });
   </script>
 
   <style scoped>

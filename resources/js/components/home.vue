@@ -390,34 +390,38 @@
             <!-- Footer -->
             <footer id="footer" style="" class="bg-white dark:bg-gray-800">
                 <div id="contact" class="max-w-screen-xl mx-auto lg:py-5 md:p-8 lg:p-10">
-                    <div class="flex justify-between items-center">
-                        <div class="mt-4 lg:mt-0 grid">
-                            <img class="w-40 h-40 sm:w-36 sm:h-36 " src="/img/logo/coaster.png" alt="" >
+                    <div class="flex justify-between items-center ">
+                        <div class="w-4/12">
+                            <h3 class="mb-4 text-base text-gray-400  block">ABOUT US</h3>
+                            <p class="text-gray-400 text-justify">
+                                The COASTER aims to spearhead the development of technologies and innovation to mitigate and manage coastal disasters and risks in the Philippines. This project is funded by DOST-PCIEERD.
+                            </p>
                         </div>
                         <div class="">
-                            <h3 class="mb-4 text-base text-gray-900 dark:text-white block">Coaster Info</h3>
+                            <h3 class="mb-4 text-base text-gray-400  block">CONNECT WITH US</h3>
                             <ul class="text-gray-500 dark:text-gray-400  justify-end">
                                     <li class="mb-4">
                                         <div class="flex block">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-                                            </svg>
+                                            <Icon size="20" type="md-flag" />
                                             Quiling Sur, Batac City, Ilocos Norte, Philippines
                                         </div>
                                     </li>
                                     <li class="mb-4">
                                         <div class="flex block">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
-                                            </svg>
+                                            <Icon size="20" type="logo-google" />
                                             coaster@mmsu.edu.ph
+                                        </div>
+                                    </li>
+                                    <li class="mb-4">
+                                        <div class="flex block">
+                                            <Icon size="20" type="logo-facebook" />
+                                            https://www.facebook.com/people/MMSU-Coaster/100088362841925/
                                         </div>
                                     </li>
                             </ul>
                         </div>
                         <div class="">
-                            <h3 class="mb-4 text-base text-gray-900 dark:text-white block">Quick Link</h3>
+                            <h3 class="mb-4 text-base text-gray-400  block">QUICK LINK</h3>
                             <ul class="text-gray-500 dark:text-gray-400  justify-end">
                                     <li class="mb-4">
                                         <div class="flex block">
