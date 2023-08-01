@@ -1820,6 +1820,7 @@ export default defineComponent({
             if (this.$refs.gmap.$mapObject.getZoom() != 11) {
                 this.isVisibleCardProvince = false
             }
+            
             this.current = ref(['delft3d']);
         },
         close() {
@@ -1856,8 +1857,10 @@ export default defineComponent({
                     map.panTo({ lat: 17.557391, lng: 120.466835 })
                 })
             }
+            existingObj.isVisibleCardFilter = false
         },
-        closeclick() {
+        async closeclick() {
+            let existingObj = this;
             this.isActiveWLIN = false;
             this.isActiveWLIS = false;
             this.openedMarkerID = null;
@@ -1865,6 +1868,7 @@ export default defineComponent({
                 map.setZoom(this.zoom)
                 map.panTo(this.center)
             })
+
         },
         filterclick(id) {
             if (id == 1) {
@@ -1877,7 +1881,7 @@ export default defineComponent({
             } else if (id == 4) {
                 this.pvActive = !this.pvActive
             }
-            console.log(id);
+            
         }
     },
     async mounted() {
