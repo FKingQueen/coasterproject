@@ -1,8 +1,8 @@
 <template>
     <div class="w-full h-[80vh] border p-2 flex justify-center">
       <GMapMap 
-          :center="this.center"
-          :zoom="zoom"
+          :center="{lat: 17.156009, lng: 121.247046}"
+          :zoom="8"
           ref="gmap"
           :options="options"
           style="width: 100vw; height: 100%"
@@ -10,7 +10,7 @@
       >
         <GMapPolygon @click="handleSelect(1)" :options="ilocosNorteOptions"
             :paths="ilocosNortePath" 
-        />
+        />            
         <GMapPolygon @click="handleSelect(2)" :options="ilocosSurOptions"
             :paths="ilocosSurPath" 
         />
@@ -20,6 +20,7 @@
         <GMapPolygon @click="handleSelect(4)" :options="pangasinanOptions"
             :paths="Pangasinan"
         />
+
         <GMapMarker
           :key="index"
           :icon="desMarker"
@@ -27,19 +28,68 @@
           :position="{lat: m.latitude, lng: m.longitude }"
           :clickable="true"
           @click="marker(m.id)"
-        />
+        >
+
+          <GMapInfoWindow
+            class="w-[700px] h-full"
+            :closeclick="true"
+            @closeclick="closeclick()"
+            :opened="openedMarkerID === m.id"
+            :options=" {
+              pixelOffset: {
+                width: 0, height: 0
+              },
+              maxWidth: 2000,
+            }"
+          >
+            <Places v-if="openedMarkerID === m.id" class="w-full" :id="m.id"/>
+          </GMapInfoWindow>
+
+        </GMapMarker>
+
         <GMapMarker
           :icon="bouyMarker"
           :position="{lat: 18.200961, lng: 120.571584}"
           :clickable="true"
           @click="bouy(1)"
-        />
+        >
+          <GMapInfoWindow
+            class="w-[700px] h-full"
+            :opened="this.isActiveWLIN"
+            :closeclick="true"
+            @closeclick="closeclick()"
+            :options=" {
+              pixelOffset: {
+                width: 0, height: 0
+              },
+              maxWidth: 2000,
+            }"
+          >
+            <WaterLevel v-if="this.isActiveWLIN" class="w-full" :id="1"/>
+          </GMapInfoWindow>
+        </GMapMarker>
+
         <GMapMarker
           :icon="bouyMarker"
           :position="{lat: 17.557391, lng: 120.466835}"
           :clickable="true"
           @click="bouy(2)"
-        />
+        >
+          <GMapInfoWindow
+            class="w-[700px] h-full"
+            :opened="this.isActiveWLIS"
+            :closeclick="true"
+            @closeclick="closeclick()"
+            :options=" {
+              pixelOffset: {
+                width: 0, height: 0
+              },
+              maxWidth: 2000,
+            }"
+          >
+            <WaterLevel v-if="this.isActiveWLIS" class="w-full" :id="2"/>
+          </GMapInfoWindow>
+        </GMapMarker>
       </GMapMap>
 
       <div ref="cardProvince">
@@ -66,95 +116,60 @@
         </transition>
       </div>
 
-      <div ref="cardMarker">
+      <div ref="cardFilter">
         <transition>
-          <div v-if="this.isVisibleCardMarker"  class="pac-card lg:w-[100vh] w-[52vh] mt-20 ml-96 " id="pac-card" style="overflow-x: hidden; overflow-y: auto;">
-              <div class="">
-                  <!-- <div id="title" class="text-center bg-[#800000]">{{ dataMarker.province }}</div> -->
-                  <div class="border w-full h-[56vh] block">
-                    <div class="h-full overflow-y-scroll">
-
-                      <div class="w-full flex justify-center">
-                        <div class="w-11/12  drop-shadow-md">
-                          <Image :src="`/inventory/high/${dataMarker.image}`" class="object-cover  border" />
-                        </div>
-                      </div>
-                      <p class="w-full flex justify-center text-sm pt-2">
-                        Lat. {{ dataMarker.latitude }}, Lng {{ dataMarker.longitude }}
-                      </p>
-                      <div class="px-5 pb-5 divide-y">
-                        <p class="text-sm py-1"> <span class="font-semibold">Location:</span> {{ dataMarker.barangay }}, {{ dataMarker.municipality }}, {{ dataMarker.province }} </p>
-                        <p class="text-sm py-1"> <span class="font-semibold">Shoreline use:</span> {{ dataMarker.shoreline }}</p>
-                        <p class="text-sm py-1"> <span class="font-semibold">Morphology:</span> {{ dataMarker.morphology }}</p>
-                        <p class="text-sm py-1"> <span class="font-semibold">Type of Coastal Structure:</span> {{ dataMarker.typeStructure }}</p>
-                        <p class="text-sm py-1"> <span class="font-semibold">Structure Material:</span> {{ dataMarker.structureMaterial }}</p>
-                        <p class="text-sm py-1"> <span class="font-semibold">Waves Acting on Structure:</span> {{ dataMarker.wavesStructure }}</p>
-                        <p class="text-sm py-1"> <span class="font-semibold">Coastal Hazard:</span> {{ dataMarker.coastalHazard }}</p>
-                        <p class="text-sm py-1"> <span class="font-semibold">Protection Toe:</span> {{ dataMarker.protectionToe }}</p>
-                        <p class="text-sm py-1"> <span class="font-semibold">Height of Structure:</span> {{ dataMarker.heightStructure }}</p>
-                        <p class="text-sm py-1"> <span class="font-semibold">Length of Structure:</span> {{ dataMarker.lengthStructure }}</p>
-                        <div class="py-1">
-                          <p class="text-base mt-2 text-center"> <span class="font-bold">Typology</span></p>
-                          <p class="text-sm mt-2"><span class="font-semibold">Landwards:</span> {{ dataMarker.landwardsTypology }}</p>
-                          <p class="text-sm mt-2"><span class="font-semibold">Shoreline:</span> {{ dataMarker.shorelineTypology }}</p>
-                          <p class="text-sm mt-2"><span class="font-semibold">Nearshore:</span> {{ dataMarker.nearshoreTypology }}</p>
-                        </div>
-                        <div class="py-1">
-                          <p class="text-base mt-2 text-center"> <span class="font-bold">Description</span></p>
-                          <p class="text-sm text-justify mt-2" v-html="dataMarker.description"></p>
-                        </div>
-                      </div>
-                    </div>
+          <div v-if="this.isVisibleCardFilter" class="mr-20">
+              <div class="w-[150px] text-white text-sm rounded grid grid-cols-1 divide-y">
+                <Tooltip :class="{ active: bmsActive}" class="cursor-pointer text-center  text-gray-800 w-full hover:bg-sky-600" content="Bouy Monitoring System" placement="top" :delay="500">
+                  <div class="p-2 w-full">
+                    
+                    BMS
                   </div>
-                  <div class="w-full p-1 flex justify-end block">
-                    <a-button type="text" @click="close()">Return</a-button>
+                </Tooltip>
+                <Tooltip class="cursor-pointer text-center bg-sky-800 w-full hover:bg-sky-600" content="Water Level Monitoring System" placement="top" :delay="500">
+                  <div class="p-2 w-full">
+                    WLMS
                   </div>
+                </Tooltip>
+                <Tooltip class="cursor-pointer text-center bg-sky-800 w-full hover:bg-sky-600" content="Structure Information" placement="top" :delay="500">
+                  <div class="p-2 w-full">
+                    SI
+                  </div>
+                </Tooltip>
+                <Tooltip class="cursor-pointer text-center bg-sky-800 w-full hover:bg-sky-600" content="Province" placement="top" :delay="500">
+                  <div class="p-2 w-full">
+                    PROVINCE
+                  </div>
+                </Tooltip>
               </div>
           </div>
         </transition>
       </div>
 
-      <div ref="cardBouy">
-        <transition>
-          <div v-if="this.isVisibleCardBouy"  class="pac-card lg:w-[100vh] w-[52vh] mt-20 ml-96" id="pac-card" style="overflow-x: hidden; overflow-y: auto;">
-              <div>
-                  <!-- <div id="title" class="text-center bg-[#025cfa]">Ilocos Norte</div> -->
-                  <div class="flex justify-center">
-                    <a-menu v-model:selectedKeys="currentBouy" mode="horizontal">
-                      <a-menu-item key="bouy">
-                        BOUY
-                      </a-menu-item>
-                    </a-menu>
-                  </div>
-                  <div class="border w-full h-[52vh]">
-                    <highcharts v-if="this.isVisibleCardBouy" class="hc" :options="chartOptions" ref="chart"></highcharts>
-                  </div>
-                  <div class="w-full p-1 flex justify-end">
-                    <a-button type="text" @click="close()">Return</a-button>
-                  </div>
-              </div>
-          </div>
-        </transition>
-      </div>
-      
     </div>
 </template>
 
 <script>
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref, nextTick } from 'vue';
 import Description from './map/description.vue'
 import Delft3D from './map/delft3d.vue'
+import WaterLevel from './map/waterLevel.vue'
+import Places from './map/places.vue'
 export default defineComponent({
   name: 'App',
   components: {
     Description,
-    Delft3D
+    Delft3D,
+    WaterLevel,
+    Places,
   },
   setup() {
     const current = ref(['delft3d']);
-    const currentBouy = ref(['bouy']);
+    const isActiveWLIN = ref(false);
+    const isActiveWLIS = ref(false);
     return {
-      currentBouy,
+      isActiveWLIN,
+      isActiveWLIS,
       current,
     };
   },
@@ -169,7 +184,7 @@ export default defineComponent({
         scaledSize : new google.maps.Size(10, 10)
     };
     return {
-      date: new Date(),
+      openedMarkerID: null,
       chartOptions: {
         chart: {
           type: 'spline',
@@ -293,15 +308,19 @@ export default defineComponent({
             elementType: "labels.text.stroke",
             stylers: [{ color: "#17263c" }],
           }
-        ]
+        ],
+        zoomControl: false,
+        mapTypeControl: false,
       },
       isVisibleCardProvince: ref(false),
-      isVisibleCardMarker: ref(false),
-      isVisibleCardBouy: ref(false),
+      isVisibleCardFilter: ref(false),
+      bmsActive: ref(false),
+      wlmsActive: ref(false),
+      siActive: ref(false),
+      pvActive: ref(false),
       center: '',
       zoom: '',
       markers: '',
-      dataMarker: '',
       pusher: [
         {
           position: {
@@ -1791,8 +1810,6 @@ export default defineComponent({
     zoomChanged(){
       if(this.$refs.gmap.$mapObject.getZoom() != 11){
         this.isVisibleCardProvince = false
-        this.isVisibleCardMarker = false
-        this.isVisibleCardBouy = false
       }
       this.current = ref(['delft3d']);
     },
@@ -1809,56 +1826,45 @@ export default defineComponent({
         if(id == existingObj.markers[i].id){
           existingObj.$refs.gmap.$mapPromise.then((map) => {
             map.setZoom(11)
-            map.panTo({lat: existingObj.markers[i].latitude, lng: existingObj.markers[i].longitude + .3900})
+            map.panTo({lat: existingObj.markers[i].latitude, lng: existingObj.markers[i].longitude})
           })
-          existingObj.dataMarker = existingObj.markers[i]
         }
       }
-      console.log(existingObj.dataMarker.municipality);
-      existingObj.isVisibleCardMarker = true
+      this.openedMarkerID = id
     },
     async bouy(id){
       let existingObj = this;
       if(id == 1){
+        this.isActiveWLIN = true;
         existingObj.$refs.gmap.$mapPromise.then((map) => {
           map.setZoom(11)
-          map.panTo({lat: 18.200961, lng: 120.571584 + .3900})
+          map.panTo({lat: 18.200961, lng: 120.571584})
         })
       } else if(id == 2){
+        this.isActiveWLIS = true;
         existingObj.$refs.gmap.$mapPromise.then((map) => {
           map.setZoom(11)
-          map.panTo({lat: 17.557391, lng: 120.466835 + .3900})
+          map.panTo({lat: 17.557391, lng: 120.466835})
         })
       }
-      existingObj.isVisibleCardBouy = true
-      console.log(id);
-
-      await axios.get('/api/getSms')
-        .then(response => {
-          console.log(response.data);
-
-          for(let i = 0; i < response.data.length; i++){
-            existingObj.chartOptions.series[0].data[i] = []
-            existingObj.chartOptions.series[0].data[i][0] = Date.UTC(response.data[i].year, response.data[i].month, response.data[i].day, response.data[i].hour, response.data[i].min, response.data[i].sec)
-            existingObj.chartOptions.series[0].data[i][1] = response.data[i].height
-          }
+    },
+    closeclick(){
+      this.isActiveWLIN = false;
+      this.isActiveWLIS = false;
+      this.openedMarkerID = null;
+      this.$refs.gmap.$mapPromise.then((map) => {
+        map.setZoom(this.zoom)
+        map.panTo(this.center)
       })
-      
-      .catch(function (error) {
-        console.error(error);
-      });
-      console.log(existingObj.chartOptions.series[0]);
     }
   },
   async mounted() {
     let existingObj = this;
-    this.zoom = 8
+    existingObj.zoom = 8
     this.center = {lat: 17.156009, lng: 121.247046}
     this.$refs.gmap.$mapPromise.then((map) => {
-      const card = this.$refs.card
       map.controls[google.maps.ControlPosition.TOP_CENTER].push(this.$refs.cardProvince);
-      map.controls[google.maps.ControlPosition.TOP_CENTER].push(this.$refs.cardMarker);
-      map.controls[google.maps.ControlPosition.TOP_CENTER].push(this.$refs.cardBouy);
+      map.controls[google.maps.ControlPosition.RIGHT_TOP].push(this.$refs.cardFilter);
     })
     
     await axios.get('/api/getInventory')
@@ -1868,17 +1874,8 @@ export default defineComponent({
     .catch(function (error) {
         console.error(error);
     });
-      
-    const d = new Date();
-    let year = d.getFullYear();
-    let month = d.getMonth();
-    let date = d.getDate();
-    
 
-    // this.chartOptions.plotOptions.spline.pointInterval = 3600000
-    // this.chartOptions.plotOptions.spline.pointStart =Date.UTC(2022, 5, 13)
-    console.log(this.chartOptions)
-
+    setTimeout(() => existingObj.isVisibleCardFilter = true, 1000);
   }
 });
 </script>

@@ -12,19 +12,19 @@
                 :modules="modules" class="mySwiper"
             >
                 <swiper-slide>
-                    <img src="/img/slides/slide1.JPG" class="object-cover w-full " alt="#">       
+                    <img src="/img/slides/slide1.png" class="object-cover w-full " alt="#">       
                 </swiper-slide>
                 <swiper-slide>
-                    <img src="/img/slides/slide2.JPG" class="object-cover w-full " alt="#">       
+                    <img src="/img/slides/slide2.png" class="object-cover w-full " alt="#">       
                 </swiper-slide>
                 <swiper-slide>
-                    <img src="/img/slides/slide3.JPG" class="object-cover w-full " alt="#">       
+                    <img src="/img/slides/slide3.png" class="object-cover w-full " alt="#">       
                 </swiper-slide>
                 <swiper-slide>
-                    <img src="/img/slides/slide4.JPG" class="object-cover w-full " alt="#">       
+                    <img src="/img/slides/slide4.png" class="object-cover w-full " alt="#">       
                 </swiper-slide>
                 <swiper-slide>
-                    <img src="/img/slides/slide5.JPG" class="object-cover w-full " alt="#">       
+                    <img src="/img/slides/slide5.png" class="object-cover w-full " alt="#">       
                 </swiper-slide>
             </swiper>
         </div>
@@ -143,6 +143,7 @@
                                         materials for coastal protection, policies, and guidelines intended to protect resources from coastal flooding and improve the lives of people in coastal 
                                         communities. It will also bolster the capability of Filipino engineers towards coastal engineering leading to the development of a master’s degree for coastal 
                                         engineering.
+                                        <a @click="clickOS()" class="underline">Organization Structure</a>
                                     </p>
                                 </template>
                             </Panel>
@@ -164,15 +165,55 @@
                                 WHERE WE ARE
                                 <template #content>
                                     <p  class="text-base text-justify indent-8 px-5 font-normal">
-                                        The Coastal Engineering Research Center or CoastER Center is located in #16 Quiling Sur, City of Batac 2906 Ilocos Norte, within the Mariano Marcos State University, in front of College of Engineering (COE)
-                                    </p>
-                                    <div class="w-full flex justify-center">
-                                        <div class="pt-5">
-                                            <img @click="this.isActiveLocation = true" class="h-full w-52 cursor-pointer transition ease-in-out delay-75  hover:-translate-y-1 hover:scale-105 duration-300" src="/img/location.png" />
-                                            <Location v-if="this.isActiveLocation == true" :isActiveLocation="this.isActiveLocation"/>
-                                            <p>{{this.isActiveLocation}}</p>
+                                        The Coastal Engineering Research Center or CoastER Center is located in #16 Quiling Sur, City of Batac 2906 Ilocos Norte, within the Mariano Marcos State University, in front of College of Engineering (COE).
+                                        <a @click="showModal" class="underline">Location</a>
+                                        <a-modal
+                                            ref="modalRef"
+                                            v-model:visible="visible"
+                                            :wrap-style="{ overflow: 'hidden' }"
+                                            @ok="handleOk"
+                                            :ok-text="false"
+                                            :closable="false"
+                                            width="1000px"
+                                            cancel-text="Close"
+                                            >
+                                            <div class="w-full h-96">
+                                                <GMapMap 
+                                                :center="{lat: 18.059881, lng: 120.548642}"
+                                                :zoom="16"
+                                                map-type-id="roadmap"
+                                                ref="gmap"
+                                                :options="{
+                                                    zoomControl: false,
+                                                    mapTypeControl: false,
+                                                    scaleControl: false,
+                                                    streetViewControl: false,
+                                                    rotateControl: false,
+                                                    fullscreenControl: false,
+                                                }"
+                                                class="w-full h-full"
+                                                >
+                                                    <GMapMarker
+                                                    :icon="bouyMarker"
+                                                    :position="{lat: 18.059249, lng: 120.544146}"
+                                                    :clickable="true"
+                                                    >
+                                                    </GMapMarker>
+                                                </GMapMap>
+                                            </div>
+                                            <template #title>
+                                                <div ref="modalTitleRef" style="width: 100%; cursor: move">Coaster Location</div>
+                                            </template>
+                                            <template #modalRender="{ originVNode }">
+                                                <div :style="transformStyle">
+                                                <component :is="originVNode" />
+                                                </div>
+                                            </template>
+                                        </a-modal>
+                                        <div>
+                                            <img src="/img/location/building_location.jpg" />
                                         </div>
-                                    </div>
+                                    </p>
                                 </template>
                             </Panel>
                         </Collapse>
@@ -230,8 +271,8 @@
   import { Mousewheel, Autoplay, Pagination, Navigation } from "swiper";
   import Location from './homeComponents/location.vue'
 
-  import { defineComponent, ref } from 'vue';
-  
+  import { defineComponent, ref, computed, watch, watchEffect } from 'vue';
+  import { useDraggable } from '@vueuse/core';
   export default defineComponent({
     components: {
       Swiper,
@@ -239,7 +280,68 @@
       Location,
     },
     setup() {
+        const visible = ref(false);
+        const modalTitleRef = ref(null);
+        const showModal = () => {
+        visible.value = true;
+        };
+        const {
+        x,
+        y,
+        isDragging,
+        } = useDraggable(modalTitleRef);
+        const handleOk = e => {
+        console.log(e);
+        visible.value = false;
+        };
+        const startX = ref(0);
+        const startY = ref(0);
+        const startedDrag = ref(false);
+        const transformX = ref(0);
+        const transformY = ref(0);
+        const preTransformX = ref(0);
+        const preTransformY = ref(0);
+        const dragRect = ref({
+        left: 0,
+        right: 0,
+        top: 0,
+        bottom: 0,
+        });
+        watch([x, y], () => {
+        if (!startedDrag.value) {
+            startX.value = x.value;
+            startY.value = y.value;
+            const bodyRect = document.body.getBoundingClientRect();
+            const titleRect = modalTitleRef.value.getBoundingClientRect();
+            dragRect.value.right = bodyRect.width - titleRect.width;
+            dragRect.value.bottom = bodyRect.height - titleRect.height;
+            preTransformX.value = transformX.value;
+            preTransformY.value = transformY.value;
+        }
+        startedDrag.value = true;
+        });
+        watch(isDragging, () => {
+        if (!isDragging) {
+            startedDrag.value = false;
+        }
+        });
+        watchEffect(() => {
+        if (startedDrag.value) {
+            transformX.value = preTransformX.value + Math.min(Math.max(dragRect.value.left, x.value), dragRect.value.right) - startX.value;
+            transformY.value = preTransformY.value + Math.min(Math.max(dragRect.value.top, y.value), dragRect.value.bottom) - startY.value;
+        }
+        });
+        const transformStyle = computed(() => {
+        return {
+            transform: `translate(${transformX.value}px, ${transformY.value}px)`,
+        };
+        });
       return {
+        visible,
+        showModal,
+        handleOk,
+        modalTitleRef,
+        transformStyle,
         isActiveLocation: ref(false),
         modules: [Mousewheel, Autoplay, Pagination, Navigation],
       };
@@ -304,6 +406,10 @@
             }
             const project = existingObj.selectedProject
             this.$router.push({ name: 'projects', params: { project, id } })
+        },
+        clickOS(){
+            let id = 1
+            this.$router.push({ name: 'about', params: { id } })
         }
     }   
   });
