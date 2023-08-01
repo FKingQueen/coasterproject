@@ -6,7 +6,7 @@
                 <BreadcrumbItem>Edit Inventory Form</BreadcrumbItem>
             </Breadcrumb>
             <a-button @click="this.$router.push('/admin/inventoryPlatform')" class="my-3">Back</a-button>
-            <Form ref="formValidate" :model="formValidate" :rules="ruleValidate"  label-position="top" class="px-10" >
+            <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" label-position="top" class="px-10">
                 <div class="w-full border flex justify-center bg-[#abdcff]/80 py-1 mb-2">
                     <p class="">LOCATION</p>
                 </div>
@@ -18,7 +18,8 @@
                 <FormItem label="Municipality" prop="municipality">
                     <!-- <Input v-model="formValidate.municipality" placeholder="Input Municipality"></Input> -->
                     <Select v-model="formValidate.municipality" placeholder="Select Municipality">
-                        <Option v-for="item in municipalityList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                        <Option v-for="item in municipalityList" :value="item.value" :key="item.value">{{ item.label }}
+                        </Option>
                     </Select>
                 </FormItem>
                 <FormItem label="Barangay" prop="barangay">
@@ -35,42 +36,50 @@
                 </div>
                 <FormItem label="Structure Material" prop="structureMaterialValidate">
                     <Select v-model="formValidate.structureMaterial" multiple placeholder="Select Structure Material">
-                        <Option v-for="item in structureMaterialList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                        <Option v-for="item in structureMaterialList" :value="item.value" :key="item.value">{{ item.label }}
+                        </Option>
                     </Select>
                 </FormItem>
                 <FormItem label="Coastal Hazard" prop="coastalHazardValidate">
                     <Select v-model="formValidate.coastalHazard" multiple placeholder="Select Coastal Hazard">
-                        <Option v-for="item in coastalHazardList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                        <Option v-for="item in coastalHazardList" :value="item.value" :key="item.value">{{ item.label }}
+                        </Option>
                     </Select>
                 </FormItem>
                 <FormItem label="Shoreline" prop="shorelineValidate">
                     <Select v-model="formValidate.shoreline" multiple placeholder="Select ShoreLine">
-                        <Option v-for="item in shorelineList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                        <Option v-for="item in shorelineList" :value="item.value" :key="item.value">{{ item.label }}
+                        </Option>
                     </Select>
                 </FormItem>
                 <FormItem label="Coastal Morphology" prop="morphology">
                     <Select v-model="formValidate.morphology" placeholder="Select Coastal Morphology">
-                        <Option v-for="item in morphologyList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                        <Option v-for="item in morphologyList" :value="item.value" :key="item.value">{{ item.label }}
+                        </Option>
                     </Select>
                 </FormItem>
                 <FormItem label="Type of Coastal Structure" prop="typeStructureValidate">
                     <Select v-model="formValidate.typeStructure" multiple placeholder="Select Type of Coastal Structure">
-                        <Option v-for="item in coastalStructureList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                        <Option v-for="item in coastalStructureList" :value="item.value" :key="item.value">{{ item.label }}
+                        </Option>
                     </Select>
                 </FormItem>
                 <FormItem label="Type of Wave Structure" prop="wavesStructure">
                     <Select v-model="formValidate.wavesStructure" placeholder="Select Waves Structure">
-                        <Option v-for="item in waveStructureList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                        <Option v-for="item in waveStructureList" :value="item.value" :key="item.value">{{ item.label }}
+                        </Option>
                     </Select>
                 </FormItem>
                 <FormItem label="Protection Toe" prop="protectionToe">
                     <Select v-model="formValidate.protectionToe" placeholder="Select Protection Toe">
-                        <Option v-for="item in protectionToeList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                        <Option v-for="item in protectionToeList" :value="item.value" :key="item.value">{{ item.label }}
+                        </Option>
                     </Select>
                 </FormItem>
                 <FormItem label="Armor Units" prop="armorUnits">
                     <Select v-model="formValidate.armorUnits" placeholder="Select Armor Units">
-                        <Option v-for="item in armorUnitsList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                        <Option v-for="item in armorUnitsList" :value="item.value" :key="item.value">{{ item.label }}
+                        </Option>
                     </Select>
                 </FormItem>
                 <FormItem label="Height Structure" prop="heightStructure">
@@ -84,32 +93,30 @@
                 </div>
                 <FormItem label="Landwards" prop="landwardsTypology">
                     <Select v-model="formValidate.landwardsTypology" placeholder="Select Landwards Typology">
-                        <Option v-for="item in landwardsTypologyList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                        <Option v-for="item in landwardsTypologyList" :value="item.value" :key="item.value">{{ item.label }}
+                        </Option>
                     </Select>
                 </FormItem>
                 <FormItem label="Shoreline" prop="shorelineTypology">
                     <Select v-model="formValidate.shorelineTypology" placeholder="Select Shoreline Typology">
-                        <Option v-for="item in shorelineTypologyList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                        <Option v-for="item in shorelineTypologyList" :value="item.value" :key="item.value">{{ item.label }}
+                        </Option>
                     </Select>
                 </FormItem>
                 <FormItem label="Nearshore" prop="nearshoreTypology">
                     <Select v-model="formValidate.nearshoreTypology" placeholder="Select Nearshore Typology">
-                        <Option v-for="item in nearshoreTypologyList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                        <Option v-for="item in nearshoreTypologyList" :value="item.value" :key="item.value">{{ item.label }}
+                        </Option>
                     </Select>
                 </FormItem>
                 <div class="w-full border flex justify-center bg-[#abdcff]/80 py-1 mb-2">
                     <p class="">CONTENT</p>
                 </div>
                 <FormItem label="Image (atleast 1)" prop="image">
-                    <Upload
-                        type="drag"
-                        ref="uploads"
-                        :headers="{'x-csrf-token' : token, 'X-Requested-With' : 'XMLHttpRequest'}"
-                        :on-success="handleSuccess"
-                        :on-error="handleError"
-                        :format="['jpg','jpeg','png']"
-                        :on-format-error="handleFormatError"
-                        action="/api/admin/uploadInventory">
+                    <Upload type="drag" ref="uploads"
+                        :headers="{ 'x-csrf-token': token, 'X-Requested-With': 'XMLHttpRequest' }"
+                        :on-success="handleSuccess" :on-error="handleError" :format="['jpg', 'jpeg', 'png']"
+                        :on-format-error="handleFormatError" action="/api/admin/uploadInventory">
                         <div style="padding: 3px 0">
                             <Icon type="ios-cloud-upload" size="52" style="color: #3399ff"></Icon>
                             <p>Click or drag files here to upload</p>
@@ -124,7 +131,8 @@
                     </div>
                 </FormItem>
                 <FormItem label="Description" prop="description">
-                    <ckeditor :editor="editor" v-model="formValidate.description" :config="editorConfig" placeholder="Write Description"></ckeditor>
+                    <ckeditor :editor="editor" v-model="formValidate.description" :config="editorConfig"
+                        placeholder="Write Description"></ckeditor>
                 </FormItem>
 
                 <div class="flex justify-end">
@@ -140,17 +148,17 @@ import { defineComponent, ref, watch } from 'vue';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { notification } from 'ant-design-vue';
 export default defineComponent({
-    data(){
-        return{ 
+    data() {
+        return {
             editor: ClassicEditor,
             editorConfig: {
                 toolbar: {
                     items: [
-                    'undo', 'redo',
-                    '|', 'heading',
-                    '|', 'bold', 'italic',
-                    '|', 'link', 'blockQuote',
-                    '|', 'bulletedList', 'numberedList', 'outdent', 'indent'
+                        'undo', 'redo',
+                        '|', 'heading',
+                        '|', 'bold', 'italic',
+                        '|', 'link', 'blockQuote',
+                        '|', 'bulletedList', 'numberedList', 'outdent', 'indent'
                     ]
                 }
             },
@@ -626,116 +634,116 @@ export default defineComponent({
         }
     },
     methods: {
-        handleSubmit(name){
-            
+        handleSubmit(name) {
+
             let existingObj = this;
 
-            if(existingObj.formValidate.structureMaterial.length != 0 || existingObj.formValidate.structureMaterial != ""){
+            if (existingObj.formValidate.structureMaterial.length != 0 || existingObj.formValidate.structureMaterial != "") {
                 existingObj.formValidate.structureMaterialValidate = "1"
-            } else if(existingObj.formValidate.structureMaterial.length == 0 || existingObj.formValidate.structureMaterial == ""){
+            } else if (existingObj.formValidate.structureMaterial.length == 0 || existingObj.formValidate.structureMaterial == "") {
                 existingObj.formValidate.structureMaterialValidate = ""
             }
 
-            if(existingObj.formValidate.shoreline.length != 0 || existingObj.formValidate.shoreline != ""){
+            if (existingObj.formValidate.shoreline.length != 0 || existingObj.formValidate.shoreline != "") {
                 existingObj.formValidate.shorelineValidate = "1"
-            } else if(existingObj.formValidate.shoreline.length == 0 || existingObj.formValidate.shoreline == ""){
+            } else if (existingObj.formValidate.shoreline.length == 0 || existingObj.formValidate.shoreline == "") {
                 existingObj.formValidate.shorelineValidate = ""
             }
 
-            if(existingObj.formValidate.typeStructure.length != 0 || existingObj.formValidate.typeStructure != ""){
+            if (existingObj.formValidate.typeStructure.length != 0 || existingObj.formValidate.typeStructure != "") {
                 existingObj.formValidate.typeStructureValidate = "1"
-            } else if(existingObj.formValidate.typeStructure.length == 0 || existingObj.formValidate.typeStructure == ""){
+            } else if (existingObj.formValidate.typeStructure.length == 0 || existingObj.formValidate.typeStructure == "") {
                 existingObj.formValidate.typeStructureValidate = ""
             }
-            if(existingObj.formValidate.coastalHazard.length != 0 || existingObj.formValidate.coastalHazard != ""){
+            if (existingObj.formValidate.coastalHazard.length != 0 || existingObj.formValidate.coastalHazard != "") {
                 existingObj.formValidate.coastalHazardValidate = "1"
-            } else if(existingObj.formValidate.coastalHazard.length == 0 || existingObj.formValidate.coastalHazard == ""){
+            } else if (existingObj.formValidate.coastalHazard.length == 0 || existingObj.formValidate.coastalHazard == "") {
                 existingObj.formValidate.coastalHazardValidate = ""
             }
 
             this.$refs[name].validate((valid) => {
-                
+
                 if (valid) {
                     console.log(true);
                     axios.get('/sanctum/csrf-cookie').then(response => {
                         axios.post(`/api/admin/updateInventory`, this.formValidate)
-                        .then(function (response) {
-                            notification.success({
-                                message: 'Notification',
-                                description: 'Inventory is Successfully Update',
-                            });
-                            existingObj.$router.push('/admin/inventoryPlatform');
-                        })
-                        .catch(function (error) {
+                            .then(function (response) {
+                                notification.success({
+                                    message: 'Notification',
+                                    description: 'Inventory is Successfully Update',
+                                });
+                                existingObj.$router.push('/admin/inventoryPlatform');
+                            })
+                            .catch(function (error) {
 
-                        });
+                            });
                     })
                     console.log(this.formValidate);
 
                 } else {
-                    
+
                 }
             })
         },
-        provinceChange(){
+        provinceChange() {
             let existingObj = this;
-            if(existingObj.formValidate.province == 'Ilocos Norte'){
+            if (existingObj.formValidate.province == 'Ilocos Norte') {
                 existingObj.municipalityList = existingObj.ilocosNorteList
-            } else if(existingObj.formValidate.province == 'Ilocos Sur'){
+            } else if (existingObj.formValidate.province == 'Ilocos Sur') {
                 existingObj.municipalityList = existingObj.ilocosSurList
-            } else if(existingObj.formValidate.province == 'La Union'){
+            } else if (existingObj.formValidate.province == 'La Union') {
                 existingObj.municipalityList = existingObj.laUnionList
-            } else if(existingObj.formValidate.province == 'Pangasinan'){
+            } else if (existingObj.formValidate.province == 'Pangasinan') {
                 existingObj.municipalityList = existingObj.pangasinanList
             }
         },
-        handleSuccess (res, file) {
+        handleSuccess(res, file) {
             this.formValidate.image = res
         },
-        handleError (res, file) {
+        handleError(res, file) {
             console.log('res', res);
         },
-        handleFormatError (file) {
+        handleFormatError(file) {
             notification.warning({
                 message: 'The file format is incorrect',
                 description: 'File format of ' + file.name + ' is incorrect, please select jpg or png.'
             });
         },
-        async deleteImage(){
+        async deleteImage() {
             let image = this.formValidate.image
             this.formValidate.image = ''
             this.$refs.uploads.clearFiles()
             await axios.get('/sanctum/csrf-cookie').then(response => {
-                axios.post(`/api/admin/deleteImageInventory`, {imageName: image})
+                axios.post(`/api/admin/deleteImageInventory`, { imageName: image })
                     .then(function (response) {
 
                     })
                     .catch(function (error) {
-                    if(error){
-                        this.formValidate.image = image
-                    }
-                });    
-            })   
+                        if (error) {
+                            this.formValidate.image = image
+                        }
+                    });
+            })
         },
     },
-    async mounted(){
+    async mounted() {
         this.token = window.Laravel.csrfToken;
         // console.log(this.$route.params.id);
         let id = this.$route.params.id
         let existingObj = this;
         await axios.get(`/api/admin/getInventoryEdit/${id}`)
-        .then(function (response) {
-            // console.log(response.data[0].type);
-            // console.log(response.data);
-            existingObj.formValidate = response.data[0]
-            existingObj.formValidate.latitude = String(response.data[0].latitude)
-            existingObj.formValidate.longitude = String(response.data[0].longitude)
+            .then(function (response) {
+                // console.log(response.data[0].type);
+                // console.log(response.data);
+                existingObj.formValidate = response.data[0]
+                existingObj.formValidate.latitude = String(response.data[0].latitude)
+                existingObj.formValidate.longitude = String(response.data[0].longitude)
 
-            console.log(existingObj.formValidate)
-        })
-        .catch(function (error) {
-            console.log(error)
-        });
+                console.log(existingObj.formValidate)
+            })
+            .catch(function (error) {
+                console.log(error)
+            });
 
     }
 })

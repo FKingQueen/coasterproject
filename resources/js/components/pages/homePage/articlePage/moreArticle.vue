@@ -7,27 +7,24 @@
                         <p class="text-left text-3xl tracking-wide antialiased border-b-2 border-black/20 mt-4 blur-none">
                             Most Recent <span class="text-sky-800 ">{{ moreCurrent }}</span>
                         </p>
-                        <swiper
-                            :spaceBetween="30"
-                            :loop="true"
-                            :pagination="{
+                        <swiper :spaceBetween="30" :loop="true" :pagination="{
                             clickable: true,
-                            }"
-                            :modules="modules"
-                            class="mySwiper h-80 mt-2"
-                        >
-                            <swiper-slide v-slot="{ isActive }" v-for="(more, key) in this.moreArticle_list.slice(0,5)" >
-                                <div class="h-full shadow-lg " :style="{backgroundImage:`url(/uploads/high/${more.image})`}" style="background-repeat: no-repeat; background-size: cover; ">
+                        }" :modules="modules" class="mySwiper h-80 mt-2">
+                            <swiper-slide v-slot="{ isActive }" v-for="(more, key) in this.moreArticle_list.slice(0, 5)">
+                                <div class="h-full shadow-lg " :style="{ backgroundImage: `url(/uploads/high/${more.image})` }"
+                                    style="background-repeat: no-repeat; background-size: cover; ">
                                     <Transition :duration="550" name="nested">
-                                            <div v-if="isActive || key == 0 " class="h-full w-full grid content-end  py-6">
-                                                <div class="bg-black/50 p-3">
-                                                    <p class="font-sans text-lg font-medium tracking-wide antialiased blur-none text-white">
-                                                        {{ more.title }}
-                                                    </p>
-                                                    <p v-html="more.article" class="indent-5 font-light text-white font-sans line-clamp-2 blur-none antialiased leading-relaxed">
-                                                    </p>
-                                                </div>
+                                        <div v-if="isActive || key == 0" class="h-full w-full grid content-end  py-6">
+                                            <div class="bg-black/50 p-3">
+                                                <p
+                                                    class="font-sans text-lg font-medium tracking-wide antialiased blur-none text-white">
+                                                    {{ more.title }}
+                                                </p>
+                                                <p v-html="more.article"
+                                                    class="indent-5 font-light text-white font-sans line-clamp-2 blur-none antialiased leading-relaxed">
+                                                </p>
                                             </div>
+                                        </div>
                                     </Transition>
                                 </div>
                             </swiper-slide>
@@ -39,12 +36,18 @@
                         <p class="text-center text-2xl tracking-wide antialiased blur-none pb-4">
                             More <span class="text-sky-800 ">{{ moreCurrent }}</span>
                         </p>
-                        <div v-for="(more, key) in this.moreArticle_list" class="flex block border-b-2 border-sky-900/60 pb-3 mb-5">
-                            <img @click="gotoArticle(more)"  class="cursor-pointer bg-sky-200 object-cover object-center blur-none w-24 h-24 " :src="`/uploads/low/${more.image}`">
+                        <div v-for="(more, key) in this.moreArticle_list"
+                            class="flex block border-b-2 border-sky-900/60 pb-3 mb-5">
+                            <img @click="gotoArticle(more)"
+                                class="cursor-pointer bg-sky-200 object-cover object-center blur-none w-24 h-24 "
+                                :src="`/uploads/low/${more.image}`">
                             <div class="block w-fit px-1 overflow-hidden">
-                                <p @click="gotoArticle(more)" class="cursor-pointer text-sm blur-none antialiased font-semibold text-sky-600  truncate">{{ more.title }}</p>
+                                <p @click="gotoArticle(more)"
+                                    class="cursor-pointer text-sm blur-none antialiased font-semibold text-sky-600  truncate">
+                                    {{ more.title }}</p>
                                 <p class="text-xs blur-none">{{ moreCurrent }} | {{ more.date }}</p>
-                                <p v-html="more.article" class="blur-none antialiased text-xs text-justify line-clamp-3 leading-relaxed"></p>
+                                <p v-html="more.article"
+                                    class="blur-none antialiased text-xs text-justify line-clamp-3 leading-relaxed"></p>
                             </div>
                         </div>
                     </div>
@@ -57,8 +60,9 @@
                             Latest <span class="text-sky-900">{{ this.moreCurrent1 }}</span>
                         </p>
                     </div>
-                    <div class="border-b-2" v-for="(more, key) in this.moreArticle1.slice(0,5)">
-                        <p @click="gotoArticle(more)" class="text-sm font-thin tracking-wide text-sky-700 cursor-pointer">{{ more.title }}</p>
+                    <div class="border-b-2" v-for="(more, key) in this.moreArticle1.slice(0, 5)">
+                        <p @click="gotoArticle(more)" class="text-sm font-thin tracking-wide text-sky-700 cursor-pointer">{{
+                            more.title }}</p>
                         <p class="text-xs font-thin tracking-wide">{{ this.moreCurrent1 }} | {{ more.date }}</p>
                     </div>
                     <p @click="gotoMoreArticle(this.moreCurrent1)" class="text-center text-lg p-5 cursor-pointer">
@@ -72,8 +76,9 @@
                             Latest <span class="text-sky-900">{{ this.moreCurrent2 }}</span>
                         </p>
                     </div>
-                    <div class="border-b-2" v-for="(more, key) in this.moreArticle2.slice(0,5)">
-                        <p @click="gotoArticle(more)" class="text-sm font-thin tracking-wide text-sky-700 cursor-pointer">{{ more.title }}</p>
+                    <div class="border-b-2" v-for="(more, key) in this.moreArticle2.slice(0, 5)">
+                        <p @click="gotoArticle(more)" class="text-sm font-thin tracking-wide text-sky-700 cursor-pointer">{{
+                            more.title }}</p>
                         <p class="text-xs font-thin tracking-wide">{{ this.moreCurrent2 }} | {{ more.date }}</p>
                     </div>
                     <p @click="gotoMoreArticle(this.moreCurrent2)" class="text-center text-lg p-5 cursor-pointer">
@@ -83,19 +88,20 @@
             </div>
         </div>
         <button v-if="this.isShowScroll" @click="scrollToTop"
-                class="fixed z-10 block p-3 bg-gray-100 rounded-full shadow-md bottom-10 right-10 animate-bounce">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 19.5v-15m0 0l-6.75 6.75M12 4.5l6.75 6.75" />
-                </svg>
+            class="fixed z-10 block p-3 bg-gray-100 rounded-full shadow-md bottom-10 right-10 animate-bounce">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 19.5v-15m0 0l-6.75 6.75M12 4.5l6.75 6.75" />
+            </svg>
         </button>
     </div>
 </template>
 
 <script>
-import { defineComponent, ref} from 'vue';
+import { defineComponent, ref } from 'vue';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css';
-import 'swiper/css/pagination';   
+import 'swiper/css/pagination';
 import { Pagination } from 'swiper';
 
 export default defineComponent({
@@ -103,12 +109,12 @@ export default defineComponent({
         Swiper,
         SwiperSlide,
     },
-    setup(){
+    setup() {
         return {
             modules: [Pagination],
         };
     },
-    data(){
+    data() {
         // show = ref(true)
         return {
             moreArticle: [],
@@ -124,79 +130,79 @@ export default defineComponent({
         }
     },
     methods: {
-        getmoreArticle(){
+        getmoreArticle() {
             let existingObj = this;
             const art = []
-            if(existingObj.moreArticle.length > 10){
-                for(let i = 0; i < 10; i++) {
-                art.push(existingObj.moreArticle[i])
+            if (existingObj.moreArticle.length > 10) {
+                for (let i = 0; i < 10; i++) {
+                    art.push(existingObj.moreArticle[i])
                 }
                 existingObj.moreArticle = existingObj.moreArticle.slice(9, existingObj.moreArticle.length);
                 return art;
-            } else if(existingObj.moreArticle.length < 10) {
-                for(let i = 0; i < existingObj.moreArticle.length; i++) {
+            } else if (existingObj.moreArticle.length < 10) {
+                for (let i = 0; i < existingObj.moreArticle.length; i++) {
                     art.push(existingObj.moreArticle[i])
                 }
                 existingObj.moreArticle = existingObj.moreArticle.slice(existingObj.moreArticle.length);
                 return art;
-            } else if(existingObj.moreArticle.length == ""){
+            } else if (existingObj.moreArticle.length == "") {
                 return;
             }
             return;
         },
         handleScroll() {
             let existingObj = this;
-            if(window.scrollY + window.innerHeight >= document.body.scrollHeight - 50){
+            if (window.scrollY + window.innerHeight >= document.body.scrollHeight - 50) {
                 const new_moreArticle = this.getmoreArticle()
                 this.moreArticle_list = [...this.moreArticle_list, ...new_moreArticle]
             }
-            if(window.scrollY >= 250){
+            if (window.scrollY >= 250) {
                 this.isShowScroll = true
             } else {
                 this.isShowScroll = false
             }
         },
-        gotoArticle(article){
+        gotoArticle(article) {
             const id = article.id
             const title = article.title
-            if(article.type_id == 1){
+            if (article.type_id == 1) {
                 article = 'news'
-            } else if(article.type_id == 2){
+            } else if (article.type_id == 2) {
                 article = 'announcements'
-            } else if(article.type_id == 3){
+            } else if (article.type_id == 3) {
                 article = 'events'
             }
             this.$router.push({ name: 'article', params: { article, title, id } })
         },
-        gotoMoreArticle(article){
+        gotoMoreArticle(article) {
             this.$router.push({ name: 'moreArticle', params: { article } })
         },
-        scrollToTop(){
+        scrollToTop() {
             window.scrollTo({
                 top: 0,
                 behavior: "smooth"
             });
         }
-        
+
     },
-    async mounted(){
+    async mounted() {
 
         let existingObj = this;
         let articleName = this.$route.params.article
         let articleId = ''
-        
-        if(articleName == 'News'){
+
+        if (articleName == 'News') {
             articleId = 1;
             existingObj.moreCurrent = 'News'
             existingObj.moreCurrent1 = 'Announcements'
             existingObj.moreCurrent2 = 'Events'
-            
-        } else if(articleName == 'Announcements'){
+
+        } else if (articleName == 'Announcements') {
             articleId = 2;
             existingObj.moreCurrent = 'Annoucements'
             existingObj.moreCurrent1 = 'News'
             existingObj.moreCurrent2 = 'Events'
-        } else if(articleName == 'Events'){
+        } else if (articleName == 'Events') {
             articleId = 3;
             existingObj.moreCurrent = 'Events'
             existingObj.moreCurrent1 = 'News'
@@ -204,18 +210,18 @@ export default defineComponent({
         }
 
         await axios.get(`/api/getmoreArticle/${articleId}`)
-        .then(function (response) {
-            existingObj.moreArticle = response.data.moreArticle
-            existingObj.moreArticle1 = response.data.moreArticle1
-            existingObj.moreArticle2 = response.data.moreArticle2
-            existingObj.articles = response.data.articles
-            existingObj.isLoaded = true;
-        })
-        .catch(function (error) {
-            console.log(error)
-        });
-        
-        
+            .then(function (response) {
+                existingObj.moreArticle = response.data.moreArticle
+                existingObj.moreArticle1 = response.data.moreArticle1
+                existingObj.moreArticle2 = response.data.moreArticle2
+                existingObj.articles = response.data.articles
+                existingObj.isLoaded = true;
+            })
+            .catch(function (error) {
+                console.log(error)
+            });
+
+
         window.addEventListener('scroll', this.handleScroll);
         this.moreArticle_list = this.getmoreArticle();
     }
@@ -223,33 +229,35 @@ export default defineComponent({
 </script>
 
 <style  scoped>
-    
-    .nested-enter-active, .nested-leave-active {
-        transition: all .6s ease-in-out;
-    }
-    /* delay leave of parent element */
-    .nested-leave-active {
-    transition-delay: 0.25s;
-    }
+.nested-enter-active,
+.nested-leave-active {
+    transition: all .6s ease-in-out;
+}
 
-    .nested-enter-from,
-    .nested-leave-to {
+/* delay leave of parent element */
+.nested-leave-active {
+    transition-delay: 0.25s;
+}
+
+.nested-enter-from,
+.nested-leave-to {
     transform: translateY(30px);
     opacity: 0;
-    }
+}
 
-    /* we can also transition nested elements using nested selectors */
-    .nested-enter-active .inner,
-    .nested-leave-active .inner { 
+/* we can also transition nested elements using nested selectors */
+.nested-enter-active .inner,
+.nested-leave-active .inner {
     transition: all 0.3s ease-in-out;
-    }
-    /* delay enter of nested element */
-    .nested-enter-active .inner {
-        transition-delay: 0.25s;
-    }
+}
 
-    .nested-enter-from .inner,
-    .nested-leave-to .inner {
+/* delay enter of nested element */
+.nested-enter-active .inner {
+    transition-delay: 0.25s;
+}
+
+.nested-enter-from .inner,
+.nested-leave-to .inner {
     transform: translateX(30px);
     /*
         Hack around a Chrome 96 bug in handling nested opacity transitions.
@@ -257,6 +265,4 @@ export default defineComponent({
         has been fixed.
     */
     opacity: 0.001;
-    }
-
-</style>
+}</style>

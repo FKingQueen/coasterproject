@@ -6,14 +6,14 @@
             </div>
             <div class="flex justify-center w-full">
                 <div class="w-6/12 border">
-                    <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="95" class="p-10" >
+                    <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="95" class="p-10">
                         <FormItem label="Name" prop="name">
                             <Input v-model="formValidate.name" placeholder="Enter your name"></Input>
                         </FormItem>
                         <FormItem label="E-mail" prop="email">
                             <Input v-model="formValidate.email" placeholder="Enter your e-mail"></Input>
                         </FormItem>
-                        <FormItem >
+                        <FormItem>
                             <a-button type="primary" @click="showModal">Change Password</a-button>
                             <a-modal v-model:visible="visible" title="New Password" @ok="changePassword('formValidate')">
                                 <div class="ivu-form ivu-form-label-right">
@@ -38,40 +38,40 @@
 </template>
 
 <script>
-  import { UploadOutlined } from '@ant-design/icons-vue';
-  import { defineComponent, ref } from 'vue';
-  import { notification } from 'ant-design-vue';
-  import { useRoute, useRouter} from 'vue-router';
-  export default defineComponent({
-    data(){
+import { UploadOutlined } from '@ant-design/icons-vue';
+import { defineComponent, ref } from 'vue';
+import { notification } from 'ant-design-vue';
+import { useRoute, useRouter } from 'vue-router';
+export default defineComponent({
+    data() {
         const visible = ref(false);
 
         const showModal = () => {
-        visible.value = true;
+            visible.value = true;
         };
 
         const validatePass = (rule, value, callback) => {
-          if (value === '') {
-              callback(new Error('Please enter your password'));
-          } else {
-              if (this.formValidate.passwdCheck !== '') {
-                  // 对第二个密码框单独验证
-                  this.$refs.formValidate.validateField('passwdCheck');
-              }
-              callback();
-          }
+            if (value === '') {
+                callback(new Error('Please enter your password'));
+            } else {
+                if (this.formValidate.passwdCheck !== '') {
+                    // 对第二个密码框单独验证
+                    this.$refs.formValidate.validateField('passwdCheck');
+                }
+                callback();
+            }
         };
         const validatePassCheck = (rule, value, callback) => {
-          if (value === '') {
-              callback(new Error('Please enter your password again'));
-          } else if (value !== this.formValidate.passwd) {
-              callback(new Error('The two input passwords do not match!'));
-          } else {
-              callback();
-          }
+            if (value === '') {
+                callback(new Error('Please enter your password again'));
+            } else if (value !== this.formValidate.passwd) {
+                callback(new Error('The two input passwords do not match!'));
+            } else {
+                callback();
+            }
         };
 
-        return{
+        return {
             visible,
             showModal,
             formValidate: {
@@ -98,76 +98,76 @@
         }
     },
     methods: {
-        async handleSubmit (name) {
+        async handleSubmit(name) {
             let existingObj = this;
             await this.$refs[name].validate((valid) => {
                 if (valid) {
                     axios.post(`/api/admin/updateUserAccount`, this.formValidate)
-                    .then(function (response) {
-                        notification.success({
-                            message: 'Notification',
-                            description: 'Your Account is Successfully Updated',
+                        .then(function (response) {
+                            notification.success({
+                                message: 'Notification',
+                                description: 'Your Account is Successfully Updated',
+                            });
+
+                        })
+                        .catch(function (error) {
+                            if (error.response.data.errors.email) {
+                                console.log(error.response.data.errors);
+                                notification.error({
+                                    message: 'Notification',
+                                    description: error.response.data.errors.email,
+                                });
+                            }
                         });
 
-                    })
-                    .catch(function (error) {
-                        if (error.response.data.errors.email) {
-                            console.log(error.response.data.errors);
-                            notification.error({
-                                message: 'Notification',
-                                description: error.response.data.errors.email,
-                            });
-                        }
-                    });
-                          
                 } else {
                 }
-                
+
             })
         },
-        changePassword(name){
+        changePassword(name) {
             let existingObj = this;
             this.$refs[name].validate((valid) => {
                 if (valid) {
                     // Post
                     axios.post(`/api/admin/updateUserAccountPassword`, this.formValidate)
-                    .then(function (response) {
-                        notification.success({
-                            message: 'Notification',
-                            description: 'Your Password is Successfully Updated',
-                        });
-                        existingObj.visible = false;
-                        existingObj.formValidate.passwd = '';
-                        existingObj.formValidate.passwdCheck = '';
-
-                    })
-                    .catch(function (error) {
-                        if (error.response.data.errors.passwd) {
-                            console.log(error.response.data.errors);
-                            notification.error({
+                        .then(function (response) {
+                            notification.success({
                                 message: 'Notification',
-                                description: error.response.data.errors.passwd,
+                                description: 'Your Password is Successfully Updated',
                             });
-                        }
-                    });
+                            existingObj.visible = false;
+                            existingObj.formValidate.passwd = '';
+                            existingObj.formValidate.passwdCheck = '';
+
+                        })
+                        .catch(function (error) {
+                            if (error.response.data.errors.passwd) {
+                                console.log(error.response.data.errors);
+                                notification.error({
+                                    message: 'Notification',
+                                    description: error.response.data.errors.passwd,
+                                });
+                            }
+                        });
                 } else {
                 }
             })
         }
     },
-    async created(){
+    async created() {
         let existingObj = this;
         await axios.get(`/api/admin/getUserAccount/`)
-        .then(function (response) {
-            console.log(response.data);
-            existingObj.formValidate.name = response.data.name
-            existingObj.formValidate.email = response.data.email
-        })
-        .catch(function (error) {
-            console.log(error)
-        });
+            .then(function (response) {
+                console.log(response.data);
+                existingObj.formValidate.name = response.data.name
+                existingObj.formValidate.email = response.data.email
+            })
+            .catch(function (error) {
+                console.log(error)
+            });
     }
 
-  })
+})
 
 </script>

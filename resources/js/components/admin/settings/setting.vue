@@ -2,7 +2,7 @@
     <div>
         User Settings
     </div>
-  </template>
-  <script>
-  </script>
+</template>
+<script>
+</script>
   
