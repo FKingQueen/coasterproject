@@ -29,6 +29,7 @@ app.use(CKEditor);
 app.use(HighchartsVue);
 app.use(VueGoogleMaps, {
     load: {
+        // CaosterApp Google Earth Engine
         key: 'AIzaSyBqrwTHtdIIy2XFwP3GkVGaMqtEfjjwJuY',
     },
 });

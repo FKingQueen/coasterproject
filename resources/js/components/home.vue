@@ -462,7 +462,7 @@
                                 <li class="mb-4">
                                     <div class="flex block">
                                         <Icon size="20" type="logo-google" />
-                                        coaster@mmsu.edu.ph
+                                        <a class="text-gray-500 dark:text-gray-400 " href="mailto:coaster@mmsu.edu.ph">coaster@mmsu.edu.ph</a>
                                     </div>
                                 </li>
                                 <li class="mb-4">

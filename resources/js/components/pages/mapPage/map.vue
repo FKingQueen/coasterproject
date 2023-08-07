@@ -184,11 +184,11 @@ export default defineComponent({
 
         var desMarker = {
             url: '/img/marker/gmapmarker1.png', // image is 512 x 512
-            scaledSize: new google.maps.Size(10, 10)
+            scaledSize: new google.maps.Size(8, 8)
         };
         var wlMarker = {
             url: '/img/marker/gmapmarker2.png', // image is 512 x 512
-            scaledSize: new google.maps.Size(10, 10)
+            scaledSize: new google.maps.Size(8, 8)
         };
         return {
             openedMarkerID: null,
@@ -1857,7 +1857,6 @@ export default defineComponent({
                     map.panTo({ lat: 17.557391, lng: 120.466835 })
                 })
             }
-            existingObj.isVisibleCardFilter = false
         },
         async closeclick() {
             let existingObj = this;
