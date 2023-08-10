@@ -18,12 +18,7 @@
 
 
         <a-table :data-source="inventories" :columns="columns" size="small">
-          <template #headerCell="{ column }">
-            <template v-if="column.key === 'title'">
-              <span style="color: #1890ff">Title</span>
-            </template>
 
-          </template>
           <template #customFilterDropdown="{ setSelectedKeys, selectedKeys, confirm, clearFilters, column }">
             <div style="padding: 8px">
               <a-input ref="searchInput" :placeholder="`Search ${column.dataIndex}`" :value="selectedKeys[0]"
@@ -66,32 +61,27 @@
                       <h2>Inventory Details</h2>
                     </div>
                   </template>
-                  <Image :src="`/inventory/high/${modalData.image}`" class="object-fit  border" />
+                  <div class="flex justify-center">
+                    <Image :src="`/inventory/high/${modalData.image}`" class="object-fit  border" />
+                  </div>
+                  
                   <div class="py-5">
-                    <p class="text-base"> <span class="font-bold">Location:</span> {{ modalData.barangay }}, {{
-                      modalData.municipality }}, {{ modalData.province }}</p>
-                    <p class="text-base"> <span class="font-bold">Coordinates:</span> Lat. {{ modalData.latitude }}, Lng
-                      {{ modalData.longitude }}</p>
-                    <p class="text-base"> <span class="font-bold">Shoreline use:</span> {{ modalData.shoreline }}</p>
-                    <p class="text-base"> <span class="font-bold">Morphology:</span> {{ modalData.morphology }}</p>
-                    <p class="text-base"> <span class="font-bold">Type of Coastal Structure:</span> {{
-                      modalData.typeStructure }}</p>
-                    <p class="text-base"> <span class="font-bold">Structure Material:</span> {{
-                      modalData.structureMaterial }}</p>
-                    <p class="text-base"> <span class="font-bold">Waves Acting on Structure:</span> {{
-                      modalData.wavesStructure }}</p>
-                    <p class="text-base"> <span class="font-bold">Coastal Hazard:</span> {{ modalData.coastalHazard }}</p>
-                    <p class="text-base"> <span class="font-bold">Protection Toe:</span> {{ modalData.protectionToe }}</p>
-                    <p class="text-base"> <span class="font-bold">Height of Structure:</span> {{ modalData.heightStructure
-                    }}</p>
-                    <p class="text-base"> <span class="font-bold">Length of Structure:</span> {{ modalData.lengthStructure
-                    }}</p>
-                    <p class="text-base"> <span class="font-bold">Typology:</span></p>
-                    <p class="pl-5"><span class="font-bold">Landwards:</span> {{ modalData.landwardsTypology }}</p>
-                    <p class="pl-5"><span class="font-bold">Shoreline:</span> {{ modalData.shorelineTypology }}</p>
-                    <p class="pl-5"><span class="font-bold">Nearshore:</span> {{ modalData.nearshoreTypology }}</p>
-                    <p class="text-base"> <span class="font-bold">Description:</span></p>
-                    <p class="text-base" v-html="modalData.description"></p>
+
+                    <p class="text-base"> <span class="font-bold">Coastal Identification:</span> {{ modalData.coastalID }}</p>
+                    <p class="text-base"> <span class="font-bold">Location:</span> {{ modalData.province }}</p>
+                    <p class="text-base"> <span class="font-bold">Coastal Protection:</span> {{ modalData.coastalProtection }}</p>
+                    <p class="text-base"> <span class="font-bold">Location:</span> Lat. {{ modalData.latitude }}, Lng {{ modalData.longitude }}</p>
+                    <p class="text-base"> <span class="font-bold">Location Type:</span> {{ modalData.locationType }}</p>
+                    <p class="text-base"> <span class="font-bold">Estimated Yr. of Completed:</span> {{ modalData.yearCompleted }}</p>
+
+                    <p class="text-base"> <span class="font-bold">Length (m):</span> {{ modalData.length }}</p>
+                    <p class="text-base"> <span class="font-bold">Height Range (m):</span> {{ modalData.heightRange }}</p>
+                    <p class="text-base"> <span class="font-bold">Primary Material:</span> {{ modalData.primaryMaterial }}</p>
+
+                    <p class="text-base"> <span class="font-bold">Condition Rating:</span> {{ modalData.conditionRating }}</p>
+                    <p class="text-base" v-html="modalData.crDesc"></p>
+                    <p class="text-base"> <span class="font-bold">Priority Rating:</span> {{ modalData.priorityRating }}</p>
+                    <p class="text-base" v-html="modalData.prDesc"></p>
                   </div>
                   <div class="space-x-2 text-right">
                     <a @click="editForm(modalData.id)">Edit</a>
@@ -135,38 +125,26 @@ export default defineComponent({
       searchedColumn: '',
     });
     const searchInput = ref();
-    const columns = [{
+    const columns = [
+    {
+      title: 'CoastalID',
+      dataIndex: 'coastalID',
+      key: 'coastalID',
+      customFilterDropdown: true,
+      onFilter: (value, record) => record.coastalID.toString().toLowerCase().includes(value.toLowerCase()),
+      onFilterDropdownVisibleChange: visible => {
+        if (visible) {
+          setTimeout(() => {
+            searchInput.value.focus();
+          }, 100);
+        }
+      },
+    }, {
       title: 'Province',
       dataIndex: 'province',
       key: 'province',
       customFilterDropdown: true,
       onFilter: (value, record) => record.province.toString().toLowerCase().includes(value.toLowerCase()),
-      onFilterDropdownVisibleChange: visible => {
-        if (visible) {
-          setTimeout(() => {
-            searchInput.value.focus();
-          }, 100);
-        }
-      },
-    }, {
-      title: 'Municipality',
-      dataIndex: 'municipality',
-      key: 'municipality',
-      customFilterDropdown: true,
-      onFilter: (value, record) => record.municipality.toString().toLowerCase().includes(value.toLowerCase()),
-      onFilterDropdownVisibleChange: visible => {
-        if (visible) {
-          setTimeout(() => {
-            searchInput.value.focus();
-          }, 100);
-        }
-      },
-    }, {
-      title: 'Barangay',
-      dataIndex: 'barangay',
-      key: 'barangay',
-      customFilterDropdown: true,
-      onFilter: (value, record) => record.barangay.toString().toLowerCase().includes(value.toLowerCase()),
       onFilterDropdownVisibleChange: visible => {
         if (visible) {
           setTimeout(() => {

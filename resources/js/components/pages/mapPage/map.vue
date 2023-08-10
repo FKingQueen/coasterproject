@@ -1896,10 +1896,13 @@ export default defineComponent({
         await axios.get('/api/getInventory')
             .then(response => {
                 existingObj.markers = response.data
+                console.log(response.data)
             })
             .catch(function (error) {
                 console.error(error);
             });
+
+        
 
         setTimeout(() => existingObj.isVisibleCardFilter = true, 1000);
     }

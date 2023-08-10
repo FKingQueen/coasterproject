@@ -17,72 +17,24 @@ class InventoryController extends Controller
     }
 
     public function storeInventory(Request $request){
-        $validated = $request->validate([
-            'municipality' => 'required',
-            'province' => 'required',    
-            'barangay' => 'required',    
-            'latitude' => 'required',          
-            'longitude' => 'required',
-        ]);
-        $shoreline = null;
-        for($i = 0; $i < sizeof($request->shoreline); $i++){
-            if($shoreline == null){
-                $shoreline =$request->shoreline[$i];
-            } else {
-                $shoreline = $shoreline . ', ' . $request->shoreline[$i];
-            }
-            
-        }
-        $coastalHazard = null;
-        for($i = 0; $i < sizeof($request->coastalHazard); $i++){
-            if($coastalHazard == null){
-                $coastalHazard =$request->coastalHazard[$i];
-            } else {
-                $coastalHazard = $coastalHazard . ', ' . $request->coastalHazard[$i];
-            }
-            
-        }
-        $structureMaterial = null;
-        for($i = 0; $i < sizeof($request->structureMaterial); $i++){
-            if($structureMaterial == null){
-                $structureMaterial =$request->structureMaterial[$i];
-            } else {
-                $structureMaterial = $structureMaterial . ', ' . $request->structureMaterial[$i];
-            }
-            
-        }
-        $typeStructure = null;
-        for($i = 0; $i < sizeof($request->typeStructure); $i++){
-            if($typeStructure == null){
-                $typeStructure =$request->typeStructure[$i];
-            } else {
-                $typeStructure = $typeStructure . ', ' . $request->typeStructure[$i];
-            }
-            
-        }
 
-        // return $typeStructure;
         $newInventory = new Inventory;
+        $newInventory->image = $request->image;
+        $newInventory->coastalID = $request->coastalID;
         $newInventory->province = $request->province;
-        $newInventory->municipality = $request->municipality;
-        $newInventory->barangay = $request->barangay;
+        $newInventory->coastalProtection = $request->coastalProtection;
         $newInventory->latitude = $request->latitude;
         $newInventory->longitude = $request->longitude;
-        $newInventory->coastalHazard = $coastalHazard;
-        $newInventory->shoreline = $shoreline;
-        $newInventory->morphology = $request->morphology;
-        $newInventory->typeStructure = $typeStructure;
-        $newInventory->structureMaterial = $structureMaterial;
-        $newInventory->wavesStructure = $request->wavesStructure;
-        $newInventory->protectionToe = $request->protectionToe;
-        $newInventory->armorUnits = $request->armorUnits;
-        $newInventory->heightStructure = $request->heightStructure;
-        $newInventory->lengthStructure = $request->lengthStructure;
-        $newInventory->landwardsTypology = $request->landwardsTypology;
-        $newInventory->shorelineTypology = $request->shorelineTypology;
-        $newInventory->nearshoreTypology = $request->nearshoreTypology;
-        $newInventory->image = $request->image;
-        $newInventory->description = $request->description;
+        $newInventory->locationType = $request->locationType;
+        $newInventory->yearCompleted = $request->yearCompleted;
+        $newInventory->length = $request->length;
+        $newInventory->heightRange = $request->heightRange;
+        $newInventory->primaryMaterial = $request->primaryMaterial;
+        $newInventory->primaryMaterial = $request->primaryMaterial;
+        $newInventory->conditionRating = $request->conditionRating;
+        $newInventory->crDesc = $request->crDesc;
+        $newInventory->priorityRating = $request->priorityRating; 
+        $newInventory->prDesc = $request->prDesc; 
         $newInventory->save();
 
         return $request->all();
@@ -143,78 +95,30 @@ class InventoryController extends Controller
 
     public function getInventoryEdit($id){
         $inventory = Inventory::where('id', $id)->get();
-
-        $inventory[0]->structureMaterial =  explode(', ',($inventory[0]->structureMaterial));
-
-        $inventory[0]->coastalHazard =  explode(', ',($inventory[0]->coastalHazard));
-
-        $inventory[0]->shoreline =  explode(', ',($inventory[0]->shoreline));
-
-        $inventory[0]->typeStructure =  explode(', ',($inventory[0]->typeStructure));
         return $inventory;
     }
 
     public function updateInventory(Request $request){
-        $shoreline = null;
-        for($i = 0; $i < sizeof($request->shoreline); $i++){
-            if($shoreline == null){
-                $shoreline =$request->shoreline[$i];
-            } else {
-                $shoreline = $shoreline . ', ' . $request->shoreline[$i];
-            }
-            
-        }
-        $coastalHazard = null;
-        for($i = 0; $i < sizeof($request->coastalHazard); $i++){
-            if($coastalHazard == null){
-                $coastalHazard =$request->coastalHazard[$i];
-            } else {
-                $coastalHazard = $coastalHazard . ', ' . $request->coastalHazard[$i];
-            }
-            
-        }
-        $structureMaterial = null;
-        for($i = 0; $i < sizeof($request->structureMaterial); $i++){
-            if($structureMaterial == null){
-                $structureMaterial =$request->structureMaterial[$i];
-            } else {
-                $structureMaterial = $structureMaterial . ', ' . $request->structureMaterial[$i];
-            }
-            
-        }
-        $typeStructure = null;
-        for($i = 0; $i < sizeof($request->typeStructure); $i++){
-            if($typeStructure == null){
-                $typeStructure =$request->typeStructure[$i];
-            } else {
-                $typeStructure = $typeStructure . ', ' . $request->typeStructure[$i];
-            }
-            
-        }
 
         DB::table('inventories')
         ->where('id', $request->id)
         ->update([
         'province' => $request->province,
-        'municipality' => $request->municipality,
-        'barangay' => $request->barangay,
+        'image' => $request->image,
+        'coastalID' => $request->coastalID,
+        'province' => $request->province,
+        'coastalProtection' => $request->coastalProtection,
         'latitude' => $request->latitude,
         'longitude' => $request->longitude,
-        'coastalHazard' => $coastalHazard,
-        'shoreline' => $shoreline,
-        'morphology' => $request->morphology,
-        'typeStructure' => $typeStructure,
-        'structureMaterial' => $structureMaterial,
-        'wavesStructure' => $request->wavesStructure,
-        'protectionToe' => $request->protectionToe,
-        'armorUnits' => $request->armorUnits,
-        'heightStructure' => $request->heightStructure,
-        'lengthStructure' => $request->lengthStructure,
-        'landwardsTypology' => $request->landwardsTypology,
-        'shorelineTypology' => $request->shorelineTypology,
-        'nearshoreTypology' => $request->nearshoreTypology,
-        'image' => $request->image,
-        'description' => $request->description,
+        'locationType' => $request->locationType,
+        'yearCompleted' => $request->yearCompleted,
+        'length' => $request->length,
+        'heightRange' => $request->heightRange,
+        'primaryMaterial' => $request->primaryMaterial,
+        'conditionRating' => $request->conditionRating,
+        'crDesc' => $request->crDesc,
+        'priorityRating' => $request->priorityRating, 
+        'prDesc' => $request->prDesc, 
         ]);
 
         return;

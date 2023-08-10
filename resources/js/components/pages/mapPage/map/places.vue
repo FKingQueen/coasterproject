@@ -10,36 +10,23 @@
                 Lat. {{ dataMarker.latitude }}, Lng {{ dataMarker.longitude }}
             </p>
             <div class="px-5 pb-5 divide-y">
-                <p class="text-sm py-1"> <span class="font-semibold">Location:</span> {{ dataMarker.barangay }}, {{
-                    dataMarker.municipality }}, {{ dataMarker.province }} </p>
-                <p class="text-sm py-1"> <span class="font-semibold">Shoreline use:</span> {{ dataMarker.shoreline }}</p>
-                <p class="text-sm py-1"> <span class="font-semibold">Morphology:</span> {{ dataMarker.morphology }}</p>
-                <p class="text-sm py-1"> <span class="font-semibold">Type of Coastal Structure:</span> {{
-                    dataMarker.typeStructure }}</p>
-                <p class="text-sm py-1"> <span class="font-semibold">Structure Material:</span> {{
-                    dataMarker.structureMaterial }}</p>
-                <p class="text-sm py-1"> <span class="font-semibold">Waves Acting on Structure:</span> {{
-                    dataMarker.wavesStructure }}</p>
-                <p class="text-sm py-1"> <span class="font-semibold">Coastal Hazard:</span> {{ dataMarker.coastalHazard }}
-                </p>
-                <p class="text-sm py-1"> <span class="font-semibold">Protection Toe:</span> {{ dataMarker.protectionToe }}
-                </p>
-                <p class="text-sm py-1"> <span class="font-semibold">Height of Structure:</span> {{
-                    dataMarker.heightStructure }}</p>
-                <p class="text-sm py-1"> <span class="font-semibold">Length of Structure:</span> {{
-                    dataMarker.lengthStructure }}</p>
+                <p class="text-sm py-1"> <span class="font-semibold">Coastal Identification:</span> {{ dataMarker.coastalID }}</p>
+                <p class="text-sm py-1"> <span class="font-semibold">Province:</span> {{ dataMarker.province }}</p>
+                <p class="text-sm py-1"> <span class="font-semibold">Coastal Protection:</span> {{ dataMarker.coastalProtection }}</p>
+                <p class="text-sm py-1"> <span class="font-semibold">Location Type:</span> {{ dataMarker.locationType }}</p>
+                <p class="text-sm py-1"> <span class="font-semibold">Estimdated Yr. of Completed:</span> {{ dataMarker.yearCompleted }}</p> 
                 <div class="py-1">
-                    <p class="text-base mt-2 text-center"> <span class="font-bold">Typology</span></p>
-                    <p class="text-sm mt-2"><span class="font-semibold">Landwards:</span> {{ dataMarker.landwardsTypology }}
-                    </p>
-                    <p class="text-sm mt-2"><span class="font-semibold">Shoreline:</span> {{ dataMarker.shorelineTypology }}
-                    </p>
-                    <p class="text-sm mt-2"><span class="font-semibold">Nearshore:</span> {{ dataMarker.nearshoreTypology }}
-                    </p>
+                    <p class="text-sm py-1"> <span class="font-semibold">Length (m):</span> {{ dataMarker.length}}</p>
+                    <p class="text-sm py-1"> <span class="font-semibold">Height Range:</span> {{ dataMarker.heightRange }}</p>
+                    <p class="text-sm py-1"> <span class="font-semibold">Primary Material:</span> {{ dataMarker.primaryMaterial }}</p>
                 </div>
                 <div class="py-1">
-                    <p class="text-base mt-2 text-center"> <span class="font-bold">Description</span></p>
-                    <p class="text-sm text-justify mt-2" v-html="dataMarker.description"></p>
+                    <p class="text-sm py-1"> <span class="font-semibold">Condition Rating:</span> {{ dataMarker.conditionRating }}</p>
+                    <div class="text-sm py-1"> <span class="font-semibold">Description:</span> <p class="text-sm py-1" v-html="dataMarker.crDesc"></p> </div>
+                </div>
+                <div class="py-1">
+                    <p class="text-sm py-1"> <span class="font-semibold">Priority Rating:</span> {{ dataMarker.priorityRating }}</p>
+                    <div class="text-sm py-1"> <span class="font-semibold">Description:</span> <p class="text-sm py-1" v-html="dataMarker.prDesc"></p> </div>
                 </div>
             </div>
         </div>

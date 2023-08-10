@@ -15,30 +15,24 @@ class CreateInventoriesTable extends Migration
     {
         Schema::create('inventories', function (Blueprint $table) {
             $table->id();
-            $table->string("province");
-            $table->string("municipality");
-            $table->string("barangay");
-            $table->string("coastalHazard");
-            $table->string("shoreline");
-            $table->string("morphology");
-            $table->string("typeStructure");
-            $table->string("structureMaterial");
-            $table->string("wavesStructure");
-            $table->string("protectionToe")->nullable();
-            $table->string("heightStructure")->nullable();
-            $table->string("lengthStructure")->nullable();
-            $table->string("landwardsTypology")->nullable();
-            $table->string("shorelineTypology")->nullable();
-            $table->string("nearshoreTypology")->nullable();
-            $table->string("armorUnits")->nullable();
             $table->string('image')->nullable();
-            $table->string("description");
+            $table->string("coastalID");
+            $table->string("province");
+            $table->string("coastalProtection");
             $table->double('latitude', 15, 8);
             $table->double('longitude', 15, 8);
+            $table->string("locationType");
+            $table->string("yearCompleted");
+            $table->string("length");
+            $table->string("heightRange");
+            $table->string("primaryMaterial");
+            $table->string("conditionRating");
+            $table->string("crDesc");
+            $table->string("priorityRating");
+            $table->string("prDesc");
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      *
