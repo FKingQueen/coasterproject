@@ -16,8 +16,8 @@
                                 delay: 2500,
                                 disableOnInteraction: false,
                             }" :pagination="{
-    clickable: true,
-}" :modules="modules" class="mySwiper h-80 mt-2">
+                                clickable: true,
+                            }" :modules="modules" class="mySwiper h-80 mt-2">
                                 <swiper-slide v-slot="{ isActive }" v-for="(project, key) in this.projectImages">
                                     <div class="h-full shadow-lg "
                                         :style="{ backgroundImage: `url(/img/Project${project.project_type_id}/${project.name})` }"
@@ -88,19 +88,19 @@
                 <div class="py-2 drop-shadow-2xl grid gap-4">
                     <div @click="gotoProject(1)" v-if="this.$route.params.id != 1"
                         class="drop-shadow-md cursor-pointer flex items-end w-full h-full">
-                        <img src="/img/slides/slide2.JPG" class="object-cover w-full" alt="#">
+                        <img src="/img/slides/slide2.PNG" class="object-cover w-full" alt="#">
                     </div>
                     <div @click="gotoProject(2)" v-if="this.$route.params.id != 2"
                         class="drop-shadow-md cursor-pointer flex items-end w-full h-full">
-                        <img src="/img/slides/slide3.JPG" class="object-cover w-full" alt="#">
+                        <img src="/img/slides/slide3.PNG" class="object-cover w-full" alt="#">
                     </div>
                     <div @click="gotoProject(3)" v-if="this.$route.params.id != 3"
                         class="drop-shadow-md cursor-pointer flex items-end w-full h-full">
-                        <img src="/img/slides/slide4.JPG" class="object-cover w-full" alt="#">
+                        <img src="/img/slides/slide4.PNG" class="object-cover w-full" alt="#">
                     </div>
                     <div @click="gotoProject(4)" v-if="this.$route.params.id != 4"
                         class="drop-shadow-md cursor-pointer flex items-end w-full h-full">
-                        <img src="/img/slides/slide5.JPG" class="object-cover w-full" alt="#">
+                        <img src="/img/slides/slide5.PNG" class="object-cover w-full" alt="#">
                     </div>
                 </div>
                 <p class="text-center text-2xl border-b-2 blur-none antialiased">
