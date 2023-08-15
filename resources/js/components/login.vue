@@ -3,7 +3,7 @@
         <div class="w-full flex flex-col items-center">
             <div class="md:w-1/4 w-11/12 border px-2 pt-5 shadow">
                 <div>
-                    <h1 class="text-center text-2xl font-bold text-gray-600 mb-6">COASTER LOGIN</h1>
+                    <h1 class="text-center text-2xl font-bold text-gray-600 mb-6">COASTER WEB PORTAL</h1>
                 </div>
                 <a-form :model="this.formState" name="normal_login" v-bind="layout" class="login-form" @finish="login"
                     :validate-messages="validateMessages">

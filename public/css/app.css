@@ -1081,6 +1081,10 @@ video {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
+.bg-yellow-300 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(253 224 71 / var(--tw-bg-opacity));
+}
 .fill-current {
   fill: currentColor;
 }
@@ -1092,9 +1096,21 @@ video {
   -o-object-fit: fill;
      object-fit: fill;
 }
+.object-none {
+  -o-object-fit: none;
+     object-fit: none;
+}
+.object-scale-down {
+  -o-object-fit: scale-down;
+     object-fit: scale-down;
+}
 .object-center {
   -o-object-position: center;
      object-position: center;
+}
+.object-top {
+  -o-object-position: top;
+     object-position: top;
 }
 .p-0 {
   padding: 0px;
