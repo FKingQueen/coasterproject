@@ -100,17 +100,7 @@
                             </div>
                             <!-- /Project -->
                             <!-- About -->
-                            <div class="dropdown z-40  px-4 flex text-white font-semibold hover:bg-sky-700 
-                                cursor-pointer transition-colors duration-300 " style="float:left;">
-                                <button class="dropdown py-4  blur-none tracking-wide antialiased">ABOUT</button>
-                                <div class="dropdown-content p-1 w-[17rem] font-normal " style="left:0;">
-                                    <a @click="gotoAbout(1)"
-                                        class="antialiased text-white text-justify  hover:shadow-[inset_17rem_0_0_0] hover:shadow-cyan-700 duration-[400ms,700ms] transition-[color,box-shadow]">ORGANIZATIONAL
-                                        STRUCTURE</a>
-                                    <a @click="gotoAbout(2)"
-                                        class="antialiased text-white text-justify  hover:shadow-[inset_17rem_0_0_0] hover:shadow-cyan-700 duration-[400ms,700ms] transition-[color,box-shadow]">ACCOMPLISHMENT</a>
-                                </div>
-                            </div>
+                            <!-- d -->
                             <!-- /About -->
                         </div>
                     </div>
