@@ -11,6 +11,7 @@ class BouyController extends Controller
 {
     public function getSms(){
         $sms = Bouy::all();
+        // return $sms;
         for($i = 0; $i < count($sms)-1; $i++ ){
             $data[$i] = explode('+',($sms[$i]->sms));   
             $data[$i][7] = '20' . $data[$i][7];   

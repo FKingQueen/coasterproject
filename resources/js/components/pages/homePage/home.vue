@@ -244,7 +244,7 @@
         <div class="grid gap-2 place-content-center mb-5">
             <div class="grid gap-2 place-content-center lg:pt-14 mt-2">
                 <div class="text-center">
-                    <h1 class="font-medium leading-tight text-3xl text-sky-600">COOP AGENCIES</h1>
+                    <h1 class="font-medium leading-tight text-3xl text-sky-600">CO-OP AGENCIES</h1>
                     <hr class="">
                 </div>
             </div>

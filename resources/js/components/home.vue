@@ -60,10 +60,10 @@
                             </router-link>
                             <!-- /About -->
                             <!-- Weather -->
-                            <a to="/" class="py-4 px-4 flex text-white font-semibold hover:bg-sky-700 
+                            <!-- <a to="/" class="py-4 px-4 flex text-white font-semibold hover:bg-sky-700 
                                 cursor-pointer  blur-none tracking-wide antialiased">
                                 WEATHER
-                            </a>
+                            </a> -->
                             <!-- /Weather -->
                             <!-- Map -->
                             <router-link to="/map" class="py-4 px-4 flex text-white font-semibold hover:bg-sky-700 
@@ -100,7 +100,16 @@
                             </div>
                             <!-- /Project -->
                             <!-- About -->
-                            <!-- d -->
+                                <div class="dropdown z-40  px-4 flex text-white font-semibold hover:bg-sky-700 
+                                    cursor-pointer transition-colors duration-300 " style="float:left;">
+                                    <button class="dropdown py-4  blur-none tracking-wide antialiased">ABOUT</button>
+                                    <div class="dropdown-content p-1 w-[17rem] font-normal " style="left:0;">
+                                        <a @click="gotoAbout(1)"
+                                            class="antialiased text-white text-justify  hover:shadow-[inset_17rem_0_0_0] hover:shadow-cyan-700 duration-[400ms,700ms] transition-[color,box-shadow]">ABOUT</a>
+                                        <a @click="gotoAbout(2)"
+                                            class="antialiased text-white text-justify  hover:shadow-[inset_17rem_0_0_0] hover:shadow-cyan-700 duration-[400ms,700ms] transition-[color,box-shadow]">ACCOMPLISHMENT</a>
+                                    </div>
+                                </div>
                             <!-- /About -->
                         </div>
                     </div>
@@ -145,12 +154,12 @@
                                         </template>
                                         HOME
                                     </a-menu-item>
-                                    <a-menu-item key="2">
+                                    <!-- <a-menu-item key="2">
                                         <template #icon>
                                             <Icon type="ios-water" />
                                         </template>
                                         WEATHER
-                                    </a-menu-item>
+                                    </a-menu-item> -->
                                     <a-menu-item key="3">
                                         <template #icon>
                                             <Icon type="ios-cloud" />
@@ -257,10 +266,10 @@
                                 </router-link>
                                 <!-- /Home -->
                                 <!-- Weather -->
-                                <a to="/" class="py-4 px-4 flex text-white font-semibold hover:bg-sky-700 
+                                <!-- <a to="/" class="py-4 px-4 flex text-white font-semibold hover:bg-sky-700 
                                         cursor-pointer  blur-none tracking-wide antialiased">
                                     WEATHER
-                                </a>
+                                </a> -->
                                 <!-- /Weather -->
                                 <!-- Map -->
                                 <router-link to="/map" class="py-4 px-4 flex text-white font-semibold hover:bg-sky-700 
@@ -352,12 +361,12 @@
                                             </template>
                                             HOME
                                         </a-menu-item>
-                                        <a-menu-item key="2">
+                                        <!-- <a-menu-item key="2">
                                             <template #icon>
                                                 <Icon type="ios-water" />
                                             </template>
                                             WEATHER
-                                        </a-menu-item>
+                                        </a-menu-item> -->
                                         <a-menu-item key="3">
                                             <template #icon>
                                                 <Icon type="ios-cloud" />

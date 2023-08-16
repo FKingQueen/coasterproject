@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Inventory;
@@ -13,12 +14,18 @@ use DB;
 class InventoryController extends Controller
 {
     public function getInventory(){
-        return Inventory::all();
+        if(Auth::user()->role_id == 1){
+            return Inventory::orderBy('id', 'desc')->get();
+        } else {
+            return Inventory::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->get();
+        }
+       
     }
 
     public function storeInventory(Request $request){
 
         $newInventory = new Inventory;
+        $newInventory->user_id = Auth::id();
         $newInventory->image = $request->image;
         $newInventory->coastalID = $request->coastalID;
         $newInventory->province = $request->province;

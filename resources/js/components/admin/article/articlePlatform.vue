@@ -55,7 +55,10 @@
                                         <h2>Article Details</h2>
                                     </div>
                                 </template>
-                                <Image :src="`/uploads/high/${modalData.image}`" class="object-cover  border" />
+                                <div class="flex justify-center">
+                                    <Image :src="`/uploads/high/${modalData.image}`" class="object-cover  border" />
+                                </div>
+                                
                                 <div>
                                     <div class="w-full text-right mt-4">
                                         <a-tag v-for="project in articles[index].projects" color="blue">Project

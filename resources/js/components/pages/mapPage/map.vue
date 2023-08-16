@@ -95,7 +95,7 @@
                         <div :class="{ active: siActive }"
                             class="p-2  w-full cursor-pointer text-center bg-sky-800 w-full hover:bg-sky-600 tracking-widest"
                             @click="filterclick(3)">
-                            SI
+                            CFPS
                         </div>
                         <div :class="{ active: pvActive }"
                             class="p-2 w-full cursor-pointer text-center bg-sky-800 w-full hover:bg-sky-600 tracking-widest"
@@ -132,7 +132,7 @@
                                 <span class="h-3 w-4"
                                     style="background-color: #2a873c; border-radius: 50%; display: inline-block;"></span>
                             </div>
-                            <div>Water Level Monitor System</div>
+                            <div>Coastal Flood Protection Structure</div>
                         </div>
                         <div class="flex justify-start space-x-2">
                             <div class="items-center flex">

@@ -12,6 +12,8 @@ export default defineComponent({
         return {
             chartOptions: {
                 chart: {
+                    
+                    zoomType: 'x',
                     type: "spline",
                     scrollablePlotArea: {
                         minWidth: 200,
@@ -37,16 +39,16 @@ export default defineComponent({
                     text: "Water Level",
                 },
                 plotOptions: {
-                    spline: {
-                        lineWidth: 2,
-                        states: {
-                            hover: {
-                                lineWidth: 2,
-                            },
-                        },
-                    },
                     series: {
                         pointStart: Date.UTC(2010, 0, 1),
+                        marker: {
+                            enabled: false,
+                            states: {
+                                hover: {
+                                    enabled: false
+                                }
+                            }
+                        }
                     },
                 },
             },
@@ -57,6 +59,8 @@ export default defineComponent({
         await axios
             .get("/api/getSms")
             .then((response) => {
+                console.log(response.data);
+                // return;
                 for (let i = 0; i < response.data.length; i++) {
                     existingObj.chartOptions.series[0].data[i] = [];
                     existingObj.chartOptions.series[0].data[i][0] = Date.UTC(

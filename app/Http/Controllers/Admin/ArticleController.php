@@ -18,14 +18,14 @@ class ArticleController extends Controller
     public function getArticle()
     {
         
-        if(Auth::user()->id == 1){
+        if(Auth::user()->role_id == 1){
             $article = Article::orderBy('id', 'desc')->with('projects')->with('type')->get();
             foreach($article as $key => $arti)
             {
                 $article[$key]->date = Carbon::createFromFormat('Y-m-d H:i:s', $arti->created_at)->format('F d, Y');
             }
             return $article;
-        } else if(Auth::user()->id == 2){
+        } else if(Auth::user()->role_id == 2){
             $article = Article::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->with('projects')->with('type')->get();
             foreach($article as $key => $arti)
             {

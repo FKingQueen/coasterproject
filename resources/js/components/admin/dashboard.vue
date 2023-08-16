@@ -20,7 +20,7 @@
                         class="flex items-center justify-start md:justify-center pl-3 w-14 md:w-64 h-14 bg-gray-300 border-none">
                         <img class="w-7 h-7 md:w-10 md:h-10 mr-2 rounded-md overflow-hidden bg-gray-300"
                             src="https://therminic2018.eu/wp-content/uploads/2018/07/dummy-avatar.jpg" />
-                        <span class="hidden md:block ">ADMIN</span>
+                        <span class="hidden md:block ">{{ role_name }} | {{ name }}</span>
                     </div>
                     <div class="flex justify-between items-center h-14 bg-gray-300 header-right">
                         <ul class="justify-end flex w-full">
@@ -60,7 +60,7 @@
                                 </div>
                             </li>
                             <li>
-                                <router-link to="/admin/slideShowPlatform"
+                                <!-- <router-link to="/admin/slideShowPlatform"
                                     class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-800 text-white hover:text-slate-300 border-l-4 border-transparent hover:border-blue-500 pr-6">
                                     <span class="inline-flex justify-center items-center ml-4">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -70,7 +70,7 @@
                                         </svg>
                                     </span>
                                     <span class="ml-2 text-sm tracking-wide truncate">Slides</span>
-                                </router-link>
+                                </router-link> -->
                                 <router-link to="/admin/articlePlatform"
                                     class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-800 text-white hover:text-slate-300 border-l-4 border-transparent hover:border-blue-500 pr-6">
                                     <span class="inline-flex justify-center items-center ml-4">
@@ -160,6 +160,8 @@ export default {
         const role = '';
         return {
             role,
+            role_name: '',
+            name: '',
         }
     },
     watch: {
@@ -188,6 +190,13 @@ export default {
             axios.get('/api/admin/getRole')
                 .then(response => {
                     existingObj.role = response.data.role_id
+                    existingObj.name = response.data.name
+                    if(existingObj.role == 1){
+                        existingObj.role_name = 'Admin'
+                    } else {
+                        existingObj.role_name = 'Editor'
+                    }
+
                 })
                 .catch(function (error) {
                     console.error(error);

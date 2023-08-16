@@ -24,8 +24,8 @@
                     </a-form-item>
 
                     <a-form-item>
-                        <div class="flex justify-between">
-                            <a class="login-form-forgot" href="">Forgot password</a>
+                        <div class="flex justify-end">
+                            <!-- <a class="login-form-forgot" href="">Forgot password</a> -->
                             <a-button :disabled="disabled" type="primary" html-type="submit" class="login-form-button">
                                 Login
                             </a-button>
