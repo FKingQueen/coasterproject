@@ -13,6 +13,7 @@
                 };
             })();
         </script>
+
     </head>
     <body class="antialiased">
         @if (!Auth::check())

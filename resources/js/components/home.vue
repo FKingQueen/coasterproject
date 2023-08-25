@@ -82,17 +82,17 @@
                                 cursor-pointer transition-colors duration-300 " style="float:left;">
                                 <button class="dropdown py-4  blur-none tracking-wide antialiased">PROJECT</button>
                                 <div class="dropdown-content p-1 w-[23rem] font-normal " style="left:0;">
-                                    <a @click="gotoProject(1)"
+                                    <a @click="this.$router.push('/projects/project1')"
                                         class="antialiased text-white text-justify  hover:shadow-[inset_23rem_0_0_0] hover:shadow-cyan-700 duration-[400ms,700ms] transition-[color,box-shadow]">Coastal
                                         Erosion Trends and Management Strategies for Region 1</a>
-                                    <a @click="gotoProject(2)"
+                                    <a @click="this.$router.push('/projects/project2')"
                                         class="antialiased text-white text-justify  hover:shadow-[inset_23rem_0_0_0] hover:shadow-cyan-700 duration-[400ms,700ms] transition-[color,box-shadow]">Assesment
                                         Monitoring, and Prediction of Coastal Flooding of Selected Municipalities in Region
                                         1</a>
-                                    <a @click="gotoProject(3)"
+                                    <a @click="this.$router.push('/projects/project3')"
                                         class="antialiased text-white text-justify  hover:shadow-[inset_23rem_0_0_0] hover:shadow-cyan-700 duration-[400ms,700ms] transition-[color,box-shadow]">Development
                                         of Science-based Engineering Approach to Coastal Prediction in Region 1</a>
-                                    <a @click="gotoProject(4)"
+                                    <a @click="this.$router.push('/projects/project4')"
                                         class="antialiased text-white text-justify  hover:shadow-[inset_23rem_0_0_0] hover:shadow-cyan-700 duration-[400ms,700ms] transition-[color,box-shadow]">Enhancing
                                         Coastal Design and Infrastructure Intervention through the Establishment of Wave
                                         Testing Facility</a>
@@ -289,17 +289,17 @@
                                     cursor-pointer transition-colors duration-300 " style="float:left;">
                                     <button class="dropdown py-4  blur-none tracking-wide antialiased">PROJECT</button>
                                     <div class="dropdown-content p-1 w-[23rem] font-normal " style="left:0;">
-                                        <a @click="gotoProject(1)"
+                                        <a @click="this.$router.push('/projects/project1')"
                                             class="antialiased text-white text-justify  hover:shadow-[inset_23rem_0_0_0] hover:shadow-cyan-700 duration-[400ms,700ms] transition-[color,box-shadow]">Coastal
                                             Erosion Trends and Management Strategies for Region 1</a>
-                                        <a @click="gotoProject(2)"
+                                        <a @click="this.$router.push('/projects/project2')"
                                             class="antialiased text-white text-justify  hover:shadow-[inset_23rem_0_0_0] hover:shadow-cyan-700 duration-[400ms,700ms] transition-[color,box-shadow]">Assesment
                                             Monitoring, and Prediction of Coastal Flooding of Selected Municipalities in
                                             Region 1</a>
-                                        <a @click="gotoProject(3)"
+                                        <a @click="this.$router.push('/projects/project3')"
                                             class="antialiased text-white text-justify  hover:shadow-[inset_23rem_0_0_0] hover:shadow-cyan-700 duration-[400ms,700ms] transition-[color,box-shadow]">Development
                                             of Science-based Engineering Approach to Coastal Prediction in Region 1</a>
-                                        <a @click="gotoProject(4)"
+                                        <a @click="this.$router.push('/projects/project4')"
                                             class="antialiased text-white text-justify  hover:shadow-[inset_23rem_0_0_0] hover:shadow-cyan-700 duration-[400ms,700ms] transition-[color,box-shadow]">Enhancing
                                             Coastal Design and Infrastructure Intervention through the Establishment of Wave
                                             Testing Facility</a>
@@ -467,7 +467,7 @@
                                 <li class="mb-4">
                                     <div class="flex block">
                                         <Icon size="20" type="logo-facebook" />
-                                        https://www.facebook.com/people/MMSU-Coaster/100088362841925/
+                                        <a class="text-gray-500 dark:text-gray-400 " href="https://www.facebook.com/people/MMSU-Coaster/100088362841925/">www.facebook.com/people/MMSU-Coaster</a>
                                     </div>
                                 </li>
                             </ul>

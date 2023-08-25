@@ -102,7 +102,7 @@
                 <div class="-m-4 flex flex-wrap">
                     <div class="w-full p-4 md:w-1/2 lg:w-1/4">
                         <a class="relative block overflow-hidden rounded flex justify-center py-5">
-                            <img @click="gotoProject(1)" alt="ecommerce"
+                            <img @click="this.$router.push('/projects/project1')" alt="ecommerce"
                                 class="block h-full w-80 shadow-lg object-cover object-center cursor-pointer transition ease-in-out delay-75  hover:-translate-y-1 hover:scale-105 duration-300"
                                 src="/img/Project1/P1.png" />
                         </a>
@@ -112,7 +112,7 @@
                     </div>
                     <div class="w-full p-4 md:w-1/2 lg:w-1/4">
                         <a class="relative block overflow-hidden rounded flex justify-center py-5">
-                            <img @click="gotoProject(2)" alt="ecommerce"
+                            <img @click="this.$router.push('/projects/project2')" alt="ecommerce"
                                 class="block h-full w-80 shadow-lg object-cover object-center cursor-pointer transition ease-in-out delay-75  hover:-translate-y-1 hover:scale-105 duration-300"
                                 src="/img/Project2/P2.png" />
                         </a>
@@ -122,7 +122,7 @@
                     </div>
                     <div class="w-full p-4 md:w-1/2 lg:w-1/4">
                         <a class="relative block overflow-hidden rounded flex justify-center py-5">
-                            <img @click="gotoProject(3)" alt="ecommerce"
+                            <img @click="this.$router.push('/projects/project3')" alt="ecommerce"
                                 class="block h-full w-80 shadow-lg object-cover object-center cursor-pointer transition ease-in-out delay-75  hover:-translate-y-1 hover:scale-105 duration-300"
                                 src="/img/Project3/P3.png" />
                         </a>
@@ -132,7 +132,7 @@
                     </div>
                     <div class="w-full p-4 md:w-1/2 lg:w-1/4">
                         <a class="relative block overflow-hidden rounded flex justify-center py-5">
-                            <img @click="gotoProject(4)" alt="ecommerce"
+                            <img @click="this.$router.push('/projects/project4')" alt="ecommerce"
                                 class="block h-full w-80 shadow-lg object-cover object-center cursor-pointer transition ease-in-out delay-75  hover:-translate-y-1 hover:scale-105 duration-300"
                                 src="/img/Project4/P4.png" />
                         </a>
@@ -417,20 +417,6 @@ export default defineComponent({
         },
         moreArticle(article) {
             this.$router.push({ name: 'moreArticle', params: { article } })
-        },
-        gotoProject(id) {
-            let existingObj = this;
-            if (id == 1) {
-                existingObj.selectedProject = 'Coastal Erosion Trends and Management Strategies for Region 1'
-            } else if (id == 2) {
-                existingObj.selectedProject = 'Assesment Monitoring, and Prediction of Coastal Flooding of Selected Municipalities in Region 1'
-            } else if (id == 3) {
-                existingObj.selectedProject = 'Development of Science-based Engineering Approach to Coastal Prediction in Region 1'
-            } else if (id == 4) {
-                existingObj.selectedProject = 'Enhancing Coastal Design and Infrastructure Intervention through the Establishment of Wave Testing Facility'
-            }
-            const project = existingObj.selectedProject
-            this.$router.push({ name: 'projects', params: { project, id } })
         },
         clickOS() {
             let id = 1

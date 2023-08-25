@@ -18,7 +18,10 @@ import Gee from '../components/pages/mapPage/gee.vue';
 import Map from '../components/pages/mapPage/map.vue';
 
 // Projects
-import Projects from '../components/pages/homePage/projectsPage/project.vue';
+import Project1 from '../components/pages/homePage/projectsPage/project1.vue';
+import Project2 from '../components/pages/homePage/projectsPage/project2.vue';
+import Project3 from '../components/pages/homePage/projectsPage/project3.vue';
+import Project4 from '../components/pages/homePage/projectsPage/project4.vue';
 
 // About
 import About from '../components/pages/homePage/aboutPage/about.vue';
@@ -87,12 +90,32 @@ export const routes = [
                 component: moreArticle ,
                 props:true 
             },
+            // Projects
             {
-                name: 'projects',
-                path: '/projects/:project/:id',
-                component: Projects ,
+                name: 'project1',
+                path: '/projects/project1',
+                component: Project1,
                 props:true 
             },
+            {
+                name: 'project2',
+                path: '/projects/project2',
+                component: Project2,
+                props:true 
+            },
+            {
+                name: 'project3',
+                path: '/projects/project3',
+                component: Project3,
+                props:true 
+            },
+            {
+                name: 'project4',
+                path: '/projects/project4',
+                component: Project4,
+                props:true 
+            },
+            // Projects
             {
                 name: 'gee',
                 path: '/gee',

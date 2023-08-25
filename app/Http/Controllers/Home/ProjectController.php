@@ -38,7 +38,7 @@ class ProjectController extends Controller
     }
 
     public function getRelatedArticle(){
-        $articles = Article::with('projects')->with('type')->get();
+        $articles = Article::with('projects')->with('type')->orderBy('created_at','DESC')->get();
         foreach($articles as $key => $arti)
         {
             $articles[$key]->date = Carbon::createFromFormat('Y-m-d H:i:s', $arti->created_at)->format('F d, Y');

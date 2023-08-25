@@ -1,8 +1,21 @@
 <template>
     <div :class="{ 'h-screen': !isLoaded }">
         <div v-if="isLoaded" class="w-full lg:flex justify-center lg:space-x-6 space-x-0 lg:py-10 py-5">
-            <div class="lg:w-5/12 md:w-10/12 w-full lg:px-0 px-2 ">
+            <div class="lg:w-6/12  w-full lg:px-0 px-2">
                 <div v-if="isLoaded" class="flex justify-center drop-shadow-md bg-white">
+                    <div class="w-full">
+                        <img v-if="this.projectId == 1" src="/img/Project1/tp1.jpg" class="object-cover w-full" alt="#">
+                        <img v-if="this.projectId == 2" src="/img/Project2/tp2.png" class="object-cover w-full" alt="#">
+                        <img v-if="this.projectId == 3" src="/img/Project3/tp3.jpg" class="object-cover w-full" alt="#">
+                        <img v-if="this.projectId == 4" src="/img/Project4/tp4.jpg" class="object-cover w-full" alt="#">
+                        <div>
+                            Hello
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- <div v-if="isLoaded" class="flex justify-center drop-shadow-md bg-white">
                     <div class="w-full">
                         <div class=" flex justify-center items-center">
                             <p
@@ -79,7 +92,7 @@
                         </div>
 
                     </div>
-                </div>
+                </div> -->
             </div>
             <div class="lg:w-2/12 w-full lg:pt-10 pt-5 px-2">
                 <p class="text-center text-2xl border-b-2 blur-none antialiased">
@@ -148,7 +161,8 @@ export default defineComponent({
             announcementsArticles: [],
             eventsArticles: [],
             relatedArticles: [],
-            isLoaded: ref(false)
+            isLoaded: ref(false),
+            projectId: '',
         }
     },
     setup() {
@@ -189,9 +203,8 @@ export default defineComponent({
     },
     async mounted() {
         let existingObj = this;
-        let projectId = this.$route.params.id
-        // let projectjName = this.$route.params.project
-        await axios.get(`/api/getProject/${projectId}`)
+        existingObj.projectId = this.$route.params.id
+        await axios.get(`/api/getProject/${existingObj.projectId}`)
             .then(function (response) {
                 existingObj.projectImages = response.data.project[0].project_image;
                 existingObj.projectObjectives = response.data.project[0].project_objective;
@@ -219,10 +232,9 @@ export default defineComponent({
 
         await axios.get(`/api/getRelatedArticle`)
             .then(function (response) {
-                console.log(response.data);
                 for (let i = 0; i < response.data.length; i++) {
                     for (let k = 0; k < response.data[i].projects.length; k++) {
-                        if (projectId == response.data[i].projects[k].project_type_id) {
+                        if (existingObj.projectId == response.data[i].projects[k].project_type_id) {
                             existingObj.relatedArticles.push(response.data[i]);
                             break;
                         }
