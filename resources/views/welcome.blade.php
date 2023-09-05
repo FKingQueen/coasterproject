@@ -6,6 +6,9 @@
         <!-- <meta name="csrf-token" content="{{ csrf_token() }}"/> -->
         <title>COASTER</title>
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        <link rel="website icon" type="png"
+            href="/img/logo/COASTER.png"
+        >
         <script>
             (function () {
                 window.Laravel = {

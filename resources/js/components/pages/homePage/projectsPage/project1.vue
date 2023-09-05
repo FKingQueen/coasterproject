@@ -51,15 +51,15 @@
                                 </p>
                             </div>
 
-                            <div class="w-full bg-[#d2e6c4]">
+                            <div class="w-full drop-shadow-md ">
                                 <div class="flex justify-center py-3">
                                     <div class="w-3/4">
-                                        <img src="/img/Project1/rationale/rationale1.png" class="object-cover w-full" alt="#">
+                                        <img src="/img/Project1/rationale/rationale1.png" class="object-cover shadow-md w-full" alt="#">
                                     </div>
                                 </div>
                                 <div class="w-full flex justify-center py-3">
                                     <div class="w-3/4 ">
-                                        <img src="/img/Project1/rationale/rationale2.png" class="object-cover " alt="#">
+                                        <img src="/img/Project1/rationale/rationale2.png" class="object-cover shadow-md " alt="#">
                                     </div>
                                 </div>
                             </div>
@@ -73,13 +73,13 @@
                                         General:
                                     </p>
                                     <div class="pl-5">
-                                        <p class="w-full tracking-wide blur-none ">
+                                        <p class="w-full tracking-wide blur-none pt-2">
                                             1. Provide knowledge know-how to Region 1 HEI researchers on coastal erosion research.
                                         </p>
-                                        <p class="w-full tracking-wide blur-none ">
+                                        <p class="w-full tracking-wide blur-none pt-2">
                                             2. Establish the trends and possible causes of erosion along the coasts of Region 1.
                                         </p>
-                                        <p class="w-full tracking-wide blur-none ">
+                                        <p class="w-full tracking-wide blur-none pt-2">
                                             3. Identify hotspots of erosion and recommend management options that can be considered by the LGU.
                                         </p>
                                     </div>
@@ -87,27 +87,119 @@
                                         Specific:
                                     </p>
                                     <div class="pl-5">
-                                        <p class="w-full tracking-wide blur-none ">
+                                        <p class="w-full tracking-wide blur-none pt-2">
                                             a. To map the hazard and risk of selected coastal municipalities.
                                         </p>
-                                        <p class="w-full tracking-wide blur-none ">
+                                        <p class="w-full tracking-wide blur-none pt-2">
                                             b. To establish and map the trends of coastal erosion in selected municipalities of region.
                                         </p>
-                                        <p class="w-full tracking-wide blur-none ">
+                                        <p class="w-full tracking-wide blur-none pt-2">
                                             c. To determine the average erosion rate and instantaneous magnitudes of erosion in region.
                                         </p>
-                                        <p class="w-full tracking-wide blur-none ">
+                                        <p class="w-full tracking-wide blur-none pt-2">
                                             d. To determine the factors contributing to coastal erosion.
                                         </p>
-                                        <p class="w-full tracking-wide blur-none ">
+                                        <p class="w-full tracking-wide blur-none pt-2">
                                             e. To develop coastal erosion management option for selected sites in region 1 
                                         </p>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="w-full bg-[#b6cfa5]">
-                                <p class="p-1 font-semibold mt-3 blur-none text-[#395723] text-lg">Activites & Accomplishments</p>
+                                <p class="p-1 font-semibold mt-3 blur-none text-[#395723] text-lg">Activities & Accomplishments</p>
                             </div>
+                            <div class="w-full divide-y-2 divide-[#d2e6c4]">
+                                <div class="w-full p-2 flex justify-center">
+                                    <div class="w-2/4 p-2">
+                                        <img src="/img/Project1/p1map1.png" class="object-cover w-full shadow-md" alt="#">
+                                    </div>
+                                    <div class="w-2/4 place-content-center grid grid-cols-1">
+                                        <div class="w-full p-2">
+                                            <img src="/img/Project1/p1t1.png" class="object-cover w-full shadow-md" alt="#">
+                                        </div>
+                                        <div class="w-full">
+                                            <p class="w-full tracking-wide blur-none indent-8 leading-loose text-justify">
+                                                (Left) Net Shoreline Movement (NSM) from DSAS. Lines with shades of red represent total erosion in each
+                                                transect within the time period (1977-2022), lines with shades of blue represent the total accretion for
+                                                the same time period, while gray lines represent the most stable segment of the coast given an uncertainty value 
+                                                of ±25 m. 
+                                            </p>
+                                            <p class="w-full tracking-wide blur-none indent-8 leading-loose text-justify">
+                                                (Right) Calculated End Point Rate of the Ilocos Norte coast from DSAS. Red colors represent erosion rate per year, 
+                                                shades of blue represent accretion rate per year, while gray represents segments of the coast with little to no change 
+                                                considering the ±25 m uncertainty. 
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="w-full p-2 flex justify-center">
+                                    <div class="w-2/4 place-content-center grid grid-cols-1 p-1">
+                                        <div class="w-full p-2">
+                                            <img src="/img/Project1/p1t2.png" class="object-cover w-full shadow-md" alt="#">
+                                        </div>
+                                        <div class="w-full">
+                                            <p class="w-full tracking-wide blur-none indent-8 leading-loose text-justify">
+                                                The DSAS results for the entire coastline of La Union, where positive values of NSM (Left) and EPR (Right) 
+                                                indicate shoreline movement toward the sea (accretion, blue lines), and negative values indicate shoreline 
+                                                movement toward the land (erosion, red lines). Between 1977 and 2022, about 40% of 
+                                                La Union’s coastline is stable, 32% is accreting and 28% is eroding.
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="w-2/4 p-2">
+                                        <img src="/img/Project1/p1map2.png" class="object-cover w-full shadow-md" alt="#">
+                                    </div>
+                                </div>
+
+                                <div class="w-full p-2 flex justify-center">
+                                    <div class="w-2/4 p-2">
+                                        <img src="/img/Project1/p1map3.1.png" class="object-cover w-full shadow-md" alt="#">
+                                        <img src="/img/Project1/p1map3.2.png" class="object-cover w-full shadow-md" alt="#">
+                                    </div>
+                                    <div class="w-2/4 place-content-center grid grid-cols-1 p-1">
+                                        <div class="w-full p-2">
+                                            <img src="/img/Project1/p1t3.png" class="object-cover w-full shadow-md" alt="#">
+                                        </div>
+                                        <div class="w-full">
+                                            <p class="w-full tracking-wide blur-none indent-8 leading-loose text-justify">
+                                                The DSAS results for the entire coastline of La Union, where positive values of NSM (Left) and EPR (Right) 
+                                                indicate shoreline movement toward the sea (accretion, blue lines), and negative values indicate shoreline 
+                                                movement toward the land (erosion, red lines). Between 1977 and 2022, about 40% of 
+                                                La Union’s coastline is stable, 32% is accreting and 28% is eroding.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="w-full p-2">
+                                    <div class="w-full place-content-center grid grid-cols-1 p-1">
+                                        <div class="w-full">
+                                            <p class="w-full tracking-wide blur-none indent-8 leading-loose text-justify">
+                                                Of the three (3) provinces, erosion is most prevalent in La Union, where 28% experienced shoreline retreat 
+                                                between 1977 and 2022. Whereas, seventeen percent (17%) of the shoreline has eroded in Pangasinan and Ilocos Norte. 
+                                                For the most part, the coastlines of these provinces have remained relatively    stable (40 to 65%) to accreting (17 to 38%) 
+                                                during this period. In La Union, the southern flanks of the Bauang and Aringay rivers as well as the coast from Agoo to Sto. 
+                                                Tomas can be considered as erosion hotspots. Large-magnitude shoreline movements were estimated at the delta flanks of Bauang and      Aringay rivers. More than 75% of the coastline of Agoo (86%) and Sto. Tomas (77%) has been eroding since 1977.
+
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="w-full p-2 flex">
+                                        <div class="w-2/4">
+                                            <img src="/img/Project1/p1pic1.png" class="object-cover w-full shadow-md" alt="#">
+                                            <img src="/img/Project1/p1pic2.png" class="object-cover w-full shadow-md" alt="#">
+                                        </div>
+                                        <div class="w-2/4">
+                                            <img src="/img/Project1/p1pic3.png" class="object-cover w-full shadow-md" alt="#">
+                                            <img src="/img/Project1/p1pic4.png" class="object-cover w-full shadow-md" alt="#">
+                                        </div>
+                                        
+                                    </div> -->
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>

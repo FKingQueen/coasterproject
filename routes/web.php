@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 // use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Home\BouyController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,7 +15,9 @@ use App\Http\Controllers\Admin\AdminController;
 |
 */
 
+Route::get('/getSampleData/{temp1}/{temp2}/{wh}', [BouyController::class, 'getSampleData']);
 
 Route::get('/{any}', function () {
     return view('welcome');
 })->where('any', '.*');
+

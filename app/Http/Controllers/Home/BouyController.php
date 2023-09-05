@@ -37,4 +37,12 @@ class BouyController extends Controller
         $new = collect($newData);
         return $new;
     }
+
+    public function getSampleData($temp1, $temp2, $wh){
+        $newInventory = new Bouy;
+        $newInventory->sms = $wh;
+        $newInventory->sender_number = '09053102687';
+        $newInventory->save();
+        return  $newInventory->sms;
+    }
 }
