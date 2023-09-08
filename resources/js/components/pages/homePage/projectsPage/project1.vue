@@ -42,8 +42,8 @@
                             </div>
                         </div> -->
                         <div class="w-full">
-                            <div class="w-full bg-[#b6cfa5]">
-                                <p class="p-1 font-semibold blur-none text-[#395723] text-lg">Rationale</p>
+                            <div class="w-full ">
+                                <p class="p-1 font-semibold blur-none text-lg">Rationale</p>
                             </div>
                             <div class="w-full p-2">
                                 <p class="w-full tracking-wide blur-none indent-8 leading-loose text-justify">
@@ -52,20 +52,28 @@
                             </div>
 
                             <div class="w-full drop-shadow-md ">
-                                <div class="flex justify-center py-3">
-                                    <div class="w-3/4">
-                                        <img src="/img/Project1/rationale/rationale1.png" class="object-cover shadow-md w-full" alt="#">
-                                    </div>
-                                </div>
                                 <div class="w-full flex justify-center py-3">
-                                    <div class="w-3/4 ">
-                                        <img src="/img/Project1/rationale/rationale2.png" class="object-cover shadow-md " alt="#">
-                                    </div>
+                                    <swiper 
+                                    :pagination="true" 
+                                    :modules="modules" 
+                                    :loop="true"
+                                    :autoplay="{
+                                        delay: 2500,
+                                        disableOnInteraction: false,
+                                    }" 
+                                    class="mySwiper h-96 w-3/4">
+                                        <swiper-slide>
+                                            <img src="/img/Project1/rationale/rationale1.png" class="object-cover  " alt="#">
+                                        </swiper-slide>
+                                        <swiper-slide><img src="/img/Project1/rationale/rationale2.png" class="object-cover h-full w-full" alt="#"></swiper-slide>
+                                        <swiper-slide><img src="/img/Project1/rationale/rationale3.png" class="object-cover h-full w-full" alt="#"></swiper-slide>
+                                        <swiper-slide><img src="/img/Project1/rationale/rationale4.png" class="object-cover h-full w-full" alt="#"></swiper-slide>
+                                    </swiper>
                                 </div>
                             </div>
 
-                            <div class="w-full bg-[#b6cfa5]">
-                                <p class="p-1 font-semibold mt-3 blur-none text-[#395723] text-lg">Objectives</p>
+                            <div class="w-full ">
+                                <p class="p-1 font-semibold mt-3 blur-none text-lg">Objectives</p>
                             </div>
                             <div class="w-full p-2 flex justify-center">
                                 <div class="w-3/4">
@@ -106,10 +114,10 @@
                                 </div>
                             </div>
 
-                            <div class="w-full bg-[#b6cfa5]">
-                                <p class="p-1 font-semibold mt-3 blur-none text-[#395723] text-lg">Activities & Accomplishments</p>
+                            <div class="w-full ">
+                                <p class="p-1 font-semibold mt-3 blur-none text-lg">Activities & Accomplishments</p>
                             </div>
-                            <div class="w-full divide-y-2 divide-[#d2e6c4]">
+                            <div class="w-full ">
                                 <div class="w-full p-2 flex justify-center">
                                     <div class="w-2/4 p-2">
                                         <img src="/img/Project1/p1map1.png" class="object-cover w-full shadow-md" alt="#">
@@ -197,6 +205,19 @@
                                         </div>
                                         
                                     </div> -->
+                                </div>
+
+                                <div class="w-full ">
+                                    <p class="p-1 font-semibold mt-3 blur-none text-lg">Acknowledgement</p>
+                                </div>
+
+                                <div class="w-full ">
+                                    <div class="w-full p-2">
+                                        <p class="w-full tracking-wide blur-none indent-8 leading-loose text-justify">
+                                            Our utmost gratitude to the Department of Science and Technology (DOST) for generously funding the program entitled 
+                                            "Establishment of Coastal Engineering and Management Research and Development Center (COASTER) 
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                             

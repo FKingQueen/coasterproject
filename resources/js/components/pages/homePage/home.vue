@@ -97,7 +97,43 @@
             </div>
         </div>
 
-        <section class="body-font text-gray-600">
+        <div class="w-full flex justify-center mt-4">
+            <div class="w-3/4 place-content-center grid grid-cols-2 gap-4">
+                <div class="w-full ">
+                    <img @click="this.$router.push('/projects/project1')" alt="ecommerce"
+                                class="p-4 cursor-pointer transition drop-shadow-lg ease-in-out delay-75  hover:-translate-y-1 hover:scale-103 duration-300"
+                                src="/img/Project1/P1.png" />
+                    <div class="mt-4 flex justify-center">
+                        <h3 class="title-font mb-1 text-xs tracking-widest text-gray-500">PROJECT 1</h3>
+                    </div>
+                </div>
+                <div class="w-full">
+                    <img @click="this.$router.push('/projects/project2')" alt="ecommerce"
+                                    class="p-4 cursor-pointer transition drop-shadow-lg ease-in-out delay-75  hover:-translate-y-1 hover:scale-103 duration-300"
+                                    src="/img/Project2/P2.png" />
+                    <div class="mt-4 flex justify-center">
+                        <h3 class="title-font mb-1 text-xs tracking-widest text-gray-500">PROJECT 2</h3>
+                    </div>
+                </div>
+                <div class="w-full">
+                    <img @click="this.$router.push('/projects/project3')" alt="ecommerce"
+                                    class="p-4 cursor-pointer transition drop-shadow-lg ease-in-out delay-75  hover:-translate-y-1 hover:scale-103 duration-300"
+                                    src="/img/Project3/P3.png" />
+                    <div class="mt-4 flex justify-center">
+                        <h3 class="title-font mb-1 text-xs tracking-widest text-gray-500">PROJECT 3</h3>
+                    </div>
+                </div>
+                <div class="w-full">
+                    <img @click="this.$router.push('/projects/project4')" alt="ecommerce"
+                                    class="p-4 cursor-pointer transition drop-shadow-lg ease-in-out delay-75  hover:-translate-y-1 hover:scale-103 duration-300"
+                                    src="/img/Project4/P4.png" />
+                    <div class="mt-4 flex justify-center">
+                        <h3 class="title-font mb-1 text-xs tracking-widest text-gray-500">PROJECT 4</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <section class="body-font text-gray-600">
             <div class="container mx-auto px-5">
                 <div class="-m-4 flex flex-wrap">
                     <div class="w-full p-4 md:w-1/2 lg:w-1/4">
@@ -142,11 +178,11 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> -->
         <!-- /Project -->
         <!-- About Us -->
         <div class="pt-14">
-            <div class="flex justify-center w-full  mt-5">
+            <div class="flex justify-center w-full  mt-3">
                 <div class="w-10/12 flex justify-center">
                     <div class="items-center flex w-2/12 justify-center">
                         <img class="w-3/4" src="/img/logo/coaster.png" alt="">
@@ -241,7 +277,7 @@
         </div>
         <!-- /About Us -->
         <!-- Coop Agencies -->
-        <div class="grid gap-2 place-content-center mb-5">
+        <div class="grid gap-2 place-content-center mb-10">
             <div class="grid gap-2 place-content-center lg:pt-14 mt-2">
                 <div class="text-center">
                     <h1 class="font-medium leading-tight text-3xl text-sky-600">CO-OP AGENCIES</h1>

@@ -52,7 +52,7 @@
 
         <!-- Structure Information -->
         <div ref="cardProvince">
-            <transition>
+            <transition> 
                 <div v-if="this.isVisibleCardProvince" class="pac-card lg:w-[100vh] w-[52vh] mt-20" id="pac-card"
                     style="overflow-x: hidden; overflow-y: auto;">
                     <div>
@@ -125,7 +125,7 @@
                                 <span class="h-3 w-4"
                                     style="background-color: #01388b; border-radius: 50%; display: inline-block;"></span>
                             </div>
-                            <div>Bouy Monitoring System</div>
+                            <div>Water Level Monitoring System</div>
                         </div>
                         <div class="flex justify-start space-x-2">
                             <div class="items-center flex">
@@ -158,10 +158,10 @@
 
 <script>
 import { defineComponent, ref, nextTick } from 'vue';
-import Description from './map/description.vue';
-import Delft3D from './map/delft3d.vue'
-import WaterLevel from './map/waterLevel.vue'
-import Places from './map/places.vue'
+import Description from './map/description';
+import Delft3D from './map/delft3d';
+import WaterLevel from './map/waterLevel';
+import Places from './map/places';
 export default defineComponent({
     name: 'App',
     components: {
@@ -1820,7 +1820,7 @@ export default defineComponent({
             if (this.$refs.gmap.$mapObject.getZoom() != 11) {
                 this.isVisibleCardProvince = false
             }
-            
+
             this.current = ref(['delft3d']);
         },
         close() {
@@ -1880,7 +1880,7 @@ export default defineComponent({
             } else if (id == 4) {
                 this.pvActive = !this.pvActive
             }
-            
+
         }
     },
     async mounted() {
@@ -1902,7 +1902,7 @@ export default defineComponent({
                 console.error(error);
             });
 
-        
+
 
         setTimeout(() => existingObj.isVisibleCardFilter = true, 1000);
     }

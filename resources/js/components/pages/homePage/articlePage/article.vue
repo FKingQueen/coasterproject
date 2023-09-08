@@ -24,7 +24,6 @@
                         </p>
                         <p v-html="this.article.article"
                             class="text-justify blur-none font-medium indent-8 leading-loose tracking-wide antialiased">
-
                         </p>
                     </div>
                     <div class="mt-5">
